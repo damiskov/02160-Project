@@ -3,4 +3,27 @@
   <groupId>project</groupId>
   <artifactId>cucumber-test</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<maven.compiler.source>13</maven.compiler.source>
+		<maven.compiler.target>13</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>7.2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>7.2.3</version>
+			<scope>test</scope>		
+		</dependency>
+
+	</dependencies>
+	
 </project>
