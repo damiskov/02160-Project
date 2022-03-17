@@ -11,3 +11,14 @@ Feature: Setting up game
   	Given A Robot
   	And A Player 
   	Then Assign Robot to Player
+  	
+  Scenario: Select Robot skin
+	  Given A Player
+	  Then Assign robot to player
+	  When the Player selects a robot skin
+	  Then Robot acquires this skin
+	  
+	Scenario: Difficulty change
+		Given a difficulty
+		Then Generate map accordingly
+  
