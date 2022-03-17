@@ -22,3 +22,6 @@ Feature: Setting up game
 		Given a difficulty
 		Then Generate map accordingly
   
+  
+  
+  
