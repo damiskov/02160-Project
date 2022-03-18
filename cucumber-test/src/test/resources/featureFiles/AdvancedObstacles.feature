@@ -7,12 +7,6 @@ Feature: Advanced obstacles scenarios
     And a robot
     When the robot steps into the laser
     Then the robot loses life points
-    
-  Scenario: Laser kills because the robot has low health
-    Given a laser 
-    And a robot with low health
-    When the robot steps into the laser
-    Then the robot dies
 
   Scenario: Random teleporting panel
     Given a sending teleporter
@@ -33,12 +27,6 @@ Feature: Advanced obstacles scenarios
     And a robot
     When the robot steps into the fire
     Then the robot loses life points
-
-  Scenario: Fire kills robot
-    Given a fire
-    And a robot with low health
-    When the robot steps into the fire
-    Then the robot dies 
     
   Scenario: Fire Spreading
     Given a fire
