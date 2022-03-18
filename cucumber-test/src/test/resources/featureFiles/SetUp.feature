@@ -4,20 +4,17 @@ Feature: Setting up game
 	@tag1
 	Scenario: Board set up
 		Given A Host
-		And A difficulty
+		When A difficulty is selected by Host
 		Then Create a Board
   	
 	Scenario: Robot assignment 
-		Given A Robot
-		And A Player 
+		Given A Player
+		When Robot selected by Player
 		Then Assign Robot to Player
   	
 	Scenario: Select Robot skin
 		Given A Player
-		Then Assign robot to player
-		When the Player selects a robot skin
-		Then Robot acquires this skin
+		And A Robot
+		When the Player selects a Robot skin
+		Then Robot acquires skin
 	  
-	Scenario: Difficulty change
-		Given a difficulty
-		Then Generate map
