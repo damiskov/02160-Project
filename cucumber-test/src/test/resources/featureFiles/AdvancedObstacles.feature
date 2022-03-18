@@ -52,13 +52,31 @@ Feature: Advanced obstacles scenarios
     When the robot steps into the reversal panel
     Then the remaining moves get reversed
     
+  Scenario: Robot becomes chainable with no other chainable robots
+    Given chaining panel
+    And a robot
+    And no chainable robots
+    When the robot steps into the chaining panel
+    Then the robot becomes chainable
+    And the chaining panel becomes inactive
+    
   Scenario: Chain connection
     Given chaining panel
     And a robot
-    And another robot
-    When the robot steps into the chaining panel
-    Then the two robots get chained together
-    And they pull on eachother when they move
+    And a chainable robot
+    When the first robot steps into the chaining panel
+    Then the robots get chained together
+    And the first chaining panel become active again
+    
+  Scenario: Robots pulling on eachother
+    Given two robots chained together
+    When one robot moves and the distance between them becomes greater 
+    Then the other robot gets pulled in the same direction
+    
+  Scenario: De-chaining the robots
+    Given two robots chained together
+    When one of them moves and the distance between them decreases 
+    Then the robots get unchained
     
   Scenario: Deterministic teleporting panel
     Given a sending teleporter
