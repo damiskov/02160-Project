@@ -21,7 +21,3 @@ Feature: Setting up game
 	Scenario: Difficulty change
 		Given a difficulty
 		Then Generate map accordingly
-  
-  
-  
-  
