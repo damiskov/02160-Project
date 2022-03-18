@@ -19,12 +19,18 @@ Feature: User Interface
   	When update robots on screen
   	Then draw robots
   	And draw robot player markers
+  	And draw robot health
   	
   Scenario: Show player cards
     Given a screen
     And player turn is current player
     When show current player hand
     Then draw current player cards
+    
+  Scenario: Show player turn
+  	Given a screen
+  	When show current player number
+  	Then draw current player number
   	
 
   
