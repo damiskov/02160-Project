@@ -4,16 +4,11 @@ Feature: Difficulty setup
 
   @tag1
   Scenario: Select from default difficulties
-    Given a Host
-    When a difficulty is selected
+    Given A Difficulty
     Then set number of obstacles
-    And setup the board
+    Then set their location
+    Then Generate board
     
-    Scenario: Insert number of obstacles
-    Given a Host
-    When a costum button is selected
-    And a number of obstacles is inserted
-    Then setup the board
     
     
 
