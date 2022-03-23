@@ -1,8 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
 import environment_elements.Laser;
-import environment_elements.Receiving_teleporter;
-import environment_elements.Sending_teleporter;
+import environment_elements.Teleporter;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import piece_basics.Robot;
@@ -11,10 +10,9 @@ import io.cucumber.java.en.Then;
 public class StepDefinitionAndvancedObstacles {
 	Laser laser;
 	Robot robot;
-	Sending_teleporter sending;
-	Receiving_teleporter receiving1;
-	Receiving_teleporter receiving2;
-	
+	Teleporter sending;
+	Teleporter receiving;
+
 	@Given("a laser")
 	public void a_laser() {
 		Laser laser = new Laser();
@@ -66,11 +64,11 @@ public class StepDefinitionAndvancedObstacles {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Given("a robot")
-	public void a_robot() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+//	@Given("a robot")
+//	public void a_robot() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 	@When("the robot steps into the oil spill")
 	public void the_robot_steps_into_the_oil_spill() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -81,38 +79,33 @@ public class StepDefinitionAndvancedObstacles {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Then("the robot loses life points")
-	public void the_robot_loses_life_points() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+//	@Then("the robot loses life points")
+//	public void the_robot_loses_life_points() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 	
 	@Given("a fire")
 	public void a_fire() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Given("a robot")
-	public void a_robot() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+//	@Given("a robot")
+//	public void a_robot() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 	@When("the robot steps into the fire")
 	public void the_robot_steps_into_the_fire() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
 	@Then("the robot loses life points")
-	public void the_robot_loses_life_points() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+//	public void the_robot_loses_life_points() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 	
-	@Given("a fire")
-	public void a_fire() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
 	@When("a turn passes")
 	public void a_turn_passes() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -130,10 +123,10 @@ public class StepDefinitionAndvancedObstacles {
 	    throw new io.cucumber.java.PendingException();
 	}
 	@Given("a robot")
-	public void a_robot() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+//	public void a_robot() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 	@Given("some remaining moves for the robots")
 	public void some_remaining_moves_for_the_robots() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -151,15 +144,15 @@ public class StepDefinitionAndvancedObstacles {
 	}
 	
 	@Given("chaining panel")
-	public void chaining_panel() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	@Given("a robot")
-	public void a_robot() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+//	public void chaining_panel() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
+//	@Given("a robot")
+//	public void a_robot() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 	@Given("no chainable robots")
 	public void no_chainable_robots() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -186,11 +179,11 @@ public class StepDefinitionAndvancedObstacles {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Given("a robot")
-	public void a_robot() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+//	@Given("a robot")
+//	public void a_robot() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 	@Given("a chainable robot")
 	public void a_chainable_robot() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -213,10 +206,10 @@ public class StepDefinitionAndvancedObstacles {
 	}
 	
 	@Given("two robots chained together")
-	public void two_robots_chained_together() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+//	public void two_robots_chained_together() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 	@When("one robot moves and the distance between them becomes greater")
 	public void one_robot_moves_and_the_distance_between_them_becomes_greater() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -246,7 +239,7 @@ public class StepDefinitionAndvancedObstacles {
 	
 	@Given("a sending teleporter")
 	public void a_sending_teleporter() {
-		Sending_teleporter sending = new Sending_teleporter();
+		Teleporter sending = new Teleporter();
 	}
 //	@Given("a robot")
 //	public void a_robot() {
@@ -254,18 +247,21 @@ public class StepDefinitionAndvancedObstacles {
 //	}
 	@Given("a receiving teleporter")
 	public void a_receiving_teleporter() {
-		Receiving_teleporter receiving = new Receiving_teleporter();
+		Teleporter receiving = new Teleporter();
 	}
 	@When("the robot steps into the sending teleporter")
 	public void the_robot_steps_into_the_sending_teleporter() {
-		robot.setPosition(laser.getX(),laser.getY());
+		robot.setPosition(sending.getX(),sending.getY());
 	}
 	@Then("the robot get teleported to the receiving teleporter")
 	public void the_robot_get_teleported_to_the_receiving_teleporter() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		receiving.activate(robot, receiving);
 	}
 	
-	
+	@Then("the robot got teleported to the receiving teleporter")
+	public void the_robot_got_teleported_to_the_receiving_teleporter() {
+		assertEquals(robot.getX(),receiving.getX());
+		assertEquals(robot.getY(),receiving.getY());
+	}
 	
 }
