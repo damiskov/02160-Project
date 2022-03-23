@@ -1,13 +1,17 @@
 package piece_basics;
 
+import board.IBoard;
+
 public abstract class Piece {
 	private int xPos;
 	private int yPos;
-	// protected IBoard board
+	protected IBoard board;
 	
-//	public Piece(IBoard board) {
-//		this.board = board;
-//	}
+	public Piece(IBoard board, int x, int y) {
+		this.board = board;
+		this.xPos = x;
+		this.yPos = y;
+	}
 	
 	public void setPosition(int x, int y) {
 		this.xPos = x;
