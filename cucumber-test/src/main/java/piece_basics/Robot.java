@@ -1,3 +1,4 @@
+package piece_basics;
 
 public class Robot extends Piece {
 	private Orientation orientation;
