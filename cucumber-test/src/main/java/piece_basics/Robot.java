@@ -52,6 +52,17 @@ public class Robot extends Piece implements IRegisterActor{
 			break;
 		}
 	}
+	
+	public void takeDamage() {
+		health--;
+	}
+	
+	public void setHealth(int x) {
+		this.health = x;
+	}
+	public int getHealth() {
+		return this.health;
+	}
 	@Override
 	public void performRegisterAction() {
 		

@@ -6,14 +6,15 @@ Feature: Advanced obstacles scenarios
     Given a laser
     And a robot
     When the robot steps into the laser
+    And the laser activates
     Then the robot loses life points
 
-  Scenario: Random teleporting panel
-    Given a sending teleporter
-    And a robot
-    And multiple receiving teleporters
-    When the robot steps into the sending teleporter
-    Then the robot get teleported to a random receiving teleporter
+  #Scenario: Random teleporting panel
+    #Given a sending teleporter
+    #And a robot
+    #And multiple receiving teleporters
+    #When the robot steps into the sending teleporter
+    #Then the robot get teleported to a random receiving teleporter
     
   Scenario: Oil spill ignites
     Given an oil spill
@@ -67,11 +68,12 @@ Feature: Advanced obstacles scenarios
     Then the robots get unchained
     
   Scenario: Deterministic teleporting panel
-    Given a sending teleporter
+    Given a teleporter
     And a robot
-    And a receiving teleporter
-    When the robot steps into the sending teleporter
-    Then the robot get teleported to the receiving teleporter
+    And another teleporter
+    When the robot steps into the first teleporter
+    And the teleporter activates
+    Then the robot get teleported to the other teleporter
     
 
 

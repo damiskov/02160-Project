@@ -1,48 +1,59 @@
+import static org.junit.Assert.assertEquals;
+
+import environment_elements.Laser;
+import environment_elements.Receiving_teleporter;
+import environment_elements.Sending_teleporter;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import piece_basics.Robot;
 import io.cucumber.java.en.Then;
 
 public class StepDefinitionAndvancedObstacles {
+	Laser laser;
+	Robot robot;
+	Sending_teleporter sending;
+	Receiving_teleporter receiving1;
+	Receiving_teleporter receiving2;
+	
 	@Given("a laser")
 	public void a_laser() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		Laser laser = new Laser();
 	}
 	@Given("a robot")
 	public void a_robot() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		Robot robot = new Robot();
+		robot.setHealth(3);
 	}
 	@When("the robot steps into the laser")
 	public void the_robot_steps_into_the_laser() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    robot.setPosition(laser.getX(),laser.getY());
+	    
 	}
 	@Then("the robot loses life points")
 	public void the_robot_loses_life_points() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		laser.activate(robot);
+	}
+	@Then("the robot lost life points")
+	public void the_robot_lost_life_points() {
+		assertEquals(robot.getHealth(),2);
 	}
 	
 	@Given("a sending teleporter")
 	public void a_sending_teleporter() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    Sending_teleporter sending = new Sending_teleporter();
 	}
-	@Given("a robot")
-	public void a_robot() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+//	@Given("a robot")
+//	public void a_robot() {
+//		Robot robot = new Robot();
+//	}
 	@Given("multiple receiving teleporters")
 	public void multiple_receiving_teleporters() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    Sending_teleporter receiving1 = new Sending_teleporter();
+	    Sending_teleporter receiving2 = new Sending_teleporter();
 	}
 	@When("the robot steps into the sending teleporter")
 	public void the_robot_steps_into_the_sending_teleporter() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		robot.setPosition(sending.getX(),sending.getY());
 	}
 	@Then("the robot get teleported to a random receiving teleporter")
 	public void the_robot_get_teleported_to_a_random_receiving_teleporter() {
@@ -233,11 +244,11 @@ public class StepDefinitionAndvancedObstacles {
 	    throw new io.cucumber.java.PendingException();
 	}
 	
-	@Given("a sending teleporter")
-	public void a_sending_teleporter() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+//	@Given("a sending teleporter")
+//	public void a_sending_teleporter() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 	@Given("a robot")
 	public void a_robot() {
 	    // Write code here that turns the phrase above into concrete actions
