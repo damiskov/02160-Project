@@ -1,3 +1,5 @@
+import board.Board;
+import board.Game;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import piece_basics.Piece;

@@ -1,9 +1,15 @@
 package piece_basics;
 
+import board.IBoard;
+
 public class Robot extends Piece implements IRegisterActor{
 	private Orientation orientation;
 	private int health;
 	
+	public Robot(IBoard board, int x, int y) {
+		super(board, x, y);
+	}
+
 	public void executeProgram() {
 		
 		System.out.println("Program executed");
@@ -65,6 +71,7 @@ public class Robot extends Piece implements IRegisterActor{
 		}
 	}
 	
+
 	public void takeDamage() {
 		health--;
 	}
@@ -75,6 +82,7 @@ public class Robot extends Piece implements IRegisterActor{
 	public int getHealth() {
 		return this.health;
 	}
+
 	@Override
 	public void performRegisterAction() {
 		
