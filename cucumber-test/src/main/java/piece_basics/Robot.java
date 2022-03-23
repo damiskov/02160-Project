@@ -4,6 +4,18 @@ public class Robot extends Piece implements IRegisterActor{
 	private Orientation orientation;
 	private int health;
 	
+	public void executeProgram() {
+		
+		System.out.println("Program executed");
+		
+	}
+	
+	public void executeCommand() {
+		
+		System.out.println("Command executed");
+		
+	}
+	
 	public void turnLeft() {
 		switch(orientation) {
 		case UP:
