@@ -1,6 +1,6 @@
 package piece_basics;
 
-public class Robot extends Piece {
+public class Robot extends Piece implements IRegisterActor{
 	private Orientation orientation;
 	private int health;
 	
@@ -51,5 +51,9 @@ public class Robot extends Piece {
 			setX(getX() - spaces);
 			break;
 		}
+	}
+	@Override
+	public void performRegisterAction() {
+		
 	}
 }
