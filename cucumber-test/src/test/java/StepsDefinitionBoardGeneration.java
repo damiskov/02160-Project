@@ -1,6 +1,6 @@
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-
+import piece_basics.Piece;
 public class StepsDefinitionBoardGeneration {
 	
 	Board b = new Board();
@@ -9,7 +9,7 @@ public class StepsDefinitionBoardGeneration {
 	String difficulty;
 	@Given("a board of type Board")
 	public void a_matrix_of_type_board(Piece[][] m) {
-		b.matrix = m;
+		b.setMatrix(m);
 	}
 	@Given("Players")
 	public void players(Player P1, Player P2) {
@@ -22,7 +22,7 @@ public class StepsDefinitionBoardGeneration {
 	}
 	@Then("Display Obstacles and Robots")
 	public void display_obstacles_and_robots() {
-		// display board 
+		System.out.println("Hey");
 	    
 	}
 

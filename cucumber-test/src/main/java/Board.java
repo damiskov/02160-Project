@@ -1,3 +1,4 @@
+import piece_basics.Piece;
 
 public class Board {
 
@@ -8,7 +9,12 @@ public class Board {
 		this.numObstacles = n;
 		
 	}
-
+	public void setMatrix(Piece[][] m) {
+		this.matrix = m;
+		
+	}
+	
+	
 	
 	
 
