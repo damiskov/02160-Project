@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 import static org.junit.Assert.assertEquals;
 
 import environment_elements.Laser;
 import environment_elements.Receiving_teleporter;
 import environment_elements.Sending_teleporter;
+=======
+
+>>>>>>> branch 'main' of https://github.com/DavidMiles-Skov/02160-Project.git
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import piece_basics.Robot;

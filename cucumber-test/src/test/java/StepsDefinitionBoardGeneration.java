@@ -1,26 +1,30 @@
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-
+import piece_basics.Piece;
 public class StepsDefinitionBoardGeneration {
-	@Given("a Matrix of type Board")
-	public void a_matrix_of_type_board() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	
+	Board b = new Board();
+	Player p1;
+	Player p2;
+	String difficulty;
+	@Given("a board of type Board")
+	public void a_matrix_of_type_board(Piece[][] m) {
+		b.setMatrix(m);
 	}
 	@Given("Players")
-	public void players() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void players(Player P1, Player P2) {
+	  this.p1 = P1;
+	  this.p2 = P2;
 	}
 	@Given("a Difficulty")
-	public void a_difficulty() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void a_difficulty(String d) {
+	    this.difficulty = d;
 	}
 	@Then("Display Obstacles and Robots")
 	public void display_obstacles_and_robots() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		System.out.println("Hey");
+	    
 	}
 
 }
+
