@@ -6,7 +6,7 @@ public class Board implements IBoard {
 	private Cell[][] matrix;
 	private int numObstacles;
 	public void setNumberOfObstacles(int n) {
-		// TODO Auto-generated method stub
+		
 		this.numObstacles = n;
 		
 	}
@@ -22,7 +22,7 @@ public class Board implements IBoard {
 	public boolean hasRobotAt(int x, int y) {
 		return matrix[x][y].robot != null;
 	}
-	public Robot robotAt(int x, int y) {
+	public Robot getRobotAt(int x, int y) {
 		return matrix[x][y].robot;
 	}
 	
