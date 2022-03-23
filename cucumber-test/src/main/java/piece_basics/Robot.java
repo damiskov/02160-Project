@@ -64,4 +64,10 @@ public class Robot extends Piece {
 			break;
 		}
 	}
+	
+	public Orientation getOrientation() {
+		
+		return orientation;
+		
+	}
 }

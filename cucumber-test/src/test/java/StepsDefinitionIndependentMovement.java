@@ -26,54 +26,60 @@ public class StepsDefinitionIndependentMovement {
 	}
 	@Then("Robot turns right")
 	public void robot_turns_right() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    r.turnRight();
 	}
 
 
 	@Given("A turn left command")
 	public void a_turn_left_command() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		r.executeCommand();
 	}
 	@Given("a robot on the board")
-	public void a_robot_on_the_board() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void a_robot_on_the_board(Robot robo_cop) {
+		r = robo_cop;
 	}
 	@Then("Robot turns left")
 	public void robot_turns_left() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	   Orientation prev_o = r.getOrientation();
+	   r.turnLeft();
+		switch(prev_o):
+			case UP:
+				
+				break;
+			case RIGHT:
+				setX(getX() + spaces);
+				break;
+			case DOWN:
+				setY(getY() - spaces);
+				break;
+			case LEFT:
+				setX(getX() - spaces);
+				break;
+			
 	}
 
 
 	@Given("A move forward command")
 	public void a_move_forward_command() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		r.executeCommand();
 	}
 	@Given("a robot on the board")
-	public void a_robot_on_the_board() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void a_robot_on_the_board(Robot robo_cop) {
+		r = robo_cop;
 	}
 	@Then("Robot moves forward")
 	public void robot_moves_forward() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    r.move(1)
 	}
 
 
 	@Given("a move backwards command")
 	public void a_move_backwards_command() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		r.executeCommand();
 	}
 	@Given("a robot on the board")
-	public void a_robot_on_the_board() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void a_robot_on_the_board(Robot robo_cop) {
+		r = robo_cop;
 	}
 	@Then("Robot moves forward")
 	public void robot_moves_forward() {
