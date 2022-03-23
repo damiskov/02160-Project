@@ -16,7 +16,13 @@ public class Gear extends EnvironmentElement implements IRegisterActor {
 	
 	@Override
 	public void performRegisterAction() {
-
+		if (board.hasRobotAt(getX(), getY())) {
+			if (counterClockwise) {
+				board.getRobotAt(getX(), getY()).turnLeft();
+			} else {
+				board.getRobotAt(getX(), getY()).turnRight();
+			}
+		}
 	}
 
 }
