@@ -1,4 +1,4 @@
-import environment_elements.ConveyerBelt;
+import environment_elements.ConveyorBelt;
 import environment_elements.Gear;
 import environment_elements.HealthStation;
 import environment_elements.Pit;
@@ -8,7 +8,7 @@ import piece_basics.Robot;
 public class Context {
 //	IBoard board;
 	Robot robot;
-	ConveyerBelt conveyerBelt;
+	ConveyorBelt conveyerBelt;
 	Gear gear;
 	HealthStation healthStation;
 	Pit pit;
