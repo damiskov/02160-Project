@@ -21,20 +21,14 @@ public abstract class Piece {
 	public int getX() {
 		return xPos;
 	}
-	public void setX(int x) {
-		setPosition(x, yPos);
-	}
 	public int getY() {
 		return yPos;
 	}
-	public void setY(int y) {
-		setPosition(xPos, y);
-	}
 	
-	public void moveX(int offset) {
+	public void shiftX(int offset) {
 		setPosition(xPos + offset, yPos);
 	}
-	public void moveY(int offset) {
+	public void shiftY(int offset) {
 		setPosition(xPos, yPos + offset);
 	}
 }

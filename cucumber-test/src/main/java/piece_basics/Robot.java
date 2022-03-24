@@ -57,16 +57,16 @@ public class Robot extends Piece implements IRegisterActor{
 	public void move(int spaces) {
 		switch(orientation) {
 		case UP:
-			setY(getY() + spaces);
+			shiftY(spaces);
 			break;
 		case RIGHT:
-			setX(getX() + spaces);
+			shiftX(spaces);
 			break;
 		case DOWN:
-			setY(getY() - spaces);
+			shiftY(-spaces);
 			break;
 		case LEFT:
-			setX(getX() - spaces);
+			shiftX(-spaces);
 			break;
 		}
 	}
