@@ -24,7 +24,7 @@ public class Board implements IBoard {
 		this.numRows = matrix.length;
 		this.numColumns = matrix[0].length;
 	}
-	@Override
+
 	public Cell index(int x, int y) {
 		return matrix[numColumns - y - 1][x];
 	}
