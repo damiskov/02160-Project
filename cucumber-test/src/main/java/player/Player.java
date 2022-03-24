@@ -1,4 +1,4 @@
-package board;
+package player;
 
 public class Player {
 

@@ -1,9 +1,14 @@
 package board;
 
 import environment_elements.EnvironmentElement;
+import piece_basics.Piece;
 import piece_basics.Robot;
 
 public interface IBoard {
+	void placeRobot(Robot r);
+	void placeEElement(EnvironmentElement e);
+	void updatePiecePosition(int oldXPos, int oldYPos, Piece p);
+	
 	boolean hasRobotAt(int x, int y);
 	Robot getRobotAt(int x, int y);
 	

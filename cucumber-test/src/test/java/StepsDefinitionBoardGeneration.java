@@ -1,8 +1,8 @@
 import board.Board;
-import board.Player;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import piece_basics.Piece;
+import player.Player;
 public class StepsDefinitionBoardGeneration {
 	
 	Board b = new Board();

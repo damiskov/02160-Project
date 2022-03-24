@@ -1,5 +1,7 @@
 package board;
 
+import player.Player;
+
 public class Game {
 	
 	Board b;

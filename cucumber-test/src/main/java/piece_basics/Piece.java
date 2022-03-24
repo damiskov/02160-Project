@@ -13,9 +13,12 @@ public abstract class Piece {
 		this.yPos = y;
 	}
 	
-	public void setPosition(int x, int y) {
-		this.xPos = x;
-		this.yPos = y;
+	public void setPosition(int newX, int newY) {
+		int oldXPos = xPos;
+		int oldYPos = yPos;
+		this.xPos = newX;
+		this.yPos = newY;
+		board.updatePiecePosition(oldXPos, oldYPos, this);
 	}
 	
 	public int getX() {
