@@ -14,6 +14,14 @@ public interface Screen {
 
 	void displayRobots();
 
+	void displayRobotMarkers();
+
+	void displayRobotHealth();
+
+	void showCurrPlayerHand();
+
+	void showCurrPlayerNumber();
+
 	
 
 }

@@ -32,6 +32,7 @@ Feature: User Interface
     
   Scenario: Show player turn
   	Given a screen
+  	And player turn is current player
   	When show current player number
   	Then display current player number on screen
  
