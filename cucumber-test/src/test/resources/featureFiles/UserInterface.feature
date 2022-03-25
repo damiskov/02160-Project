@@ -3,7 +3,6 @@ Feature: User Interface
   This feature handles how the user sees the game
 
   @tag1
-
   Scenario: Update board on screen
   	Given a screen
   	And a board array
@@ -35,6 +34,4 @@ Feature: User Interface
   	Given a screen
   	When show current player number
   	Then display current player number on screen
-  	
-
-  
+ 

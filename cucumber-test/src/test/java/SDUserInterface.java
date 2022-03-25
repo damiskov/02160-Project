@@ -8,10 +8,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 
-public class StepsDefinitionUserInterface {
+public class SDUserInterface {
 private Context context;
 	
-	public StepsDefinitionUserInterface(Context context) {
+	public SDUserInterface(Context context) {
 		this.context = context;
 	}
 
@@ -61,18 +61,15 @@ private Context context;
 	
 	@Given("obstacles on screen")
 	public void obstacles_on_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		context.screen.setOutput("[Board][Obstacles]");
 	}
 	@When("update robots on screen")
 	public void update_robots_on_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    context.screen.displayRobots();
 	}
 	@Then("display robots on screen")
 	public void display_robots_on_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		assertEquals(context.screen.output(),"[Board][Obstacles][Robots]");
 	}
 	@Then("display robot player markers on screen")
 	public void display_robot_player_markers_on_screen() {

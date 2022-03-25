@@ -12,6 +12,8 @@ public interface Screen {
 
 	void displayObstacles();
 
+	void displayRobots();
+
 	
 
 }
