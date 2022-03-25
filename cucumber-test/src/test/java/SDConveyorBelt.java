@@ -5,10 +5,12 @@ import static org.junit.Assert.assertEquals;
 import board.Board;
 import board.IBoard;
 import environment_elements.ConveyorBelt;
+import environment_elements.Wall;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import piece_basics.Orientation;
+import piece_basics.Robot;
 
 public class SDConveyorBelt {
 	private Context context;
@@ -24,8 +26,8 @@ public class SDConveyorBelt {
 	    board.placeEElement(c);
 	    context.conveyorBelt = c;
 	}
-	@When("the robot moves into the conveyor belt during a regiser")
-	public void the_robot_moves_into_the_conveyor_belt_during_a_regiser() {
+	@When("the robot moves into the conveyor belt during a register")
+	public void the_robot_moves_into_the_conveyor_belt_during_a_register() {
 	    context.robot.shiftX(1);
 	}
 	@Then("the robot is pushed upwards at the end of the register")
@@ -73,4 +75,18 @@ public class SDConveyorBelt {
 	    assertEquals(5, context.robot.getX());
 	}
 	
+	@Given("a robot blocking the way of the conveyor belt")
+	public void a_robot_blocking_the_way_of_the_conveyor_belt() {
+	    context.board.placeRobot(new Robot(context.board, 7, 5));
+	}
+	@Then("the robot stays on the conveyor belt at the end of the register")
+	public void the_robot_stays_on_the_conveyor_belt_at_the_end_of_the_register() {
+		context.conveyorBelt.performRegisterAction();
+		assertEquals(6, context.robot.getX());
+	}
+	
+	@Given("a wall blocking the way of the conveyor belt")
+	public void a_wall_blocking_the_way_of_the_conveyor_belt() {
+	    context.board.placeEElement(new Wall(context.board, 7, 5));
+	}
 }

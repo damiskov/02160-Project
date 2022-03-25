@@ -3,7 +3,7 @@ Feature: User Interface
   This feature handles how the user sees the game
 
   @tag1
-  Scenario: Update board on screen
+  Scenario: Display board on screen
   	Given a board array
   	When update board on screen
   	Then draw board
