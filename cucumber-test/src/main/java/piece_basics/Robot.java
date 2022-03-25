@@ -1,14 +1,20 @@
 package piece_basics;
 
 import board.IBoard;
+import environment_elements.RespawnPoint;
 
 public class Robot extends Piece implements IRegisterActor{
 	private Orientation orientation;
 	private int health = 3;
 	private final int maxHealth = 3;
+	private RespawnPoint currentRespawnPoint;
 	
 	public Robot(IBoard board, int x, int y) {
 		super(board, x, y);
+	}
+	
+	public void setRespawnPoint(RespawnPoint r) {
+		this.currentRespawnPoint = r;
 	}
 
 	public void executeProgram() {
@@ -75,6 +81,7 @@ public class Robot extends Piece implements IRegisterActor{
 
 	public void takeDamage() {
 		health--;
+		if (health == 0) reboot();
 	}
 	public void heal() {
 		if (health < maxHealth) health++;
@@ -90,15 +97,18 @@ public class Robot extends Piece implements IRegisterActor{
 	public int getMaxHealth() {
 		return this.maxHealth;
 	}
+	
+	public void reboot() {
+		setPosition(currentRespawnPoint.getX(), currentRespawnPoint.getY());
+		health = maxHealth;
+		// also must discard all cards in hand and stop moving
+	}
 
 	@Override
 	public void performRegisterAction() {
 		
 	}
 	public Orientation getOrientation() {
-		
 		return orientation;
-
-		
 	}
 }
