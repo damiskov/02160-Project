@@ -3,10 +3,10 @@ Feature: Board Generation
 
   @tag1
   Scenario: Generate Board
-    Given a Matrix of type Board 
+    Given an empty board
     And Players
     And a Difficulty
-    Then Display Obstacles and Robots
+    Then Generate board
     
 
     

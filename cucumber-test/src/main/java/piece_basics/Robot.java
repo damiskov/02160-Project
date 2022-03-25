@@ -4,7 +4,8 @@ import board.IBoard;
 
 public class Robot extends Piece implements IRegisterActor{
 	private Orientation orientation;
-	private int health;
+	private int health = 3;
+	private final int maxHealth = 3;
 	
 	public Robot(IBoard board, int x, int y) {
 		super(board, x, y);
@@ -75,12 +76,19 @@ public class Robot extends Piece implements IRegisterActor{
 	public void takeDamage() {
 		health--;
 	}
+	public void heal() {
+		if (health < maxHealth) health++;
+	}
 	
 	public void setHealth(int x) {
 		this.health = x;
 	}
 	public int getHealth() {
 		return this.health;
+	}
+	
+	public int getMaxHealth() {
+		return this.maxHealth;
 	}
 
 	@Override
