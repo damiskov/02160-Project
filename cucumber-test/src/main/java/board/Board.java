@@ -36,6 +36,13 @@ public class Board implements IBoard {
 		this.numObstacles = n;
 		
 	}
+	
+	public int getNumberObstacles() {
+		
+		return numObstacles;
+		
+	}
+	
 	public void setMatrix(Cell[][] m) {
 		this.matrix = m;
 		this.numRows = matrix.length;

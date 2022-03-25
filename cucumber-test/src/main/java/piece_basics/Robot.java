@@ -5,15 +5,13 @@ import environment_elements.RespawnPoint;
 
 public class Robot extends Piece implements IRegisterActor{
 	private Orientation orientation;
-<<<<<<< HEAD
+
 	private int health = 3;
 	private final int maxHealth = 3;
 	private RespawnPoint currentRespawnPoint;
-=======
-	private int health;
 	public boolean chainable;
 	public Robot chainedTo;
->>>>>>> refs/remotes/origin/StepDefinitionLandB
+
 	
 	public Robot(IBoard board, int x, int y) {
 		super(board, x, y);

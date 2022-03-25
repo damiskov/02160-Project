@@ -1,6 +1,7 @@
 
-import board.Board;
 import environment_elements.Chaining_Panel;
+import board.*;
+import piece_basics.*;
 import environment_elements.ConveyorBelt;
 import environment_elements.Fire;
 import environment_elements.Gear;
@@ -8,12 +9,9 @@ import environment_elements.HealthStation;
 import environment_elements.Laser;
 import environment_elements.OilSpill;
 import environment_elements.Pit;
-<<<<<<< HEAD
 import environment_elements.RespawnPoint;
-=======
 import environment_elements.Reversal_Panel;
 import environment_elements.Teleporter;
->>>>>>> refs/remotes/origin/StepDefinitionLandB
 import environment_elements.Wall;
 import piece_basics.Robot;
 
@@ -26,9 +24,7 @@ public class Context {
 	HealthStation healthStation;
 	Pit pit;
 	Wall wall;
-<<<<<<< HEAD
 	RespawnPoint respawnPoint;
-=======
 	Laser laser;
 	Teleporter sending;
 	Teleporter receiving;
@@ -36,5 +32,9 @@ public class Context {
 	Fire fire;
 	Reversal_Panel revpan;
 	Chaining_Panel chainpan;
->>>>>>> refs/remotes/origin/StepDefinitionLandB
+	Player player;
+	Player host;
+	Button startButton;
+	Game game;
+	Piece piece;
 }
