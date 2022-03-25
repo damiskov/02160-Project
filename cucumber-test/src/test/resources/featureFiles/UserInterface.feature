@@ -4,33 +4,36 @@ Feature: User Interface
 
   @tag1
   Scenario: Update board on screen
-  	Given a board array
+  	Given a screen
+  	And a board array
   	When update board on screen
-  	Then draw board
+  	Then display board on screen
   	
   Scenario: Update obstacles
-  	Given board on screen
+  	Given a screen
+  	And a board on screen
   	When update obstacles on screen
-  	Then draw obstacles
+  	Then display obstacles on screen
   	
   Scenario: Update robots
-  	Given board on screen
+  	Given a screen
+  	And a board on screen
   	And obstacles on screen
   	When update robots on screen
-  	Then draw robots
-  	And draw robot player markers
-  	And draw robot health
+  	Then display robots on screen
+  	And display robot player markers on screen
+  	And display robot health on screen
   	
   Scenario: Show player cards
     Given a screen
     And player turn is current player
     When show current player hand
-    Then draw current player cards
+    Then display current player cards on screen
     
   Scenario: Show player turn
   	Given a screen
   	When show current player number
-  	Then draw current player number
+  	Then display current player number on screen
   	
 
   
