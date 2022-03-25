@@ -27,6 +27,12 @@ public class Game {
 		}
 	}
 	
+	public void displayBoard()
+	{
+		// Displaying board
+		
+	}
+	
 	// Difficulty getter and setters
 	
 	public void setDifficulty(String d) {
@@ -57,12 +63,8 @@ public class Game {
 		return currentPlayer;
 	}
 	
-	public void displayBoard()
+	public Player setCurrentPlayer(Player p)
 	{
-		// Displaying board
-		
+		this.currentPlayer = p;
 	}
-	
-	
-
 }
