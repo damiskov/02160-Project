@@ -5,6 +5,8 @@ import board.IBoard;
 public class Robot extends Piece implements IRegisterActor{
 	private Orientation orientation;
 	private int health;
+	public boolean chainable;
+	public Robot chainedTo;
 	
 	public Robot(IBoard board, int x, int y) {
 		super(board, x, y);
@@ -82,6 +84,16 @@ public class Robot extends Piece implements IRegisterActor{
 	public int getHealth() {
 		return this.health;
 	}
+
+	public void pullChained(Robot r, int spaces, String dir) {
+		if (dir == "X") {
+			r.shiftX(spaces);
+		}
+		else if (dir == "Y") {
+			r.shiftY(spaces);
+		}
+	}
+	
 
 	@Override
 	public void performRegisterAction() {
