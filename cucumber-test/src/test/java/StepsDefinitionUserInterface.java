@@ -5,8 +5,13 @@ import io.cucumber.java.en.When;
 
 public class StepsDefinitionUserInterface {
 	
-	//Update board on screen
+	//Update board(User Interface)
 	
+	@Given("a screen")
+	public void a_screen() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
 	@Given("a board array")
 	public void a_board_array() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -17,16 +22,22 @@ public class StepsDefinitionUserInterface {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Then("draw board")
-	public void draw_board() {
+	@Then("display board on screen")
+	public void display_board_on_screen() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	
-	//Update Obstacles
-	
-	@Given("board on screen")
-	public void board_on_screen() {
+
+
+	//Update obstacles(User Interface)
+
+	@Given("a screen")
+	public void a_screen() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Given("a board on screen")
+	public void a_board_on_screen() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
@@ -35,14 +46,25 @@ public class StepsDefinitionUserInterface {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Then("draw obstacles")
-	public void draw_obstacles() {
+	@Then("display obstacles on screen")
+	public void display_obstacles_on_screen() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	
-	//Update robots
-	
+
+
+	//Update robots(User Interface)
+
+	@Given("a screen")
+	public void a_screen() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Given("a board on screen")
+	public void a_board_on_screen() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
 	@Given("obstacles on screen")
 	public void obstacles_on_screen() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -53,24 +75,25 @@ public class StepsDefinitionUserInterface {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Then("draw robots")
-	public void draw_robots() {
+	@Then("display robots on screen")
+	public void display_robots_on_screen() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Then("draw robot player markers")
-	public void draw_robot_player_markers() {
+	@Then("display robot player markers on screen")
+	public void display_robot_player_markers_on_screen() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Then("draw robot health")
-	public void draw_robot_health() {
+	@Then("display robot health on screen")
+	public void display_robot_health_on_screen() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	
-	//Show player cards
-	
+
+
+	//Show player cards(User Interface)
+
 	@Given("a screen")
 	public void a_screen() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -86,22 +109,29 @@ public class StepsDefinitionUserInterface {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Then("draw current player cards")
-	public void draw_current_player_cards() {
+	@Then("display current player cards on screen")
+	public void display_current_player_cards_on_screen() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	
-	//Show player turn
-	
+
+
+	//Show player turn(User Interface)
+
+	@Given("a screen")
+	public void a_screen() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
 	@When("show current player number")
 	public void show_current_player_number() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Then("draw current player number")
-	public void draw_current_player_number() {
+	@Then("display current player number on screen")
+	public void display_current_player_number_on_screen() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
+	
 }
