@@ -87,4 +87,10 @@ public class Robot extends Piece implements IRegisterActor{
 	public void performRegisterAction() {
 		
 	}
+	public Orientation getOrientation() {
+		
+		return orientation;
+
+		
+	}
 }
