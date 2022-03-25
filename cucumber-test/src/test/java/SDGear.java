@@ -32,7 +32,7 @@ private Context context;
 	@Then("gear turns the robot towards right")
 	public void gear_turns_the_robot_towards_right() {
 		context.gear.performRegisterAction();
-		//assertEquals(Orientation.RIGHT, context.robot.);
+		assertEquals(Orientation.RIGHT, context.robot.getOrientation());
 		
 	}
 	
@@ -46,7 +46,7 @@ private Context context;
 	@Then("gear turns the robot towards left")
 	public void gear_turns_the_robot_towards_left() {
 		context.gear.performRegisterAction();
-	    assertEquals(Orientation.LEFT,context.robot.getX());
+	    assertEquals(Orientation.LEFT,context.robot.getOrientation());
 	}
 
 }
