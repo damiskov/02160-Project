@@ -7,7 +7,7 @@ public class Game {
 	Board b;
 	String difficulty;
 	Player[] players;
-	Player currentPlayer;
+	int currentPlayer;
 	Deck gameDeck;
 	
 	// Board methods
@@ -58,12 +58,12 @@ public class Game {
 		}
 	}
 	
-	public Player getCurrentPlayer()
+	public int getCurrentPlayer()
 	{
 		return currentPlayer;
 	}
 	
-	private Player setCurrentPlayer(Player p)
+	private Player setCurrentPlayer(int p)
 	{
 		this.currentPlayer = p;
 	}
