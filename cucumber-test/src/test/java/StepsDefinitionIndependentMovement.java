@@ -1,3 +1,4 @@
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import piece_basics.Robot;
@@ -9,7 +10,7 @@ public class StepsDefinitionIndependentMovement {
 
 	//scenario 1
 	@Given("a Robot")
-	public void a_robot(Robot robo_cop) {
+	public void a_robot1(Robot robo_cop) {
 		r = robo_cop;
 	}
 	@Then("execute program")
