@@ -3,13 +3,13 @@ import io.cucumber.java.en.Then;
 import piece_basics.Piece;
 public class StepsDefinitionBoardGeneration {
 	
-	Board b = new Board();
+	Board b;
 	Player p1;
 	Player p2;
 	String difficulty;
-	@Given("a board of type Board")
-	public void a_matrix_of_type_board(Piece[][] m) {
-		b.setMatrix(m);
+	@Given("an empty Board")
+	public void a_board() {
+		this.b = new Board();
 	}
 	@Given("Players")
 	public void players(Player P1, Player P2) {

@@ -12,9 +12,3 @@ Feature: Setting up game
 		Given A Player
 		When Robot selected by Player
 		Then Assign Robot to Player
-  	
-	Scenario: Select Robot skin
-		Given A Player
-		And A Robot assigned to a Player
-		When the Player selects a Robot skin
-		Then Robot acquires skin
