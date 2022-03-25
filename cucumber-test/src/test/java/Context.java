@@ -1,5 +1,7 @@
 
+import UserInterface.Screen;
 import board.Board;
+import board.Game;
 import environment_elements.ConveyorBelt;
 import environment_elements.Gear;
 import environment_elements.HealthStation;
@@ -15,4 +17,8 @@ public class Context {
 	HealthStation healthStation;
 	Pit pit;
 	Wall wall;
+	Screen screen;
+	Game game;
+	
+	
 }

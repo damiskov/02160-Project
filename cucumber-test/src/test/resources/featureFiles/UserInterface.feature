@@ -3,14 +3,9 @@ Feature: User Interface
   This feature handles how the user sees the game
 
   @tag1
-<<<<<<< HEAD
-  Scenario: Display board on screen
-  	Given a board array
-=======
   Scenario: Update board on screen
   	Given a screen
   	And a board array
->>>>>>> refs/heads/UserInterface
   	When update board on screen
   	Then display board on screen
   	
@@ -37,8 +32,7 @@ Feature: User Interface
     
   Scenario: Show player turn
   	Given a screen
+  	And player turn is current player
   	When show current player number
   	Then display current player number on screen
-  	
-
-  
+ 
