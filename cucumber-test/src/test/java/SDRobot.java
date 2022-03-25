@@ -1,5 +1,6 @@
 import board.Board;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import piece_basics.Robot;
 
 public class SDRobot {
@@ -16,4 +17,11 @@ public class SDRobot {
 	    board.placeRobot(r);
 	    context.robot = r;
 	}
+	@When("the robot takes enough damage to kill it")
+	public void the_robot_takes_enough_damage_to_kill_it() {
+	    for (int i = 0; i < 3; i++) {
+	    	context.robot.takeDamage();
+	    }
+	}
+
 }
