@@ -4,35 +4,38 @@ import io.cucumber.java.en.Then;
 import piece_basics.Robot;
 import piece_basics.Orientation;
 import static org.junit.Assert.*;
-public class StepsDefinitionIndependentMovement {
+import board.Board;
+public class SDIndependentMovement {
 	
-	Robot r;
-
-	//scenario 1
-	@Given("a Robot")
-	public void a_robot1(Robot robo_cop) {
-		r = robo_cop;
+	private Context context;
+	
+	public SDIndependentMovement(Context context) {
+		this.context = context;
 	}
+	
+	
+//given a robot on the board
 	@Then("execute program")
 	public void execute_program() {
-	    r.executeProgram();
+	    context.robot.executeProgram();
 	}
 
+//given a command
 	@Given("A turn right command")
 	public void a_turn_right_command() {
-	    r.executeCommand();
+		 context.robot.executeCommand();
 	}
 	@Given("a robot on the board")
-	public void a_robot_on_the_board1(Robot robo_cop) {
-		r = robo_cop;
-	}
+
+	
+//given a robot on the board
 	@Then("Robot turns right")
 	public void robot_turns_right() {
-		Orientation prev_o = r.getOrientation();
+		Orientation prev_o = context.robot.getOrientation();
 		   
-		   r.turnRight();
+		context.robot.turnRight();
 		   
-		   Orientation curr_o = r.getOrientation();
+		   Orientation curr_o = context.robot.getOrientation();
 		   
 		   switch(prev_o) {
 				case UP:
@@ -53,20 +56,18 @@ public class StepsDefinitionIndependentMovement {
 
 	@Given("A turn left command")
 	public void a_turn_left_command() {
-		r.executeCommand();
+		context.robot.executeCommand();
 	}
-	@Given("a robot on the board")
-	public void a_robot_on_the_board2(Robot robo_cop) {
-		r = robo_cop;
-	}
+
+//given a robot on the board
 	@Then("Robot turns left")
 	public void robot_turns_left() {
 	   
-		Orientation prev_o = r.getOrientation();
+		Orientation prev_o = context.robot.getOrientation();
 	   
-	   r.turnLeft();
+		context.robot.turnLeft();
 	   
-	   Orientation curr_o = r.getOrientation();
+	   Orientation curr_o = context.robot.getOrientation();
 	   
 	   switch(prev_o) {
 			case UP:
@@ -89,24 +90,22 @@ public class StepsDefinitionIndependentMovement {
 
 	@Given("A move forward command")
 	public void a_move_forward_command() {
-		r.executeCommand();
+		context.robot.executeCommand();
 	}
-	@Given("a robot on the board")
-	public void a_robot2(Robot robo_cop) {
-		r = robo_cop;
-	}
+
+//given a robot on the board
 	@Then("Robot moves forward")
 	public void robot_moves_forward() {
 		int n = 1;
-		int old_x = r.getX();
-		int old_y = r.getY();
+		int old_x = context.robot.getX();
+		int old_y = context.robot.getY();
 	   
-	   r.move(n);
+		context.robot.move(n);
 	   
-	   int new_x = r.getX();
-	   int new_y = r.getY();
+	   int new_x = context.robot.getX();
+	   int new_y = context.robot.getY();
 	   
-	   switch(r.getOrientation()) {
+	   switch(context.robot.getOrientation()) {
 			case UP:
 				assertEquals(new_y, old_y+n);
 				break;
@@ -125,16 +124,22 @@ public class StepsDefinitionIndependentMovement {
 
 	@Given("a move backwards command")
 	public void a_move_backwards_command() {
+		context.robot.executeCommand();
+	}
+
+//given a robot on the board
+	@Then("Robot moves backward")
+	public void backwards() {
 		int n = -1;
-		int old_x = r.getX();
-		int old_y = r.getY();
+		int old_x = context.robot.getX();
+		int old_y = context.robot.getY();
 	   
-	   r.move(n);
+		context.robot.move(n);
 	   
-	   int new_x = r.getX();
-	   int new_y = r.getY();
+	   int new_x = context.robot.getX();
+	   int new_y = context.robot.getY();
 	   
-	   switch(r.getOrientation()) {
+	   switch(context.robot.getOrientation()) {
 			case UP:
 				assertEquals(new_y, old_y+n);
 				break;
@@ -148,14 +153,6 @@ public class StepsDefinitionIndependentMovement {
 				assertEquals(new_x, old_x-n);
 				break;
 		}
-	}
-	@Given("a robot on the board")
-	public void a_robot_on_the_board3(Robot robo_cop) {
-		r = robo_cop;
-	}
-	@Then("Robot moves backward")
-	public void backwards() {
-		System.out.println("moves backward");
 	}
 
 }

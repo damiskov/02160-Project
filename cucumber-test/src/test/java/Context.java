@@ -1,5 +1,6 @@
 
-import board.Board;
+import board.*;
+import piece_basics.*;
 import environment_elements.ConveyorBelt;
 import environment_elements.Gear;
 import environment_elements.HealthStation;
@@ -15,4 +16,9 @@ public class Context {
 	HealthStation healthStation;
 	Pit pit;
 	Wall wall;
+	Player player;
+	Player host;
+	Button startButton;
+	Game game;
+	Piece piece;
 }
