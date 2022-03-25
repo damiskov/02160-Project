@@ -1,7 +1,8 @@
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import piece_basics.Robot;
-
+import piece_basics.Orientation;
+import static org.junit.Assert.*;
 public class StepsDefinitionIndependentMovement {
 	
 	Robot r;
@@ -21,12 +22,31 @@ public class StepsDefinitionIndependentMovement {
 	    r.executeCommand();
 	}
 	@Given("a robot on the board")
-	public void a_robot_on_the_board(Robot robo_cop) {
+	public void a_robot_on_the_board1(Robot robo_cop) {
 		r = robo_cop;
 	}
 	@Then("Robot turns right")
 	public void robot_turns_right() {
-	    r.turnRight();
+		Orientation prev_o = r.getOrientation();
+		   
+		   r.turnRight();
+		   
+		   Orientation curr_o = r.getOrientation();
+		   
+		   switch(prev_o) {
+				case UP:
+					assertEquals(curr_o, Orientation.RIGHT);
+					break;
+				case RIGHT:
+					assertEquals(curr_o, Orientation.DOWN);
+					break;
+				case DOWN:
+					assertEquals(curr_o, Orientation.LEFT);
+					break;
+				case LEFT:
+					assertEquals(curr_o, Orientation.DOWN);
+					break;
+			}
 	}
 
 
@@ -35,26 +55,33 @@ public class StepsDefinitionIndependentMovement {
 		r.executeCommand();
 	}
 	@Given("a robot on the board")
-	public void a_robot_on_the_board(Robot robo_cop) {
+	public void a_robot_on_the_board2(Robot robo_cop) {
 		r = robo_cop;
 	}
 	@Then("Robot turns left")
 	public void robot_turns_left() {
-	   Orientation prev_o = r.getOrientation();
+	   
+		Orientation prev_o = r.getOrientation();
+	   
 	   r.turnLeft();
-		switch(prev_o):
+	   
+	   Orientation curr_o = r.getOrientation();
+	   
+	   switch(prev_o) {
 			case UP:
-				
+				assertEquals(curr_o, Orientation.LEFT);
 				break;
 			case RIGHT:
-				setX(getX() + spaces);
+				assertEquals(curr_o, Orientation.UP);
 				break;
 			case DOWN:
-				setY(getY() - spaces);
+				assertEquals(curr_o, Orientation.RIGHT);
 				break;
 			case LEFT:
-				setX(getX() - spaces);
+				assertEquals(curr_o, Orientation.DOWN);
 				break;
+		}
+	   
 			
 	}
 
@@ -64,27 +91,70 @@ public class StepsDefinitionIndependentMovement {
 		r.executeCommand();
 	}
 	@Given("a robot on the board")
-	public void a_robot_on_the_board(Robot robo_cop) {
+	public void a_robot2(Robot robo_cop) {
 		r = robo_cop;
 	}
 	@Then("Robot moves forward")
 	public void robot_moves_forward() {
-	    r.move(1)
+		int n = 1;
+		int old_x = r.getX();
+		int old_y = r.getY();
+	   
+	   r.move(n);
+	   
+	   int new_x = r.getX();
+	   int new_y = r.getY();
+	   
+	   switch(r.getOrientation()) {
+			case UP:
+				assertEquals(new_y, old_y+n);
+				break;
+			case RIGHT:
+				assertEquals(new_x, old_x+n);
+				break;
+			case DOWN:
+				assertEquals(new_y, old_y-n);
+				break;
+			case LEFT:
+				assertEquals(new_x, old_x-n);
+				break;
+		}
 	}
 
 
 	@Given("a move backwards command")
 	public void a_move_backwards_command() {
-		r.executeCommand();
+		int n = -1;
+		int old_x = r.getX();
+		int old_y = r.getY();
+	   
+	   r.move(n);
+	   
+	   int new_x = r.getX();
+	   int new_y = r.getY();
+	   
+	   switch(r.getOrientation()) {
+			case UP:
+				assertEquals(new_y, old_y+n);
+				break;
+			case RIGHT:
+				assertEquals(new_x, old_x+n);
+				break;
+			case DOWN:
+				assertEquals(new_y, old_y-n);
+				break;
+			case LEFT:
+				assertEquals(new_x, old_x-n);
+				break;
+		}
 	}
 	@Given("a robot on the board")
-	public void a_robot_on_the_board(Robot robo_cop) {
+	public void a_robot_on_the_board3(Robot robo_cop) {
 		r = robo_cop;
 	}
-	@Then("Robot moves forward")
-	public void robot_moves_forward() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@Then("Robot moves backward")
+	public void backwards() {
+		System.out.println("moves backward");
 	}
 
 }
