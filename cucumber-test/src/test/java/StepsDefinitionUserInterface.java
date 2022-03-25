@@ -1,72 +1,64 @@
 
+import static org.junit.Assert.assertEquals;
+
+import UserInterface.Screen;
+import board.Board;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+
 public class StepsDefinitionUserInterface {
+private Context context;
 	
+	public StepsDefinitionUserInterface(Context context) {
+		this.context = context;
+	}
+
 	//Update board(User Interface)
-	
-	//Epic feature
 	
 	@Given("a screen")
 	public void a_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    Screen screen = context.screen;
 	}
 	@Given("a board array")
 	public void a_board_array() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		Board board = context.board;
 	}
 	@When("update board on screen")
 	public void update_board_on_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    context.screen.update(context.board);
 	}
 	@Then("display board on screen")
 	public void display_board_on_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	   assertEquals(context.screen.output(),"[Board]");
 	}
 
 
 	//Update obstacles(User Interface)
 
-	@Given("a screen")
-	public void a_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+	//@Given("a screen")
+	
 	@Given("a board on screen")
 	public void a_board_on_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    context.screen.setOutput("[Board]");
 	}
 	@When("update obstacles on screen")
 	public void update_obstacles_on_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    context.screen.displayObstacles();
 	}
 	@Then("display obstacles on screen")
 	public void display_obstacles_on_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		assertEquals(context.screen.output(),"[Board][Obstacles]");
 	}
 
 
 	//Update robots(User Interface)
 
-	@Given("a screen")
-	public void a_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	@Given("a board on screen")
-	public void a_board_on_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+	//@Given("a screen")
+	
+	//@Given("a board on screen")
+	
 	@Given("obstacles on screen")
 	public void obstacles_on_screen() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -96,11 +88,8 @@ public class StepsDefinitionUserInterface {
 
 	//Show player cards(User Interface)
 
-	@Given("a screen")
-	public void a_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+	//@Given("a screen")
+	
 	@Given("player turn is current player")
 	public void player_turn_is_current_player() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -120,11 +109,8 @@ public class StepsDefinitionUserInterface {
 
 	//Show player turn(User Interface)
 
-	@Given("a screen")
-	public void a_screen() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+	//@Given("a screen")
+	
 	@When("show current player number")
 	public void show_current_player_number() {
 	    // Write code here that turns the phrase above into concrete actions
