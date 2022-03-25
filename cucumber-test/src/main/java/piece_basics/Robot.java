@@ -11,10 +11,7 @@ public class Robot extends Piece implements IRegisterActor{
 	
 	public Robot(IBoard board, int x, int y) {
 		super(board, x, y);
-		orientation = Orientation.RIGHT;
-		orientation = Orientation.LEFT;
 		orientation = Orientation.UP;
-		orientation = Orientation.DOWN;
 		
 	}
 	
