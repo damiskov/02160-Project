@@ -63,7 +63,7 @@ public class Game {
 		return currentPlayer;
 	}
 	
-	public Player setCurrentPlayer(Player p)
+	private Player setCurrentPlayer(Player p)
 	{
 		this.currentPlayer = p;
 	}
