@@ -13,8 +13,7 @@ public class HealthStation extends EnvironmentElement implements IRegisterActor 
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(getX(), getY())) {
-			Robot r = board.getRobotAt(getX(), getY());
-			r.setHealth(r.getHealth() + 1);
+			board.getRobotAt(getX(), getY()).heal();
 		}
 	}
 
