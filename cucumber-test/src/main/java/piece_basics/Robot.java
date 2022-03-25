@@ -5,9 +5,15 @@ import environment_elements.RespawnPoint;
 
 public class Robot extends Piece implements IRegisterActor{
 	private Orientation orientation;
+<<<<<<< HEAD
 	private int health = 3;
 	private final int maxHealth = 3;
 	private RespawnPoint currentRespawnPoint;
+=======
+	private int health;
+	public boolean chainable;
+	public Robot chainedTo;
+>>>>>>> refs/remotes/origin/StepDefinitionLandB
 	
 	public Robot(IBoard board, int x, int y) {
 		super(board, x, y);
@@ -105,6 +111,16 @@ public class Robot extends Piece implements IRegisterActor{
 		health = maxHealth;
 		// also must discard all cards in hand and stop moving
 	}
+
+	public void pullChained(Robot r, int spaces, String dir) {
+		if (dir == "X") {
+			r.shiftX(spaces);
+		}
+		else if (dir == "Y") {
+			r.shiftY(spaces);
+		}
+	}
+	
 
 	@Override
 	public void performRegisterAction() {

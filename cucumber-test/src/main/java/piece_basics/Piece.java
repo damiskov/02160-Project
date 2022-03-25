@@ -3,8 +3,8 @@ package piece_basics;
 import board.IBoard;
 
 public abstract class Piece {
-	private int xPos;
-	private int yPos;
+	public int xPos; //changed to public for ignite method in class OilSpill
+	public int yPos; //changed to public for ignite method in class OilSpill
 	protected IBoard board;
 	
 	public Piece(IBoard board, int x, int y) {
