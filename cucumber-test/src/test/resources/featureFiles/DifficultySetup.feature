@@ -8,8 +8,3 @@ Feature: Difficulty setup
     Then set number of obstacles
     Then set their location
     Then Generate board
-    
-    
-    
-
-
