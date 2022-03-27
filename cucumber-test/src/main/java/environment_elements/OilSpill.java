@@ -6,8 +6,8 @@ import piece_basics.IRegisterActor;
 public class OilSpill extends EnvironmentElement implements IRegisterActor {
 
 
-	public OilSpill(IBoard board, int x, int y) {
-		super(board, x, y);
+	public OilSpill(int x, int y) {
+		super(x, y);
 	}
 
 	public void ignite() {

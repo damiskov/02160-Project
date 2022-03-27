@@ -27,8 +27,8 @@ public class StepDefinitionAndvancedObstacles {
 	@Given("a laser")
 	public void a_laser() {
 		Board board = context.board;
-		Laser l = new Laser(board, 6, 5);
-		board.placeEElement(l);
+		Laser l = new Laser(6, 5);
+		board.place(l);
 	    context.laser = l;
 	}
 	@Given("a robot")
@@ -52,8 +52,8 @@ public class StepDefinitionAndvancedObstacles {
 
 	@Given("an oil spill")
 	public void an_oil_spill() {
-		OilSpill s = new OilSpill(context.board, 6, 5);
-		context.board.placeEElement(s);
+		OilSpill s = new OilSpill(6, 5);
+		context.board.place(s);
 	    context.spill = s;
 	}
 //	@Given("a robot")
@@ -77,8 +77,8 @@ public class StepDefinitionAndvancedObstacles {
 	
 	@Given("a fire")
 	public void a_fire() {
-		Fire f = new Fire(context.board, 6, 5);
-		context.board.placeEElement(f);
+		Fire f = new Fire(6, 5);
+		context.board.place(f);
 	    context.fire = f;
 	}
 //	@Given("a robot")
@@ -115,8 +115,8 @@ public class StepDefinitionAndvancedObstacles {
 	
 	@Given("reversal panel")
 	public void reversal_panel() {
-	    Reversal_Panel rp = new Reversal_Panel(context.board, 6, 5);
-	    context.board.placeEElement(rp);
+	    Reversal_Panel rp = new Reversal_Panel(6, 5);
+	    context.board.place(rp);
 	    context.revpan = rp;
 	    
 	}
@@ -142,8 +142,8 @@ public class StepDefinitionAndvancedObstacles {
 	
 	@Given("chaining panel")
 	public void chaining_panel() {
-	    Chaining_Panel cp = new Chaining_Panel(context.board, 5, 5);
-	    context.board.placeEElement(cp);
+	    Chaining_Panel cp = new Chaining_Panel(5, 5);
+	    context.board.place(cp);
 	    context.chainpan = cp;
 	}
 	
@@ -183,9 +183,9 @@ public class StepDefinitionAndvancedObstacles {
 //	}
 	@Given("a chainable robot")
 	public void a_chainable_robot() {
-	    Robot r = new Robot(context.board, 7, 10);
+	    Robot r = new Robot(7, 10);
 	    r.chainable = true;
-	    context.board.placeRobot(r);
+	    context.board.place(r);
 	    context.robot2 = r;
 	    
 	}
@@ -268,8 +268,8 @@ public class StepDefinitionAndvancedObstacles {
 	
 	@Given("a sending teleporter")
 	public void a_sending_teleporter() {
-		Teleporter sed = new Teleporter(context.board, 5, 5);
-		context.board.placeEElement(sed);
+		Teleporter sed = new Teleporter(5, 5);
+		context.board.place(sed);
 	    context.sending = sed;
 	}
 	@Given("a robot")
@@ -278,8 +278,8 @@ public class StepDefinitionAndvancedObstacles {
 //	}
 	@Given("a receiving teleporter")
 	public void a_receiving_teleporter() {
-		Teleporter rec = new Teleporter(context.board, 10, 5);
-		context.board.placeEElement(rec);
+		Teleporter rec = new Teleporter(10, 5);
+		context.board.place(rec);
 	    context.receiving = rec;
 	}
 	@When("the robot steps into the sending teleporter")

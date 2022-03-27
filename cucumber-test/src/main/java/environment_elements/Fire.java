@@ -8,8 +8,8 @@ import piece_basics.IRegisterActor;
 
 public class Fire extends EnvironmentElement implements IRegisterActor {
 	
-	public Fire(IBoard board, int x, int y) {
-		super(board, x, y);
+	public Fire(int x, int y) {
+		super(x, y);
 	}
 
 	@Override
@@ -24,6 +24,6 @@ public class Fire extends EnvironmentElement implements IRegisterActor {
 		int newX = x_c + (int)(Math.random() * 3) -1;
 		int newY = y_c + (int)(Math.random() * 3) -1;
 		
-		Fire newF = new Fire(b, newX, newY);
+		board.place(new Fire(newX, newY));
 	}
 }

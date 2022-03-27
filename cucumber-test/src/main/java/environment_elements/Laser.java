@@ -5,8 +5,8 @@ import piece_basics.*;
 
 public class Laser extends EnvironmentElement implements IRegisterActor{
 	
-	public Laser(IBoard board, int x, int y) {
-		super(board, x, y);
+	public Laser(int x, int y) {
+		super(x, y);
 	}
 
 	public void interact(Robot r) {

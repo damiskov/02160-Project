@@ -54,11 +54,13 @@ public class Board implements IBoard {
 	}
 	
 	@Override
-	public void placeRobot(Robot r) {
+	public void place(Robot r) {
+		r.setBoard(this);
 		index(r.getX(), r.getY()).robot = r;
 	}
 	@Override
-	public void placeEElement(EnvironmentElement e) {
+	public void place(EnvironmentElement e) {
+		e.setBoard(this);
 		index(e.getX(), e.getY()).eElement = e;
 	}
 	@Override

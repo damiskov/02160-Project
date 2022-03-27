@@ -3,14 +3,18 @@ package piece_basics;
 import board.IBoard;
 
 public abstract class Piece {
-	public int xPos; //changed to public for ignite method in class OilSpill
-	public int yPos; //changed to public for ignite method in class OilSpill
+	// should be changed back to private
+	public int xPos; 
+	public int yPos; 
 	protected IBoard board;
 	
-	public Piece(IBoard board, int x, int y) {
-		this.board = board;
+	public Piece(int x, int y) {
 		this.xPos = x;
 		this.yPos = y;
+	}
+	
+	public void setBoard(IBoard board) {
+		this.board = board;
 	}
 	
 	public void setPosition(int newX, int newY) {

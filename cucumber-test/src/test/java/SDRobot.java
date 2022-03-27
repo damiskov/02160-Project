@@ -13,8 +13,8 @@ public class SDRobot {
 	@Given("a robot on the board")
 	public void a_robot_on_the_board() {
 		Board board = context.board;
-	    Robot r = new Robot(board, 5, 5);
-	    board.placeRobot(r);
+	    Robot r = new Robot(5, 5);
+	    board.place(r);
 	    context.robot = r;
 	}
 	@When("the robot takes enough damage to kill it")

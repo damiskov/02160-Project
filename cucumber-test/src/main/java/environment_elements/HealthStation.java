@@ -6,8 +6,8 @@ import piece_basics.Robot;
 
 public class HealthStation extends EnvironmentElement implements IRegisterActor {
 	
-	public HealthStation(IBoard board, int x, int y) {
-		super(board, x, y);
+	public HealthStation(int x, int y) {
+		super(x, y);
 	}
 
 	@Override

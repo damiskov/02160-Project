@@ -19,8 +19,8 @@ private Context context;
 	@Given("a gear pointing towards right")
 	public void a_gear_pointing_towards_right() {
 		Board board = context.board;
-		Gear g = new Gear(board, 6, 5, false);
-		board.placeEElement(g);
+		Gear g = new Gear(6, 5, false);
+		board.place(g);
 		context.gear = g;
 	}
 	
@@ -39,8 +39,8 @@ private Context context;
 	@Given("a gear pointing towards left")
 	public void a_gear_pointing_towards_left() {
 		Board board = context.board;
-		Gear g = new Gear(board, 6, 5, true);
-		board.placeEElement(g);
+		Gear g = new Gear(6, 5, true);
+		board.place(g);
 		context.gear = g;
 	}
 	@Then("gear turns the robot towards left")

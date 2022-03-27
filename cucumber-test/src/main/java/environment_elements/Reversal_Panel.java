@@ -8,8 +8,8 @@ public class Reversal_Panel extends EnvironmentElement implements IRegisterActor
 
 	
 	
-	public Reversal_Panel(IBoard board, int x, int y) {
-		super(board, x, y);
+	public Reversal_Panel(int x, int y) {
+		super(x, y);
 	}
 
 	@Override

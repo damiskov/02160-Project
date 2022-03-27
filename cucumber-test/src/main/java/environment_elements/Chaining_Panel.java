@@ -10,8 +10,8 @@ public class Chaining_Panel extends EnvironmentElement implements IRegisterActor
 
 	public boolean active = true;
 	
-	public Chaining_Panel(IBoard board, int x, int y) {
-		super(board, x, y);
+	public Chaining_Panel(int x, int y) {
+		super(x, y);
 	}
 	
 	public void chain1(Robot r) {

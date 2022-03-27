@@ -13,8 +13,8 @@ public class Robot extends Piece implements IRegisterActor{
 	public Robot chainedTo;
 
 	
-	public Robot(IBoard board, int x, int y) {
-		super(board, x, y);
+	public Robot(int x, int y) {
+		super(x, y);
 		orientation = Orientation.UP;
 		
 	}
