@@ -1,7 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
 import board.Board;
-import environment_elements.Chaining_Panel;
+import environment_elements.ChainingPanel;
 import environment_elements.Fire;
 import environment_elements.Laser;
 import environment_elements.OilSpill;
@@ -12,15 +12,16 @@ import io.cucumber.java.en.When;
 import piece_basics.Robot;
 import io.cucumber.java.en.Then;
 
-public class StepDefinitionAndvancedObstacles {
+public class SDAndvancedObstacles {
 	private Context context;
-	//these are going to have to change
+	//can someone look at this and the corresponding step code?
+	//no idea if this is viable
 	int Xdistance;
 	int Ydistance;
 	int newXdistance;
 	int newYdistance;
 	
-	public StepDefinitionAndvancedObstacles(Context context) {
+	public SDAndvancedObstacles(Context context) {
 		this.context = context;
 	}
 
@@ -31,7 +32,8 @@ public class StepDefinitionAndvancedObstacles {
 		board.place(l);
 	    context.laser = l;
 	}
-	@Given("a robot")
+	//is this necessary?
+	@Given("a robot") 
 	public void a_robot() {
 		context.robot.setHealth(3);
 	}
@@ -75,6 +77,8 @@ public class StepDefinitionAndvancedObstacles {
 //	    throw new io.cucumber.java.PendingException();
 //	}
 	
+	
+	
 	@Given("a fire")
 	public void a_fire() {
 		Fire f = new Fire(6, 5);
@@ -96,6 +100,8 @@ public class StepDefinitionAndvancedObstacles {
 //	    throw new io.cucumber.java.PendingException();
 //	}
 	
+	
+	
 	@Given("a fire")
 //	public void a_fire() {
 //		Fire f = new Fire(context.board, 8, 5);
@@ -110,8 +116,10 @@ public class StepDefinitionAndvancedObstacles {
 	}
 	@Then("the fire spreads to a random adjacent cell")
 	public void the_fire_spreads_to_a_random_adjacent_cell() {
-	    context.fire.spread(context.board);
+	    context.fire.spread();
 	}
+	
+	
 	
 	@Given("reversal panel")
 	public void reversal_panel() {
@@ -140,9 +148,11 @@ public class StepDefinitionAndvancedObstacles {
 	    throw new io.cucumber.java.PendingException();
 	}
 	
+	
+	
 	@Given("chaining panel")
 	public void chaining_panel() {
-	    Chaining_Panel cp = new Chaining_Panel(5, 5);
+	    ChainingPanel cp = new ChainingPanel(5, 5);
 	    context.board.place(cp);
 	    context.chainpan = cp;
 	}
@@ -154,7 +164,7 @@ public class StepDefinitionAndvancedObstacles {
 //	}
 	@Given("no chainable robots")
 	public void no_chainable_robots() {
-	    context.chainpan.noChainable(context.robot); //parameter needs to be list of robots
+	    context.chainpan.noChainable(context.robot); //parameter needs to the list of robots on the board
 	}
 	@When("the robot steps into the chaining panel")
 	public void the_robot_steps_into_the_chaining_panel() {
@@ -166,9 +176,9 @@ public class StepDefinitionAndvancedObstacles {
 	}
 	@Then("the chaining panel becomes inactive")
 	public void the_chaining_panel_becomes_inactive() {
-	    context.chainpan.inactivate();
-	    assertEquals(true, context.robot.chainable);
-	    assertEquals(false, context.chainpan.active);
+	    context.chainpan.setActive(false);
+	    assertEquals(true, context.robot.getChainable());
+	    assertEquals(false, context.chainpan.getActive());
 	}
 	
 	@Given("chaining panel")
@@ -184,7 +194,7 @@ public class StepDefinitionAndvancedObstacles {
 	@Given("a chainable robot")
 	public void a_chainable_robot() {
 	    Robot r = new Robot(7, 10);
-	    r.chainable = true;
+	    r.setChainable(true);
 	    context.board.place(r);
 	    context.robot2 = r;
 	    
@@ -199,18 +209,20 @@ public class StepDefinitionAndvancedObstacles {
 	}
 	@Then("the first chaining panel become active again")
 	public void the_first_chaining_panel_become_active_again() {
-	    context.chainpan.activate();
+	    context.chainpan.setActive(true);
 	}
 	@Then("the robots are chained")
 	public void the_robots_are_chained() {
-		assertEquals(context.robot, context.robot2.chainedTo);
-	    assertEquals(context.robot2, context.robot.chainedTo);
+		assertEquals(context.robot, context.robot2.getChainedTo());
+	    assertEquals(context.robot2, context.robot.getChainedTo());
 	}
+	
+	
 	
 	@Given("two robots chained together")
 	public void two_robots_chained_together() {
-		context.robot.chainedTo = context.robot2;
-		context.robot2.chainedTo = context.robot;
+		context.robot.setChainedTo(context.robot2);
+		context.robot2.setChainedTo(context.robot);
 		Xdistance = context.robot.getX()-context.robot2.getX();
 		Ydistance = context.robot.getY()-context.robot2.getY();
 
@@ -244,6 +256,8 @@ public class StepDefinitionAndvancedObstacles {
 		assertEquals(context.robot.getY(), 5 + (newYdistance - Ydistance));
 	}
 	
+	
+	
 	@Given("two robots chained together")
 //	public void two_robots_chained_together() {
 //	    // Write code here that turns the phrase above into concrete actions
@@ -261,10 +275,12 @@ public class StepDefinitionAndvancedObstacles {
 	
 	@Then("the robots are unchained")
 	public void the_robots_are_unchained() {
-	    assertEquals(context.robot.chainable,false);
-	    assertEquals(context.robot2.chainable,false);
+	    assertEquals(context.robot.getChainable(),false);
+	    assertEquals(context.robot2.getChainable(),false);
 	    
 	}
+	
+	
 	
 	@Given("a sending teleporter")
 	public void a_sending_teleporter() {

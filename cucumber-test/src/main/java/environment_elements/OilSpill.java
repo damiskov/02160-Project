@@ -11,7 +11,7 @@ public class OilSpill extends EnvironmentElement implements IRegisterActor {
 	}
 
 	public void ignite() {
-		Fire f = new Fire(board, this.xPos, this.yPos);
+		board.place(new Fire(this.getX(), this.getY()));
 	}
 	
 	@Override

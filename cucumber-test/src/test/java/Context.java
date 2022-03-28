@@ -1,5 +1,5 @@
 
-import environment_elements.Chaining_Panel;
+import environment_elements.ChainingPanel;
 import board.*;
 import piece_basics.*;
 import environment_elements.ConveyorBelt;
@@ -31,7 +31,7 @@ public class Context {
 	OilSpill spill;
 	Fire fire;
 	Reversal_Panel revpan;
-	Chaining_Panel chainpan;
+	ChainingPanel chainpan;
 	Player player;
 	Player host;
 	Button startButton;

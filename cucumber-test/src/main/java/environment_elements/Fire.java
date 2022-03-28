@@ -17,7 +17,7 @@ public class Fire extends EnvironmentElement implements IRegisterActor {
 		
 	}
 
-	public void spread(Board b) {
+	public void spread() {
 		int x_c = this.getX();
 		int y_c = this.getY();
 		

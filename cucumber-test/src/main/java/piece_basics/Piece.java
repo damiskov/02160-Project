@@ -3,9 +3,8 @@ package piece_basics;
 import board.IBoard;
 
 public abstract class Piece {
-	// should be changed back to private
-	public int xPos; 
-	public int yPos; 
+	private int xPos; 
+	private int yPos; 
 	protected IBoard board;
 	
 	public Piece(int x, int y) {

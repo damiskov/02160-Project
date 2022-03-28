@@ -5,12 +5,11 @@ import environment_elements.RespawnPoint;
 
 public class Robot extends Piece implements IRegisterActor{
 	private Orientation orientation;
-
 	private int health = 3;
 	private final int maxHealth = 3;
 	private RespawnPoint currentRespawnPoint;
-	public boolean chainable;
-	public Robot chainedTo;
+	private boolean chainable;
+	private Robot chainedTo;
 
 	
 	public Robot(int x, int y) {
@@ -93,6 +92,7 @@ public class Robot extends Piece implements IRegisterActor{
 		if (health < maxHealth) health++;
 	}
 	
+	//is this method still relevant?
 	public void setHealth(int x) {
 		this.health = x;
 	}
@@ -102,6 +102,19 @@ public class Robot extends Piece implements IRegisterActor{
 	
 	public int getMaxHealth() {
 		return this.maxHealth;
+	}
+	
+	public boolean getChainable() {
+		return this.chainable;
+	}
+	public void setChainable(boolean chainable) {
+		this.chainable = chainable;
+	}
+	public Robot getChainedTo() {
+		return this.chainedTo;
+	}
+	public void setChainedTo(Robot chainedTo) {
+		this.chainedTo = chainedTo;
 	}
 	
 	public void reboot() {
