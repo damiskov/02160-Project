@@ -6,8 +6,8 @@ import piece_basics.Robot;
 
 public class Teleporter extends EnvironmentElement implements IRegisterActor{
 	
-	public Teleporter(IBoard board, int x, int y) {
-		super(board, x, y);
+	public Teleporter(int x, int y) {
+		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
 

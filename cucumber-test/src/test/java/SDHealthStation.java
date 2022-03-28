@@ -17,8 +17,8 @@ public class SDHealthStation {
 	@Given("a health station on the board")
 	public void a_health_station_on_the_board() {
 	    Board board = context.board;
-	    HealthStation hs = new HealthStation(board, 6, 5);
-	    board.placeEElement(hs);
+	    HealthStation hs = new HealthStation(6, 5);
+	    board.place(hs);
 	    context.healthStation = hs;
 	}
 	@Given("the robot does not have full health")

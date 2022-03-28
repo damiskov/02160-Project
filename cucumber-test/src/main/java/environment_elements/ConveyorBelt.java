@@ -4,10 +4,11 @@ import piece_basics.IRegisterActor;
 import piece_basics.Orientation;
 
 public class ConveyorBelt extends EnvironmentElement implements IRegisterActor {
+	
 	private Orientation orientation;
 	
-	public ConveyorBelt(IBoard board, int x, int y, Orientation orientation) {
-		super(board, x, y);
+	public ConveyorBelt(int x, int y, Orientation orientation) {
+		super(x, y);
 		this.orientation = orientation;
 	}
 

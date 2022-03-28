@@ -36,6 +36,13 @@ public class Board implements IBoard {
 		this.numObstacles = n;
 		
 	}
+	
+	public int getNumberObstacles() {
+		
+		return numObstacles;
+		
+	}
+	
 	public void setMatrix(Cell[][] m) {
 		this.matrix = m;
 		this.numRows = matrix.length;
@@ -47,11 +54,13 @@ public class Board implements IBoard {
 	}
 	
 	@Override
-	public void placeRobot(Robot r) {
+	public void place(Robot r) {
+		r.setBoard(this);
 		index(r.getX(), r.getY()).robot = r;
 	}
 	@Override
-	public void placeEElement(EnvironmentElement e) {
+	public void place(EnvironmentElement e) {
+		e.setBoard(this);
 		index(e.getX(), e.getY()).eElement = e;
 	}
 	@Override

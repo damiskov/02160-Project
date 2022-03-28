@@ -17,8 +17,8 @@ public class SDRespawnPoint {
 	@Given("a respawn point on the board")
 	public void a_respawn_point_on_the_board() {
 	    Board board = context.board;
-	    RespawnPoint r = new RespawnPoint(board, 1, 1);
-	    board.placeEElement(r);
+	    RespawnPoint r = new RespawnPoint(1, 1);
+	    board.place(r);
 	    context.respawnPoint = r;
 	}
 	@Given("the robot having its respawn point set")

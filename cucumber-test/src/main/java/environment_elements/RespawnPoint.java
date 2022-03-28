@@ -5,8 +5,8 @@ import piece_basics.IRegisterActor;
 
 public class RespawnPoint extends EnvironmentElement implements IRegisterActor {
 
-	public RespawnPoint(IBoard board, int x, int y) {
-		super(board, x, y);
+	public RespawnPoint(int x, int y) {
+		super(x, y);
 	}
 
 	@Override

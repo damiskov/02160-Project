@@ -8,9 +8,12 @@ public class Robot extends Piece implements IRegisterActor{
 	private int health = 3;
 	private final int maxHealth = 3;
 	private RespawnPoint currentRespawnPoint;
+	private boolean chainable;
+	private Robot chainedTo;
+
 	
-	public Robot(IBoard board, int x, int y) {
-		super(board, x, y);
+	public Robot(int x, int y) {
+		super(x, y);
 		orientation = Orientation.UP;
 		
 	}
@@ -89,6 +92,7 @@ public class Robot extends Piece implements IRegisterActor{
 		if (health < maxHealth) health++;
 	}
 	
+	//is this method still relevant?
 	public void setHealth(int x) {
 		this.health = x;
 	}
@@ -100,11 +104,34 @@ public class Robot extends Piece implements IRegisterActor{
 		return this.maxHealth;
 	}
 	
+	public boolean getChainable() {
+		return this.chainable;
+	}
+	public void setChainable(boolean chainable) {
+		this.chainable = chainable;
+	}
+	public Robot getChainedTo() {
+		return this.chainedTo;
+	}
+	public void setChainedTo(Robot chainedTo) {
+		this.chainedTo = chainedTo;
+	}
+	
 	public void reboot() {
 		setPosition(currentRespawnPoint.getX(), currentRespawnPoint.getY());
 		health = maxHealth;
 		// also must discard all cards in hand and stop moving
 	}
+
+	public void pullChained(Robot r, int spaces, String dir) {
+		if (dir == "X") {
+			r.shiftX(spaces);
+		}
+		else if (dir == "Y") {
+			r.shiftY(spaces);
+		}
+	}
+	
 
 	@Override
 	public void performRegisterAction() {
