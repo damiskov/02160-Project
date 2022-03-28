@@ -2,6 +2,7 @@ package board;
 import player.Player;
 
 public class BoardGenerator {
+	@SuppressWarnings("unused")
 	private Difficulty difficulty;
 	int numObstacles;
 	Player[] players;
@@ -14,7 +15,8 @@ public class BoardGenerator {
 	
 	public Board Generate()
 	{
-		return new Board();
+		Board board = new Board();
+		return board;
 	}
 	
 

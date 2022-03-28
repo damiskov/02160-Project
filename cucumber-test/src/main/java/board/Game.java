@@ -6,7 +6,7 @@ import player.Player;
 public class Game {
 	
 	Board b;
-	String difficulty;
+	Difficulty difficulty;
 	Player[] players;
 	int currentPlayer;
 	Deck gameDeck;
@@ -14,15 +14,15 @@ public class Game {
 	// Board methods
 	
 	public void genBoard() {
-		if (difficulty.equals("easy"))
+		if (difficulty.getLevel()==1)
 		{
 			// Generate board corresponding to easy difficulty
 		}
-		if (difficulty.equals("medium"))
+		if (difficulty.getLevel()==2)
 		{
 			// Generate board corresponding to medium difficulty 
 		}
-		if (difficulty.equals("hard"))
+		if (difficulty.getLevel()==3)
 		{
 			// Generate board corresponding to hard difficulty
 		}
@@ -36,8 +36,8 @@ public class Game {
 	
 	// Difficulty getter and setters
 	
-	public void setDifficulty(String d) {
-		this.difficulty = d;
+	public void setDifficulty(int d) {
+		this.difficulty.setLevel(d);
 	}
 	
 	public void getDifficulty()
