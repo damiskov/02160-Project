@@ -7,7 +7,7 @@ import piece_basics.Robot;
 public interface IBoard {
 	void place(Robot r);
 	void place(EnvironmentElement e);
-	void updatePiecePosition(int oldXPos, int oldYPos, Piece p);
+	void updatePosition(int oldXPos, int oldYPos, Piece p);
 	
 	boolean hasRobotAt(int x, int y);
 	Robot getRobotAt(int x, int y);

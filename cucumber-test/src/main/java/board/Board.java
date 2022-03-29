@@ -64,7 +64,7 @@ public class Board implements IBoard {
 		index(e.getX(), e.getY()).eElement = e;
 	}
 	@Override
-	public void updatePiecePosition(int oldXPos, int oldYPos, Piece p) {
+	public void updatePosition(int oldXPos, int oldYPos, Piece p) {
 		if (p instanceof Robot) {
 			var r = (Robot) p;
 			index(oldXPos, oldYPos).robot = null;
