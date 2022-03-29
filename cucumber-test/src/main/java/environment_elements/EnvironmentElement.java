@@ -4,8 +4,8 @@ import piece_basics.Piece;
 
 public abstract class EnvironmentElement extends Piece {
 
-	public EnvironmentElement(IBoard board, int x, int y) {
-		super(board, x, y);
+	public EnvironmentElement(int x, int y) {
+		super(x, y);
 	}
 
 	

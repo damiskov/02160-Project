@@ -3,14 +3,17 @@ package piece_basics;
 import board.IBoard;
 
 public abstract class Piece {
-	private int xPos;
-	private int yPos;
+	private int xPos; 
+	private int yPos; 
 	protected IBoard board;
 	
-	public Piece(IBoard board, int x, int y) {
-		this.board = board;
+	public Piece(int x, int y) {
 		this.xPos = x;
 		this.yPos = y;
+	}
+	
+	public void setBoard(IBoard board) {
+		this.board = board;
 	}
 	
 	public void setPosition(int newX, int newY) {
@@ -18,7 +21,7 @@ public abstract class Piece {
 		int oldYPos = yPos;
 		this.xPos = newX;
 		this.yPos = newY;
-		board.updatePiecePosition(oldXPos, oldYPos, this);
+		board.updatePosition(oldXPos, oldYPos, this);
 	}
 	
 	public int getX() {

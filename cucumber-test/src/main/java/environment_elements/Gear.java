@@ -7,11 +7,9 @@ public class Gear extends EnvironmentElement implements IRegisterActor {
 
 	private boolean counterClockwise;
 
-	
-	public Gear(IBoard board, int x, int y,boolean counterClockwise) {
-		super(board, x, y);
+	public Gear(int x, int y, boolean counterClockwise) {
+		super(x, y);
 		this.counterClockwise = counterClockwise;
-		
 	}
 	
 	@Override
