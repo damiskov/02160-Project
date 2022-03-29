@@ -1,22 +1,31 @@
 package board;
 import player.Player;
 
-public class BoardGenerator {
-	@SuppressWarnings("unused")
-	private Difficulty difficulty;
-	int numObstacles;
+public class BoardGenerator implements IBoardGenerator {
+	private String difficulty;
 	Player[] players;
 	
-	public BoardGenerator(Difficulty difficulty, int numObstacles, Player[] players) {
+	public BoardGenerator(String difficulty,  Player[] players) {
 		this.difficulty = difficulty;
-		this.numObstacles = numObstacles;
 		this.players = players;
 	}
-	
-	public Board Generate()
-	{
-		Board board = new Board();
-		return board;
+
+	@Override
+	public Board genEasyBoard() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Board genMediumBoard() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Board genHardBoard() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
