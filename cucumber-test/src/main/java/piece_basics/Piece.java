@@ -21,7 +21,7 @@ public abstract class Piece {
 		int oldYPos = yPos;
 		this.xPos = newX;
 		this.yPos = newY;
-		board.updatePiecePosition(oldXPos, oldYPos, this);
+		board.updatePosition(oldXPos, oldYPos, this);
 	}
 	
 	public int getX() {
