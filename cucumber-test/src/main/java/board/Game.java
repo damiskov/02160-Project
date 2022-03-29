@@ -14,5 +14,9 @@ public class Game {
 		this.difficulty = d;
 		
 	}
+	public void setCurrentPlayer(int i) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
