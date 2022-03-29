@@ -10,7 +10,7 @@ import environment_elements.Laser;
 import environment_elements.OilSpill;
 import environment_elements.Pit;
 import environment_elements.RespawnPoint;
-import environment_elements.Reversal_Panel;
+import environment_elements.ReversalPanel;
 import environment_elements.Teleporter;
 import environment_elements.Wall;
 import piece_basics.Robot;
@@ -30,7 +30,7 @@ public class Context {
 	Teleporter receiving;
 	OilSpill spill;
 	Fire fire;
-	Reversal_Panel revpan;
+	ReversalPanel revpan;
 	ChainingPanel chainpan;
 	Player player;
 	Player host;

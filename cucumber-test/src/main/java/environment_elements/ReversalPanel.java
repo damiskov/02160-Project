@@ -4,11 +4,11 @@ import board.IBoard;
 import piece_basics.IRegisterActor;
 import piece_basics.Robot;
 
-public class Reversal_Panel extends EnvironmentElement implements IRegisterActor{
+public class ReversalPanel extends EnvironmentElement implements IRegisterActor{
 
 	
 	
-	public Reversal_Panel(int x, int y) {
+	public ReversalPanel(int x, int y) {
 		super(x, y);
 	}
 

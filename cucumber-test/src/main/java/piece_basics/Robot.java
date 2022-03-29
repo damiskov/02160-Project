@@ -104,7 +104,7 @@ public class Robot extends Piece implements IRegisterActor{
 		return this.maxHealth;
 	}
 	
-	public boolean getChainable() {
+	public boolean isChainable() {
 		return this.chainable;
 	}
 	public void setChainable(boolean chainable) {
