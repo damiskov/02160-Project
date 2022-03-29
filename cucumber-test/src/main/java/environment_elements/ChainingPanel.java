@@ -20,7 +20,7 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 		r.setChainable(true);
 	}
 	
-	public boolean getActive() {
+	public boolean isActive() {
 		return this.active;
 	}
 	
@@ -31,7 +31,7 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 	
 	public boolean noChainable(Robot[] rs) {
 		for (i = 0; i <= rs.length; i++); {
-			if(rs[i].getChainable() == true) {
+			if(rs[i].isChainable() == true) {
 				chainableOnBoard = chainableOnBoard || true;
 			
 			} else {
@@ -43,7 +43,7 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 	
 	
 	public void chainRobots(Robot r1, Robot r2) {
-		if(r1.getChainable() == true && r2.getChainable() == true) {
+		if(r1.isChainable() == true && r2.isChainable() == true) {
 			System.out.println(r1 + " has been chained to robot " + r2);
 			r1.setChainedTo(r2);
 			r2.setChainedTo(r1);
@@ -54,8 +54,8 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 		r1.setChainable(false);
 		r2.setChainable(false);
 		
-		r1.setChainedTo(r1); //these two are changed and the robot is chained to itself
-		r2.setChainedTo(r2); //it won't pull another robot, but it might cause problems, idk how to wipe the value in the variable
+		r1.setChainedTo(null); 
+		r2.setChainedTo(null); 
 		}
 	
 	
