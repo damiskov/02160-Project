@@ -8,25 +8,26 @@ public class PrintScreen implements Screen{
 
 	@Override
 	public void update(Board board) {
-		// TODO Auto-generated method stub
+		if (board==null){
+			this.output="[]";
+		}
 		
 	}
 
 	@Override
 	public void setOutput(String string) {
-		// TODO Auto-generated method stub
-		
+		this.output=string;
 	}
 
 	@Override
 	public void displayObstacles() {
-		// TODO Auto-generated method stub
+		this.output+="[]";
 		
 	}
 
 	@Override
 	public void displayRobots() {
-		// TODO Auto-generated method stub
+		this.output+="[Robot1 P1 HP:3][Robot2 P2 HP:2]";
 		
 	}
 
@@ -56,8 +57,7 @@ public class PrintScreen implements Screen{
 
 	@Override
 	public String getOutput() {
-		// TODO Auto-generated method stub
-		return "[Board]";
+		return output;
 	}
 
 }

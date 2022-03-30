@@ -3,6 +3,7 @@ import static org.junit.Assert.assertEquals;
 
 import UserInterface.*;
 import board.Board;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,15 +20,16 @@ private Context context;
 	
 	@Given("a screen")
 	public void a_screen() {
-	    PrintScreen printScreen = context.printScreen;
+	   //PrintScreen printScreen = context.printScreen;
+	   context.printScreen = new PrintScreen();
 	}
 	@Given("a board array")
 	public void a_board_array() {
-		Board board = context.board;
+		//Board board = context.board;
 	}
 	@When("update board on screen")
 	public void update_board_on_screen() {
-	    context.printScreen.update(context.board);
+	   context.printScreen.update(context.board);
 	}
 	@Then("display board on screen")
 	public void display_board_on_screen() {
@@ -42,6 +44,10 @@ private Context context;
 	@Given("a board on screen")
 	public void a_board_on_screen() {
 	    context.printScreen.setOutput("[Board]");
+	}
+	@And("obstacles on board")
+	public void obstacles_on_board() {
+		
 	}
 	@When("update obstacles on screen")
 	public void update_obstacles_on_screen() {
@@ -64,11 +70,15 @@ private Context context;
 	public void obstacles_on_screen() {
 		context.printScreen.setOutput("[Board][Obstacles]");
 	}
+	@And("robots on board")
+	public void robots_on_board() {
+		
+	}
 	@When("update robots on screen")
 	public void update_robots_on_screen() {
 	    context.printScreen.displayRobots();
 	}
-	@Then("display robots with marker and HP on screen")
+	@Then("display robots with markers and HP on screen")
 	public void display_robot_health_on_screen() {
 	    assertEquals(context.printScreen.getOutput(),"[Board][Obstacles][Robot1 P1 HP:3][Robot2 P2 HP:2]");
 	}

@@ -12,13 +12,15 @@ Feature: User Interface
   Scenario: Update obstacles
   	Given a screen
   	And a board on screen
+  	And obstacles on board
   	When update obstacles on screen
   	Then display obstacles on screen
-  	
+  
   Scenario: Update robots
   	Given a screen
   	And a board on screen
   	And obstacles on screen
+  	And robots on board
   	When update robots on screen
   	Then display robots with markers and HP on screen
   	
