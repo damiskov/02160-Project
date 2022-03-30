@@ -9,4 +9,6 @@ public class Wall extends EnvironmentElement {
 		super(board, x, y);
 	}
 
+
+
 }
