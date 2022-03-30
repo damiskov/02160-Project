@@ -1,4 +1,6 @@
-
+import UserInterface.Screen;
+import board.Board;
+import board.Game;
 import environment_elements.ChainingPanel;
 import board.*;
 import piece_basics.*;
@@ -24,6 +26,8 @@ public class Context {
 	HealthStation healthStation;
 	Pit pit;
 	Wall wall;
+	Screen screen;
+	Game game;
 	RespawnPoint respawnPoint;
 	Laser laser;
 	Teleporter sending;
@@ -35,6 +39,5 @@ public class Context {
 	Player player;
 	Player host;
 	Button startButton;
-	Game game;
 	Piece piece;
 }

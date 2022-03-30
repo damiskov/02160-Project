@@ -94,6 +94,16 @@ public class Board implements IBoard {
 	}
 	
 	@Override
+	public void removeEElement(int x, int y) {
+		index(x, y).eElement = null;
+	}
+	
+	@Override
+	public void removeRobot(int x, int y) {
+		index(x, y).robot = null;
+	}
+	
+	@Override
 	public boolean coordinateWithinBounds(int x, int y) {
 		return
 				0 <= x && x <= numColumns

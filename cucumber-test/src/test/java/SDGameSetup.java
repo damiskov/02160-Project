@@ -13,20 +13,20 @@ public class SDGameSetup {
 	
 // Scenario 1 - Start game
 //Given a host
-	@Given("A Difficulty")
-	public void a_difficulty(String diff) {
-		this.d = diff;
-	}
+	//@Given("A Difficulty")
+	//public void a_difficulty(String diff) {
+	//	this.d = diff;
+	//}
 	
 	@When("Start button pressed")
 	public void start_button_pressed() {
 	    context.startButton.press();
 	}
-	@Then("Generate Board")
-	public void generate_board() {
+	//@Then("Generate Board")
+	//public void generate_board() {
 	    // Generate board
 		// Then display
-	}
+	//}
 		
 // Scenario 2 - Robot assignment 
 //given a player

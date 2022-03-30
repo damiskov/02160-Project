@@ -8,7 +8,7 @@ public class Game {
 	String difficulty;
 	Player[] players;
 	int currentPlayer;
-	Deck gameDeck;
+
 	
 	// Board methods
 	
@@ -32,6 +32,7 @@ public class Game {
 		// Displaying board
 		
 	}
+
 	
 	// Difficulty getter and setters
 	
@@ -67,4 +68,7 @@ public class Game {
 	{
 		this.currentPlayer = p;
 	}
+
+
+
 }
