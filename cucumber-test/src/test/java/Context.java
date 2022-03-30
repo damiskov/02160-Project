@@ -39,5 +39,5 @@ public class Context {
 	Game game;
 	Piece piece;
 	Screen screen;
-	//Here I go boi
+	
 }

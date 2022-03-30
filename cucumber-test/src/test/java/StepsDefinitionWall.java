@@ -12,11 +12,11 @@ public class StepsDefinitionWall {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Given("a robot on the board")
-	public void a_robot_on_the_board() {
+	//@Given("a robot on the board")
+	//public void a_robot_on_the_board() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+	//    throw new io.cucumber.java.PendingException();
+	//}
 	@When("robot bumps into the wall")
 	public void robot_bumps_into_the_wall() {
 	    // Write code here that turns the phrase above into concrete actions
