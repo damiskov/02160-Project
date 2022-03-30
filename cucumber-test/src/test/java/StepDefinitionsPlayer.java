@@ -2,7 +2,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class SDRobotBumping {
+public class StepDefinitionsPlayer {
 	
 	//Player as obstacle on the right side(Player)	
 	@Given("a player")

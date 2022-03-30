@@ -6,10 +6,10 @@ import io.cucumber.java.en.When;
 import piece_basics.Orientation;
 import static org.junit.Assert.assertEquals;
 
-public class SDWall{
+public class StepDefinitionsWall{
 private Context context;
 	
-	public SDWall(Context context) {
+	public StepDefinitionsWall(Context context) {
 		this.context = context;
 	}
 	
