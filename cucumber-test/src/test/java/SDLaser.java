@@ -7,7 +7,6 @@ import environment_elements.Laser;
 
 public class SDLaser {
 
-	//change the first "Then" 
 	private Context context;
 	
 	public SDLaser(Context context) {
@@ -21,17 +20,17 @@ public class SDLaser {
 		board.place(l);
 	    context.laser = l;
 	}
+	
 	@When("the robot steps into the laser")
 	public void the_robot_steps_into_the_laser() {
 		context.robot.shiftX(1);
+		context.laser.performRegisterAction();
 	}
+	
 	@Then("the robot loses life points")
 	public void the_robot_loses_life_points() {
-		context.laser.activate(context.robot);
-	}
-	@Then("the robot lost life points")
-	public void the_robot_lost_life_points() {
 		assertEquals(context.robot.getHealth(),2);
 	}
+	
 }
 

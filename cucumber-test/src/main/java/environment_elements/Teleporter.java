@@ -5,10 +5,9 @@ import piece_basics.IRegisterActor;
 import piece_basics.Robot;
 
 public class Teleporter extends EnvironmentElement implements IRegisterActor{
-	
+
 	public Teleporter(int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void interact(Robot r, Teleporter t ) {
@@ -22,8 +21,9 @@ public class Teleporter extends EnvironmentElement implements IRegisterActor{
 			
 	}
 	
-	@Override
+	@Override //can't figure out how to use this in this case so I kept the two other methods
 	public void performRegisterAction() {
-		
 	}
+
+
 }
