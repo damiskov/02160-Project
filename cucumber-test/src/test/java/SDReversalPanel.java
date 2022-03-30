@@ -18,7 +18,7 @@ public class SDReversalPanel {
 	    context.board.place(rp);
 	    context.revpan = rp;
 	}
-	
+	//moves have not been implemented
 	@Given("some remaining moves for the robots")
 	public void some_remaining_moves_for_the_robots() {
 	    // Write code here that turns the phrase above into concrete actions

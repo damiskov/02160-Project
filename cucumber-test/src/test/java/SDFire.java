@@ -25,17 +25,16 @@ public class SDFire {
 		context.fire.performRegisterAction();
 	}
 	
-	
-
 	//Turns have not been implemented yet
 	@When("a turn passes")
 	public void a_turn_passes() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
+	
 	@Then("the fire spreads to a random adjacent cell")
 	public void the_fire_spreads_to_a_random_adjacent_cell() {
-	    context.fire.spread();
+		context.fire.performRegisterAction();
 	}
 	
 }

@@ -28,7 +28,8 @@ public class SDTeleporter {
 	@When("the robot steps into the sending teleporter")
 	public void the_robot_steps_into_the_sending_teleporter() {
 		context.robot.shiftX(1);
-		context.sending.activate(context.robot, context.receiving);
+		context.sending.performRegisterAction();
+		context.receiving.performRegisterAction();
 	}
 	
 	@Then("the robot get teleported to the receiving teleporter")

@@ -10,19 +10,25 @@ public class Teleporter extends EnvironmentElement implements IRegisterActor{
 		super(x, y);
 	}
 
-	public void interact(Robot r, Teleporter t ) {
-		r.setPosition(t.getX(),t.getY());
-	}
+//	public void interact(Robot r, Teleporter t ) {
+//		r.setPosition(t.getX(),t.getY());
+//	}
+//	
+//	public void activate(Robot r, Teleporter t) {
+//		if(this.getX() == r.getX() && this.getY() == r.getY()) {
+//			this.interact(r,t);
+//		}
+//			
+//	}
 	
-	public void activate(Robot r, Teleporter t) {
-		if(this.getX() == r.getX() && this.getY() == r.getY()) {
-			this.interact(r,t);
-		}
-			
-	}
-	
-	@Override //can't figure out how to use this in this case so I kept the two other methods
+	@Override //temporary solution, won't work because we create a new robot instead of actually moving it
 	public void performRegisterAction() {
+		if(board.hasRobotAt(this.getX(), this.getY())) {
+			board.removeRobot(this.getX(), this.getY());
+		}
+		else{
+			board.place(new Robot(this.getX(), this.getY()));
+		}
 	}
 
 
