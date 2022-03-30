@@ -1,7 +1,7 @@
 
 import static org.junit.Assert.assertEquals;
 
-import UserInterface.Screen;
+import UserInterface.*;
 import board.Board;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,7 +19,7 @@ private Context context;
 	
 	@Given("a screen")
 	public void a_screen() {
-	    Screen screen = context.screen;
+	    PrintScreen printScreen = context.printScreen;
 	}
 	@Given("a board array")
 	public void a_board_array() {
@@ -31,7 +31,7 @@ private Context context;
 	}
 	@Then("display board on screen")
 	public void display_board_on_screen() {
-	   assertEquals(context.screen.output(),"[Board]");
+	   assertEquals(context.printScreen.getOutput(),"[Board]");
 	}
 
 
@@ -49,7 +49,7 @@ private Context context;
 	}
 	@Then("display obstacles on screen")
 	public void display_obstacles_on_screen() {
-		assertEquals(context.screen.output(),"[Board][Obstacles]");
+		assertEquals(context.printScreen.getOutput(),"[Board][Obstacles]");
 		
 	}
 
@@ -70,17 +70,17 @@ private Context context;
 	}
 	@Then("display robots on screen")
 	public void display_robots_on_screen() {
-		assertEquals(context.screen.output(),"[Board][Obstacles][Robot1][Robot2]");
+		assertEquals(context.printScreen.getOutput(),"[Board][Obstacles][Robot1][Robot2]");
 	}
 	@Then("display robot player markers on screen")
 	public void display_robot_player_markers_on_screen() {
 		context.screen.displayRobotMarkers();
-	    assertEquals(context.screen.output(),"[Board][Obstacles][Robot1 P1][Robot2 P2]");
+	    assertEquals(context.printScreen.getOutput(),"[Board][Obstacles][Robot1 P1][Robot2 P2]");
 	}
 	@Then("display robot health on screen")
 	public void display_robot_health_on_screen() {
 	    context.screen.displayRobotHealth();
-	    assertEquals(context.screen.output(),"[Board][Obstacles][Robot1 P1 HP:3][Robot2 P2 HP:2]");
+	    assertEquals(context.printScreen.getOutput(),"[Board][Obstacles][Robot1 P1 HP:3][Robot2 P2 HP:2]");
 	}
 
 
@@ -98,7 +98,7 @@ private Context context;
 	}
 	@Then("display current player cards on screen")
 	public void display_current_player_cards_on_screen() {
-	   assertEquals(context.screen.output(),"[Player 2][Forward x1][Right x2][Left x1]");
+	   assertEquals(context.printScreen.getOutput(),"[Player 2][Forward x1][Right x2][Left x1]");
 	}
 
 
@@ -112,7 +112,7 @@ private Context context;
 	}
 	@Then("display current player number on screen")
 	public void display_current_player_number_on_screen() {
-		assertEquals(context.screen.output(),"[Player 2]");
+		assertEquals(context.printScreen.getOutput(),"[Player 2]");
 	}
 	
 }

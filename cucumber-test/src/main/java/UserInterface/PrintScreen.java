@@ -4,11 +4,7 @@ import board.Board;
 
 public class PrintScreen implements Screen{
 
-	@Override
-	public Object output() {
-		// TODO Auto-generated method stub huh
-		return null;
-	}
+	public String output;
 
 	@Override
 	public void update(Board board) {
@@ -56,6 +52,12 @@ public class PrintScreen implements Screen{
 	public void showCurrPlayerNumber() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String getOutput() {
+		// TODO Auto-generated method stub
+		return "[Board]";
 	}
 
 }
