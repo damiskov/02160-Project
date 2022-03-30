@@ -22,10 +22,12 @@ public class SDFire {
 	@When("the robot steps into the fire")
 	public void the_robot_steps_into_the_fire() {
 		context.robot.shiftX(1);
+		context.fire.performRegisterAction();
 	}
+	
+	@Then("the robot loses life points")
 
-	
-	
+	//Turns have not been implemented yet
 	@When("a turn passes")
 	public void a_turn_passes() {
 	    // Write code here that turns the phrase above into concrete actions

@@ -14,7 +14,6 @@ public class ReversalPanel extends EnvironmentElement implements IRegisterActor{
 
 	@Override
 	public void performRegisterAction() {
-		// TODO Auto-generated method stub
 		
 	}
 

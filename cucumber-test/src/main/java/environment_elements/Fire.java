@@ -14,7 +14,9 @@ public class Fire extends EnvironmentElement implements IRegisterActor {
 
 	@Override
 	public void performRegisterAction() {
-		
+		if (board.hasRobotAt(getX(), getY())) {
+			board.getRobotAt(getX(), getY()).takeDamage();
+		}
 	}
 
 	public void spread() {
