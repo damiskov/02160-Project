@@ -36,9 +36,9 @@ private Context context;
 	@Given("a wall on the left side of the robot")
 	public void a_wall_on_the_left_side_of_the_robot() {
 		Board board = context.board;
-		Wall w = new Wall(board, 4, 5);
-	    board.placeEElement(w);
-	    context.wall = w;
+		//Wall w = new Wall(board, 4, 5);
+	   // board.placeEElement(w);
+	    //context.wall = w;
 	}
 	
 	@When("robot bumps into the wall from the left side")
