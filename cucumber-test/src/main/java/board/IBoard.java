@@ -1,7 +1,6 @@
 package board;
 
 import environment_elements.EnvironmentElement;
-import piece_basics.Piece;
 import piece_basics.Robot;
 
 public interface IBoard {
@@ -10,9 +9,11 @@ public interface IBoard {
 	
 	Position getPosition(Robot r);
 	Position getPosition(EnvironmentElement e);
+	void removeRobot(int x, int y);
 	
 	void moveRobotFromTo(Position oldPos, Position newPos);
 	void moveEElementFromTo(Position oldPos, Position newPos);
+	void removeEElement(int x, int y);
 	
 	void setPosition(Robot r, Position p);
 	void setPosition(EnvironmentElement e, Position p);

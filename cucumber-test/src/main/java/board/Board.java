@@ -138,6 +138,15 @@ public class Board implements IBoard {
 		return getCell(p).eElement;
 	}
 
+	public void removeEElement(int x, int y) {
+		getCell(x, y).eElement = null;
+	}
+	
+	@Override
+	public void removeRobot(int x, int y) {
+		getCell(x, y).robot = null;
+	}
+	
 	@Override
 	public boolean coordinateWithinBounds(Position p) {
 		int x = p.getX();
