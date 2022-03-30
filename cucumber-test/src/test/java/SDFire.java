@@ -25,7 +25,7 @@ public class SDFire {
 		context.fire.performRegisterAction();
 	}
 	
-	@Then("the robot loses life points")
+	
 
 	//Turns have not been implemented yet
 	@When("a turn passes")
