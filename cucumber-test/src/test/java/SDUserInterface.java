@@ -68,16 +68,7 @@ private Context context;
 	public void update_robots_on_screen() {
 	    context.screen.displayRobots();
 	}
-	@Then("display robots on screen")
-	public void display_robots_on_screen() {
-		assertEquals(context.printScreen.getOutput(),"[Board][Obstacles][Robot1][Robot2]");
-	}
-	@Then("display robot player markers on screen")
-	public void display_robot_player_markers_on_screen() {
-		context.screen.displayRobotMarkers();
-	    assertEquals(context.printScreen.getOutput(),"[Board][Obstacles][Robot1 P1][Robot2 P2]");
-	}
-	@Then("display robot health on screen")
+	@Then("display robots with marker and HP on screen")
 	public void display_robot_health_on_screen() {
 	    context.screen.displayRobotHealth();
 	    assertEquals(context.printScreen.getOutput(),"[Board][Obstacles][Robot1 P1 HP:3][Robot2 P2 HP:2]");
