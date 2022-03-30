@@ -21,13 +21,16 @@ public class Teleporter extends EnvironmentElement implements IRegisterActor{
 //			
 //	}
 	
-	@Override //temporary solution, won't work because we create a new robot instead of actually moving it
+	@Override //Check if it works, not sure if updatePosition is used properly
 	public void performRegisterAction() {
+//		if(board.hasRobotAt(this.getX(), this.getY())) {
+//			board.removeRobot(this.getX(), this.getY());
+//		}
+//		else{
+//			board.place(new Robot(this.getX(), this.getY()));
+//		}
 		if(board.hasRobotAt(this.getX(), this.getY())) {
-			board.removeRobot(this.getX(), this.getY());
-		}
-		else{
-			board.place(new Robot(this.getX(), this.getY()));
+			board.updatePosition(this.getX(), this.getY(), board.getRobotAt(this.getX(), this.getY()));
 		}
 	}
 

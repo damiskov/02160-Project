@@ -17,7 +17,7 @@ public class SDLaser {
 	public void a_laser() {
 		Board board = context.board;
 		Laser l = new Laser(6, 5);
-		board.place(l);
+		context.board.place(l);
 	    context.laser = l;
 	}
 	
