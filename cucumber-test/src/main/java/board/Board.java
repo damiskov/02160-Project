@@ -49,52 +49,99 @@ public class Board implements IBoard {
 		this.numColumns = matrix[0].length;
 	}
 
-	private Cell index(int x, int y) {
+	private Cell getCell(Position p) {
+		int x = p.getX();
+		int y = p.getY();
+		return matrix[numColumns - y - 1][x];
+	}
+	private Cell getCell(int x, int y) {
 		return matrix[numColumns - y - 1][x];
 	}
 	
 	@Override
-	public void place(Robot r) {
+	public void place(Robot r, int x, int y) {
 		r.setBoard(this);
-		index(r.getX(), r.getY()).robot = r;
+		getCell(x, y).robot = r;
 	}
 	@Override
-	public void place(EnvironmentElement e) {
+	public void place(EnvironmentElement e, int x, int y) {
 		e.setBoard(this);
-		index(e.getX(), e.getY()).eElement = e;
+		getCell(x, y).eElement = e;
 	}
+
 	@Override
-	public void updatePosition(int oldXPos, int oldYPos, Piece p) {
-		if (p instanceof Robot) {
-			var r = (Robot) p;
-			index(oldXPos, oldYPos).robot = null;
-			index(r.getX(), r.getY()).robot = r;
-		} else if (p instanceof EnvironmentElement) {
-			var e = (EnvironmentElement) p;
-			index(oldXPos, oldYPos).eElement = null;
-			index(e.getX(), e.getY()).eElement = e;
+	public Position getPosition(Robot r) {
+		for (int i = 0; i < numColumns; i++) {
+			for (int j = 0; j < numRows; j++) {
+				var pr = getCell(i, j).robot;
+				if (r == pr) {
+					return new Position(i, j);
+				}
+			}
 		}
+		return null;
+	}
+
+	@Override
+	public Position getPosition(EnvironmentElement e) {
+		for (int i = 0; i < numColumns; i++) {
+			for (int j = 0; j < numRows; j++) {
+				var pe = getCell(i, j).eElement;
+				if (e == pe) {
+					return new Position(i, j);
+				}
+			}
+		}
+		return null;
 	}
 	
 	@Override
-	public boolean hasRobotAt(int x, int y) {
-		return index(x, y).robot != null;
+	public void moveRobotFromTo(Position oldPos, Position newPos) {
+		Cell oldCell = getCell(oldPos);
+		getCell(newPos).robot = oldCell.robot;
+		oldCell.robot = null;
 	}
-	@Override
-	public Robot getRobotAt(int x, int y) {
-		return index(x, y).robot;
-	}
-	@Override
-	public boolean hasEElementAt(int x, int y) {
-		return index(x, y).eElement != null;
-	}
-	@Override
-	public EnvironmentElement getEElementAt(int x, int y) {
-		return index(x, y).eElement;
+	
+	public void moveEElementFromTo(Position oldPos, Position newPos) {
+		Cell oldCell = getCell(oldPos);
+		getCell(newPos).eElement = oldCell.eElement;
+		oldCell.eElement = null;
 	}
 	
 	@Override
-	public boolean coordinateWithinBounds(int x, int y) {
+	public void setPosition(Robot r, Position p) {
+		moveRobotFromTo(getPosition(r), p);
+	}
+
+	@Override
+	public void setPosition(EnvironmentElement e, Position p) {
+		moveEElementFromTo(getPosition(e), p);
+	}
+
+	@Override
+	public boolean hasRobotAt(Position p) {
+		return getCell(p).robot != null;
+	}
+
+	@Override
+	public boolean hasEElementAt(Position p) {
+		return getCell(p).eElement != null;
+	}
+
+	@Override
+	public Robot getRobotAt(Position p) {
+		return getCell(p).robot;
+	}
+
+	@Override
+	public EnvironmentElement getEElementAt(Position p) {
+		return getCell(p).eElement;
+	}
+
+	@Override
+	public boolean coordinateWithinBounds(Position p) {
+		int x = p.getX();
+		int y = p.getY();
 		return
 				0 <= x && x <= numColumns
 				&& 0 <= y && y <= numRows;

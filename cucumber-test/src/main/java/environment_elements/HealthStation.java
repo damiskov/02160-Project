@@ -1,19 +1,15 @@
 package environment_elements;
 
-import board.IBoard;
+import board.Position;
 import piece_basics.IRegisterActor;
-import piece_basics.Robot;
 
 public class HealthStation extends EnvironmentElement implements IRegisterActor {
-	
-	public HealthStation(int x, int y) {
-		super(x, y);
-	}
 
 	@Override
 	public void performRegisterAction() {
-		if (board.hasRobotAt(getX(), getY())) {
-			board.getRobotAt(getX(), getY()).heal();
+		Position p = getPosition();
+		if (board.hasRobotAt(p)) {
+			board.getRobotAt(p).heal();
 		}
 	}
 

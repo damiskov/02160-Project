@@ -1,14 +1,15 @@
 package environment_elements;
 import board.IBoard;
+import board.Position;
 import piece_basics.IRegisterActor;
 import piece_basics.Orientation;
+import piece_basics.Robot;
 
 public class ConveyorBelt extends EnvironmentElement implements IRegisterActor {
 	
 	private Orientation orientation;
 	
-	public ConveyorBelt(int x, int y, Orientation orientation) {
-		super(x, y);
+	public ConveyorBelt(Orientation orientation) {
 		this.orientation = orientation;
 	}
 
@@ -16,37 +17,34 @@ public class ConveyorBelt extends EnvironmentElement implements IRegisterActor {
 	public void performRegisterAction() {
 		// if a robot is on top of the conveyer, push the robot in the conveyer's direction unless there is a robot or wall in the way
 		
-		if (board.hasRobotAt(getX(), getY())) {
-			int newX = 0;
-			int newY = 0;
+		Position p = getPosition();
+		
+		if (board.hasRobotAt(p)) {
+			Position newP = getPosition();
 			
 			switch (orientation) {
 			case UP:
-				newX = getX();
-				newY = getY() + 1;
+				newP.incrY(1);
 				break;
 			case RIGHT:
-				newX = getX() + 1;
-				newY = getY();
+				newP.incrX(1);
 				break;
 			case DOWN:
-				newX = getX();
-				newY = getY() - 1;
+				newP.incrY(-1);
 				break;
 			case LEFT:
-				newX = getX() - 1;
-				newY = getY();
+				newP.incrX(-1);
 				break;
 			}
 			
-			if (!isBlocking(newX, newY)) {
-				board.getRobotAt(getX(), getY()).setPosition(newX, newY);
+			if (!isBlocking(p)) {
+				board.moveRobotFromTo(p, newP);
 			}
 		}
 	}
 	
-	private boolean isBlocking(int x, int y) {
-		return board.hasRobotAt(x, y) || (board.hasEElementAt(x, y) && board.getEElementAt(x, y) instanceof Wall);
+	private boolean isBlocking(Position p) {
+		return board.hasRobotAt(p) || (board.hasEElementAt(p) && board.getEElementAt(p) instanceof Wall);
 	}
 
 }
