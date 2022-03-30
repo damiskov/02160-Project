@@ -39,6 +39,6 @@ public class Context {
 	Game game;
 	Piece piece;
 	Screen screen;
-	PrintScreen printScreen;
+	PrintScreen printScreen; //Implementation for screen
 	
 }
