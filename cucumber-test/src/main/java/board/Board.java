@@ -1,6 +1,5 @@
 package board;
 import environment_elements.EnvironmentElement;
-import piece_basics.Piece;
 import piece_basics.Robot;
 
 // utility class for Board with public attributes. Encapsulation is still respected as this class is fully encapsulated by the Board class
@@ -151,6 +150,10 @@ public class Board implements IBoard {
 	public boolean coordinateWithinBounds(Position p) {
 		int x = p.getX();
 		int y = p.getY();
+		return coordinateWithinBounds(x, y);
+	}
+	@Override
+	public boolean coordinateWithinBounds(int x, int y) {
 		return
 				0 <= x && x <= numColumns
 				&& 0 <= y && y <= numRows;

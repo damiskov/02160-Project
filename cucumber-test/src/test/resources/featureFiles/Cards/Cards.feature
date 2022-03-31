@@ -60,11 +60,6 @@ Feature: Programming Cards
     When the card is executed
     Then the robot moves one space back without changing its direction
     
-          
-  Scenario: Energy cubes for the mat
-  	Given Power up card
-    When the card is executed
-    When the player takes one energy cube
-    Then the player places the energy cube on its mat
+
 
    

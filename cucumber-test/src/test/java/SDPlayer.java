@@ -9,9 +9,9 @@ public class SDPlayer {
 		this.context = context;
 	}
 
-	//@Given("a player")
-	//public void a_player() {
-	//    context.player = new Player();
-	//}
+	@Given("a player")
+	public void a_player() {
+	    context.player = new Player();
+	}
 	
 }

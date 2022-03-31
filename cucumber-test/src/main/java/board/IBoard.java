@@ -25,4 +25,5 @@ public interface IBoard {
 	EnvironmentElement getEElementAt(Position p);
 	
 	boolean coordinateWithinBounds(Position p);
+	boolean coordinateWithinBounds(int x, int y);
 }

@@ -9,10 +9,13 @@ public class OilSpill extends EnvironmentElement implements IRegisterActor {
 	public OilSpill(int x, int y) {
 		super(x, y);
 	}
-	
-	@Override 
-	public void performRegisterAction() {
-		board.removeEElement(this.getX(), this.getY());
+
+	public void ignite() {
 		board.place(new Fire(this.getX(), this.getY()));
+	}
+	
+	@Override
+	public void performRegisterAction() {
+		
 	}
 }

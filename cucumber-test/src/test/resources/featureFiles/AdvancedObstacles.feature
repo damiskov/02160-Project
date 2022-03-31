@@ -1,5 +1,5 @@
 @tag
-Feature: Advanced obstacles 
+Feature: Advanced obstacles scenarios
 
   @tag1
   Scenario: Laser damages
@@ -8,6 +8,13 @@ Feature: Advanced obstacles
     When the robot steps into the laser
     And the laser activates
     Then the robot loses life points
+
+  #Scenario: Random teleporting panel
+    #Given a sending teleporter
+    #And a robot
+    #And multiple receiving teleporters
+    #When the robot steps into the sending teleporter
+    #Then the robot get teleported to a random receiving teleporter
     
   Scenario: Oil spill ignites
     Given an oil spill

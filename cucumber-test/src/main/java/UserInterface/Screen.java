@@ -4,7 +4,7 @@ import board.Board;
 
 public interface Screen {
 	
-	//Object output();
+	Object output();
 
 	void update(Board board);
 
@@ -21,7 +21,5 @@ public interface Screen {
 	void showCurrPlayerHand();
 
 	void showCurrPlayerNumber();
-	
-	String getOutput();
 
 }

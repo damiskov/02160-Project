@@ -63,10 +63,10 @@ private Context context;
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	//@Given("a robot on the board")
-	//public void a_robot_on_the_board() {
-	//	Board board = context.board;
-	//}
+	@Given("a robot on the board")
+	public void a_robot_on_the_board() {
+		Board board = context.board;
+	}
 	@When("the card is executed")
 	public void the_card_is_executed() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -157,22 +157,5 @@ private Context context;
 	    throw new io.cucumber.java.PendingException();
 	}
 
-	//Energy cubes for the mat(Programming Cards) 
-	@Given("Power up card")
-	public void power_up_card() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-
-	@When("the player takes one energy cube")
-	public void the_player_takes_one_energy_cube() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	@Then("the player places the energy cube on its mat")
-	public void the_player_places_the_energy_cube_on_its_mat() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-
+	
 }

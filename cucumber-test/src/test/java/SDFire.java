@@ -22,19 +22,18 @@ public class SDFire {
 	@When("the robot steps into the fire")
 	public void the_robot_steps_into_the_fire() {
 		context.robot.shiftX(1);
-		context.fire.performRegisterAction();
 	}
+
 	
-	//Turns have not been implemented yet
+	
 	@When("a turn passes")
 	public void a_turn_passes() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	
 	@Then("the fire spreads to a random adjacent cell")
 	public void the_fire_spreads_to_a_random_adjacent_cell() {
-		context.fire.performRegisterAction();
+	    context.fire.spread();
 	}
 	
 }
