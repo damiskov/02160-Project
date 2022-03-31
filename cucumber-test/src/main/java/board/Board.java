@@ -63,9 +63,17 @@ public class Board implements IBoard {
 		getCell(x, y).robot = r;
 	}
 	@Override
+	public void place(Robot r, Position p) {
+		place(r, p.getX(), p.getY());
+	}
+	@Override
 	public void place(EnvironmentElement e, int x, int y) {
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
+	}
+	@Override
+	public void place(EnvironmentElement e, Position p) {
+		place(e, p.getX(), p.getY());
 	}
 
 	@Override
@@ -158,7 +166,5 @@ public class Board implements IBoard {
 				0 <= x && x <= numColumns
 				&& 0 <= y && y <= numRows;
 	}
-
-	
 
 }
