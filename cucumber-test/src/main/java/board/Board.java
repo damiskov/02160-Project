@@ -1,5 +1,5 @@
 package board;
-import environment_elements.EnvironmentElement;
+import piece_basics.EnvironmentElement;
 import piece_basics.Robot;
 
 // utility class for Board with public attributes. Encapsulation is still respected as this class is fully encapsulated by the Board class

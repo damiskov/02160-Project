@@ -214,8 +214,7 @@ public class Robot extends Piece implements IRegisterActor {
 	
 	
 	private boolean laserBlocking(Position p) {
-		// TODO: Refactor into objects
-		return board.hasEElementAt(p) ? board.getEElementAt(p) instanceof Wall : false;
+		return board.hasEElementAt(p) && board.getEElementAt(p).isLaserBlocking();
 	}
 
 }

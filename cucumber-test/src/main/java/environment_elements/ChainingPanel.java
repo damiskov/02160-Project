@@ -3,6 +3,7 @@ package environment_elements;
 import java.util.Arrays;
 
 import board.IBoard;
+import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
 import piece_basics.Robot;
 

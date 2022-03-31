@@ -1,6 +1,6 @@
 package board;
 
-import environment_elements.EnvironmentElement;
+import piece_basics.EnvironmentElement;
 import piece_basics.Robot;
 
 public interface IBoard {

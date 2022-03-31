@@ -1,9 +1,14 @@
-package environment_elements;
+package piece_basics;
 import board.Position;
-import piece_basics.Piece;
 
 public abstract class EnvironmentElement extends Piece {
 	public Position getPosition() {
 		return board.getPosition(this);
+	}
+	public boolean isConveyorBlocking() {
+		return false;
+	}
+	public boolean isLaserBlocking() {
+		return false;
 	}
 }

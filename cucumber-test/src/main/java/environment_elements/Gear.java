@@ -1,6 +1,7 @@
 package environment_elements;
 
 import board.Position;
+import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
 
 public class Gear extends EnvironmentElement implements IRegisterActor {
