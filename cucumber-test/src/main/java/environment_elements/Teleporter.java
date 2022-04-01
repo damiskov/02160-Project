@@ -7,6 +7,8 @@ import piece_basics.Robot;
 
 public class Teleporter extends EnvironmentElement implements IRegisterActor{
 
+	Teleporter target;
+	
 	public void interact(Robot r, Teleporter t ) {
 		r.setPosition(t.getPosition());
 	}
@@ -19,9 +21,19 @@ public class Teleporter extends EnvironmentElement implements IRegisterActor{
 //			
 //	}
 	
+//Check if it works, not sure if updatePosition is used properly
 	@Override
 	public void performRegisterAction() {
-		
+//		if(board.hasRobotAt(this.getX(), this.getY())) {
+//			board.removeRobot(this.getX(), this.getY());
+//		}
+//		else{
+//			board.place(new Robot(this.getX(), this.getY()));
+//		}
+		if(board.hasRobotAt(getPosition())) {
+			board.moveRobotFromTo(getPosition(), target.getPosition());
+		}
+
 	}
 
 	@Override
