@@ -15,9 +15,10 @@ public class SDFire {
 	
 	@Given("a fire")
 	public void a_fire() {
-		Fire f = new Fire(6, 5);
-		context.board.place(f);
-	    context.fire = f;
+		Fire f = new Fire();
+		context.fire = f;
+		context.board.initialPlacement(f, 6, 5);
+	    
 	}
 	@When("the robot steps into the fire")
 	public void the_robot_steps_into_the_fire() {

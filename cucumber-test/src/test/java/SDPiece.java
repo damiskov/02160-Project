@@ -10,6 +10,7 @@ public class SDPiece {
 
 	@Given("a piece")
 	public void a_piece() { 
-		context.piece = new Robot(context.board, 5, 5);
+		context.robot = new Robot();
+		context.board.initialPlacement(context.robot, 5, 5);
 	}
 }

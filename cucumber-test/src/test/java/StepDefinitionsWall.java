@@ -18,8 +18,8 @@ private Context context;
 	@Given("a wall on the right side of the robot")
 	public void a_wall_on_the_right_side_of_the_robot() {
 		Board board = context.board;
-		Wall w = new Wall(board, 6, 5);
-	    board.placeEElement(w);
+		Wall w = new Wall();
+	    board.initialPlacement(w, 6, 5);
 	    context.wall = w;
 	}
 
@@ -56,8 +56,8 @@ private Context context;
 	@Given("a wall standing infront of the robot")
 	public void a_wall_standing_infront_of_the_robot() {
 		Board board = context.board;
-		Wall w = new Wall(board, 5, 6);
-	    board.placeEElement(w);
+		Wall w = new Wall();
+	    board.initialPlacement(w, 5, 6);
 	    context.wall = w;
 	}
 	
@@ -76,8 +76,8 @@ private Context context;
 	@Given("a wall standing behined the robot")
 	public void a_wall_standing_behined_the_robot() {
 		Board board = context.board;
-		Wall w = new Wall(board, 5, 4);
-	    board.placeEElement(w);
+		Wall w = new Wall();
+	    board.initialPlacement(w, 5, 4);
 	    context.wall = w;
 	}
 	

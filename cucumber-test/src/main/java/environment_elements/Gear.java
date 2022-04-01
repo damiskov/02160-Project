@@ -1,24 +1,25 @@
 package environment_elements;
 
-import board.IBoard;
+import board.Position;
+import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
 
 public class Gear extends EnvironmentElement implements IRegisterActor {
 
 	private boolean counterClockwise;
 
-	public Gear(int x, int y, boolean counterClockwise) {
-		super(x, y);
+	public Gear(boolean counterClockwise) {
 		this.counterClockwise = counterClockwise;
 	}
 	
 	@Override
 	public void performRegisterAction() {
-		if (board.hasRobotAt(getX(), getY())) {
+		Position p = getPosition();
+		if (board.hasRobotAt(p)) {
 			if (counterClockwise) {
-				board.getRobotAt(getX(), getY()).turnLeft();
+				board.getRobotAt(p).turnLeft();
 			} else {
-				board.getRobotAt(getX(), getY()).turnRight();
+				board.getRobotAt(p).turnRight();
 			}
 		}
 	}

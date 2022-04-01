@@ -3,6 +3,7 @@ package environment_elements;
 import java.util.Arrays;
 
 import board.IBoard;
+import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
 import piece_basics.Robot;
 
@@ -11,10 +12,6 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 	private boolean active = true;
 	int i;
 	private boolean chainableOnBoard = false; //used for noChainable()
-	
-	public ChainingPanel(int x, int y) {
-		super(x, y);
-	}
 	
 	public void chain1(Robot r) {
 		r.setChainable(true);

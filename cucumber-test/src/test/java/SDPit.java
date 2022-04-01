@@ -12,8 +12,8 @@ public class SDPit {
 	
 	@Given("a pit on the board")
 	public void a_pit_on_the_board() {
-	    Pit p = new Pit(6, 5);
-	    context.board.place(p);
+	    Pit p = new Pit();
+	    context.board.initialPlacement(p, 6, 5);
 	    context.pit = p;
 	}
 	@When("the robot moves into the pit during a register")
