@@ -2,6 +2,7 @@ package environment_elements;
 
 import board.IBoard;
 import piece_basics.*;
+import piece_basics.EnvironmentElement;
 
 public class Laser extends EnvironmentElement implements IRegisterActor{
 

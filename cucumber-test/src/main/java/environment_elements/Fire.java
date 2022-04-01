@@ -1,10 +1,7 @@
 package environment_elements;
 
-import javax.naming.Context;
-
-import board.Board;
-import board.IBoard;
 import board.Position;
+import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
 
 public class Fire extends EnvironmentElement implements IRegisterActor {
