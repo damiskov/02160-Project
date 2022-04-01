@@ -1,0 +1,15 @@
+package cards;
+
+public class Move2 extends Card 
+{
+    public Move2()
+    {
+        super("move2");
+    }
+
+    @Override
+    public void executeAction(Robot r)
+    {
+        r.move(2);
+    }
+}
