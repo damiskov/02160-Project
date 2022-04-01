@@ -1,6 +1,7 @@
 package environment_elements;
 import board.IBoard;
 import board.Position;
+import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
 import piece_basics.Orientation;
 import piece_basics.Robot;
@@ -44,7 +45,7 @@ public class ConveyorBelt extends EnvironmentElement implements IRegisterActor {
 	}
 	
 	private boolean isBlocking(Position p) {
-		return board.hasRobotAt(p) || (board.hasEElementAt(p) && board.getEElementAt(p) instanceof Wall);
+		return board.hasRobotAt(p) || (board.hasEElementAt(p) && board.getEElementAt(p).isConveyorBlocking());
 	}
 
 }
