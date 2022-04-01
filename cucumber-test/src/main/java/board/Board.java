@@ -58,22 +58,22 @@ public class Board implements IBoard {
 	}
 	
 	@Override
-	public void place(Robot r, int x, int y) {
+	public void initialPlacement(Robot r, int x, int y) {
 		r.setBoard(this);
 		getCell(x, y).robot = r;
 	}
 	@Override
-	public void place(Robot r, Position p) {
-		place(r, p.getX(), p.getY());
+	public void initialPlacement(Robot r, Position p) {
+		initialPlacement(r, p.getX(), p.getY());
 	}
 	@Override
-	public void place(EnvironmentElement e, int x, int y) {
+	public void initialPlacement(EnvironmentElement e, int x, int y) {
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
 	}
 	@Override
-	public void place(EnvironmentElement e, Position p) {
-		place(e, p.getX(), p.getY());
+	public void initialPlacement(EnvironmentElement e, Position p) {
+		initialPlacement(e, p.getX(), p.getY());
 	}
 
 	@Override

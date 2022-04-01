@@ -4,10 +4,10 @@ import environment_elements.EnvironmentElement;
 import piece_basics.Robot;
 
 public interface IBoard {
-	void place(Robot r, int x, int y);
-	void place(Robot r, Position p);
-	void place(EnvironmentElement e, int x, int y);
-	void place(EnvironmentElement e, Position p);
+	void initialPlacement(Robot r, int x, int y);
+	void initialPlacement(Robot r, Position p);
+	void initialPlacement(EnvironmentElement e, int x, int y);
+	void initialPlacement(EnvironmentElement e, Position p);
 	
 	Position getPosition(Robot r);
 	Position getPosition(EnvironmentElement e);

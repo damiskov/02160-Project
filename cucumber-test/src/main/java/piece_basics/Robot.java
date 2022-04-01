@@ -15,7 +15,7 @@ public class Robot extends Piece implements IRegisterActor {
 	private Robot chainedTo;
 
 	
-	public Robot(int x, int y) {
+	public Robot() {
 		orientation = Orientation.UP;
 	}
 	

@@ -22,6 +22,6 @@ public class Fire extends EnvironmentElement implements IRegisterActor {
 		int newX = x_c + (int)(Math.random() * 3) -1;
 		int newY = y_c + (int)(Math.random() * 3) -1;
 		
-		board.place(new Fire(), newX, newY);
+		board.initialPlacement(new Fire(), newX, newY);
 	}
 }
