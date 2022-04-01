@@ -3,11 +3,6 @@
 Feature: Robot movement
 
   @tag1
-  Scenario: Move robot
-    Given a Robot
-    And a Program
-    Then execute program
-    
   Scenario: Robot turns right
 	  Given A turn right command
 	  And a robot on the board
