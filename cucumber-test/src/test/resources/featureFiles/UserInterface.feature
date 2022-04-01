@@ -3,6 +3,7 @@ Feature: User Interface
   This feature handles how the user sees the game
 
   @tag1
+
   Scenario: Update board on screen
   	Given a screen
   	And a board array
@@ -20,7 +21,9 @@ Feature: User Interface
   	And a board on screen
   	And obstacles on screen
   	When update robots on screen
-  	Then display robots with markers and HP on screen
+  	Then display robots on screen
+  	And display robot player markers on screen
+  	And display robot health on screen
   	
   Scenario: Show player cards
     Given a screen

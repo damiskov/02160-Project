@@ -6,14 +6,11 @@ import piece_basics.Robot;
 
 public class Teleporter extends EnvironmentElement implements IRegisterActor{
 
-	public Teleporter(int x, int y) {
-		super(x, y);
+	public void interact(Robot r, Teleporter t ) {
+		r.setPosition(t.getPosition());
 	}
-
-//	public void interact(Robot r, Teleporter t ) {
-//		r.setPosition(t.getX(),t.getY());
-//	}
-//	
+	
+	// needs changing, you need to first check if a robot exists at your position, and then interact with it. Same issue in Laser
 //	public void activate(Robot r, Teleporter t) {
 //		if(this.getX() == r.getX() && this.getY() == r.getY()) {
 //			this.interact(r,t);
@@ -21,8 +18,13 @@ public class Teleporter extends EnvironmentElement implements IRegisterActor{
 //			
 //	}
 	
+<<<<<<< HEAD
 	@Override //Check if it works, not sure if updatePosition is used properly
+=======
+	@Override
+>>>>>>> refs/heads/main
 	public void performRegisterAction() {
+<<<<<<< HEAD
 //		if(board.hasRobotAt(this.getX(), this.getY())) {
 //			board.removeRobot(this.getX(), this.getY());
 //		}
@@ -32,7 +34,8 @@ public class Teleporter extends EnvironmentElement implements IRegisterActor{
 		if(board.hasRobotAt(this.getX(), this.getY())) {
 			board.updatePosition(this.getX(), this.getY(), board.getRobotAt(this.getX(), this.getY()));
 		}
+=======
+		
+>>>>>>> refs/heads/main
 	}
-
-
 }

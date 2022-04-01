@@ -25,7 +25,6 @@ public class SDIndependentMovement {
 	public void a_turn_right_command() {
 		 context.robot.executeCommand();
 	}
-	//@Given("a robot on the board")
 
 	
 //given a robot on the board

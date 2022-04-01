@@ -1,28 +1,35 @@
 package cards;
 
-import board.IBoard;
-import piece_basics.IRegisterActor;
-import piece_basics.Orientation;
+import piece_basics.Robot;
 
-public class Card implements IRegisterActor{
-	
-	private Orientation orientation;
-	
-	public Card (IBoard board, int x, int y, Orientation orientation) {
-		this.setOrientation(orientation);
-	}
+public class Card
+{
+    private String action;
+    private int num;
+    public Card(String action)
+    {
+        this.action = action;
+        setNum();
+    }
 
-	@Override
-	public void performRegisterAction() {
-		
-	}
+    public void setNum()
+    {
+        this.num = 0;
+    }
 
-	public Orientation getOrientation() {
-		return orientation;
-	}
+    public int getNum()
+    {
+        return num;
+    }
 
-	public void setOrientation(Orientation orientation) {
-		this.orientation = orientation;
-	}
+    public String getAction()
+    {
+        return action;
+    }
+
+    public void executeAction(Robot r) {
+    	
+    }
+
 
 }

@@ -4,16 +4,14 @@ import javax.naming.Context;
 
 import board.Board;
 import board.IBoard;
+import board.Position;
 import piece_basics.IRegisterActor;
 
 public class Fire extends EnvironmentElement implements IRegisterActor {
-	
-	public Fire(int x, int y) {
-		super(x, y);
-	}
 
 	@Override
 	public void performRegisterAction() {
+<<<<<<< HEAD
 		if (board.hasRobotAt(getX(), getY())) {
 			board.getRobotAt(getX(), getY()).takeDamage();
 		}
@@ -24,15 +22,19 @@ public class Fire extends EnvironmentElement implements IRegisterActor {
 		int newY = y_c + (int)(Math.random() * 3) -1;
 			
 		board.place(new Fire(newX, newY));
+=======
+		
+>>>>>>> refs/heads/main
 	}
 
-//	public void spread() {
-//		int x_c = this.getX();
-//		int y_c = this.getY();
-//		
-//		int newX = x_c + (int)(Math.random() * 3) -1;
-//		int newY = y_c + (int)(Math.random() * 3) -1;
-//		
-//		board.place(new Fire(newX, newY));
-//	}
+	public void spread() {
+		Position p = getPosition();
+		int x_c = p.getX();
+		int y_c = p.getY();
+		
+		int newX = x_c + (int)(Math.random() * 3) -1;
+		int newY = y_c + (int)(Math.random() * 3) -1;
+		
+		board.initialPlacement(new Fire(), newX, newY);
+	}
 }

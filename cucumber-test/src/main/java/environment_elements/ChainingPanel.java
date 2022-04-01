@@ -12,10 +12,6 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 	int i;
 	private boolean chainableOnBoard = false; //used for noChainable()
 	
-	public ChainingPanel(int x, int y) {
-		super(x, y);
-	}
-	
 	public void chain1(Robot r) {
 		r.setChainable(true);
 	}
