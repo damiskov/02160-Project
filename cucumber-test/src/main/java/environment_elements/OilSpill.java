@@ -1,6 +1,5 @@
 package environment_elements;
 
-import board.IBoard;
 import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
 
@@ -13,5 +12,10 @@ public class OilSpill extends EnvironmentElement implements IRegisterActor {
 	@Override
 	public void performRegisterAction() {
 		
+	}
+
+	@Override
+	public String getActorClassID() {
+		return "oil_spill";
 	}
 }

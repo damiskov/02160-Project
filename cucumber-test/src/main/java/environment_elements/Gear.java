@@ -24,4 +24,9 @@ public class Gear extends EnvironmentElement implements IRegisterActor {
 		}
 	}
 
+	@Override
+	public String getActorClassID() {
+		return "gear";
+	}
+
 }

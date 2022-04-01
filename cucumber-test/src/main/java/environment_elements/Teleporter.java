@@ -23,4 +23,9 @@ public class Teleporter extends EnvironmentElement implements IRegisterActor{
 	public void performRegisterAction() {
 		
 	}
+
+	@Override
+	public String getActorClassID() {
+		return "teleporter";
+	}
 }

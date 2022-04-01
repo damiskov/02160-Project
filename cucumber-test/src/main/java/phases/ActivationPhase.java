@@ -14,10 +14,11 @@ public class ActivationPhase implements IPhase {
 			"conveyor_belt",
 			"gear",
 			"laser",
-			"robot_laser",
+			"robot",
 			"fire",
 			"oil_spill",
 			"reversal_panel",
+			"respawn_point",
 			"checkpoint"
 	);
 	

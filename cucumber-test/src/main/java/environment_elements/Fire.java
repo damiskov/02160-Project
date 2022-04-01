@@ -21,4 +21,9 @@ public class Fire extends EnvironmentElement implements IRegisterActor {
 		
 		board.initialPlacement(new Fire(), newX, newY);
 	}
+
+	@Override
+	public String getActorClassID() {
+		return "fire";
+	}
 }

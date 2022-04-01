@@ -14,4 +14,9 @@ public class HealthStation extends EnvironmentElement implements IRegisterActor 
 		}
 	}
 
+	@Override
+	public String getActorClassID() {
+		return "health_station";
+	}
+
 }

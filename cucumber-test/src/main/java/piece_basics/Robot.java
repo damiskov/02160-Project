@@ -217,4 +217,9 @@ public class Robot extends Piece implements IRegisterActor {
 		return board.hasEElementAt(p) && board.getEElementAt(p).isLaserBlocking();
 	}
 
+	@Override
+	public String getActorClassID() {
+		return "robot";
+	}
+
 }

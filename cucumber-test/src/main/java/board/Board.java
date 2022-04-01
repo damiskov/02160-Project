@@ -1,5 +1,7 @@
 package board;
+import phases.ActivationPhase;
 import piece_basics.EnvironmentElement;
+import piece_basics.IRegisterActor;
 import piece_basics.Robot;
 
 // utility class for Board with public attributes. Encapsulation is still respected as this class is fully encapsulated by the Board class
@@ -59,6 +61,7 @@ public class Board implements IBoard {
 	
 	@Override
 	public void initialPlacement(Robot r, int x, int y) {
+		ActivationPhase.getInstance().add(r);
 		r.setBoard(this);
 		getCell(x, y).robot = r;
 	}
@@ -68,6 +71,9 @@ public class Board implements IBoard {
 	}
 	@Override
 	public void initialPlacement(EnvironmentElement e, int x, int y) {
+		if (e instanceof IRegisterActor) {
+			ActivationPhase.getInstance().add((IRegisterActor) e);
+		}
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
 	}
@@ -163,8 +169,8 @@ public class Board implements IBoard {
 	@Override
 	public boolean coordinateWithinBounds(int x, int y) {
 		return
-				0 <= x && x <= numColumns
-				&& 0 <= y && y <= numRows;
+				0 <= x && x < numColumns
+				&& 0 <= y && y < numRows;
 	}
 
 }

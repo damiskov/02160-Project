@@ -15,4 +15,9 @@ public class RespawnPoint extends EnvironmentElement implements IRegisterActor {
 		}
 	}
 
+	@Override
+	public String getActorClassID() {
+		return "respawn_point";
+	}
+
 }

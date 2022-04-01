@@ -60,4 +60,9 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 	public void performRegisterAction() {
 	}
 
+	@Override
+	public String getActorClassID() {
+		return "chaining_panel";
+	}
+
 }

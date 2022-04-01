@@ -13,4 +13,9 @@ public class ReversalPanel extends EnvironmentElement implements IRegisterActor{
 		
 	}
 
+	@Override
+	public String getActorClassID() {
+		return "reversal_panel";
+	}
+
 }

@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
 import board.Board;
+import board.Position;
 import environment_elements.Wall;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,6 +16,44 @@ public class SDRobot {
 		this.context = context;
 	}
 
+	@Given("a robot on the board at \\({int}, {int}) facing {string}")
+	public void a_robot_on_the_board_at_facing(Integer int1, Integer int2, String string) {
+	    Robot r = new Robot();
+	    switch (string.toLowerCase()) {
+	    case "up":
+	    	r.setOrientation(Orientation.UP); break;
+	    case "right":
+	    	r.setOrientation(Orientation.RIGHT); break;
+	    case "down":
+	    	r.setOrientation(Orientation.DOWN); break;
+	    case "left":
+	    	r.setOrientation(Orientation.LEFT); break;
+    	default:
+    		throw new IllegalArgumentException("Invalid orientation");
+	    }
+	    context.board.initialPlacement(r, int1, int2);
+	    context.robot = r;
+	}
+	
+	@Then("the robot is at \\({int}, {int}) and pointing {string}")
+	public void the_robot_is_at_and_pointing(Integer int1, Integer int2, String string) {
+	    assertEquals(new Position(int1, int2), context.robot.getPosition());
+	    Orientation o = null;
+	    switch (string.toLowerCase()) {
+	    case "up":
+	    	o = Orientation.UP; break;
+	    case "right":
+	    	o = Orientation.RIGHT; break;
+	    case "down":
+	    	o = Orientation.DOWN; break;
+	    case "left":
+	    	o = Orientation.LEFT; break;
+    	default:
+    		throw new IllegalArgumentException("Invalid orientation");
+	    }
+	    assertEquals(o, context.robot.getOrientation());
+	}
+	
 	@Given("a robot on the board")
 	public void a_robot_on_the_board() {
 	    Robot r = new Robot();
@@ -92,6 +131,5 @@ public class SDRobot {
 	public void the_second_robot_does_not_take_damage() {
 		assertEquals(3, context.robot2.getHealth());
 	}
-	
 
 }
