@@ -39,4 +39,5 @@ public class Context {
 	Game game;
 	Piece piece;
 	Screen screen;
+	int difficulty;
 }

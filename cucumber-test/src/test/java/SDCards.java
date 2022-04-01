@@ -17,11 +17,12 @@ private Context context;
 	}
 	
 	//Accept the programming card(Programming Cards)
-	@Given("a player")
-	public void a_player() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+// commented to fix error
+//	@Given("a player")
+//	public void a_player() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 	@Given("the cards")
 	public void the_cards() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -63,10 +64,9 @@ private Context context;
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-	@Given("a robot on the board")
-	public void a_robot_on_the_board() {
-		Board board = context.board;
-	}
+
+	//given a robot on the board
+	
 	@When("the card is executed")
 	public void the_card_is_executed() {
 	    // Write code here that turns the phrase above into concrete actions

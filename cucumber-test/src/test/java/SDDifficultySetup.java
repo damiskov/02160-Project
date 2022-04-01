@@ -18,17 +18,14 @@ public class SDDifficultySetup {
 	}
 	
 	
-	@Given("A Difficulty")
-	public void a_difficulty(String d) {
-		context.game.setDifficulty(d);
-	}
+	//given an easy difficulty
 	
 	@Then("set number of obstacles")
 	public void set_number_of_obstacles() {
 		context.board.setNumberOfObstacles(5);
 	}
-	@Then("set their location")
-	public void set_location() {
+	@Then("set obstacles on board")
+	public void set_obstacles_on_board() {
 		context.robot.setPosition(new Position(1, 2) );
 	}
 	@Then("Generate board")
