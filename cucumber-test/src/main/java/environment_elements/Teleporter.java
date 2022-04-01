@@ -10,6 +10,12 @@ public class Teleporter extends EnvironmentElement implements IRegisterActor{
 	public void interact(Robot r, Teleporter t ) {
 		r.setPosition(t.getPosition());
 	}
+
+	@Override
+	public void performRegisterAction() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	// needs changing, you need to first check if a robot exists at your position, and then interact with it. Same issue in Laser
 //	public void activate(Robot r, Teleporter t) {
@@ -18,25 +24,12 @@ public class Teleporter extends EnvironmentElement implements IRegisterActor{
 //		}
 //			
 //	}
-	
-<<<<<<< HEAD
-	@Override //Check if it works, not sure if updatePosition is used properly
-=======
-	@Override
->>>>>>> refs/heads/main
-	public void performRegisterAction() {
-<<<<<<< HEAD
+
 //		if(board.hasRobotAt(this.getX(), this.getY())) {
 //			board.removeRobot(this.getX(), this.getY());
 //		}
 //		else{
 //			board.place(new Robot(this.getX(), this.getY()));
 //		}
-		if(board.hasRobotAt(this.getX(), this.getY())) {
-			board.updatePosition(this.getX(), this.getY(), board.getRobotAt(this.getX(), this.getY()));
-		}
-=======
-		
->>>>>>> refs/heads/main
-	}
 }
+
