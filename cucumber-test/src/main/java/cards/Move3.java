@@ -1,4 +1,5 @@
 package cards;
+import piece_basics.Robot;
 
 public class Move3 extends Card 
 {

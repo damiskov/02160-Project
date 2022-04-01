@@ -1,5 +1,6 @@
 package cards;
 
+import piece_basics.Robot;
 
 public class Card
 {
@@ -26,5 +27,9 @@ public class Card
         return action;
     }
 
-    public void executeAction() {}
+    public void executeAction(Robot r) {
+    	
+    }
+
+
 }
