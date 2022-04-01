@@ -14,8 +14,8 @@ public class SDOilSpill {
 
 	@Given("an oil spill")
 	public void an_oil_spill() {
-		OilSpill s = new OilSpill(6, 5);
-		context.board.place(s);
+		OilSpill s = new OilSpill();
+		context.board.initialPlacement(s, 6, 5);
 	    context.spill = s;
 	}
 	@When("the robot steps into the oil spill")

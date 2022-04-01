@@ -2,6 +2,7 @@ import static org.junit.Assert.assertEquals;
 
 import board.Board;
 import board.Game;
+import board.Position;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import piece_basics.Piece;
@@ -28,14 +29,14 @@ public class SDDifficultySetup {
 	}
 	@Then("set their location")
 	public void set_location() {
-		context.piece.setPosition(1, 2);
+		context.robot.setPosition(new Position(1, 2) );
 	}
 	@Then("Generate board")
 	public void generate_board() {
 	    context.game.genBoard();
 	    
-	    assertEquals(context.piece.getX(), 1);
-	    assertEquals(context.piece.getY(), 2);
+	    assertEquals(context.robot.getX(), 1);
+	    assertEquals(context.robot.getY(), 2);
 	    
 
 	    assertEquals(context.board.getNumberObstacles(), 5);

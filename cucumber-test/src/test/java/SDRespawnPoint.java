@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
 import board.Board;
+import board.Position;
 import environment_elements.RespawnPoint;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -17,8 +18,8 @@ public class SDRespawnPoint {
 	@Given("a respawn point on the board")
 	public void a_respawn_point_on_the_board() {
 	    Board board = context.board;
-	    RespawnPoint r = new RespawnPoint(1, 1);
-	    board.place(r);
+	    RespawnPoint r = new RespawnPoint();
+	    board.initialPlacement(r, 1, 1);
 	    context.respawnPoint = r;
 	}
 	@Given("the robot having its respawn point set")
@@ -41,7 +42,7 @@ public class SDRespawnPoint {
 	@When("the robot is on the respawn point at the end of a register")
 	public void the_robot_is_on_the_respawn_point_at_the_end_of_a_register() {
 		RespawnPoint resp = context.respawnPoint;
-	    context.robot.setPosition(resp.getX(), resp.getY());
+	    context.board.setPosition(context.robot, new Position(resp.getX(), resp.getY()) );
 	    resp.performRegisterAction();
 	}
 	@When("the robot moves away from the respawn point")

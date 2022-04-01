@@ -14,8 +14,8 @@ public class SDReversalPanel {
 	
 	@Given("reversal panel")
 	public void reversal_panel() {
-	    ReversalPanel rp = new ReversalPanel(6, 5);
-	    context.board.place(rp);
+	    ReversalPanel rp = new ReversalPanel();
+	    context.board.initialPlacement(rp, 6, 5);
 	    context.revpan = rp;
 	}
 	@Given("some remaining moves for the robots")

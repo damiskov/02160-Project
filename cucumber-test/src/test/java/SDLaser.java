@@ -17,8 +17,8 @@ public class SDLaser {
 	@Given("a laser")
 	public void a_laser() {
 		Board board = context.board;
-		Laser l = new Laser(6, 5);
-		board.place(l);
+		Laser l = new Laser();
+		board.initialPlacement(l, 6, 5);
 	    context.laser = l;
 	}
 	@When("the robot steps into the laser")
@@ -27,7 +27,7 @@ public class SDLaser {
 	}
 	@Then("the robot loses life points")
 	public void the_robot_loses_life_points() {
-		context.laser.activate(context.robot);
+//		context.laser.activate(context.robot);
 	}
 	@Then("the robot lost life points")
 	public void the_robot_lost_life_points() {
