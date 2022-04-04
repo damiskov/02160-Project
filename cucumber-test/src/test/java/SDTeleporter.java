@@ -5,7 +5,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 
 public class SDTeleporter {
-	//Adjust the "Then"
+
 	private Context context;
 	
 	public SDTeleporter(Context context) {
@@ -24,19 +24,16 @@ public class SDTeleporter {
 		Teleporter rec = new Teleporter();
 		context.board.initialPlacement(rec, 10, 5);
 	    context.receiving = rec;
+	    context.sending.setReceiving(context.receiving);
 	}
 	@When("the robot steps into the sending teleporter")
 	public void the_robot_steps_into_the_sending_teleporter() {
 		context.robot.shiftX(1);
+		context.sending.performRegisterAction();
 	}
 	@Then("the robot get teleported to the receiving teleporter")
 	public void the_robot_get_teleported_to_the_receiving_teleporter() {
-//		context.sending.activate(context.robot, context.receiving);
+		assertEquals(context.board.getPosition(context.robot),context.board.getPosition(context.receiving));
 	}
 	
-	@Then("the robot got teleported to the receiving teleporter")
-	public void the_robot_got_teleported_to_the_receiving_teleporter() {
-		assertEquals(context.robot.getX(),context.receiving.getX());
-		assertEquals(context.robot.getY(),context.receiving.getY());
-	}	
 }

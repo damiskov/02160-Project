@@ -9,12 +9,6 @@ Feature: Advanced obstacles scenarios
     And the laser activates
     Then the robot loses life points
 
-  #Scenario: Random teleporting panel
-    #Given a sending teleporter
-    #And a robot
-    #And multiple receiving teleporters
-    #When the robot steps into the sending teleporter
-    #Then the robot get teleported to a random receiving teleporter
     
   Scenario: Oil spill ignites
     Given an oil spill
@@ -37,7 +31,6 @@ Feature: Advanced obstacles scenarios
   Scenario: Reversal panel
     Given reversal panel
     And a robot
-    And some remaining moves for the robots
     When the robot steps into the reversal panel
     Then the remaining moves get reversed
     

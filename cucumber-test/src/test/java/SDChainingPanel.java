@@ -31,7 +31,7 @@ public class SDChainingPanel {
 	
 	@Given("no chainable robots")
 	public void no_chainable_robots() {
-//	    context.chainpan.noChainable(context.robot); //parameter needs to the list of robots on the board
+	    context.chainpan.noChainable(context.game.getPlayers()); 
 	}
 	@When("the robot steps into the chaining panel")
 	public void the_robot_steps_into_the_chaining_panel() {
