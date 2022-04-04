@@ -9,12 +9,12 @@ public class Card
     public Card(String action)
     {
         this.action = action;
-        setNum();
+        
     }
 
-    public void setNum()
+    public void setNum(int num)
     {
-        this.num = 0;
+        this.num = num;
     }
 
     public int getNum()

@@ -13,6 +13,7 @@ public class Robot extends Piece implements IRegisterActor {
 	private RespawnPoint currentRespawnPoint;
 	private boolean chainable;
 	private Robot chainedTo;
+	private String command;
 
 	
 	public Robot() {
@@ -35,18 +36,8 @@ public class Robot extends Piece implements IRegisterActor {
 	public void setRespawnPoint(RespawnPoint r) {
 		this.currentRespawnPoint = r;
 	}
-
-	public void executeProgram() {
-		
-		System.out.println("Program executed");
-		
-	}
 	
-	public void executeCommand() {
-		
-		System.out.println("Command executed");
-		
-	}
+
 	
 	
 	public void setOrientation(Orientation orientation) {
@@ -115,7 +106,6 @@ public class Robot extends Piece implements IRegisterActor {
 			break;
 		}
 	}
-	
 
 	public void takeDamage() {
 		health--;

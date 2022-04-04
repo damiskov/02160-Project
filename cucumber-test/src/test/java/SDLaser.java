@@ -17,13 +17,8 @@ public class SDLaser {
 	@Given("a laser")
 	public void a_laser() {
 		Board board = context.board;
-<<<<<<< HEAD
-		Laser l = new Laser(6, 5);
-		context.board.place(l);
-=======
 		Laser l = new Laser();
 		board.initialPlacement(l, 6, 5);
->>>>>>> refs/heads/main
 	    context.laser = l;
 	}
 	@When("the robot steps into the laser")
