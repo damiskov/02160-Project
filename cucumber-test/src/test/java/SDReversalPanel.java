@@ -13,8 +13,8 @@ public class SDReversalPanel {
 		this.context = context;		
 	}
 	
-	@Given("reversal panel")
-	public void reversal_panel() {
+	@Given("reversal panel on the board")
+	public void reversal_panel_on_the_board() {
 	    ReversalPanel rp = new ReversalPanel();
 	    context.board.initialPlacement(rp, 6, 5);
 	    context.revpan = rp;

@@ -3,48 +3,53 @@ Feature: Advanced obstacles scenarios
 
   @tag1
   Scenario: Laser damages
-    Given a laser
-    And a robot
+  	Given a board
+    And a laser on the board
+    And a robot on the board
     When the robot steps into the laser
-    And the laser activates
     Then the robot loses life points
-
     
   Scenario: Oil spill ignites
-    Given an oil spill
-    And a robot
+  	Given a board
+    And an oil spill on the board
+    And a robot on the board
     When the robot steps into the oil spill
     Then the oil spill ignites
     And the robot loses life points
     
   Scenario: Fire damages robot
-    Given a fire
-    And a robot
+    Given a board
+    And a fire on the board
+    And a robot on the board
     When the robot steps into the fire
     Then the robot loses life points
     
   Scenario: Fire Spreading
-    Given a fire
+    Given a board
+    And a fire on the board
     When a turn passes
     Then the fire spreads to a random adjacent cell
     
   Scenario: Reversal panel
-    Given reversal panel
-    And a robot
+    Given a board
+    And reversal panel on the board
+    And a robot on the board
     When the robot steps into the reversal panel
     Then the remaining moves get reversed
     
   Scenario: Robot becomes chainable with no other chainable robots
-    Given chaining panel
-    And a robot
+    Given a board
+    And chaining panel on the board
+    And a robot on the board
     And no chainable robots
     When the robot steps into the chaining panel
     Then the robot becomes chainable
     And the chaining panel becomes inactive
     
   Scenario: Chain connection
-    Given chaining panel
-    And a robot
+    Given a board
+    And chaining panel on the board
+    And a robot on the board
     And a chainable robot
     When the first robot steps into the chaining panel
     Then the robots get chained together
@@ -61,12 +66,13 @@ Feature: Advanced obstacles scenarios
     Then the robots get unchained
     
   Scenario: Deterministic teleporting panel
-    Given a teleporter
-    And a robot
-    And another teleporter
+    Given a board
+    And a teleporter on the board
+    And a robot on the board
+    And another teleporter on the board
     When the robot steps into the first teleporter
     And the teleporter activates
-    Then the robot get teleported to the other teleporter
+    Then the robot gets teleported to the other teleporter
     
 
 

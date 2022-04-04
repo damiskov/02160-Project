@@ -1,7 +1,7 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-
+import board.Board;
 import environment_elements.Fire;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,11 +15,11 @@ public class SDFire {
 		this.context = context;		
 	}
 	
-	@Given("a fire")
-	public void a_fire() {
+	@Given("a fire on the board")
+	public void a_fire_on_the_board() {
 		Fire f = new Fire();
-		context.fire = f;
 		context.board.initialPlacement(f, 6, 5);
+		context.fire = f;
 	    
 	}
 	@When("the robot steps into the fire")
@@ -30,7 +30,7 @@ public class SDFire {
 
 	@Then("the fire spreads to a random adjacent cell")
 	public void the_fire_spreads_to_a_random_adjacent_cell() {
-		assertEquals(context.robot.getHealth(), 2);
+		assertEquals(context.robot.getHealth(),2);
 		assertTrue(context.board.getEElementAt(context.fire.getP()) instanceof Fire);
 	}
 	

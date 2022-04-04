@@ -22,8 +22,8 @@ public class SDChainingPanel {
 	}
 	
 
-	@Given("chaining panel")
-	public void chaining_panel() {
+	@Given("chaining panel on the board")
+	public void chaining_panel_on_the_board() {
 	    ChainingPanel cp = new ChainingPanel();
 	    context.board.initialPlacement(cp, new Position(5, 5) );
 	    context.chainpan = cp;
