@@ -5,7 +5,7 @@ Feature: Robot laser
   	And a robot on the board
   	And a second robot above the first
   	And the first robot is facing up
-  	When the first robot performs its register action
+  	When the board elements activate
   	Then the second robot takes damage
 
   Scenario: Successful downwards laser shot
@@ -13,7 +13,7 @@ Feature: Robot laser
   	And a robot on the board
   	And a second robot below the first
   	And the first robot is facing down
-  	When the first robot performs its register action
+  	When the board elements activate
   	Then the second robot takes damage
 
   Scenario: Successful rightwards laser shot
@@ -21,7 +21,7 @@ Feature: Robot laser
   	And a robot on the board
   	And a second robot to the right of the first
   	And the first robot is facing right
-  	When the first robot performs its register action
+  	When the board elements activate
   	Then the second robot takes damage
 
   Scenario: Successful leftwards laser shot
@@ -29,7 +29,7 @@ Feature: Robot laser
   	And a robot on the board
   	And a second robot to the left of the first
   	And the first robot is facing left
-  	When the first robot performs its register action
+  	When the board elements activate
   	Then the second robot takes damage
 
 
@@ -41,7 +41,7 @@ Feature: Robot laser
   	And a second robot above the first
   	And the first robot is facing up
   	And a wall in between the robots
-  	When the first robot performs its register action
+  	When the board elements activate
   	Then the second robot does not take damage
 
   Scenario: Blocked downwards laser shot
@@ -50,7 +50,7 @@ Feature: Robot laser
   	And a second robot below the first
   	And the first robot is facing down
   	And a wall in between the robots
-  	When the first robot performs its register action
+  	When the board elements activate
   	Then the second robot does not take damage
 
   Scenario: Blocked rightwards laser shot
@@ -59,7 +59,7 @@ Feature: Robot laser
   	And a second robot to the right of the first
   	And the first robot is facing right
   	And a wall in between the robots
-  	When the first robot performs its register action
+  	When the board elements activate
   	Then the second robot does not take damage
 
   Scenario: Blocked leftwards laser shot
@@ -68,5 +68,5 @@ Feature: Robot laser
   	And a second robot to the left of the first
   	And the first robot is facing left
   	And a wall in between the robots
-  	When the first robot performs its register action
+  	When the board elements activate
   	Then the second robot does not take damage

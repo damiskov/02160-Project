@@ -8,8 +8,8 @@ public class SDActivationPhase {
 		this.context = context;
 	}
 	
-	@When("the activation phase activates the board elements")
-	public void the_activation_phase_activates_the_board_elements() {
-	    ActivationPhase.getInstance().activateRegisterActors();
+	@When("the board elements activate")
+	public void the_board_elements_activate() {
+		ActivationPhase.getInstance().activateRegisterActors();
 	}
 }

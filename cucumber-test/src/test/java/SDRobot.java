@@ -15,6 +15,20 @@ public class SDRobot {
 	public SDRobot(Context context) {
 		this.context = context;
 	}
+	
+	@Given("a robot on the board at \\({int}, {int})")
+	public void a_robot_on_the_board_at(Integer int1, Integer int2) {
+		Robot r = new Robot();
+		context.board.initialPlacement(r, int1, int2);
+	    context.robot = r;
+	}
+	
+	@Given("a second robot on the board at \\({int}, {int})")
+	public void a_second_robot_on_the_board_at(Integer int1, Integer int2) {
+		Robot r = new Robot();
+		context.board.initialPlacement(r, int1, int2);
+	    context.robot2 = r;
+	}
 
 	@Given("a robot on the board at \\({int}, {int}) facing {string}")
 	public void a_robot_on_the_board_at_facing(Integer int1, Integer int2, String string) {
@@ -35,8 +49,18 @@ public class SDRobot {
 	    context.robot = r;
 	}
 	
-	@Then("the robot is at \\({int}, {int}) and pointing {string}")
-	public void the_robot_is_at_and_pointing(Integer int1, Integer int2, String string) {
+	@Then("the robot is at \\({int}, {int})")
+	public void the_robot_is_at(Integer int1, Integer int2) {
+		assertEquals(new Position(int1, int2), context.robot.getPosition());
+	}
+	
+	@Then("the first robot is at \\({int}, {int})")
+	public void the_first_robot_is_at(Integer int1, Integer int2) {
+		assertEquals(new Position(int1, int2), context.robot.getPosition());
+	}
+	
+	@Then("the robot is at \\({int}, {int}) and facing {string}")
+	public void the_robot_is_at_and_facing(Integer int1, Integer int2, String string) {
 	    assertEquals(new Position(int1, int2), context.robot.getPosition());
 	    Orientation o = null;
 	    switch (string.toLowerCase()) {

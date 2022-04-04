@@ -4,7 +4,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/featureFiles/Interactions", publish=true)
+@CucumberOptions(features = "src/test/resources/featureFiles/Interactions/Conveyor belt.feature", publish=true)
 public class CucumberTest {
 
 }
