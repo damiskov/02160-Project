@@ -35,10 +35,10 @@ class Deck
     // adds a certain "action" "num" amount of times to deck
     public void addToDeck(String action, int num)
     {
+    	CardFactory fact = new CardFactory();
         for (int i = 0; i < num; i++)
-        {
-            
-            cards.add(new Card(action));
+        {   
+            cards.add(fact.getCard(action));
         }
     }
 

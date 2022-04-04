@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertTrue;
+
 import environment_elements.ReversalPanel;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -5,31 +7,25 @@ import io.cucumber.java.en.When;
 
 public class SDReversalPanel {
 	
-	//Complete steps
 	private Context context;
 	
 	public SDReversalPanel(Context context) {
 		this.context = context;		
 	}
 	
-	@Given("reversal panel")
-	public void reversal_panel() {
+	@Given("reversal panel on the board")
+	public void reversal_panel_on_the_board() {
 	    ReversalPanel rp = new ReversalPanel();
 	    context.board.initialPlacement(rp, 6, 5);
 	    context.revpan = rp;
 	}
-	@Given("some remaining moves for the robots")
-	public void some_remaining_moves_for_the_robots() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
 	@When("the robot steps into the reversal panel")
 	public void the_robot_steps_into_the_reversal_panel() {
 		context.robot.shiftX(1);
+		context.revpan.performRegisterAction();
 	}
-	@Then("the remaining moves get reversed")
+	/*@Then("the remaining moves get reversed")
 	public void the_remaining_moves_get_reversed() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+	    assertequals(context.robot.program, context.revpan.newProg);
+	}*/
 }

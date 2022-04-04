@@ -6,6 +6,8 @@ import board.IBoard;
 import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
 import piece_basics.Robot;
+import player.Player;
+import board.Game;
 
 public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 
@@ -26,9 +28,9 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 	}
 
 	
-	public boolean noChainable(Robot[] rs) {
+	public boolean noChainable(Player[] rs) {
 		for (i = 0; i <= rs.length; i++); {
-			if(rs[i].isChainable() == true) {
+			if(rs[i].getRobot().isChainable() == true) {
 				chainableOnBoard = chainableOnBoard || true;
 			
 			} else {
@@ -58,6 +60,9 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 	
 	@Override
 	public void performRegisterAction() {
+//		if(noChainable() == false) {
+//			board.getRobotAt(getPosition()).setChainable(true);
+//		}
 	}
 
 	@Override
@@ -66,3 +71,5 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 	}
 
 }
+
+
