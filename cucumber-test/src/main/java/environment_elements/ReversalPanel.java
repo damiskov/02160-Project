@@ -57,11 +57,7 @@ public class ReversalPanel extends EnvironmentElement implements IRegisterActor{
 				else if (program[i] instanceof turnRight) {
 					turnLeft left1 = new turnLeft;
 					newProg.add(left1);
-				}
-				else if (program[i] instanceof uTurn) {
-					backUp back1 = new backUp;
-					newProg.add(back1);
-				}
+				} else  {}
 			}
 			board.getRobotAt(getPosition()).program = newProg;
 		}

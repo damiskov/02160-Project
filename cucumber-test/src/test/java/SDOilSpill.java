@@ -15,8 +15,8 @@ public class SDOilSpill{
 		this.context = context;		
 	}
 
-	@Given("an oil spill")
-	public void an_oil_spill() {
+	@Given("an oil spill on the board")
+	public void an_oil_spill_on_the_board() {
 		OilSpill s = new OilSpill();
 		context.board.initialPlacement(s, 6, 5);
 	    context.spill = s;
@@ -30,7 +30,7 @@ public class SDOilSpill{
 	
 	@Then("the oil spill ignites")
 	public void the_oil_spill_ignites() {
-		assertTrue(context.board.getEElementAt(context.spill.getPosition()) instanceof Fire);
+		assertTrue(context.board.getEElementAt(context.fire.getPosition()) instanceof Fire);
 	}
 	
 }
