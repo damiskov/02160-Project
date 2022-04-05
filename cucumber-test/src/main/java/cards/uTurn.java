@@ -14,4 +14,9 @@ public class uTurn extends Card
         r.turnRight();
         r.turnRight();
     }
+    
+    @Override
+    public Card getOppositeCard() {
+    	return new uTurn(); //this one does not get reversed by the panel (agreed with David)
+    }
 }

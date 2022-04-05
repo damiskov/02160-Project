@@ -15,9 +15,8 @@ public class SDLaser {
 	
 	@Given("a laser on the board")
 	public void a_laser_on_the_board() {
-		Board board = context.board;    //this should be deleted
 		Laser l = new Laser();
-		board.initialPlacement(l, 6, 5);   //should be changed to context.board.initialPlacement(l,6,5)
+		context.board.initialPlacement(l, 6, 5);
 	    context.laser = l;
 	}
 	

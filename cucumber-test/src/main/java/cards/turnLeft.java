@@ -13,4 +13,9 @@ public class turnLeft extends Card
     {
         r.turnLeft();
     }
+    
+    @Override
+    public Card getOppositeCard() {
+    	return new turnRight();
+    }
 }
