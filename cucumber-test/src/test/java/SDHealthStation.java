@@ -14,24 +14,20 @@ public class SDHealthStation {
 		this.context = context;
 	}
 	
-	@Given("a health station on the board")
-	public void a_health_station_on_the_board() {
-	    Board board = context.board;
+	@Given("a health station on the board at \\({int}, {int})")
+	public void a_health_station_on_the_board_at(Integer int1, Integer int2) {
 	    HealthStation hs = new HealthStation();
-	    board.initialPlacement(hs, 6, 5);
+	    context.board.initialPlacement(hs, int1, int2);
 	    context.healthStation = hs;
 	}
+	
 	@Given("the robot does not have full health")
 	public void the_robot_does_not_have_full_health() {
 	    context.robot.takeDamage();
 	    context.robot.takeDamage();
 	}
-	@When("the robot moves into the health station during a register")
-	public void the_robot_moves_into_the_health_station_during_a_register() {
-		context.robot.shiftX(1);
-	}
-	@Then("the robot gains one HP at the end of the register")
-	public void the_robot_gains_one_hp_at_the_end_of_the_register() {
+	@Then("the robot gains one HP")
+	public void the_robot_gains_one_hp() {
 	    Robot r = context.robot;
 		int oldHealth = r.getHealth();
 		context.healthStation.performRegisterAction();
@@ -40,8 +36,9 @@ public class SDHealthStation {
 	
 	@Given("the robot has full health")
 	public void the_robot_has_full_health() {}
-	@Then("the robot remains at full health at the end of the register")
-	public void the_robot_remains_at_full_health_at_the_end_of_the_register() {
+	
+	@Then("the robot remains at full health")
+	public void the_robot_remains_at_full_health() {
 		Robot r = context.robot;
 		int oldHealth = r.getHealth();
 		context.healthStation.performRegisterAction();

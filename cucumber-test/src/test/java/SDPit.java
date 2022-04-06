@@ -10,15 +10,11 @@ public class SDPit {
 		this.context = context;
 	}
 	
-	@Given("a pit on the board")
-	public void a_pit_on_the_board() {
-	    Pit p = new Pit();
-	    context.board.initialPlacement(p, 6, 5);
+	@Given("a pit on the board at \\({int}, {int})")
+	public void a_pit_on_the_board_at(Integer int1, Integer int2) {
+		Pit p = new Pit();
+	    context.board.initialPlacement(p, int1, int2);
 	    context.pit = p;
-	}
-	@When("the robot moves into the pit during a register")
-	public void the_robot_moves_into_the_pit_during_a_register() {
-	    context.robot.shiftX(1);
 	}
 
 }

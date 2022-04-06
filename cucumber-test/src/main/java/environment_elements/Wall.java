@@ -1,11 +1,10 @@
 package environment_elements;
 
-import board.IBoard;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 
 public class Wall extends EnvironmentElement {
 	
+	public static final String ID = "wall";
 	@Override
 	public boolean isConveyorBlocking() {
 		return true;
@@ -13,5 +12,9 @@ public class Wall extends EnvironmentElement {
 	@Override
 	public boolean isLaserBlocking() {
 		return true;
+	}
+	@Override
+	public String getPieceID() {
+		return ID;
 	}
 }

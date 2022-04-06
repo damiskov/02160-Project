@@ -4,6 +4,7 @@ import board.Board;
 import board.Game;
 import environment_elements.ChainingPanel;
 import board.*;
+import cards.Card;
 import piece_basics.*;
 import environment_elements.ConveyorBelt;
 import environment_elements.Fire;
