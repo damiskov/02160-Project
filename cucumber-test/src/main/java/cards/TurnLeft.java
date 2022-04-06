@@ -1,9 +1,9 @@
 package cards;
 import piece_basics.Robot;
 
-public class turnLeft extends Card 
+public class TurnLeft extends Card 
 {
-    public turnLeft()
+    public TurnLeft()
     {
         super("turnLeft");
     }
@@ -16,6 +16,6 @@ public class turnLeft extends Card
     
     @Override
     public Card getOppositeCard() {
-    	return new turnRight();
+    	return new TurnRight();
     }
 }
