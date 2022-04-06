@@ -18,19 +18,19 @@ public class CardFactory
         }
         else if (action.equals("turnLeft"))
         {
-            return new turnLeft();
+            return new TurnLeft();
         }
         else if (action.equals("turnRight"))
         {
-            return new turnRight();
+            return new TurnRight();
         }
         else if (action.equals("backUp"))
         {
-            return new backUp();
+            return new BackUp();
         }
         else if (action.equals("uTurn"))
         {
-            return new uTurn();
+            return new UTurn();
             
         }
 		return null;

@@ -38,7 +38,7 @@ public class ConveyorBelt extends EnvironmentElement implements IRegisterActor {
 				break;
 			}
 			
-			if (!isBlocking(p)) {
+			if (!isBlocking(newP)) {
 				board.moveRobotFromTo(p, newP);
 			}
 		}

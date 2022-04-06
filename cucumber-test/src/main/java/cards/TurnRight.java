@@ -1,22 +1,21 @@
 package cards;
 import piece_basics.Robot;
 
-public class uTurn extends Card 
+public class TurnRight extends Card 
 {
-    public uTurn()
+    public TurnRight()
     {
-        super("uTurn");
+        super("turnRight");
     }
 
     @Override
     public void executeAction(Robot r)
     {
         r.turnRight();
-        r.turnRight();
     }
     
     @Override
     public Card getOppositeCard() {
-    	return new uTurn(); //this one does not get reversed by the panel (agreed with David)
+    	return new TurnLeft();
     }
 }
