@@ -10,7 +10,7 @@ public class StepsDefinitionBoardGeneration {
 	Player p2;
 	String difficulty;
 	@Given("an empty Board")
-	public void a_board() {
+	public void an_empty_board() {
 		this.b = new Board();
 	}
 	@Given("Players")

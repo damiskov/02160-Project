@@ -1,5 +1,9 @@
-#@tag
-#Feature: User Interface
+@tag
+Feature: User Interface
+
+#error because Cannot invoke "UserInterface.Screen.update(board.Board)" 
+#because "this.context.screen" is null
+
   #This feature handles how the user sees the game
 #
   #@tag1
