@@ -1,4 +1,9 @@
 package board;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import phases.ActivationPhase;
 import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
@@ -16,6 +21,7 @@ public class Board implements IBoard {
 	private int numColumns;
 	private int numRows;
 	private int numObstacles;
+	private Map<String, List<IRegisterActor>> executionLists = new HashMap<>();
 	
 	// initialize an empty board with a set number of columns and rows
 	public Board(int numColumns, int numRows) {
@@ -61,7 +67,7 @@ public class Board implements IBoard {
 	
 	@Override
 	public void initialPlacement(Robot r, int x, int y) {
-		ActivationPhase.getInstance().add(r);
+		addToExecutionLists(r);
 		r.setBoard(this);
 		getCell(x, y).robot = r;
 	}
@@ -72,7 +78,7 @@ public class Board implements IBoard {
 	@Override
 	public void initialPlacement(EnvironmentElement e, int x, int y) {
 		if (e instanceof IRegisterActor) {
-			ActivationPhase.getInstance().add((IRegisterActor) e);
+			addToExecutionLists((IRegisterActor) e);
 		}
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
@@ -80,6 +86,12 @@ public class Board implements IBoard {
 	@Override
 	public void initialPlacement(EnvironmentElement e, Position p) {
 		initialPlacement(e, p.getX(), p.getY());
+	}
+	
+	private void addToExecutionLists(IRegisterActor actor) {
+		String id = actor.getActorClassID();
+		executionLists.computeIfAbsent(id, k -> new ArrayList<IRegisterActor>());
+		executionLists.get(id).add(actor);
 	}
 
 	@Override
@@ -171,6 +183,10 @@ public class Board implements IBoard {
 		return
 				0 <= x && x < numColumns
 				&& 0 <= y && y < numRows;
+	}
+
+	public Map<String, List<IRegisterActor>> getExecutionLists() {
+		return executionLists;
 	}
 
 }
