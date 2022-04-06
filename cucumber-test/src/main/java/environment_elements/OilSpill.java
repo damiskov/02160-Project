@@ -2,9 +2,10 @@ package environment_elements;
 
 import board.Position;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 
-public class OilSpill extends EnvironmentElement implements IRegisterActor {
+public class OilSpill extends EnvironmentElement {
+
+	public static final String ID = "oil_spill";
 
 	public Position p; 
 	
@@ -15,5 +16,10 @@ public class OilSpill extends EnvironmentElement implements IRegisterActor {
 		board.initialPlacement(new Fire(), p);
 		
 		board.getRobotAt(p).takeDamage();
+	}
+
+	@Override
+	public String getPieceID() {
+		return ID;
 	}
 }

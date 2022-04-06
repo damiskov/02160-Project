@@ -1,14 +1,13 @@
 package environment_elements;
-import board.IBoard;
 import board.Position;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 import piece_basics.Orientation;
-import piece_basics.Robot;
 
-public class ConveyorBelt extends EnvironmentElement implements IRegisterActor {
+public class ConveyorBelt extends EnvironmentElement {
 	
 	private Orientation orientation;
+	
+	public static final String ID = "conveyor_belt";
 	
 	public ConveyorBelt(Orientation orientation) {
 		this.orientation = orientation;
@@ -17,7 +16,6 @@ public class ConveyorBelt extends EnvironmentElement implements IRegisterActor {
 	@Override
 	public void performRegisterAction() {
 		// if a robot is on top of the conveyer, push the robot in the conveyer's direction unless there is a robot or wall in the way
-		
 		Position p = getPosition();
 		
 		if (board.hasRobotAt(p)) {
@@ -38,7 +36,7 @@ public class ConveyorBelt extends EnvironmentElement implements IRegisterActor {
 				break;
 			}
 			
-			if (!isBlocking(p)) {
+			if (!isBlocking(newP)) {
 				board.moveRobotFromTo(p, newP);
 			}
 		}
@@ -46,6 +44,11 @@ public class ConveyorBelt extends EnvironmentElement implements IRegisterActor {
 	
 	private boolean isBlocking(Position p) {
 		return board.hasRobotAt(p) || (board.hasEElementAt(p) && board.getEElementAt(p).isConveyorBlocking());
+	}
+
+	@Override
+	public String getPieceID() {
+		return ID;
 	}
 
 }

@@ -1,6 +1,10 @@
 package board;
 
+import java.util.List;
+import java.util.Map;
+
 import piece_basics.EnvironmentElement;
+import piece_basics.Piece;
 import piece_basics.Robot;
 
 public interface IBoard {
@@ -28,4 +32,6 @@ public interface IBoard {
 	
 	boolean coordinateWithinBounds(Position p);
 	boolean coordinateWithinBounds(int x, int y);
+	
+	Map<String, List<Piece>> getPieceLists();
 }

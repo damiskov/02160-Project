@@ -1,15 +1,21 @@
 package environment_elements;
 
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 
-public class Teleporter extends EnvironmentElement implements IRegisterActor{
-
+public class Teleporter extends EnvironmentElement {
 	private Teleporter receiving;
+	
+	public static final String ID = "teleporter";
 	
 	public void setReceiving(Teleporter receiving) {
 		this.receiving = receiving;
 	}
+
+	@Override
+	public String getPieceID() {
+		return ID;
+	}
+
 
 	@Override
 	public void performRegisterAction() {

@@ -5,17 +5,20 @@ import java.util.List;
 
 import board.IBoard;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
+import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
-import board.Game;
 
-public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
+public class ChainingPanel extends EnvironmentElement {
 
 	private boolean active = true;
 	int i;
 	private boolean chainableOnBoard = false; //used for noChainable()
 	Robot toChain;
+
+	
+	public static final String ID = "chaining_panel";
+
 	
 	public boolean isActive() {
 		return this.active;
@@ -26,13 +29,16 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 	}
 
 	 
-	public boolean noChainable(List<Robot> rs) {
-		for (Robot r : rs) {
-			if(r.isChainable() == true) {
-				chainableOnBoard = true;
-				toChain = r;
-				break;
-			} 
+	public boolean noChainable(List<Piece> rs) {
+		for (Piece p : rs) { //for Piece p : rs then downcast and add an instanceof check
+			if (p instanceof Robot) {
+				Robot r = (Robot) p;
+				if(r.isChainable() == true) { 
+					chainableOnBoard = true;
+					toChain = r;
+					break;
+				} 
+			}
 		}
 		return chainableOnBoard;
 	}
@@ -51,14 +57,20 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 	
 	@Override
 	public void performRegisterAction() {
-		if(noChainable(board.getPieceList.get(Robot.ID)) == false && this.isActive() == true) {
+		if(noChainable(board.getPieceLists().get(Robot.ID)) == false && isActive() == true) {
+		//	board.getRobotAt(getPosition()).setChainable(true);
 			chainRobots(board.getRobotAt(getPosition()), toChain);
-			this.setActive(true);
+			setActive(true);
 		}
 		else {
 			board.getRobotAt(getPosition()).setChainable(true);
-			this.setActive(false);
+			setActive(false);
 		} 
+	}
+
+	@Override
+	public String getPieceID() {
+		return ID;
 	}
 
 }

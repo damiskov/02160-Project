@@ -10,18 +10,14 @@ import piece_basics.Robot;
 public class SDChainingPanel {
 	private Context context;
 	
-//	int Xdistance;
-//	int Ydistance;
-//	int newXdistance;
-//	int newYdistance;
 	
 	public SDChainingPanel(Context context) {
 		this.context = context;
 	}
 	
 
-	@Given("chaining panel on the board")
-	public void chaining_panel_on_the_board() {
+	@Given("a chaining panel on the board")
+	public void a_chaining_panel_on_the_board() {
 	    ChainingPanel cp = new ChainingPanel();
 	    context.board.initialPlacement(cp, new Position(6, 5) );
 	    context.chainpan = cp;
@@ -71,7 +67,7 @@ public class SDChainingPanel {
 	}
 	@Then("the first chaining panel become active again")
 	public void the_first_chaining_panel_become_active_again() {
-		assertEquals(false, context.chainpan.isActive());
+		assertEquals(true, context.chainpan.isActive());
 	}
 
 	

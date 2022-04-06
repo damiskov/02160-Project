@@ -2,9 +2,9 @@ package cards;
 
 import piece_basics.Robot;
 
-public class backUp extends Card 
+public class BackUp extends Card 
 {
-    public backUp()
+    public BackUp()
     {
         super("backUp");
     }

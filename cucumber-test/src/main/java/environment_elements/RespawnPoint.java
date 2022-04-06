@@ -2,9 +2,10 @@ package environment_elements;
 
 import board.Position;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 
-public class RespawnPoint extends EnvironmentElement implements IRegisterActor {
+public class RespawnPoint extends EnvironmentElement {
+
+	public static final String ID = "respawn_point";
 
 	@Override
 	public void performRegisterAction() {
@@ -13,6 +14,11 @@ public class RespawnPoint extends EnvironmentElement implements IRegisterActor {
 		if (board.hasRobotAt(p)) {
 			board.getRobotAt(p).setRespawnPoint(this);
 		}
+	}
+
+	@Override
+	public String getPieceID() {
+		return ID;
 	}
 
 }

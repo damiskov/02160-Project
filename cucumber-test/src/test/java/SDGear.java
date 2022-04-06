@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
 import board.Board;
+import board.IBoard;
 import environment_elements.Gear;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,13 +16,27 @@ private Context context;
 		this.context = context;
 	}
 	
+	@Given("a gear on the board at \\({int}, {int}) spinning {string}")
+	public void a_gear_on_the_board_at_spinning(Integer int1, Integer int2, String string) {
+	    Gear g;
+	    switch (string.toLowerCase()) {
+	    case "clockwise": case "right":
+	    	g = new Gear(false); break;
+	    case "counterclockwise": case "anticlockwise": case "left":
+	    	g = new Gear(true); break;
+    	default:
+    		throw new IllegalArgumentException("Invalid direction");
+	    }
+	    context.board.initialPlacement(g, int1, int2);
+	    context.gear = g;
+	}
 	
 	@Given("a gear pointing towards right")
 	public void a_gear_pointing_towards_right() {
 		Board board = context.board;
 		Gear g = new Gear( false);
-		board.initialPlacement(g, 6, 5);
 		context.gear = g;
+		board.initialPlacement(g, 6, 5);
 	}
 	
 	@When("robot steps on a gear")
@@ -40,8 +55,8 @@ private Context context;
 	public void a_gear_pointing_towards_left() {
 		Board board = context.board;
 		Gear g = new Gear(true);
-		board.initialPlacement(g, 6, 5);
 		context.gear = g;
+		board.initialPlacement(g, 6, 5);
 	}
 	@Then("gear turns the robot towards left")
 	public void gear_turns_the_robot_towards_left() {
