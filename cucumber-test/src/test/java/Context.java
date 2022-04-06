@@ -1,6 +1,7 @@
 
 import environment_elements.ChainingPanel;
 import board.*;
+import cards.Card;
 import piece_basics.*;
 import environment_elements.ConveyorBelt;
 import environment_elements.Fire;
@@ -38,6 +39,6 @@ public class Context {
 	Button startButton;
 	Game game;
 	Piece piece;
-	Screen screen;
+	Card card;
 	int difficulty;
 }
