@@ -14,7 +14,7 @@ import environment_elements.ReversalPanel;
 import environment_elements.Teleporter;
 import environment_elements.Wall;
 import piece_basics.Robot;
-import UserInterface.Screen;
+
 
 public class Context {
 	Board board;
@@ -38,6 +38,5 @@ public class Context {
 	Button startButton;
 	Game game;
 	Piece piece;
-	Screen screen;
 	int difficulty;
 }
