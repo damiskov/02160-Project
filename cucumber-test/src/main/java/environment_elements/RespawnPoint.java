@@ -2,9 +2,10 @@ package environment_elements;
 
 import board.Position;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 
-public class RespawnPoint extends EnvironmentElement implements IRegisterActor {
+public class RespawnPoint extends EnvironmentElement {
+
+	public static final String ID = "respawn_point";
 
 	@Override
 	public void performRegisterAction() {
@@ -16,8 +17,8 @@ public class RespawnPoint extends EnvironmentElement implements IRegisterActor {
 	}
 
 	@Override
-	public String getActorClassID() {
-		return "respawn_point";
+	public String getPieceID() {
+		return ID;
 	}
 
 }

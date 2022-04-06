@@ -3,22 +3,31 @@ package board;
 import java.util.List;
 import java.util.Map;
 
-import piece_basics.IRegisterActor;
+import environment_elements.ChainingPanel;
+import environment_elements.ConveyorBelt;
+import environment_elements.Fire;
+import environment_elements.Gear;
+import environment_elements.Laser;
+import environment_elements.OilSpill;
+import environment_elements.RespawnPoint;
+import environment_elements.ReversalPanel;
+import piece_basics.Piece;
+import piece_basics.Robot;
 import player.Player;
 
 public class Game {
 	
 	private static final List<String> priorityList = List.of(
-			"chaining panel",
-			"conveyor_belt",
-			"gear",
-			"laser",
-			"robot",
-			"fire",
-			"oil_spill",
-			"reversal_panel",
-			"respawn_point",
-			"checkpoint"
+			ChainingPanel.ID,
+			ConveyorBelt.ID,
+			Gear.ID,
+			Laser.ID,
+			Robot.ID,
+			Fire.ID,
+			OilSpill.ID,
+			ReversalPanel.ID,
+			RespawnPoint.ID
+			/* Checkpoint.ID */
 	);
 	
 	Board board;
@@ -42,10 +51,10 @@ public class Game {
 	
 	// Observer pattern
 	public void activateRegisterActors() {
-		Map<String, List<IRegisterActor>> executionLists = board.getExecutionLists();
+		Map<String, List<Piece>> executionLists = board.getPieceLists();
 		for (String id: priorityList) {
 			if (executionLists.containsKey(id)) {
-				for (IRegisterActor actor: executionLists.get(id)) {
+				for (Piece actor: executionLists.get(id)) {
 					actor.performRegisterAction();
 				}
 			}

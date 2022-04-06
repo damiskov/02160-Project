@@ -2,9 +2,10 @@ package environment_elements;
 
 import board.Position;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 
-public class HealthStation extends EnvironmentElement implements IRegisterActor {
+public class HealthStation extends EnvironmentElement {
+
+	public static final String ID = "health_station";
 
 	@Override
 	public void performRegisterAction() {
@@ -15,8 +16,8 @@ public class HealthStation extends EnvironmentElement implements IRegisterActor 
 	}
 
 	@Override
-	public String getActorClassID() {
-		return "health_station";
+	public String getPieceID() {
+		return ID;
 	}
 
 }

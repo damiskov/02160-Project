@@ -3,14 +3,11 @@ package piece_basics;
 import java.util.ArrayList;
 import java.util.List;
 
-import board.IBoard;
 import board.Position;
 import cards.Card;
-import environment_elements.Pit;
 import environment_elements.RespawnPoint;
-import environment_elements.Wall;
 
-public class Robot extends Piece implements IRegisterActor {
+public class Robot extends Piece {
 	private Orientation orientation;
 	private int health = 3;
 	private final int maxHealth = 3;
@@ -19,6 +16,8 @@ public class Robot extends Piece implements IRegisterActor {
 	private Robot chainedTo;
 	private String command;	
 	private ArrayList<Card> program; //setter method?
+	
+	public static final String ID = "robot";
 	
 	public Robot() {
 		orientation = Orientation.UP;
@@ -220,8 +219,8 @@ public class Robot extends Piece implements IRegisterActor {
 	}
 
 	@Override
-	public String getActorClassID() {
-		return "robot";
+	public String getPieceID() {
+		return ID;
 	}
 
 }

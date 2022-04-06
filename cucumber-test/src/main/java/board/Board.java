@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
+import piece_basics.Piece;
 import piece_basics.Robot;
 
 // utility class for Board with public attributes. Encapsulation is still respected as this class is fully encapsulated by the Board class
@@ -20,7 +20,7 @@ public class Board implements IBoard {
 	private int numColumns;
 	private int numRows;
 	private int numObstacles;
-	private Map<String, List<IRegisterActor>> executionLists = new HashMap<>();
+	private Map<String, List<Piece>> pieceLists = new HashMap<>();
 	
 	// initialize an empty board with a set number of columns and rows
 	public Board(int numColumns, int numRows) {
@@ -76,9 +76,7 @@ public class Board implements IBoard {
 	}
 	@Override
 	public void initialPlacement(EnvironmentElement e, int x, int y) {
-		if (e instanceof IRegisterActor) {
-			addToExecutionLists((IRegisterActor) e);
-		}
+		addToExecutionLists(e);
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
 	}
@@ -87,10 +85,10 @@ public class Board implements IBoard {
 		initialPlacement(e, p.getX(), p.getY());
 	}
 	
-	private void addToExecutionLists(IRegisterActor actor) {
-		String id = actor.getActorClassID();
-		executionLists.computeIfAbsent(id, k -> new ArrayList<IRegisterActor>());
-		executionLists.get(id).add(actor);
+	private void addToExecutionLists(Piece piece) {
+		String id = piece.getPieceID();
+		pieceLists.computeIfAbsent(id, k -> new ArrayList<Piece>());
+		pieceLists.get(id).add(piece);
 	}
 
 	@Override
@@ -184,8 +182,8 @@ public class Board implements IBoard {
 				&& 0 <= y && y < numRows;
 	}
 
-	public Map<String, List<IRegisterActor>> getExecutionLists() {
-		return executionLists;
+	public Map<String, List<Piece>> getPieceLists() {
+		return pieceLists;
 	}
 
 }

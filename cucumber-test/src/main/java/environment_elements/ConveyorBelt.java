@@ -1,12 +1,13 @@
 package environment_elements;
 import board.Position;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 import piece_basics.Orientation;
 
-public class ConveyorBelt extends EnvironmentElement implements IRegisterActor {
+public class ConveyorBelt extends EnvironmentElement {
 	
 	private Orientation orientation;
+	
+	public static final String ID = "conveyor_belt";
 	
 	public ConveyorBelt(Orientation orientation) {
 		this.orientation = orientation;
@@ -46,8 +47,8 @@ public class ConveyorBelt extends EnvironmentElement implements IRegisterActor {
 	}
 
 	@Override
-	public String getActorClassID() {
-		return "conveyor_belt";
+	public String getPieceID() {
+		return ID;
 	}
 
 }

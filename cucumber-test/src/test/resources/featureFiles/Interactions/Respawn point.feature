@@ -1,4 +1,4 @@
-Feature: Title of your feature
+Feature: Respawn point
 
   Scenario: A robot loses all of its health and respawns at its respawn point
     Given a game with an empty board

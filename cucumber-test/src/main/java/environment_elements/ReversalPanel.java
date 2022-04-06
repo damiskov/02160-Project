@@ -3,10 +3,12 @@ package environment_elements;
 import java.util.ArrayList;
 
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 import cards.Card;
 
-public class ReversalPanel extends EnvironmentElement implements IRegisterActor{
+public class ReversalPanel extends EnvironmentElement {
+
+	public static final String ID = "reversal_panel";
+
 
 	//to avoid compilation errors
 	@Override
@@ -17,8 +19,8 @@ public class ReversalPanel extends EnvironmentElement implements IRegisterActor{
 
 
 	@Override
-	public String getActorClassID() {
-		return "reversal_panel";
+	public String getPieceID() {
+		return ID;
 	}
 
 	/*implemented based on these assumptions 

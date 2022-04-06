@@ -8,4 +8,7 @@ public abstract class Piece {
 	public void setBoard(IBoard board) {
 		this.board = board;
 	}
+	
+	public void performRegisterAction() {}
+	public abstract String getPieceID();
 }

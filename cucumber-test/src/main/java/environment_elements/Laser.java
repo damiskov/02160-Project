@@ -3,8 +3,10 @@ package environment_elements;
 import piece_basics.*;
 import piece_basics.EnvironmentElement;
 
-public class Laser extends EnvironmentElement implements IRegisterActor{
+public class Laser extends EnvironmentElement {
 	
+	public static final String ID = "laser";
+
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(getPosition())) {
@@ -13,8 +15,8 @@ public class Laser extends EnvironmentElement implements IRegisterActor{
 	}
 
 	@Override
-	public String getActorClassID() {
-		return "laser";
+	public String getPieceID() {
+		return ID;
 	}
 }
 

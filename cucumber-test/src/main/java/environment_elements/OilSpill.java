@@ -2,9 +2,10 @@ package environment_elements;
 
 import board.Position;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 
-public class OilSpill extends EnvironmentElement implements IRegisterActor {
+public class OilSpill extends EnvironmentElement {
+
+	public static final String ID = "oil_spill";
 
 	@Override
 	public void performRegisterAction() {
@@ -14,7 +15,7 @@ public class OilSpill extends EnvironmentElement implements IRegisterActor {
 	}
 
 	@Override
-	public String getActorClassID() {
-		return "oil_spill";
+	public String getPieceID() {
+		return ID;
 	}
 }

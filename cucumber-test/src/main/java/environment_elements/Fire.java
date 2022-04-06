@@ -2,11 +2,13 @@ package environment_elements;
 
 import board.Position;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 
-public class Fire extends EnvironmentElement implements IRegisterActor {
+public class Fire extends EnvironmentElement {
 	//necessary for the Then step in the step definitions, has a getter method lower
 	private Position p;
+	
+	public static final String ID = "fire";
+	
 	@Override
 	public void performRegisterAction() {
 		if(board.hasRobotAt(getPosition())) {
@@ -29,8 +31,8 @@ public class Fire extends EnvironmentElement implements IRegisterActor {
 	}
 
 	@Override
-	public String getActorClassID() {
-		return "fire";
+	public String getPieceID() {
+		return ID;
 	}
 	
 	public Position getP() {
