@@ -26,7 +26,6 @@ public class Card
     {
         return action;
     }
-
     public void executeAction(Robot r) {
     	
     }
