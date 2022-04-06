@@ -1,3 +1,4 @@
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -5,16 +6,16 @@ import io.cucumber.java.en.When;
 public class StepsDefinitionPlayer {
 	
 	//Player as obstacle on the right side(Player)	
-	@Given("a player")
-	public void a_player() {
+	//@Given("a player")
+	//public void a_player() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	@Given("a robot")
-	public void a_robot() {
+	//    throw new io.cucumber.java.PendingException();
+	//}
+	//@Given("a robot")
+	//public void a_robot() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+	//    throw new io.cucumber.java.PendingException();
+	//}
 	@Given("robot pushes other robot")
 	public void robot_pushes_other_robot() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -57,3 +58,4 @@ public class StepsDefinitionPlayer {
 	}
 
 }
+

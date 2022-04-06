@@ -6,7 +6,7 @@ public class Player {
 	
 	public Player()
 	{
-		
+		System.out.println("This is a player");
 	}
 	
 	public void setRobot(Robot r) {

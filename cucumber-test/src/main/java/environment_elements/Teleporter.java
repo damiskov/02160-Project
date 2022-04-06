@@ -1,29 +1,22 @@
 package environment_elements;
 
-import board.IBoard;
+import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
-import piece_basics.Robot;
 
 public class Teleporter extends EnvironmentElement implements IRegisterActor{
+
+	private Teleporter receiving;
 	
-	public Teleporter(int x, int y) {
-		super(x, y);
-		// TODO Auto-generated constructor stub
+	public void setReceiving(Teleporter receiving) {
+		this.receiving = receiving;
 	}
 
-	public void interact(Robot r, Teleporter t ) {
-		r.setPosition(t.getX(),t.getY());
-	}
-	
-	public void activate(Robot r, Teleporter t) {
-		if(this.getX() == r.getX() && this.getY() == r.getY()) {
-			this.interact(r,t);
-		}
-			
-	}
-	
 	@Override
 	public void performRegisterAction() {
+		if (board.hasRobotAt(getPosition())) {
+			board.moveRobotFromTo(getPosition(), receiving.getPosition());
+		}
 		
 	}
 }
+

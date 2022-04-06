@@ -8,12 +8,8 @@ public class Game {
 	Board b;
 	Difficulty difficulty;
 	Player[] players;
-	int currentPlayer;
-	Deck gameDeck;
-	
-	// Board methods
-	
 	public void genBoard() {
+
 		if (difficulty.getLevel()==1)
 		{
 			// Generate board corresponding to easy difficulty
@@ -30,19 +26,16 @@ public class Game {
 	
 	public void displayBoard()
 	{
-		// Displaying board
-		
+		// Displaying board		
 	}
-	
 	// Difficulty getter and setters
 	
 	public void setDifficulty(int d) {
 		this.difficulty.setLevel(d);
 	}
-	
-	public void getDifficulty()
-	{
-		System.out.println(difficulty);
+	public void setCurrentPlayer(int i) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	// Player methods
@@ -59,13 +52,8 @@ public class Game {
 		}
 	}
 	
-	public int getCurrentPlayer()
-	{
-		return currentPlayer;
-	}
-	
-	private void setCurrentPlayer(int p)
-	{
-		this.currentPlayer = p;
+
+	public Player[] getPlayers() {
+		return players;
 	}
 }

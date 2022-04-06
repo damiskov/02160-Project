@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 
+import board.Position;
 import environment_elements.ChainingPanel;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -21,16 +22,16 @@ public class SDChainingPanel {
 	}
 	
 
-	@Given("chaining panel")
-	public void chaining_panel() {
-	    ChainingPanel cp = new ChainingPanel(5, 5);
-	    context.board.place(cp);
+	@Given("chaining panel on the board")
+	public void chaining_panel_on_the_board() {
+	    ChainingPanel cp = new ChainingPanel();
+	    context.board.initialPlacement(cp, new Position(5, 5) );
 	    context.chainpan = cp;
 	}
 	
 	@Given("no chainable robots")
 	public void no_chainable_robots() {
-	    context.chainpan.noChainable(context.robot); //parameter needs to the list of robots on the board
+	    context.chainpan.noChainable(context.game.getPlayers()); 
 	}
 	@When("the robot steps into the chaining panel")
 	public void the_robot_steps_into_the_chaining_panel() {
@@ -49,9 +50,9 @@ public class SDChainingPanel {
 	
 	@Given("a chainable robot")
 	public void a_chainable_robot() {
-	    Robot r = new Robot(7, 10);
+	    Robot r = new Robot();
 	    r.setChainable(true);
-	    context.board.place(r);
+	    context.board.initialPlacement(r, 7, 10);
 	    context.robot2 = r;
 	    
 	}

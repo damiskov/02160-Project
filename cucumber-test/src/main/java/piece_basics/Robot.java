@@ -1,48 +1,47 @@
 package piece_basics;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import board.IBoard;
+import board.Position;
+import cards.Card;
 import environment_elements.Pit;
 import environment_elements.RespawnPoint;
 import environment_elements.Wall;
 
-public class Robot extends Piece implements IRegisterActor{
+public class Robot extends Piece implements IRegisterActor {
 	private Orientation orientation;
 	private int health = 3;
 	private final int maxHealth = 3;
 	private RespawnPoint currentRespawnPoint;
 	private boolean chainable;
 	private Robot chainedTo;
-
+	private String command;	
+	private ArrayList<Card> program; //setter method?
 	
-	public Robot(int x, int y) {
-		super(x, y);
+	public Robot() {
 		orientation = Orientation.UP;
-		
 	}
 	
-	@Override
-	public void setPosition(int newX, int newY) {
-		super.setPosition(newX, newY);
-		if (board.hasEElementAt(newX, newY) && board.getEElementAt(newX, newY) instanceof Pit) {
-			reboot();
-		}
+	public void setPosition(Position p) {
+		board.setPosition(this, p);
+	}
+	public Position getPosition() {
+		return board.getPosition(this);
+	}
+	public int getX() {
+		return board.getPosition(this).getX();
+	}
+	public int getY() {
+		return board.getPosition(this).getY();
 	}
 	
 	public void setRespawnPoint(RespawnPoint r) {
 		this.currentRespawnPoint = r;
 	}
-
-	public void executeProgram() {
-		
-		System.out.println("Program executed");
-		
-	}
 	
-	public void executeCommand() {
-		
-		System.out.println("Command executed");
-		
-	}
+
 	
 	
 	public void setOrientation(Orientation orientation) {
@@ -83,6 +82,18 @@ public class Robot extends Piece implements IRegisterActor{
 			break;
 		}
 	}
+	
+	public void shiftX(int spaces) {
+		// TODO: Add wall collision logic
+		Position p = getPosition();
+		p.incrX(spaces);
+		board.setPosition(this, p);
+	}
+	public void shiftY(int spaces) {
+		Position p = getPosition();
+		p.incrY(spaces);
+		board.setPosition(this, p);
+	}
 	public void move(int spaces) {
 		switch(orientation) {
 		case UP:
@@ -99,7 +110,6 @@ public class Robot extends Piece implements IRegisterActor{
 			break;
 		}
 	}
-	
 
 	public void takeDamage() {
 		health--;
@@ -135,7 +145,7 @@ public class Robot extends Piece implements IRegisterActor{
 	}
 	
 	public void reboot() {
-		setPosition(currentRespawnPoint.getX(), currentRespawnPoint.getY());
+		setPosition(board.getPosition(currentRespawnPoint));
 		health = maxHealth;
 		// also must discard all cards in hand and stop moving
 	}
@@ -159,51 +169,54 @@ public class Robot extends Piece implements IRegisterActor{
 		}
 	}
 	private Robot findRobotAhead() {
-		int searchX = 0;
-		int searchY = 0;
+		Position p = getPosition();
 		
 		switch(orientation) {
 		case UP:
-			searchX = getX();
-			searchY = getY() + 1;
+			p.incrY(1);
 			break;
 		case RIGHT:
-			searchX = getX() + 1;
-			searchY = getY();
+			p.incrX(1);
 			break;
 		case DOWN:
-			searchX = getX();
-			searchY = getY() - 1;
+			p.incrY(-1);
 			break;
 		case LEFT:
-			searchX = getX() - 1;
-			searchY = getY();
+			p.incrX(-1);
 			break;
 		}
 		
 		Robot foundRobot = null;
-		while (board.coordinateWithinBounds(searchX, searchY) && !laserBlocking(searchX, searchY)) {
-			if (board.hasRobotAt(searchX, searchY)) {
-				foundRobot = board.getRobotAt(searchX, searchY);
+		while (board.coordinateWithinBounds(p) && !laserBlocking(p)) {
+			if (board.hasRobotAt(p)) {
+				foundRobot = board.getRobotAt(p);
 				break;
 			}
 			switch (orientation) {
 			case UP:
-				searchY++; break;
+				p.incrY(1); break;
 			case RIGHT:
-				searchX++; break;
+				p.incrX(1); break;
 			case DOWN:
-				searchY--; break;
+				p.incrY(-1); break;
 			case LEFT:
-				searchX--; break;
+				p.incrX(-1); break;
 			}
 		}
 		return foundRobot;
 	}
 	
 	
-	private boolean laserBlocking(int x, int y) {
-		return board.hasEElementAt(x, y) ? board.getEElementAt(x, y) instanceof Wall : false;
+	private boolean laserBlocking(Position p) {
+		return board.hasEElementAt(p) && board.getEElementAt(p).isLaserBlocking();
+	}
+	
+	public ArrayList<Card> getProgram(){
+		return this.program;
+	}
+	
+	public void updateProgram(ArrayList<Card> program) {
+		this.program = program;
 	}
 
 }

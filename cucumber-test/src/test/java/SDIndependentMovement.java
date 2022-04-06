@@ -15,17 +15,12 @@ public class SDIndependentMovement {
 	
 	
 //given a robot on the board
-	@Then("execute program")
-	public void execute_program() {
-	    context.robot.executeProgram();
-	}
 
 //given a command
 	@Given("A turn right command")
 	public void a_turn_right_command() {
-		 context.robot.executeCommand();
+		 //create a turn right card
 	}
-	@Given("a robot on the board")
 
 	
 //given a robot on the board
@@ -56,7 +51,7 @@ public class SDIndependentMovement {
 
 	@Given("A turn left command")
 	public void a_turn_left_command() {
-		context.robot.executeCommand();
+		 //create a turn left card
 	}
 
 //given a robot on the board
@@ -90,7 +85,7 @@ public class SDIndependentMovement {
 
 	@Given("A move forward command")
 	public void a_move_forward_command() {
-		context.robot.executeCommand();
+		 //create a move forward card
 	}
 
 //given a robot on the board
@@ -124,7 +119,7 @@ public class SDIndependentMovement {
 
 	@Given("a move backwards command")
 	public void a_move_backwards_command() {
-		context.robot.executeCommand();
+		 //create a move backward card
 	}
 
 //given a robot on the board

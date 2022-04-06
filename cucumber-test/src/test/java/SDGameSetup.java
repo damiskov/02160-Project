@@ -13,10 +13,8 @@ public class SDGameSetup {
 	
 // Scenario 1 - Start game
 //Given a host
-	@Given("A Difficulty")
-	public void a_difficulty(String diff) {
-		this.d = diff;
-	}
+
+	//given a difficulty
 	
 	@When("Start button pressed")
 	public void start_button_pressed() {

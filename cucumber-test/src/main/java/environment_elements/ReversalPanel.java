@@ -1,21 +1,27 @@
 package environment_elements;
 
-import board.IBoard;
+import java.util.ArrayList;
+
+import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
-import piece_basics.Robot;
+import cards.Card;
 
 public class ReversalPanel extends EnvironmentElement implements IRegisterActor{
 
+	ArrayList<Card> newProg = new ArrayList<Card>();
 	
-	
-	public ReversalPanel(int x, int y) {
-		super(x, y);
-	}
-
 	@Override
 	public void performRegisterAction() {
-		// TODO Auto-generated method stub
-		
+		if (board.hasRobotAt(getPosition())) {
+			ArrayList<Card> program = board.getRobotAt(getPosition()).getProgram();
+			int programLength = program.size();
+			
+			for (int i = 0; i < programLength; i++) {
+				newProg.add(program.get(i).getOppositeCard());
+			}
+			
+			board.getRobotAt(getPosition()).updateProgram(newProg);
+		}
 	}
 
 }
