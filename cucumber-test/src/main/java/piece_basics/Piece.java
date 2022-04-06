@@ -10,5 +10,7 @@ public abstract class Piece {
 	}
 	
 	public void performRegisterAction() {}
+	public void performImmediateAction(Robot r) {}
+	
 	public abstract String getPieceID();
 }
