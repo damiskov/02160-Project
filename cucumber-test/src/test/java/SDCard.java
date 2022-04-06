@@ -1,17 +1,18 @@
 import io.cucumber.java.en.*;
+import cards.*;
+import player.*;
 
 public class SDCard {
 	private Context context;
-	private Player player;
+	private Card card;
+	
 	
 	public SDCard(Context context) {
 		this.context = context;
 	}
 
-	@Given("a player")
-	public void a_player() {
-	    Player player = context.player;
-	}
+	// @Given("a player")
+	
 	
 	@Given("a Deck")
 	public void a_Deck() {
@@ -21,13 +22,13 @@ public class SDCard {
 	
 	@When("a Hand is created")
 	public void a_Hand_is_created() {
-		Hand hand = deck.genHand();
+		Hand hand = context.deck.genHand();
 	    
 	}
 	
 	@Then("the player accepts nine cards")
 	public void the_player_accepts_nine_cards() {
-	    player.setHand(hand);
+	    context.player.setHand(context.deck.genHand());
 	}
 	
 	
@@ -40,21 +41,21 @@ public class SDCard {
 	public void a_Hand() {
 		Deck deck = context.deck;
 		Hand hand = deck.genHand();
-		player.setHand(hand);
+		context.player.setHand(hand);
 	}
 
 	@When("the player creates a program")
 	public void the_player_creates_a_program() {
-	    player.createProgram();
+	    context.player.setProgram();
 	}
 	@When("a card is taken from the front of the program")
 	public void a_card_is_taken_from_the_fron_of_the_program() {
-	    Card card = player.getTopCardInProgram();
+	    this.card = context.player.getTopCardInProgram();
 	    
 	}
 	@Then("the robot executes the action on the card")
 	public void the_robot_executes_the_action_on_the_card() {
-	    card.executeAction(player.getRobot());
+	    card.executeAction(context.player.getRobot());
 	}
 	
 	

@@ -19,6 +19,7 @@ import environment_elements.Wall;
 import piece_basics.Robot;
 import UserInterface.Screen;
 import cards.*;
+import player.Player;
 
 public class Context {
 	Board board;

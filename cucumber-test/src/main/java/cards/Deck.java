@@ -44,10 +44,10 @@ public class Deck
 
     // Generating a hand 
 
-    public ArrayList<Card> genHand()
+    public Hand genHand()
     {
         // empty hand
-        ArrayList<Card> hand = new ArrayList();
+        ArrayList<Card> hand = new ArrayList<Card>();
         // 0 - 8 (9 cards in hand)
         for (int i = 0; i < 9; i++)
         {
@@ -61,8 +61,10 @@ public class Deck
             hand.add(c);
             // removing taken card from deck
             cards.remove(x);
+            // Making sure we don't get duplicate numbers
             numbers.remove(y);
         }
-        return hand;
+        Hand h = new Hand(hand);
+        return h;
     }
 }
