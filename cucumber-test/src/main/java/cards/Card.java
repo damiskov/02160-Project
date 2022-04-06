@@ -30,7 +30,6 @@ public class Card
     public void executeAction(Robot r) {
     	
     }
-
     public Card getOppositeCard() {
     	return new Card("something");
     }
