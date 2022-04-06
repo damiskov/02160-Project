@@ -95,19 +95,41 @@ public class Robot extends Piece implements IRegisterActor {
 		board.setPosition(this, p);
 	}
 	public void move(int spaces) {
-		switch(orientation) {
-		case UP:
-			shiftY(spaces);
-			break;
-		case RIGHT:
-			shiftX(spaces);
-			break;
-		case DOWN:
-			shiftY(-spaces);
-			break;
-		case LEFT:
-			shiftX(-spaces);
-			break;
+		if(this.getChainedTo() == null) {
+			switch(orientation) {
+			case UP:
+				shiftY(spaces);
+				break;
+			case RIGHT:
+				shiftX(spaces);
+				break;
+			case DOWN:
+				shiftY(-spaces);
+				break;
+			case LEFT:
+				shiftX(-spaces);
+				break;
+			}
+		}
+		else {
+			switch(orientation) {
+			case UP:
+				shiftY(spaces);
+				this.getChainedTo().shiftY(spaces);
+				break;
+			case RIGHT:
+				shiftX(spaces);
+				this.getChainedTo().shiftX(spaces);
+				break;
+			case DOWN:
+				shiftY(-spaces);
+				this.getChainedTo().shiftY(-spaces);
+				break;
+			case LEFT:
+				shiftX(-spaces);
+				this.getChainedTo().shiftX(-spaces);
+				break;
+			}
 		}
 	}
 
@@ -145,20 +167,16 @@ public class Robot extends Piece implements IRegisterActor {
 	}
 	
 	public void reboot() {
+		//unchains the robot when it reboots
+		getChainedTo().setChainedTo(null);
+		getChainedTo().setChainable(false);
+		setChainable(false);
+		setChainedTo(null);
+		
 		setPosition(board.getPosition(currentRespawnPoint));
 		health = maxHealth;
 		// also must discard all cards in hand and stop moving
 	}
-
-	public void pullChained(Robot r, int spaces, String dir) {
-		if (dir == "X") {
-			r.shiftX(spaces);
-		}
-		else if (dir == "Y") {
-			r.shiftY(spaces);
-		}
-	}
-	
 
 	@Override
 	public void performRegisterAction() {

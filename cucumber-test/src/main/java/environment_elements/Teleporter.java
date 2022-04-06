@@ -16,7 +16,6 @@ public class Teleporter extends EnvironmentElement implements IRegisterActor{
 		if (board.hasRobotAt(getPosition())) {
 			board.moveRobotFromTo(getPosition(), receiving.getPosition());
 		}
-		
 	}
 }
 

@@ -1,6 +1,7 @@
 package environment_elements;
 
 import java.util.Arrays;
+import java.util.List;
 
 import board.IBoard;
 import piece_basics.EnvironmentElement;
@@ -14,10 +15,7 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 	private boolean active = true;
 	int i;
 	private boolean chainableOnBoard = false; //used for noChainable()
-	
-	public void chain1(Robot r) {
-		r.setChainable(true);
-	}
+	Robot toChain;
 	
 	public boolean isActive() {
 		return this.active;
@@ -27,15 +25,14 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 		this.active = active;
 	}
 
-	
-	public boolean noChainable(Player[] rs) {
-		for (i = 0; i <= rs.length; i++); {
-			if(rs[i].getRobot().isChainable() == true) {
-				chainableOnBoard = chainableOnBoard || true;
-			
-			} else {
-				chainableOnBoard = chainableOnBoard || false;
-			}
+	 
+	public boolean noChainable(List<Robot> rs) {
+		for (Robot r : rs) {
+			if(r.isChainable() == true) {
+				chainableOnBoard = true;
+				toChain = r;
+				break;
+			} 
 		}
 		return chainableOnBoard;
 	}
@@ -46,23 +43,22 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 			System.out.println(r1 + " has been chained to robot " + r2);
 			r1.setChainedTo(r2);
 			r2.setChainedTo(r1);
+			r1.setChainable(false);
+			r2.setChainable(false);
 		}
 	}
-	
-	public void unChain(Robot r1, Robot r2) {
-		r1.setChainable(false);
-		r2.setChainable(false);
-		
-		r1.setChainedTo(null); 
-		r2.setChainedTo(null); 
-		}
 	
 	
 	@Override
 	public void performRegisterAction() {
-//		if(noChainable() == false) {
-//			board.getRobotAt(getPosition()).setChainable(true);
-//		}
+		if(noChainable(board.getPieceList.get(Robot.ID)) == false && this.isActive() == true) {
+			chainRobots(board.getRobotAt(getPosition()), toChain);
+			this.setActive(true);
+		}
+		else {
+			board.getRobotAt(getPosition()).setChainable(true);
+			this.setActive(false);
+		} 
 	}
 
 }

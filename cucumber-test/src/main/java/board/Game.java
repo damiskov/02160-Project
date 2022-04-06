@@ -6,7 +6,7 @@ public class Game {
 	
 	Board b;
 	String difficulty;
-	Player[] players;
+	private Player[] players;
 	public void genBoard() {
 		
 	}

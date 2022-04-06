@@ -27,11 +27,10 @@ public class SDFire {
 		context.robot.shiftX(1);
 		context.fire.performRegisterAction();
 	}
-
+	
 	@Then("the fire spreads to a random adjacent cell")
 	public void the_fire_spreads_to_a_random_adjacent_cell() {
-		assertEquals(context.robot.getHealth(),2);
-		assertTrue(context.board.getEElementAt(context.fire.getP()) instanceof Fire);
+		assertTrue(context.board.getEElementAt(context.fire.p) instanceof Fire);
 	}
 	
 }

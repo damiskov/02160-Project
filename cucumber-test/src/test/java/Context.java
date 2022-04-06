@@ -33,6 +33,7 @@ public class Context {
 	Fire fire;
 	ReversalPanel revpan;
 	ChainingPanel chainpan;
+	ChainingPanel chainpan2;
 	Player player;
 	Player host;
 	Button startButton;
