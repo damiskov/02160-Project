@@ -1,90 +1,90 @@
-import static org.junit.Assert.assertEquals;
+import io.cucumber.java.en.*;
 
-import board.Board;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import piece_basics.Orientation;
-import piece_basics.Orientation;
-import piece_basics.Robot;
-
-public class SDCards {
+public class SDCard {
+	private Context context;
+	private Player player;
 	
-private Context context;
-	
-	public SDCards(Context context) {
+	public SDCard(Context context) {
 		this.context = context;
 	}
+
+	@Given("a player")
+	public void a_player() {
+	    Player player = context.player;
+	}
 	
-	//Accept the programming card(Programming Cards)
-// commented to fix error
-//	@Given("a player")
-//	public void a_player() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-	@Given("the cards")
-	public void the_cards() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@Given("a Deck")
+	public void a_Deck() {
+		Deck deck = context.deck;
+	    
 	}
-	@When("the cards are dealt")
-	public void the_cards_are_dealt() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	
+	@When("a Hand is created")
+	public void a_Hand_is_created() {
+		Hand hand = deck.genHand();
+	    
 	}
+	
 	@Then("the player accepts nine cards")
 	public void the_player_accepts_nine_cards() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    player.setHand(hand);
 	}
 	
-	//Programming the cards(Programming Cards)
+	
+	
+	
+	// @Given("a player")
+	// public void a_player()
 
-
-	@When("the player chooses five cards")
-	public void the_player_chooses_five_cards() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	@When("the program is executed")
-	public void the_program_is_executed() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	@Then("the robot performs some actions")
-	public void the_robot_performs_some_actions() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	// @Given("a Hand")
+	public void a_Hand() {
+		Deck deck = context.deck;
+		Hand hand = deck.genHand();
+		player.setHand(hand);
 	}
 
-	//Move the robot one step in the direction it is facing(Programming Cards)
+	@When("the player creates a program")
+	public void the_player_creates_a_program() {
+	    player.createProgram();
+	}
+	@When("a card is taken from the front of the program")
+	public void a_card_is_taken_from_the_fron_of_the_program() {
+	    Card card = player.getTopCardInProgram();
+	    
+	}
+	@Then("the robot executes the action on the card")
+	public void the_robot_executes_the_action_on_the_card() {
+	    card.executeAction(player.getRobot());
+	}
+	
+	
+	
+	
 	@Given("a one step card")
 	public void a_one_step_card() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    
 	}
+	// @Given("a robot on the board")
 
-	//given a robot on the board
-	
-	@When("the card is executed")
-	public void the_card_is_executed() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
+	// @When("the card is executed")
+
 	@Then("the robot moves one step in its direction")
 	public void the_robot_moves_one_step_in_its_direction() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
+
 	
-	//Move the robot two steps in the direction it is facing(Programming Cards)
+	
+	
 	@Given("a two steps card")
 	public void a_two_steps_card() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
+	// @Given("a robot on the board")
 
+	// @When("the card is executed")
 
 	@Then("the robot moves two steps in its direction")
 	public void the_robot_moves_two_steps_in_its_direction() {
@@ -92,70 +92,99 @@ private Context context;
 	    throw new io.cucumber.java.PendingException();
 	}
 	
-	//Move the robot three steps in the direction it is facing(Programming Cards)
+	
+	
+	
 	@Given("three steps card")
 	public void three_steps_card() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
+	// @Given("a robot on the board")
+
+	// @When("the card is executed")
 
 	@Then("the robot moves three steps in its direction")
 	public void the_robot_moves_three_steps_in_its_direction() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
+	
+	
 
-	//Move the robot towards right at ninety degrees angle(Programming Cards)
 	@Given("Right Direction card")
 	public void right_direction_card() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
+	// @Given("a robot on the board")
 
+	// @When("the card is executed")
+	
 	@Then("the robot moves ninety degrees to the right")
 	public void the_robot_moves_ninety_degrees_to_the_right() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
 	
-	//Move the robot towards left at ninety degrees angle(Programming Cards)
+	
 	@Given("Left Direction card")
 	public void left_direction_card() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-
+	// @Given("a robot on the board")
+	
+	// @When("the card is executed")
+	
 	@Then("the robot moves ninety degrees to the left")
 	public void the_robot_moves_ninety_degrees_to_the_left() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-
-	//Move the robot at one hundred eighty degrees angle(Programming Cards)
+	
+	
+	
 	@Given("U-turn card")
 	public void u_turn_card() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-
+	// @Given("a robot on the board")
+	
+	// @When("the card is executed")
+	
 	@Then("the robot moves one hundred eighty degrees so it faces opposite direction")
 	public void the_robot_moves_one_hundred_eighty_degrees_so_it_faces_opposite_direction() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
 
-	//Move the robot in the downwards direction(Programming Cards) 
+	
+	
+	
 	@Given("Backup card")
 	public void backup_card() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-
+	@Given("a robot on the board")
+	public void a_robot_on_the_board() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@When("the card is executed")
+	public void the_card_is_executed() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
 	@Then("the robot moves one space back without changing its direction")
 	public void the_robot_moves_one_space_back_without_changing_its_direction() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
 
-	
+
+
+
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 
-class Deck
+public class Deck
 {
     
     List<String> actions = Arrays.asList("move1", "move2", "move3", "turnRight", "turnLeft", "backUp", "uTurn");
