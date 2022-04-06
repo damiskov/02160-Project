@@ -17,7 +17,7 @@ import player.Player;
 
 public class Game {
 	
-	private static final List<String> priorityList = List.of(
+	private static final List<String> registerActorPriorityList = List.of(
 			ChainingPanel.ID,
 			ConveyorBelt.ID,
 			Gear.ID,
@@ -52,7 +52,7 @@ public class Game {
 	// Observer pattern
 	public void activateRegisterActors() {
 		Map<String, List<Piece>> executionLists = board.getPieceLists();
-		for (String id: priorityList) {
+		for (String id: registerActorPriorityList) {
 			if (executionLists.containsKey(id)) {
 				for (Piece actor: executionLists.get(id)) {
 					actor.performRegisterAction();
