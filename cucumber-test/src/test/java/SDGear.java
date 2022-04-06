@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
 import board.Board;
+import board.IBoard;
 import environment_elements.Gear;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -20,8 +21,8 @@ private Context context;
 	public void a_gear_pointing_towards_right() {
 		Board board = context.board;
 		Gear g = new Gear( false);
-		board.initialPlacement(g, 6, 5);
 		context.gear = g;
+		board.initialPlacement(g, 6, 5);
 	}
 	
 	@When("robot steps on a gear")
@@ -40,8 +41,8 @@ private Context context;
 	public void a_gear_pointing_towards_left() {
 		Board board = context.board;
 		Gear g = new Gear(true);
-		board.initialPlacement(g, 6, 5);
 		context.gear = g;
+		board.initialPlacement(g, 6, 5);
 	}
 	@Then("gear turns the robot towards left")
 	public void gear_turns_the_robot_towards_left() {
