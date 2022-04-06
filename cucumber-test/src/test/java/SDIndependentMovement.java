@@ -5,6 +5,11 @@ import piece_basics.Robot;
 import piece_basics.Orientation;
 import static org.junit.Assert.*;
 import board.Board;
+import cards.BackUp;
+import cards.Card;
+import cards.Move1;
+import cards.TurnLeft;
+import cards.TurnRight;
 public class SDIndependentMovement {
 	
 	private Context context;
@@ -19,7 +24,8 @@ public class SDIndependentMovement {
 //given a command
 	@Given("A turn right command")
 	public void a_turn_right_command() {
-		 //create a turn right card
+		 Card r1_card = new TurnRight();
+		 context.card = r1_card;
 	}
 
 	
@@ -28,7 +34,7 @@ public class SDIndependentMovement {
 	public void robot_turns_right() {
 		Orientation prev_o = context.robot.getOrientation();
 		   
-		context.robot.turnRight();
+		context.card.executeAction(context.robot);
 		   
 		   Orientation curr_o = context.robot.getOrientation();
 		   
@@ -51,7 +57,8 @@ public class SDIndependentMovement {
 
 	@Given("A turn left command")
 	public void a_turn_left_command() {
-		 //create a turn left card
+		Card l1_card = new TurnLeft();
+		context.card = l1_card;
 	}
 
 //given a robot on the board
@@ -60,7 +67,7 @@ public class SDIndependentMovement {
 	   
 		Orientation prev_o = context.robot.getOrientation();
 	   
-		context.robot.turnLeft();
+		context.card.executeAction(context.robot);
 	   
 	   Orientation curr_o = context.robot.getOrientation();
 	   
@@ -85,7 +92,8 @@ public class SDIndependentMovement {
 
 	@Given("A move forward command")
 	public void a_move_forward_command() {
-		 //create a move forward card
+		Card f1_card = new Move1();
+		context.card = f1_card;
 	}
 
 //given a robot on the board
@@ -95,7 +103,7 @@ public class SDIndependentMovement {
 		int old_x = context.robot.getX();
 		int old_y = context.robot.getY();
 	   
-		context.robot.move(n);
+		context.card.executeAction(context.robot);
 	   
 	   int new_x = context.robot.getX();
 	   int new_y = context.robot.getY();
@@ -119,7 +127,8 @@ public class SDIndependentMovement {
 
 	@Given("a move backwards command")
 	public void a_move_backwards_command() {
-		 //create a move backward card
+		Card b1_card = new BackUp();
+		context.card = b1_card;
 	}
 
 //given a robot on the board
@@ -129,7 +138,7 @@ public class SDIndependentMovement {
 		int old_x = context.robot.getX();
 		int old_y = context.robot.getY();
 	   
-		context.robot.move(n);
+		context.card.executeAction(context.robot);
 	   
 	   int new_x = context.robot.getX();
 	   int new_y = context.robot.getY();
