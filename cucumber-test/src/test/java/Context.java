@@ -1,13 +1,10 @@
 
-<<<<<<< HEAD
 import UserInterface.Screen;
 import board.Board;
 import board.Game;
-=======
 import environment_elements.ChainingPanel;
 import board.*;
 import piece_basics.*;
->>>>>>> refs/heads/main
 import environment_elements.ConveyorBelt;
 import environment_elements.Fire;
 import environment_elements.Gear;
@@ -30,12 +27,11 @@ public class Context {
 	HealthStation healthStation;
 	Pit pit;
 	Wall wall;
-<<<<<<< HEAD
 	Screen screen;
 	Game game;
 	
 	
-=======
+
 	RespawnPoint respawnPoint;
 	Laser laser;
 	Teleporter sending;
@@ -47,7 +43,6 @@ public class Context {
 	Player player;
 	Player host;
 	Button startButton;
-	Game game;
 	Piece piece;
->>>>>>> refs/heads/main
+
 }

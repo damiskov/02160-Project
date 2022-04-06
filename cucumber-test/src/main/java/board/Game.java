@@ -49,13 +49,13 @@ public class Game {
 	
 	public void setPlayers(Player[] p)
 	{
-		if (p.length >= 2 && p.length <= 8)
+		if (p.length >= 1 && p.length <= 8)
 		{
 			this.players = p;
 		}
 		else
 		{
-			System.out.println("Invalid number of players (Should be between 2 and 8 (inclusive))");
+			System.out.println("Invalid number of players (Should be between 1 and 8 (inclusive))");
 		}
 	}
 	

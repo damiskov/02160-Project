@@ -18,7 +18,7 @@ public class SDDifficultySetup {
 	
 	
 	@Given("A Difficulty")
-	public void a_difficulty(String d) {
+	public void a_difficulty(int d) {
 		context.game.setDifficulty(d);
 	}
 	
