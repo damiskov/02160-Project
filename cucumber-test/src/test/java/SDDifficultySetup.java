@@ -18,14 +18,7 @@ public class SDDifficultySetup {
 	}
 	
 	
-<<<<<<< HEAD
-	@Given("A Difficulty")
-	public void a_difficulty(int d) {
-		context.game.setDifficulty(d);
-	}
-=======
 	//given an easy difficulty
->>>>>>> refs/heads/main
 	
 	@Then("set number of obstacles")
 	public void set_number_of_obstacles() {

@@ -1,10 +1,8 @@
 package board;
 
-import card.Deck;
-=======
+import cards.Deck;
 import java.util.List;
 import java.util.Map;
-
 import environment_elements.ChainingPanel;
 import environment_elements.ConveyorBelt;
 import environment_elements.Fire;
@@ -15,12 +13,10 @@ import environment_elements.RespawnPoint;
 import environment_elements.ReversalPanel;
 import piece_basics.Piece;
 import piece_basics.Robot;
->>>>>>> refs/heads/main
 import player.Player;
 
 public class Game {
-	Board b;
-	Difficulty difficulty;
+	
 	private static final List<String> registerActorPriorityList = List.of(
 			ChainingPanel.ID,
 			ConveyorBelt.ID,
@@ -35,50 +31,19 @@ public class Game {
 	);
 	
 	Board board;
+	String difficulty;
+	Player[] players;
 	public void genBoard() {
-
-		if (difficulty.getLevel()==1)
-		{
-			// Generate board corresponding to easy difficulty
-		}
-		if (difficulty.getLevel()==2)
-		{
-			// Generate board corresponding to medium difficulty 
-		}
-		if (difficulty.getLevel()==3)
-		{
-			// Generate board corresponding to hard difficulty
-		}
+		
 	}
-	
-	public void displayBoard()
-	{
-		// Displaying board		
-	}
-	// Difficulty getter and setters
-	
-	public void setDifficulty(int d) {
-		this.difficulty.setLevel(d);
+	public void setDifficulty(String d) {
+		this.difficulty = d;
+		
 	}
 	public void setCurrentPlayer(int i) {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	// Player methods
-	
-	public void setPlayers(Player[] p)
-	{
-		if (p.length >= 1 && p.length <= 8)
-		{
-			this.players = p;
-		}
-		else
-		{
-			System.out.println("Invalid number of players (Should be between 1 and 8 (inclusive))");
-		}
-	}
-	
 
 	public Player[] getPlayers() {
 		return players;
