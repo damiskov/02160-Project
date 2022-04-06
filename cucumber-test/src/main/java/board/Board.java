@@ -1,5 +1,11 @@
 package board;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import piece_basics.EnvironmentElement;
+import piece_basics.Piece;
 import piece_basics.Robot;
 
 // utility class for Board with public attributes. Encapsulation is still respected as this class is fully encapsulated by the Board class
@@ -14,6 +20,7 @@ public class Board implements IBoard {
 	private int numColumns;
 	private int numRows;
 	private int numObstacles;
+	private Map<String, List<Piece>> pieceLists = new HashMap<>();
 	
 	// initialize an empty board with a set number of columns and rows
 	public Board(int numColumns, int numRows) {
@@ -59,6 +66,7 @@ public class Board implements IBoard {
 	
 	@Override
 	public void initialPlacement(Robot r, int x, int y) {
+		addToExecutionLists(r);
 		r.setBoard(this);
 		getCell(x, y).robot = r;
 	}
@@ -68,12 +76,19 @@ public class Board implements IBoard {
 	}
 	@Override
 	public void initialPlacement(EnvironmentElement e, int x, int y) {
+		addToExecutionLists(e);
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
 	}
 	@Override
 	public void initialPlacement(EnvironmentElement e, Position p) {
 		initialPlacement(e, p.getX(), p.getY());
+	}
+	
+	private void addToExecutionLists(Piece piece) {
+		String id = piece.getPieceID();
+		pieceLists.computeIfAbsent(id, k -> new ArrayList<Piece>());
+		pieceLists.get(id).add(piece);
 	}
 
 	@Override
@@ -163,8 +178,12 @@ public class Board implements IBoard {
 	@Override
 	public boolean coordinateWithinBounds(int x, int y) {
 		return
-				0 <= x && x <= numColumns
-				&& 0 <= y && y <= numRows;
+				0 <= x && x < numColumns
+				&& 0 <= y && y < numRows;
+	}
+
+	public Map<String, List<Piece>> getPieceLists() {
+		return pieceLists;
 	}
 
 }

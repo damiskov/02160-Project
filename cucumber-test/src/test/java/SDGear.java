@@ -16,6 +16,20 @@ private Context context;
 		this.context = context;
 	}
 	
+	@Given("a gear on the board at \\({int}, {int}) spinning {string}")
+	public void a_gear_on_the_board_at_spinning(Integer int1, Integer int2, String string) {
+	    Gear g;
+	    switch (string.toLowerCase()) {
+	    case "clockwise": case "right":
+	    	g = new Gear(false); break;
+	    case "counterclockwise": case "anticlockwise": case "left":
+	    	g = new Gear(true); break;
+    	default:
+    		throw new IllegalArgumentException("Invalid direction");
+	    }
+	    context.board.initialPlacement(g, int1, int2);
+	    context.gear = g;
+	}
 	
 	@Given("a gear pointing towards right")
 	public void a_gear_pointing_towards_right() {

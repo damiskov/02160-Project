@@ -1,19 +1,16 @@
 package environment_elements;
 
-import java.util.Arrays;
-
-import board.IBoard;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 import piece_basics.Robot;
 import player.Player;
-import board.Game;
 
-public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
+public class ChainingPanel extends EnvironmentElement {
 
 	private boolean active = true;
 	int i;
 	private boolean chainableOnBoard = false; //used for noChainable()
+	
+	public static final String ID = "conveyor_belt";
 	
 	public void chain1(Robot r) {
 		r.setChainable(true);
@@ -63,6 +60,11 @@ public class ChainingPanel extends EnvironmentElement implements IRegisterActor{
 //		if(noChainable() == false) {
 //			board.getRobotAt(getPosition()).setChainable(true);
 //		}
+	}
+
+	@Override
+	public String getPieceID() {
+		return ID;
 	}
 
 }
