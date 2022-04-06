@@ -2,10 +2,10 @@ package board;
 import player.Player;
 
 public class BoardGenerator implements IBoardGenerator {
-	private String difficulty;
+	private int difficulty;
 	Player[] players;
 	
-	public BoardGenerator(String difficulty,  Player[] players) {
+	public BoardGenerator(int difficulty,  Player[] players) {
 		this.difficulty = difficulty;
 		this.players = players;
 	}
