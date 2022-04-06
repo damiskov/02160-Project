@@ -49,6 +49,11 @@ public class SDRobot {
 	    context.robot = r;
 	}
 	
+	@When("the robot moves to \\({int}, {int})")
+	public void the_robot_moves_to(Integer int1, Integer int2) {
+	    context.board.setPosition(context.robot, new Position(int1, int2));
+	}
+	
 	@Then("the robot is at \\({int}, {int})")
 	public void the_robot_is_at(Integer int1, Integer int2) {
 		assertEquals(new Position(int1, int2), context.robot.getPosition());
@@ -89,62 +94,6 @@ public class SDRobot {
 	    for (int i = 0; i < 3; i++) {
 	    	context.robot.takeDamage();
 	    }
-	}
-	
-	@Given("a second robot above the first")
-	public void a_second_robot_above_the_first() {
-	    Robot r2 = new Robot();
-	    context.board.initialPlacement(r2, 5, 9);
-	    context.robot2 = r2;
-	}
-	@Given("a second robot below the first")
-	public void a_second_robot_below_the_first() {
-	    Robot r2 = new Robot();
-	    context.board.initialPlacement(r2, 5, 1);
-	    context.robot2 = r2;
-	}
-	@Given("a second robot to the right of the first")
-	public void a_second_robot_to_the_right_of_the_first() {
-	    Robot r2 = new Robot();
-	    context.board.initialPlacement(r2, 9, 5);
-	    context.robot2 = r2;
-	}
-	@Given("a second robot to the left of the first")
-	public void a_second_robot_to_the_left_of_the_first() {
-		Board board = context.board;
-	    Robot r2 = new Robot();
-	    board.initialPlacement(r2, 1, 5);
-	    context.robot2 = r2;
-	}
-	
-	@Given("the first robot is facing up")
-	public void the_first_robot_is_facing_up() {
-	    context.robot.setOrientation(Orientation.UP);
-	}
-	@Given("the first robot is facing down")
-	public void the_first_robot_is_facing_down() {
-		context.robot.setOrientation(Orientation.DOWN);
-	}
-	@Given("the first robot is facing right")
-	public void the_first_robot_is_facing_right() {
-		context.robot.setOrientation(Orientation.RIGHT);
-	}
-	@Given("the first robot is facing left")
-	public void the_first_robot_is_facing_left() {
-		context.robot.setOrientation(Orientation.LEFT);
-	}
-	
-	@When("the first robot performs its register action")
-	public void the_first_robot_performs_its_register_action() {
-	    context.robot.performRegisterAction();
-	}
-	@Given("a wall in between the robots")
-	public void a_wall_in_between_the_robots() {
-		Robot r = context.robot;
-		Robot r2 = context.robot2;
-		Wall w = new Wall();
-		context.board.initialPlacement(w, (r.getX() + r2.getX())/2, (r.getY() + r2.getY())/2);
-		context.wall = w;
 	}
 	
 	@Then("the second robot takes damage")
