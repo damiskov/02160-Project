@@ -31,5 +31,8 @@ public class Card
     	
     }
 
+    public Card getOppositeCard() {
+    	return new Card("something");
+    }
 
 }

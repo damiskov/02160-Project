@@ -13,4 +13,9 @@ public class Move3 extends Card
     {
         r.move(3);
     }
+    
+    @Override
+    public Card getOppositeCard() {
+    	return new back3();
+    }
 }

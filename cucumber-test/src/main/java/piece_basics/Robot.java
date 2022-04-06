@@ -1,7 +1,11 @@
 package piece_basics;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import board.IBoard;
 import board.Position;
+import cards.Card;
 import environment_elements.Pit;
 import environment_elements.RespawnPoint;
 import environment_elements.Wall;
@@ -13,8 +17,8 @@ public class Robot extends Piece implements IRegisterActor {
 	private RespawnPoint currentRespawnPoint;
 	private boolean chainable;
 	private Robot chainedTo;
-	private String command;
-
+	private String command;	
+	private ArrayList<Card> program; //setter method?
 	
 	public Robot() {
 		orientation = Orientation.UP;
@@ -205,6 +209,14 @@ public class Robot extends Piece implements IRegisterActor {
 	
 	private boolean laserBlocking(Position p) {
 		return board.hasEElementAt(p) && board.getEElementAt(p).isLaserBlocking();
+	}
+	
+	public ArrayList<Card> getProgram(){
+		return this.program;
+	}
+	
+	public void updateProgram(ArrayList<Card> program) {
+		this.program = program;
 	}
 
 	@Override

@@ -1,9 +1,10 @@
 package environment_elements;
 
-import board.IBoard;
+import java.util.ArrayList;
+
 import piece_basics.EnvironmentElement;
 import piece_basics.IRegisterActor;
-import piece_basics.Robot;
+import cards.Card;
 
 public class ReversalPanel extends EnvironmentElement implements IRegisterActor{
 
@@ -32,42 +33,23 @@ public class ReversalPanel extends EnvironmentElement implements IRegisterActor{
 	*/
 	
 /*	public Program[] newProg;
+=======
+	ArrayList<Card> newProg = new ArrayList<Card>();
+>>>>>>> refs/heads/main
 	
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(getPosition())) {
-			Card[] program = board.getRobotAt(getPosition()).getProgram();
-			int programLength = program.length;
+			ArrayList<Card> program = board.getRobotAt(getPosition()).getProgram();
+			int programLength = program.size();
 			
 			for (int i = 0; i < programLength; i++) {
-				if (program[i] instanceof Move1) {
-					backUp back1 = new backUp;
-					newProg.add(back1);
-				}
-				else if (program[i] instanceof Move2) {
-					backUp2 back2 = new backUp2;
-					newProg.add(back2);
-				}
-				else if (program[i] instanceof Move3) {
-					backUp3 back3 = new backUp3;
-					newProg.add(back3);
-				}
-				else if (program[i] instanceof backUp) {
-					Move1 forward1 = new Move1;
-					newProg.add(Move1);
-				}
-				else if (program[i] instanceof turnLeft) {
-					turnRight right = new turnRight;
-					newProg.add(right1);
-				}
-				else if (program[i] instanceof turnRight) {
-					turnLeft left1 = new turnLeft;
-					newProg.add(left1);
-				} else  {}
+				newProg.add(program.get(i).getOppositeCard());
 			}
-			board.getRobotAt(getPosition()).program = newProg;
+			
+			board.getRobotAt(getPosition()).updateProgram(newProg);
 		}
+<<<<<<< HEAD
 	}*/
-
 
 }

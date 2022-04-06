@@ -16,4 +16,9 @@ public class Move1 extends Card
     {
         r.move(1);
     }
+    
+    @Override
+    public Card getOppositeCard() {
+    	return new backUp();
+    }
 }
