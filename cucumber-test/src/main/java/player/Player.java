@@ -7,6 +7,11 @@ public class Player {
 	private Hand hand;
 	private Program program;
 	
+	public void setRobot(Robot r)
+	{
+		this.myRobot = r;
+	}
+	
 	public Robot getRobot() {
 		return myRobot;
 	}
@@ -35,4 +40,7 @@ public class Player {
 	{
 		return program.getTopOfProgram();
 	}
+	
+	
+	
 }
