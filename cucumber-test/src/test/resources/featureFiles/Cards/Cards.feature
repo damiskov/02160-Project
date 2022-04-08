@@ -1,19 +1,18 @@
 Feature: Programming Cards
 
-#error because we need to implement SD file
-#	Scenario: Accept the programming card
-  #	Given a player
-  #	And the cards
-    #When the cards are dealt
-    #Then the player accepts nine cards
-    #
-  #Scenario: Programming the cards
-  #	Given a player
-  #	And the cards
-    #When the player chooses five cards
-    #And the program is executed
-    #Then the robot performs some actions
-    #
+#error because we need to implement SD file - DONE
+	Scenario: Accept the programming card
+  	Given a player
+  	And a Deck
+    When a Hand is created 
+    Then the player accepts nine cards
+    
+  Scenario: Programming the cards
+  	Given a player
+  	And a non empty program
+    When a card is taken from the front of the program
+    Then the robot executes the action on the card
+  
 #
   #Scenario: Move the robot one step in the direction it is facing
   #	Given a one step card
