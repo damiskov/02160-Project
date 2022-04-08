@@ -1,5 +1,3 @@
-
-import UserInterface.Screen;
 import board.Board;
 import board.Game;
 import environment_elements.ChainingPanel;
@@ -17,7 +15,6 @@ import environment_elements.ReversalPanel;
 import environment_elements.Teleporter;
 import environment_elements.Wall;
 import piece_basics.Robot;
-import UserInterface.Screen;
 import cards.*;
 import player.Player;
 
@@ -30,7 +27,6 @@ public class Context {
 	HealthStation healthStation;
 	Pit pit;
 	Wall wall;
-	Screen screen;
 	Game game;
 	
 	
