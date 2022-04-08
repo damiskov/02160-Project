@@ -81,8 +81,6 @@ public class SDCard {
 	}
 
 	
-	
-	
 	@Given("a two steps card")
 	public void a_two_steps_card() {
 	    // Write code here that turns the phrase above into concrete actions
