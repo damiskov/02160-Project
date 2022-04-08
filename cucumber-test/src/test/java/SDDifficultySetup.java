@@ -17,12 +17,13 @@ public class SDDifficultySetup {
 		this.context = context;
 	}
 	
-	
 
 	@Given("A Difficulty")
 	public void a_difficulty(int d) {
 		context.game.setDifficulty(d);
 	}
+	//given an easy difficulty
+
 	
 	@Then("set number of obstacles")
 	public void set_number_of_obstacles() {

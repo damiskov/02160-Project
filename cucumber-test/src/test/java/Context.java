@@ -48,6 +48,7 @@ public class Context {
 	Player host;
 	Button startButton;
 	Piece piece;
+	Card card;
 	int difficulty;
 	
 	Deck deck;

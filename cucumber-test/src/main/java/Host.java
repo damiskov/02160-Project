@@ -1,4 +1,4 @@
-import player.Player;
+import player.*;
 
 
 public class Host extends Player {
