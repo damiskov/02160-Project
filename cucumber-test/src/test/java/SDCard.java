@@ -1,4 +1,9 @@
 import io.cucumber.java.en.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import cards.*;
 import player.*;
 
@@ -7,17 +12,20 @@ public class SDCard {
 	private Card card;
 	
 	
+	
+	
 	public SDCard(Context context) {
 		this.context = context;
+		
 	}
 
+	// scenario - accept the programming cards
 	// @Given("a player")
 	
 	
 	@Given("a Deck")
 	public void a_Deck() {
-		Deck deck = context.deck;
-	    
+	    this.context.deck = new Deck();
 	}
 	
 	@When("a Hand is created")
@@ -32,22 +40,19 @@ public class SDCard {
 	}
 	
 	
-	
+	// scenario - Programming the cards
 	
 	// @Given("a player")
 	// public void a_player()
 
-	// @Given("a Hand")
-	public void a_Hand() {
-		Deck deck = context.deck;
-		Hand hand = deck.genHand();
-		context.player.setHand(hand);
+	@And("a non empty program")
+	public void a_non_empty_program() {
+		this.context.program = new Program();
+		ArrayList<Card> cardlst = new ArrayList<> (Arrays.asList(new Card("move1")));
+		this.context.program.setProgram(cardlst);
+		context.player.setProgram(context.program);
 	}
 
-	@When("the player creates a program")
-	public void the_player_creates_a_program() {
-	    context.player.setProgram();
-	}
 	@When("a card is taken from the front of the program")
 	public void a_card_is_taken_from_the_fron_of_the_program() {
 	    this.card = context.player.getTopCardInProgram();

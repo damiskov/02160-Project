@@ -26,9 +26,10 @@ public class Player {
 	}
 	
 	
-	public void setProgram()
+	public void setProgram(Program p)
 	{
 		// will get player to select 5 cards according to execution priority
+		this.program = p;
 	}
 	
 	public Program getProgram()

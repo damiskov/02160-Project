@@ -1,7 +1,7 @@
 import board.Board;
 import board.Game;
 import environment_elements.ChainingPanel;
-import cards.Card;
+import board.*;
 import piece_basics.*;
 import environment_elements.ConveyorBelt;
 import environment_elements.Fire;
@@ -47,5 +47,7 @@ public class Context {
 	int difficulty;
 	
 	Deck deck;
+	Hand hand;
+	Program program;
 
 }
