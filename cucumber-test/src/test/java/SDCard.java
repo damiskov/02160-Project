@@ -1,9 +1,15 @@
 import io.cucumber.java.en.*;
 
+import piece_basics.Robot;
+
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import board.Board;
+import board.Position;
 import cards.*;
 import player.*;
 
@@ -66,18 +72,28 @@ public class SDCard {
 	
 	//scenario - Move the robot one step in the direction it is facing
 	
-	@Given("a one step card")
-	public void a_one_step_card() {
-	    
+	@Given("a Move1 card")
+	public void a_Move1_card() {
+		context.card = new Move1();
+    
 	}
-	// @Given("a robot on the board")
+	@Given("a robot on the board2")
+	public void a_robot_on_the_board2() {
+		this.context.robot = new Robot();
+		this.context.board = new Board(12,12);
+		context.board.initialPlacement(context.robot, new Position(5,5));
+	}
 
-	// @When("the card is executed")
+	@When("the card is executed2")
+	public void the_card_is_executed2() {
+		context.card.executeAction(context.robot);
+		
+	
+	}
 
 	@Then("the robot moves one step in its direction")
 	public void the_robot_moves_one_step_in_its_direction() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    assertEquals(context.board.getPosition(context.robot), new Position(5,6));
 	}
 
 	
