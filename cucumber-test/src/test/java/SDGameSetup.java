@@ -34,7 +34,7 @@ public class SDGameSetup {
 	}
 	@Then("Assign Robot to Player")
 	public void assign_robot_to_player() {
-		assertEquals(context.player.robot, context.robot);
+		assertEquals(context.player.getRobot(), context.robot);
 	}
 
 }

@@ -9,10 +9,10 @@ public class SDDifficulty {
 		this.context = context;
 	}
 
-//	@Given("an easy difficulty")
-//	public void an_easy_difficulty() {
-//	    context.difficulty = 1;
-//	}
+	@Given("an easy difficulty")
+	public void an_easy_difficulty() {
+	    context.difficulty = 1;
+	}
 //	
 //	@Given("a medium difficulty")
 //	public void a_medium_difficulty() {

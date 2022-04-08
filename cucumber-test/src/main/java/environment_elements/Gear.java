@@ -2,11 +2,11 @@ package environment_elements;
 
 import board.Position;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 
-public class Gear extends EnvironmentElement implements IRegisterActor {
-
+public class Gear extends EnvironmentElement {
 	private boolean counterClockwise;
+	
+	public static final String ID = "gear";
 
 	public Gear(boolean counterClockwise) {
 		this.counterClockwise = counterClockwise;
@@ -22,6 +22,11 @@ public class Gear extends EnvironmentElement implements IRegisterActor {
 				board.getRobotAt(p).turnRight();
 			}
 		}
+	}
+
+	@Override
+	public String getPieceID() {
+		return ID;
 	}
 
 }

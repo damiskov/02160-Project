@@ -2,9 +2,10 @@ package environment_elements;
 
 import board.Position;
 import piece_basics.EnvironmentElement;
-import piece_basics.IRegisterActor;
 
-public class HealthStation extends EnvironmentElement implements IRegisterActor {
+public class HealthStation extends EnvironmentElement {
+
+	public static final String ID = "health_station";
 
 	@Override
 	public void performRegisterAction() {
@@ -12,6 +13,11 @@ public class HealthStation extends EnvironmentElement implements IRegisterActor 
 		if (board.hasRobotAt(p)) {
 			board.getRobotAt(p).heal();
 		}
+	}
+
+	@Override
+	public String getPieceID() {
+		return ID;
 	}
 
 }
