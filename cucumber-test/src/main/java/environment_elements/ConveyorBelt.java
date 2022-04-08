@@ -36,7 +36,7 @@ public class ConveyorBelt extends EnvironmentElement {
 				break;
 			}
 			
-			if (!isBlocking(newP)) {
+			if (board.coordinateWithinBounds(newP) && !isBlocking(newP)) {
 				board.moveRobotFromTo(p, newP);
 			}
 		}
