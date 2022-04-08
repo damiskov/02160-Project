@@ -43,3 +43,10 @@ Feature: Conveyor belt
     And a wall on the board at (6, 5)
     When the board elements activate
     Then the robot is at (5, 5)
+  
+  Scenario: The edge of the map blocks a robot from being pushed by a conveyor belt
+		Given a 10 x 10 board
+		And a conveyor belt on the board at (9, 5)
+		And a robot on the board at (9, 5)
+		When the board elements activate
+		Then the robot is at (9, 5)
