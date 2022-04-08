@@ -1,5 +1,5 @@
 import io.cucumber.java.en.*;
-
+import piece_basics.Orientation;
 import piece_basics.Robot;
 
 import static org.junit.Assert.assertEquals;
@@ -96,112 +96,177 @@ public class SDCard {
 	    assertEquals(context.board.getPosition(context.robot), new Position(5,6));
 	}
 
+	//scenario - Move the robot two steps in the direction it is facing
 	
-	@Given("a two steps card")
-	public void a_two_steps_card() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@Given("a Move2 card")
+	public void a_Move2_card() {
+		context.card = new Move2();
+    
 	}
-	// @Given("a robot on the board")
+	@Given("a robot on the board3")
+	public void a_robot_on_the_board3() {
+		this.context.robot = new Robot();
+		this.context.board = new Board(12,12);
+		context.board.initialPlacement(context.robot, new Position(5,5));
+	}
 
-	// @When("the card is executed")
+	@When("the card is executed3")
+	public void the_card_is_executed3() {
+		context.card.executeAction(context.robot);
+		
+	
+	}
 
 	@Then("the robot moves two steps in its direction")
 	public void the_robot_moves_two_steps_in_its_direction() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    assertEquals(context.board.getPosition(context.robot), new Position(5,7));
 	}
-	
-	
-	
-	
-	@Given("three steps card")
-	public void three_steps_card() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	// @Given("a robot on the board")
 
-	// @When("the card is executed")
+	
+	//scenario - Move the robot three steps in the direction it is facing
+	
+	@Given("a Move3 card")
+	public void a_Move3_card() {
+		context.card = new Move3();
+    
+	}
+	@Given("a robot on the board4")
+	public void a_robot_on_the_board4() {
+		this.context.robot = new Robot();
+		this.context.board = new Board(12,12);
+		context.board.initialPlacement(context.robot, new Position(5,5));
+	}
+
+	@When("the card is executed4")
+	public void the_card_is_executed4() {
+		context.card.executeAction(context.robot);
+		
+	
+	}
 
 	@Then("the robot moves three steps in its direction")
 	public void the_robot_moves_three_steps_in_its_direction() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    assertEquals(context.board.getPosition(context.robot), new Position(5,8));
 	}
 	
-	
 
+	//scenario - turn robot to the right
+	
 	@Given("Right Direction card")
 	public void right_direction_card() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		
+		context.card = new TurnRight();
+	    
 	}
-	// @Given("a robot on the board")
+	
+	@Given("a robot on the board5")
+	public void a_robot_on_the_board5() {
+		this.context.robot = new Robot();
+		context.robot.setOrientation(Orientation.UP);
+		this.context.board = new Board(12,12);
+		context.board.initialPlacement(context.robot, new Position(5,5));
+	}
 
-	// @When("the card is executed")
+	@When("the card is executed5")
+	public void the_card_is_executed5() {
+		context.card.executeAction(context.robot);
+		
+	
+	}
 	
 	@Then("the robot moves ninety degrees to the right")
 	public void the_robot_moves_ninety_degrees_to_the_right() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    assertEquals(context.robot.getOrientation(), Orientation.RIGHT);
 	}
 	
 	
-	@Given("Left Direction card")
-	public void left_direction_card() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	// @Given("a robot on the board")
+	//scenario - turn robot to the left
 	
-	// @When("the card is executed")
+	@Given("Left turn card")
+	public void left_turn_card() {
+		
+		context.card = new TurnLeft();
+	    
+	}
+	
+	@Given("a robot on the board6")
+	public void a_robot_on_the_board6() {
+		this.context.robot = new Robot();
+		context.robot.setOrientation(Orientation.UP);
+		this.context.board = new Board(12,12);
+		context.board.initialPlacement(context.robot, new Position(5,5));
+	}
+
+	@When("the card is executed6")
+	public void the_card_is_executed6() {
+		context.card.executeAction(context.robot);
+		
+	
+	}
 	
 	@Then("the robot moves ninety degrees to the left")
 	public void the_robot_moves_ninety_degrees_to_the_left() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    assertEquals(context.robot.getOrientation(), Orientation.LEFT);
+	}
+		
+	
+	
+	
+//scenario - turn robot to the right
+
+	@Given("UTurn card")
+	public void UTurn_card() {
+		
+		context.card = new UTurn();
+	    
 	}
 	
-	
-	
-	@Given("U-turn card")
-	public void u_turn_card() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-	// @Given("a robot on the board")
-	
-	// @When("the card is executed")
-	
-	@Then("the robot moves one hundred eighty degrees so it faces opposite direction")
-	public void the_robot_moves_one_hundred_eighty_degrees_so_it_faces_opposite_direction() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@Given("a robot on the board7")
+	public void a_robot_on_the_board7() {
+		this.context.robot = new Robot();
+		context.robot.setOrientation(Orientation.UP);
+		this.context.board = new Board(12,12);
+		context.board.initialPlacement(context.robot, new Position(5,5));
 	}
 
+	@When("the card is executed7")
+	public void the_card_is_executed7() {
+		context.card.executeAction(context.robot);
+		
 	
+	}
+	
+	@Then("the robot faces opposite orientation")
+	public void the_robot_faces_opposite_orientation() {
+	    assertEquals(context.robot.getOrientation(), Orientation.DOWN);
+	}
+	
+
+	// Backup card 
 	
 	
 	@Given("Backup card")
 	public void backup_card() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		context.card = new BackUp();
 	}
-	// @Given("a robot on the board")
-
-	@When("the card is executed")
-	public void the_card_is_executed() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	
+	@Given("a robot on the board8")
+	public void a_robot_on_the_board8() {
+		this.context.robot = new Robot();
+		this.context.board = new Board(12,12);
+		context.board.initialPlacement(context.robot, new Position(5,5));
+	}
+	
+	
+	@When("the card is executed8")
+	public void the_card_is_executed8() {
+		context.card.executeAction(context.robot);
 	}
 	@Then("the robot moves one space back without changing its direction")
 	public void the_robot_moves_one_space_back_without_changing_its_direction() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    assertEquals(context.board.getPosition(context.robot), new Position(5,4));
 	}
-
-
+	
 
 
 }
