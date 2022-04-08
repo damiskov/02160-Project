@@ -1,9 +1,11 @@
 package view;
-
+ 
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -48,9 +50,11 @@ public class InitiateView extends JFrame{
 		//Difficulty setup
 		difficulty = new ButtonGroup();
 		easyDifficulty = new JRadioButton("EASY");
+		easyDifficulty.setActionCommand("easy");
 		mediumDifficulty = new JRadioButton("MEDIUM");
+		mediumDifficulty.setActionCommand("medium");
 		hardDifficulty = new JRadioButton("HARD");
-		
+		hardDifficulty.setActionCommand("hard");
 		
 		
 		easyDifficulty.setSelected(true);
@@ -70,7 +74,8 @@ public class InitiateView extends JFrame{
 		btnStart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.setPlayers(sliderPlayers.getValue());
+				System.out.println(difficulty.getSelection().getActionCommand());
+				controller.setParameters(sliderPlayers.getValue(),difficulty.getSelection().getActionCommand());
 			}
 		});
 		

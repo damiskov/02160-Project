@@ -16,9 +16,9 @@ public class InitiateController {
 		this.view = new InitiateView(this);
 	}
 	
-	public void setPlayers(int value) {
+	public void setParameters(int playerCount, String difficulty) {
 		view.setVisible(false);
-		application.startGame(value);
+		application.startGame(playerCount, difficulty);
 	}
 	
 	public void display() {

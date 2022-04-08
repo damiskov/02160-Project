@@ -5,6 +5,7 @@ package controller;
 
 public class ApplicationController {
 	private InitiateController initiateController;
+	private MasterController masterController;
 
 	private void initiate() {
 		initiateController = new InitiateController(this);
@@ -12,9 +13,10 @@ public class ApplicationController {
 		
 	}
 	
-	public void startGame(int playerCount) {
-		System.out.println("Game started with " + playerCount + " players.");
-		
+	public void startGame(int playerCount, String difficulty) {
+		//System.out.println("Game started with " + playerCount + " players.");
+		masterController = new MasterController(this, playerCount, difficulty);
+		masterController.display();
 	}
 	
 	public static void main(String[] args) {
