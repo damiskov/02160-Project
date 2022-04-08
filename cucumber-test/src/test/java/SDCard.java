@@ -64,7 +64,7 @@ public class SDCard {
 	}
 	
 	
-	
+	//scenario - Move the robot one step in the direction it is facing
 	
 	@Given("a one step card")
 	public void a_one_step_card() {
