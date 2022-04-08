@@ -1,7 +1,7 @@
 package board;
 
 import card.Deck;
-=======
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +15,6 @@ import environment_elements.RespawnPoint;
 import environment_elements.ReversalPanel;
 import piece_basics.Piece;
 import piece_basics.Robot;
->>>>>>> refs/heads/main
 import player.Player;
 
 public class Game {
