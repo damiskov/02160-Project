@@ -1,12 +1,8 @@
 package view;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.MasterController;
@@ -19,7 +15,7 @@ public class MasterView extends JFrame{
 	
 	private MasterController controller;
 	
-	private JPanel boardPanel;
+	private BoardPanel boardPanel;
 	private JPanel cardPanel;
 	
 	
@@ -31,8 +27,6 @@ public class MasterView extends JFrame{
 	private void initGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("RoboRally Game of " + controller.playerCount + " players on " + controller.difficulty + " difficulty");
-//		setPreferredSize(new Dimension(800, 600));
-		
 		
 		setLayout(new GridBagLayout());
 		
@@ -45,6 +39,7 @@ public class MasterView extends JFrame{
 		
 		pack();
 		setVisible(true);
+		
 		// maximize the window
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 	}
