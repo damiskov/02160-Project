@@ -14,7 +14,7 @@ public class Gear extends EnvironmentElement {
 	
 	@Override
 	public void performRegisterAction() {
-		Position p = getPosition();
+		Position p = calculatePosition();
 		if (board.hasRobotAt(p)) {
 			if (counterClockwise) {
 				board.getRobotAt(p).turnLeft();

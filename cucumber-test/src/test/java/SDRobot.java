@@ -56,17 +56,17 @@ public class SDRobot {
 	
 	@Then("the robot is at \\({int}, {int})")
 	public void the_robot_is_at(Integer int1, Integer int2) {
-		assertEquals(new Position(int1, int2), context.robot.getPosition());
+		assertEquals(new Position(int1, int2), context.robot.calculatePosition());
 	}
 	
 	@Then("the first robot is at \\({int}, {int})")
 	public void the_first_robot_is_at(Integer int1, Integer int2) {
-		assertEquals(new Position(int1, int2), context.robot.getPosition());
+		assertEquals(new Position(int1, int2), context.robot.calculatePosition());
 	}
 	
 	@Then("the robot is at \\({int}, {int}) and facing {string}")
 	public void the_robot_is_at_and_facing(Integer int1, Integer int2, String string) {
-	    assertEquals(new Position(int1, int2), context.robot.getPosition());
+	    assertEquals(new Position(int1, int2), context.robot.calculatePosition());
 	    Orientation o = null;
 	    switch (string.toLowerCase()) {
 	    case "up":

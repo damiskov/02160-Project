@@ -11,11 +11,11 @@ public class Fire extends EnvironmentElement {
 	
 	@Override
 	public void performRegisterAction() {
-		if(board.hasRobotAt(getPosition())) {
-			board.getRobotAt(getPosition()).takeDamage();
+		if(board.hasRobotAt(calculatePosition())) {
+			board.getRobotAt(calculatePosition()).takeDamage();
 		}
 		
-		Position p = getPosition();
+		Position p = calculatePosition();
 		int x_c = p.getX();
 		int y_c = p.getY();
 		

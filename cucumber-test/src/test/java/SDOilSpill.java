@@ -30,7 +30,7 @@ public class SDOilSpill{
 	
 	@Then("the oil spill ignites")
 	public void the_oil_spill_ignites() {
-		assertTrue(context.board.getEElementAt(context.fire.getPosition()) instanceof Fire);
+		assertTrue(context.board.getEElementAt(context.fire.calculatePosition()) instanceof Fire);
 	}
 	
 }

@@ -9,7 +9,7 @@ public class RespawnPoint extends EnvironmentElement {
 
 	@Override
 	public void performRegisterAction() {
-		Position p = getPosition();
+		Position p = calculatePosition();
 		
 		if (board.hasRobotAt(p)) {
 			board.getRobotAt(p).setRespawnPoint(this);

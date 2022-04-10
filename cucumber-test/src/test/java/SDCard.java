@@ -93,7 +93,7 @@ public class SDCard {
 
 	@Then("the robot moves one step in its direction")
 	public void the_robot_moves_one_step_in_its_direction() {
-	    assertEquals(context.board.getPosition(context.robot), new Position(5,6));
+	    assertEquals(context.board.calculatePosition(context.robot), new Position(5,6));
 	}
 
 	//scenario - Move the robot two steps in the direction it is facing
@@ -119,7 +119,7 @@ public class SDCard {
 
 	@Then("the robot moves two steps in its direction")
 	public void the_robot_moves_two_steps_in_its_direction() {
-	    assertEquals(context.board.getPosition(context.robot), new Position(5,7));
+	    assertEquals(context.board.calculatePosition(context.robot), new Position(5,7));
 	}
 
 	
@@ -146,7 +146,7 @@ public class SDCard {
 
 	@Then("the robot moves three steps in its direction")
 	public void the_robot_moves_three_steps_in_its_direction() {
-	    assertEquals(context.board.getPosition(context.robot), new Position(5,8));
+	    assertEquals(context.board.calculatePosition(context.robot), new Position(5,8));
 	}
 	
 
@@ -264,7 +264,7 @@ public class SDCard {
 	}
 	@Then("the robot moves one space back without changing its direction")
 	public void the_robot_moves_one_space_back_without_changing_its_direction() {
-	    assertEquals(context.board.getPosition(context.robot), new Position(5,4));
+	    assertEquals(context.board.calculatePosition(context.robot), new Position(5,4));
 	}
 	
 

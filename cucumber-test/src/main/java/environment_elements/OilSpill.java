@@ -9,8 +9,8 @@ public class OilSpill extends EnvironmentElement {
 
 	@Override
 	public void performRegisterAction() {
-		Position p = this.getPosition();
-		board.removeEElement(this.getX(),this.getY());
+		Position p = this.calculatePosition();
+		board.removeEElement(p);
 		board.initialPlacement(new Fire(), p);
 	}
 
