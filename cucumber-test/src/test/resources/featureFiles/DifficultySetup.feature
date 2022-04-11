@@ -1,5 +1,4 @@
 Feature: Difficulty setup
-
 # error because, The step 'an easy difficulty' is undefined.
 
   #Scenario: Select from default difficulties
@@ -7,8 +6,5 @@ Feature: Difficulty setup
     #Then set number of obstacles
     #Then set obstacles on board
     #Then Generate board
-    
-    
-    
 
-
+   

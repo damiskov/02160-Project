@@ -1,8 +1,8 @@
 package board;
 
+import cards.Deck;
 import java.util.List;
 import java.util.Map;
-
 import environment_elements.ChainingPanel;
 import environment_elements.ConveyorBelt;
 import environment_elements.Fire;

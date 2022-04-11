@@ -17,15 +17,15 @@ public class ReversalPanel extends EnvironmentElement {
 	
 	@Override
 	public void performRegisterAction() {
-		if (board.hasRobotAt(getPosition())) {
-			ArrayList<Card> program = board.getRobotAt(getPosition()).getProgram();
+		if (board.hasRobotAt(calculatePosition())) {
+			ArrayList<Card> program = board.getRobotAt(calculatePosition()).getProgram();
 			int programLength = program.size();
 			
 			for (int i = 0; i < programLength; i++) {
 				newProg.add(program.get(i).getOppositeCard());
 			}
 			
-			board.getRobotAt(getPosition()).updateProgram(newProg);
+			board.getRobotAt(calculatePosition()).updateProgram(newProg);
 		}
 
 	}

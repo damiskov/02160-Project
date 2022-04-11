@@ -16,10 +16,10 @@ public class ConveyorBelt extends EnvironmentElement {
 	@Override
 	public void performRegisterAction() {
 		// if a robot is on top of the conveyer, push the robot in the conveyer's direction unless there is a robot or wall in the way
-		Position p = getPosition();
+		Position p = calculatePosition();
 		
 		if (board.hasRobotAt(p)) {
-			Position newP = getPosition();
+			Position newP = calculatePosition();
 			
 			switch (orientation) {
 			case UP:
@@ -36,7 +36,7 @@ public class ConveyorBelt extends EnvironmentElement {
 				break;
 			}
 			
-			if (!isBlocking(newP)) {
+			if (board.coordinateWithinBounds(newP) && !isBlocking(newP)) {
 				board.moveRobotFromTo(p, newP);
 			}
 		}

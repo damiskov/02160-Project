@@ -1,7 +1,7 @@
-
+import board.Board;
+import board.Game;
 import environment_elements.ChainingPanel;
 import board.*;
-import cards.Card;
 import piece_basics.*;
 import environment_elements.ConveyorBelt;
 import environment_elements.Fire;
@@ -15,7 +15,8 @@ import environment_elements.ReversalPanel;
 import environment_elements.Teleporter;
 import environment_elements.Wall;
 import piece_basics.Robot;
-import UserInterface.Screen;
+import cards.*;
+import player.Player;
 
 public class Context {
 	Board board;
@@ -26,6 +27,10 @@ public class Context {
 	HealthStation healthStation;
 	Pit pit;
 	Wall wall;
+	Game game;
+	
+	
+
 	RespawnPoint respawnPoint;
 	Laser laser;
 	Teleporter sending;
@@ -38,8 +43,12 @@ public class Context {
 	Player player;
 	Player host;
 	Button startButton;
-	Game game;
 	Piece piece;
 	Card card;
 	int difficulty;
+	
+	Deck deck;
+	Hand hand;
+	Program program;
+
 }

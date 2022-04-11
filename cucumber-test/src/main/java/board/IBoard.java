@@ -13,16 +13,17 @@ public interface IBoard {
 	void initialPlacement(EnvironmentElement e, int x, int y);
 	void initialPlacement(EnvironmentElement e, Position p);
 	
-	Position getPosition(Robot r);
-	Position getPosition(EnvironmentElement e);
-	void removeRobot(int x, int y);
+	Position calculatePosition(Robot r);
+	Position calculatePosition(EnvironmentElement e);
 	
 	void moveRobotFromTo(Position oldPos, Position newPos);
 	void moveEElementFromTo(Position oldPos, Position newPos);
-	void removeEElement(int x, int y);
 	
 	void setPosition(Robot r, Position p);
 	void setPosition(EnvironmentElement e, Position p);
+	
+	void removeRobot(Position p);
+	void removeEElement(Position p);
 	
 	boolean hasRobotAt(Position p);
 	boolean hasEElementAt(Position p);

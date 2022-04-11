@@ -59,17 +59,17 @@ public class ChainingPanel extends EnvironmentElement {
 	@Override
 	public void performRegisterAction() {
 		if(noChainable(board.getPieceLists().get(Robot.ID)) == false && isActive() == true &&
-			board.getRobotAt(getPosition()).isChainable()) {
+			board.getRobotAt(calculatePosition()).isChainable()) {
 		//	board.getRobotAt(getPosition()).setChainable(true);
 		//	noChainable(board.getPieceLists().get(Robot.ID));
 		//	toChain = getChainableRobot(board.getPieceLists().get(Robot.ID));
 			noChainable(board.getPieceLists().get(Robot.ID));
 			System.out.println(this.toChain);
-			chainRobots(board.getRobotAt(getPosition()), toChain);
+			chainRobots(board.getRobotAt(calculatePosition()), toChain);
 			setActive(true);
 		}
 		else {
-			board.getRobotAt(getPosition()).setChainable(true);
+			board.getRobotAt(calculatePosition()).setChainable(true);
 			setActive(false);
 		} 
 	}

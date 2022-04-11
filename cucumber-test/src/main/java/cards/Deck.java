@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 
-class Deck
+public class Deck
 {
     
     List<String> actions = Arrays.asList("move1", "move2", "move3", "turnRight", "turnLeft", "backUp", "uTurn");
@@ -25,9 +25,10 @@ class Deck
         addToDeck("turnRight", 24);
         addToDeck("uTurn", 16);
         addToDeck("backUp", 16);
-        for (int i = 1; i <= actions.size(); i++)
+        for (int i = 1; i <= cards.size(); i++)
         {
-            numbers.add(i);
+
+            this.numbers.add(i);
         }
 
     }
@@ -38,16 +39,16 @@ class Deck
     	CardFactory fact = new CardFactory();
         for (int i = 0; i < num; i++)
         {   
-            cards.add(fact.getCard(action));
+            this.cards.add(fact.getCard(action));
         }
     }
 
     // Generating a hand 
 
-    public ArrayList<Card> genHand()
+    public Hand genHand()
     {
         // empty hand
-        ArrayList<Card> hand = new ArrayList();
+        ArrayList<Card> hand = new ArrayList<Card>();
         // 0 - 8 (9 cards in hand)
         for (int i = 0; i < 9; i++)
         {
@@ -55,14 +56,18 @@ class Deck
             Random rand  = new Random();
             int x = rand.nextInt(cards.size());
             int y = rand.nextInt(numbers.size());
+            
             // adding card to hand
             Card c = cards.get(x);
             c.setNum(y);
             hand.add(c);
             // removing taken card from deck
             cards.remove(x);
+            // Making sure we don't get duplicate numbers
             numbers.remove(y);
         }
-        return hand;
+        Hand h = new Hand();
+        h.setHand(hand);
+        return h;
     }
 }

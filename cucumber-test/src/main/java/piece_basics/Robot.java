@@ -26,14 +26,14 @@ public class Robot extends Piece {
 	public void setPosition(Position p) {
 		board.setPosition(this, p);
 	}
-	public Position getPosition() {
-		return board.getPosition(this);
+	public Position calculatePosition() {
+		return board.calculatePosition(this);
 	}
 	public int getX() {
-		return board.getPosition(this).getX();
+		return board.calculatePosition(this).getX();
 	}
 	public int getY() {
-		return board.getPosition(this).getY();
+		return board.calculatePosition(this).getY();
 	}
 	
 	public void setRespawnPoint(RespawnPoint r) {
@@ -84,12 +84,12 @@ public class Robot extends Piece {
 	
 	public void shiftX(int spaces) {
 		// TODO: Add wall collision logic
-		Position p = getPosition();
+		Position p = calculatePosition();
 		p.incrX(spaces);
 		board.setPosition(this, p);
 	}
 	public void shiftY(int spaces) {
-		Position p = getPosition();
+		Position p = calculatePosition();
 		p.incrY(spaces);
 		board.setPosition(this, p);
 	}
@@ -174,7 +174,7 @@ public class Robot extends Piece {
 			setChainedTo(null);
 		}
 		
-		setPosition(board.getPosition(currentRespawnPoint));
+		setPosition(board.calculatePosition(currentRespawnPoint));
 		health = maxHealth;
 		// also must discard all cards in hand and stop moving
 	}
@@ -188,7 +188,7 @@ public class Robot extends Piece {
 		}
 	}
 	private Robot findRobotAhead() {
-		Position p = getPosition();
+		Position p = calculatePosition();
 		
 		switch(orientation) {
 		case UP:
