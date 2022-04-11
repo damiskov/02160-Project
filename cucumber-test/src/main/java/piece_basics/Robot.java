@@ -6,6 +6,7 @@ import java.util.List;
 import board.Position;
 import cards.Card;
 import environment_elements.RespawnPoint;
+import cards.Program;
 
 public class Robot extends Piece {
 	private Orientation orientation;
@@ -15,7 +16,7 @@ public class Robot extends Piece {
 	private boolean chainable;
 	private Robot chainedTo;
 	private String command;	
-	private ArrayList<Card> program; //setter method?
+	private Program program; //setter method?
 	
 	public static final String ID = "robot";
 	
@@ -211,11 +212,11 @@ public class Robot extends Piece {
 	}
 	
 	public ArrayList<Card> getProgram(){
-		return this.program;
+		return this.program.getProgram();
 	}
 	
 	public void updateProgram(ArrayList<Card> program) {
-		this.program = program;
+		this.program.setProgram(program);
 	}
 
 	@Override

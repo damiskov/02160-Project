@@ -17,6 +17,11 @@ public class Program {
 		this.program = cardList;
 	}
 	
+	public ArrayList<Card> getProgram()
+	{
+		return this.program;
+	}
+	
 	// Simulates process of taking a card from the top of a program
 	
 	public Card getTopOfProgram()
