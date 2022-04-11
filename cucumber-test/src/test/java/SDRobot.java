@@ -85,9 +85,8 @@ public class SDRobot {
 	
 	@Given("a robot on the board")
 	public void a_robot_on_the_board() {
-	    Robot r = new Robot();
-	    context.board.initialPlacement(r, 5, 5);
-	    context.robot = r;
+
+	    this.context.robot = new Robot();
 	    context.robot.setOrientation(Orientation.UP);
 		this.context.board = new Board(12,12);
 		context.board.initialPlacement(context.robot, new Position(5,5));
