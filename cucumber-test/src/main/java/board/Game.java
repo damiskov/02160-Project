@@ -11,6 +11,7 @@ import environment_elements.Laser;
 import environment_elements.OilSpill;
 import environment_elements.RespawnPoint;
 import environment_elements.ReversalPanel;
+import environment_elements.Teleporter;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
@@ -20,6 +21,7 @@ public class Game {
 	private static final List<String> registerActorPriorityList = List.of(
 			ChainingPanel.ID,
 			ConveyorBelt.ID,
+			Teleporter.ID,
 			Gear.ID,
 			Laser.ID,
 			Robot.ID,
@@ -54,7 +56,9 @@ public class Game {
 		Map<String, List<Piece>> executionLists = board.getPieceLists();
 		for (String id: registerActorPriorityList) {
 			if (executionLists.containsKey(id)) {
-				for (Piece actor: executionLists.get(id)) {
+				int startsize = executionLists.get(id).size();
+				for (int i = 0; i < startsize; i++) {
+					Piece actor = executionLists.get(id).get(i);
 					actor.performRegisterAction();
 				}
 			}

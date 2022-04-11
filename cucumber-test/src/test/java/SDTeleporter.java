@@ -11,26 +11,22 @@ public class SDTeleporter {
 	public SDTeleporter(Context context) {
 		this.context = context;
 	}
-
-	@Given("a teleporter on the board")
-	public void a_teleporter_on_the_board() {
+	
+	@Given("a sending teleporter on the board at \\({int}, {int})")
+	public void a_sending_teleporter_on_the_board_at(Integer int1, Integer int2) {
 		Teleporter sed = new Teleporter();
-		context.board.initialPlacement(sed, 6, 5); 
+		sed.setSending(true);
+		context.board.initialPlacement(sed, int1, int2); 
 	    context.sending = sed; 
 	}
-
-	@Given("another teleporter on the board")
-	public void another_teleporter_on_the_board() {
+	
+	@Given("a linked receiving teleporter on the board at \\({int}, {int})")
+	public void a_linked_receiving_teleporter_on_the_board_at(Integer int1, Integer int2) {
 		Teleporter rec = new Teleporter();
-		context.board.initialPlacement(rec, 9, 5);
+		rec.setSending(false);
+		context.board.initialPlacement(rec, int1, int2);
 	    context.receiving = rec;
 	    context.sending.setReceiving(context.receiving);
-	}
-	
-	@When("the robot steps into the first teleporter")
-	public void the_robot_steps_into_the_first_teleporter() {
-		context.robot.shiftX(1);
-		context.sending.performRegisterAction();
 	}
 	
 	@Then("the robot gets teleported to the other teleporter")

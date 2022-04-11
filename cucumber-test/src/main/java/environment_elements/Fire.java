@@ -4,7 +4,6 @@ import board.Position;
 import piece_basics.EnvironmentElement;
 
 public class Fire extends EnvironmentElement{
-	//necessary for the Then step in the step definitions, has a getter method lower
 	public Position p;	
 	public static final String ID = "fire";
 
@@ -27,17 +26,13 @@ public class Fire extends EnvironmentElement{
 		p.setY(newY);
 
 		board.initialPlacement(new Fire(), p);
-		System.out.println(board.getEElementAt(p) instanceof Fire); //this evaluates to true
+		
 
 	}
 
 	@Override
 	public String getPieceID() {
 		return ID;
-	}
-	
-	public Position getP() {
-		return p;
 	}
 
 }

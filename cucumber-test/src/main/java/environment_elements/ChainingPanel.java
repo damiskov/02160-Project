@@ -13,8 +13,8 @@ public class ChainingPanel extends EnvironmentElement {
 
 	private boolean active = true;
 	int i;
-	private boolean chainableOnBoard = false; //used for noChainable()
-	Robot toChain;
+	private boolean chainableOnBoard; 
+	public Robot toChain;
 
 	
 	public static final String ID = "chaining_panel";
@@ -30,12 +30,13 @@ public class ChainingPanel extends EnvironmentElement {
 
 	 
 	public boolean noChainable(List<Piece> rs) {
-		for (Piece p : rs) { //for Piece p : rs then downcast and add an instanceof check
+		chainableOnBoard = false;
+		for (Piece p : rs) { 
 			if (p instanceof Robot) {
 				Robot r = (Robot) p;
 				if(r.isChainable() == true) { 
 					chainableOnBoard = true;
-					toChain = r;
+					this.toChain = r;
 					break;
 				} 
 			}
@@ -57,8 +58,13 @@ public class ChainingPanel extends EnvironmentElement {
 	
 	@Override
 	public void performRegisterAction() {
-		if(noChainable(board.getPieceLists().get(Robot.ID)) == false && isActive() == true) {
+		if(noChainable(board.getPieceLists().get(Robot.ID)) == false && isActive() == true &&
+			board.getRobotAt(getPosition()).isChainable()) {
 		//	board.getRobotAt(getPosition()).setChainable(true);
+		//	noChainable(board.getPieceLists().get(Robot.ID));
+		//	toChain = getChainableRobot(board.getPieceLists().get(Robot.ID));
+			noChainable(board.getPieceLists().get(Robot.ID));
+			System.out.println(this.toChain);
 			chainRobots(board.getRobotAt(getPosition()), toChain);
 			setActive(true);
 		}

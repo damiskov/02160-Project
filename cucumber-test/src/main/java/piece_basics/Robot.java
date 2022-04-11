@@ -12,7 +12,7 @@ public class Robot extends Piece {
 	private int health = 3;
 	private final int maxHealth = 3;
 	private RespawnPoint currentRespawnPoint;
-	private boolean chainable;
+	private boolean chainable = false;
 	private Robot chainedTo;
 	private String command;	
 	private ArrayList<Card> program; //setter method?
@@ -167,10 +167,12 @@ public class Robot extends Piece {
 	
 	public void reboot() {
 		//unchains the robot when it reboots
-		getChainedTo().setChainedTo(null);
-		getChainedTo().setChainable(false);
-		setChainable(false);
-		setChainedTo(null);
+		if (getChainedTo() != null) {
+			getChainedTo().setChainedTo(null);
+			getChainedTo().setChainable(false);
+			setChainable(false);
+			setChainedTo(null);
+		}
 		
 		setPosition(board.getPosition(currentRespawnPoint));
 		health = maxHealth;

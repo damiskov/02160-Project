@@ -29,6 +29,11 @@ public class SDRobot {
 		context.board.initialPlacement(r, int1, int2);
 	    context.robot2 = r;
 	}
+	
+	@Given("a program for the robot")
+	public void a_program_for_the_robot() {
+		//define this
+	}
 
 	@Given("a robot on the board at \\({int}, {int}) facing {string}")
 	public void a_robot_on_the_board_at_facing(Integer int1, Integer int2, String string) {
@@ -62,6 +67,21 @@ public class SDRobot {
 	@Then("the first robot is at \\({int}, {int})")
 	public void the_first_robot_is_at(Integer int1, Integer int2) {
 		assertEquals(new Position(int1, int2), context.robot.getPosition());
+	}
+	
+	@Then("the second robot is at \\({int}, {int})")
+	public void the_second_robot_is_at(Integer int1, Integer int2) {
+		assertEquals(new Position(int1, int2), context.robot2.getPosition());
+	}
+	
+	@When("one robot moves")
+	public void one_robot_moves() {
+	    context.robot.move(1);
+	}
+	
+	@When("one robot reboots")
+	public void one_robot_reboots() {
+	    context.robot.reboot();
 	}
 	
 	@Then("the robot is at \\({int}, {int}) and facing {string}")
