@@ -119,19 +119,23 @@ public class Board implements IBoard {
 	
 	@Override
 	public void moveRobotFromTo(Position oldPos, Position newPos) {
-		Cell oldCell = getCell(oldPos);
-		Robot r = oldCell.robot;
-		getCell(newPos).robot = r;
-		oldCell.robot = null;
-		if (hasEElementAt(newPos)) {
-			getEElementAt(newPos).performImmediateAction(r);
+		if (!oldPos.equals(newPos)) {
+			Cell oldCell = getCell(oldPos);
+			Robot r = oldCell.robot;
+			getCell(newPos).robot = r;
+			oldCell.robot = null;
+			if (hasEElementAt(newPos)) {
+				getEElementAt(newPos).performImmediateAction(r);
+			}
 		}
 	}
 	
 	public void moveEElementFromTo(Position oldPos, Position newPos) {
-		Cell oldCell = getCell(oldPos);
-		getCell(newPos).eElement = oldCell.eElement;
-		oldCell.eElement = null;
+		if (!oldPos.equals(newPos)) {
+			Cell oldCell = getCell(oldPos);
+			getCell(newPos).eElement = oldCell.eElement;
+			oldCell.eElement = null;
+		}
 	}
 	
 	@Override

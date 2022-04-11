@@ -175,7 +175,7 @@ public class Robot extends Piece {
 		}
 		
 		Position respawnPointPos = board.calculatePosition(currentRespawnPoint);
-		if (board.hasRobotAt(respawnPointPos)) {
+		if (board.hasRobotAt(respawnPointPos) && board.getRobotAt(respawnPointPos) != this) {
 			board.getRobotAt(respawnPointPos).reboot();
 		}
 		setPosition(respawnPointPos);

@@ -20,3 +20,12 @@ Feature: Respawn point
 		When the robot takes enough damage to kill it
 		Then the first robot is at (1, 1)
 		And the second robot is at (4, 1)
+	
+	Scenario: A robot dies on its own respawn point
+		Given a game with an empty board
+		And a robot on the board at (5, 5)
+		And a respawn point on the board at (5, 5)
+		And the robot having its respawn point set
+		When the robot takes enough damage to kill it
+		Then the robot is at (5, 5)
+		
