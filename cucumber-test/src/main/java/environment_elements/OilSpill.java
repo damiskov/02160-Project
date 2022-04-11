@@ -7,7 +7,7 @@ public class OilSpill extends EnvironmentElement {
 
 	public static final String ID = "oil_spill";
 
-	public Position p; 
+	public Position p; //ask Andrea about this
 	
 	@Override
 	public void performRegisterAction() {
@@ -16,7 +16,6 @@ public class OilSpill extends EnvironmentElement {
 		board.initialPlacement(new Fire(), p);
 		
 		board.getRobotAt(p).takeDamage();
-		System.out.println(p);
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import board.Position;
 import piece_basics.EnvironmentElement;
 
 public class Fire extends EnvironmentElement{
-	public Position p;	
+	public Position p;	//ask Andrea about this
 	public static final String ID = "fire";
 
 	
