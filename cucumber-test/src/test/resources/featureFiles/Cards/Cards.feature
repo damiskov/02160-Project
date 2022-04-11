@@ -1,6 +1,6 @@
 Feature: Programming Cards
 
-#error because we need to implement SD file - DONE
+
 	Scenario: Accept the programming card
   	Given a player
   	And a Deck
@@ -16,8 +16,8 @@ Feature: Programming Cards
 
   Scenario: Move the robot one step in the direction it is facing
   	Given a Move1 card
-    And a robot on the board2
-    When the card is executed2
+    And a robot on the board
+    When the card is executed
     Then the robot moves one step in its direction
     
    
