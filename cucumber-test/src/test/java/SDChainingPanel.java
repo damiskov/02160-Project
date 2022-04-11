@@ -15,25 +15,13 @@ public class SDChainingPanel {
 		this.context = context;
 	}
 	
-
-//	@Given("a chaining panel on the board")
-//	public void a_chaining_panel_on_the_board() {
-//	    ChainingPanel cp = new ChainingPanel();
-//	    context.board.initialPlacement(cp, new Position(6, 5) );
-//	    context.chainpan = cp;
-//	}
-	
 	@Given("a chaining panel on the board at \\({int}, {int})")
 	public void a_chaining_panel_on_the_board_at(Integer int1, Integer int2) {
 		ChainingPanel cp = new ChainingPanel();
 	    context.board.initialPlacement(cp, new Position(int1, int2) );
 	    context.chainpan = cp;
 	}
-	
-//	@Given("no chainable robots")
-//	public void no_chainable_robots() {
-//	    context.chainpan.noChainable(context.game.getPlayers()); 
-//	}
+
 	@When("the robot steps into the chaining panel")
 	public void the_robot_steps_into_the_chaining_panel() {
 		context.robot.shiftX(1);
@@ -64,12 +52,7 @@ public class SDChainingPanel {
 	    cp2.setActive(false);
 	    context.chainpan2 = cp2;
 	}
-	
-//	@When("the first robot steps into the chaining panel")
-//	public void the_first_robot_steps_into_the_chaining_panel() {
-//		context.robot.shiftX(1);
-//		context.chainpan.performRegisterAction();
-//	}
+
 	@Then("the robots get chained together")
 	public void the_robots_get_chained_together() {
 		assertEquals(context.robot, context.robot2.getChainedTo());
