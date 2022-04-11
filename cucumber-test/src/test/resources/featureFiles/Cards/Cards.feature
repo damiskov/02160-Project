@@ -16,8 +16,8 @@ Feature: Programming Cards
 
   Scenario: Move the robot one step in the direction it is facing
   	Given a Move1 card
-    And a robot on the board
-    When the card is executed
+    And a robot on the board2
+    When the card is executed2
     Then the robot moves one step in its direction
     
    

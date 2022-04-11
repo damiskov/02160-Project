@@ -77,15 +77,15 @@ public class SDCard {
 		context.card = new Move1();
     
 	}
-	@Given("a robot on the board")
-	public void a_robot_on_the_board() {
+	@Given("a robot on the board2")
+	public void a_robot_on_the_board2() {
 		this.context.robot = new Robot();
 		this.context.board = new Board(12,12);
 		context.board.initialPlacement(context.robot, new Position(5,5));
 	}
 
-	@When("the card is executed")
-	public void the_card_is_executed() {
+	@When("the card is executed2")
+	public void the_card_is_executed2() {
 		context.card.executeAction(context.robot);
 		
 	
