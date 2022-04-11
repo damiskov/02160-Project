@@ -15,7 +15,7 @@ public class Robot extends Piece {
 	private boolean chainable = false;
 	private Robot chainedTo;
 	private String command;	
-	private ArrayList<Card> program; //setter method?
+	private ArrayList<Card> program; 
 	
 	public static final String ID = "robot";
 	

@@ -22,11 +22,6 @@ public class SDChainingPanel {
 	    context.chainpan = cp;
 	}
 
-	@When("the robot steps into the chaining panel")
-	public void the_robot_steps_into_the_chaining_panel() {
-		context.robot.shiftX(1);
-		context.chainpan.performRegisterAction();
-	}
 	@Then("the robot becomes chainable")
 	public void the_robot_becomes_chainable() {
 		assertEquals(true, context.robot.isChainable());
@@ -45,8 +40,8 @@ public class SDChainingPanel {
 	}
 
 	
-	@Given("a second chaining panel on the board at \\({int}, {int})")
-	public void a_second_chaining_panel_on_the_board_at(Integer int1, Integer int2) {
+	@Given("an inactive chaining panel on the board at \\({int}, {int})")
+	public void an_inactive_chaining_panel_on_the_board_at(Integer int1, Integer int2) {
 		ChainingPanel cp2 = new ChainingPanel();
 	    context.board.initialPlacement(cp2, new Position(int1, int2) );
 	    cp2.setActive(false);
@@ -58,10 +53,10 @@ public class SDChainingPanel {
 		assertEquals(context.robot, context.robot2.getChainedTo());
 		assertEquals(context.robot2, context.robot.getChainedTo());
 	}
-	@Then("the first chaining panel become active again")
-	public void the_first_chaining_panel_become_active_again() {
-		assertEquals(true, context.chainpan.isActive());
-	}
+//	@Then("the inactive chaining panel become active again")
+//	public void the_inactive_chaining_panel_become_active_again() {
+//		assertEquals(true, context.chainpan2.isActive());
+//	}
 
 	
 	@Given("two robots chained together")
@@ -83,4 +78,10 @@ public class SDChainingPanel {
 	    assertEquals(context.robot2.getChainedTo(),null);
 	}
 
+	
+	@Then("nothing changes")
+	public void nothing_changes() {
+		assertEquals(context.chainpan2.isActive(),false);
+		assertEquals(context.robot.getChainedTo(),null);
+	}
 }
