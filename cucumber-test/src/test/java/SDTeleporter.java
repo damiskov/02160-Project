@@ -35,7 +35,7 @@ public class SDTeleporter {
 	
 	@Then("the robot gets teleported to the other teleporter")
 	public void the_robot_gets_teleported_to_the_other_teleporter() {
-		assertEquals(context.board.getPosition(context.robot),context.board.getPosition(context.receiving));
+		assertEquals(context.board.calculatePosition(context.robot),context.board.calculatePosition(context.receiving));
 	}
 	
 }

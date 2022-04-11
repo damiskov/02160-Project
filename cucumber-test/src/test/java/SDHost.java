@@ -1,5 +1,5 @@
 import io.cucumber.java.en.Given;
-import player.*;
+import player.Player;
 
 public class SDHost {
 	private Context context;
