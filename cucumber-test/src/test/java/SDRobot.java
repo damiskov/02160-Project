@@ -2,7 +2,6 @@ import static org.junit.Assert.assertEquals;
 
 import board.Board;
 import board.Position;
-import environment_elements.Wall;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -141,6 +140,21 @@ public class SDRobot {
 	@Then("the second robot does not take damage")
 	public void the_second_robot_does_not_take_damage() {
 		assertEquals(3, context.robot2.getHealth());
+	}
+	
+	@Then("the robot moves to \\({int}, {int}) and turns {string}")
+	public void the_robot_moves_to_and_turns(Integer int1, Integer int2, String string) {
+	    context.robot.shiftX(1);
+	    Orientation o = null;
+	    switch (string.toLowerCase()) {
+	    case "right":
+	    	o = (context.robot.getOrientation()); break;
+	    case "left":
+	    	o = (context.robot.getOrientation()); break;
+    	default:
+    		throw new IllegalArgumentException("Invalid orientation");
+	    }
+	    assertEquals(o, context.robot.getOrientation());
 	}
 
 }

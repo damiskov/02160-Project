@@ -174,9 +174,13 @@ public class Robot extends Piece {
 			setChainedTo(null);
 		}
 		
-		setPosition(board.calculatePosition(currentRespawnPoint));
+		Position respawnPointPos = board.calculatePosition(currentRespawnPoint);
+		if (board.hasRobotAt(respawnPointPos)) {
+			board.getRobotAt(respawnPointPos).reboot();
+		}
+		setPosition(respawnPointPos);
 		health = maxHealth;
-		// also must discard all cards in hand and stop moving
+		// TODO: (maybe) also must discard all cards in hand and stop moving
 	}
 
 	@Override
