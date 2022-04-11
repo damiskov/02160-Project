@@ -14,7 +14,7 @@ public class Fire extends EnvironmentElement{
 			board.getRobotAt(calculatePosition()).takeDamage();
 		}
 		
-		Position p = calculatePosition();
+		p = calculatePosition();
 
 		int x_c = p.getX();
 		int y_c = p.getY();
