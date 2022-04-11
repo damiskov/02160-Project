@@ -69,6 +69,7 @@ public class SDRobot {
 		assertEquals(new Position(int1, int2), context.robot.calculatePosition());
 	}
 	
+	
 	@Then("the second robot is at \\({int}, {int})")
 	public void the_second_robot_is_at(Integer int1, Integer int2) {
 		assertEquals(new Position(int1, int2), context.robot2.calculatePosition());
@@ -77,6 +78,11 @@ public class SDRobot {
 	@When("one robot moves")
 	public void one_robot_moves() {
 	    context.robot.move(1);
+	}
+	
+	@When("the first robot moves {int} step")
+	public void the_first_robot_moves_step(Integer int1) {
+		context.robot.move(int1);
 	}
 	
 	@When("one robot reboots")
