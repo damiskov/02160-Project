@@ -77,15 +77,9 @@ public class SDCard {
 		context.card = new Move1();
     
 	}
-	@Given("a robot on the board2")
-	public void a_robot_on_the_board2() {
-		this.context.robot = new Robot();
-		this.context.board = new Board(12,12);
-		context.board.initialPlacement(context.robot, new Position(5,5));
-	}
 
-	@When("the card is executed2")
-	public void the_card_is_executed2() {
+	@When("the card is executed")
+	public void the_card_is_executed() {
 		context.card.executeAction(context.robot);
 		
 	
@@ -103,19 +97,6 @@ public class SDCard {
 		context.card = new Move2();
     
 	}
-	@Given("a robot on the board3")
-	public void a_robot_on_the_board3() {
-		this.context.robot = new Robot();
-		this.context.board = new Board(12,12);
-		context.board.initialPlacement(context.robot, new Position(5,5));
-	}
-
-	@When("the card is executed3")
-	public void the_card_is_executed3() {
-		context.card.executeAction(context.robot);
-		
-	
-	}
 
 	@Then("the robot moves two steps in its direction")
 	public void the_robot_moves_two_steps_in_its_direction() {
@@ -129,19 +110,6 @@ public class SDCard {
 	public void a_Move3_card() {
 		context.card = new Move3();
     
-	}
-	@Given("a robot on the board4")
-	public void a_robot_on_the_board4() {
-		this.context.robot = new Robot();
-		this.context.board = new Board(12,12);
-		context.board.initialPlacement(context.robot, new Position(5,5));
-	}
-
-	@When("the card is executed4")
-	public void the_card_is_executed4() {
-		context.card.executeAction(context.robot);
-		
-	
 	}
 
 	@Then("the robot moves three steps in its direction")
@@ -159,20 +127,6 @@ public class SDCard {
 	    
 	}
 	
-	@Given("a robot on the board5")
-	public void a_robot_on_the_board5() {
-		this.context.robot = new Robot();
-		context.robot.setOrientation(Orientation.UP);
-		this.context.board = new Board(12,12);
-		context.board.initialPlacement(context.robot, new Position(5,5));
-	}
-
-	@When("the card is executed5")
-	public void the_card_is_executed5() {
-		context.card.executeAction(context.robot);
-		
-	
-	}
 	
 	@Then("the robot moves ninety degrees to the right")
 	public void the_robot_moves_ninety_degrees_to_the_right() {
@@ -189,20 +143,6 @@ public class SDCard {
 	    
 	}
 	
-	@Given("a robot on the board6")
-	public void a_robot_on_the_board6() {
-		this.context.robot = new Robot();
-		context.robot.setOrientation(Orientation.UP);
-		this.context.board = new Board(12,12);
-		context.board.initialPlacement(context.robot, new Position(5,5));
-	}
-
-	@When("the card is executed6")
-	public void the_card_is_executed6() {
-		context.card.executeAction(context.robot);
-		
-	
-	}
 	
 	@Then("the robot moves ninety degrees to the left")
 	public void the_robot_moves_ninety_degrees_to_the_left() {
@@ -221,20 +161,6 @@ public class SDCard {
 	    
 	}
 	
-	@Given("a robot on the board7")
-	public void a_robot_on_the_board7() {
-		this.context.robot = new Robot();
-		context.robot.setOrientation(Orientation.UP);
-		this.context.board = new Board(12,12);
-		context.board.initialPlacement(context.robot, new Position(5,5));
-	}
-
-	@When("the card is executed7")
-	public void the_card_is_executed7() {
-		context.card.executeAction(context.robot);
-		
-	
-	}
 	
 	@Then("the robot faces opposite orientation")
 	public void the_robot_faces_opposite_orientation() {
@@ -250,18 +176,6 @@ public class SDCard {
 		context.card = new BackUp();
 	}
 	
-	@Given("a robot on the board8")
-	public void a_robot_on_the_board8() {
-		this.context.robot = new Robot();
-		this.context.board = new Board(12,12);
-		context.board.initialPlacement(context.robot, new Position(5,5));
-	}
-	
-	
-	@When("the card is executed8")
-	public void the_card_is_executed8() {
-		context.card.executeAction(context.robot);
-	}
 	@Then("the robot moves one space back without changing its direction")
 	public void the_robot_moves_one_space_back_without_changing_its_direction() {
 	    assertEquals(context.board.calculatePosition(context.robot), new Position(5,4));
