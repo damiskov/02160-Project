@@ -8,7 +8,7 @@ Feature: Programming Cards
     Then the player accepts nine cards
     
   Scenario: Programming the cards
-  	Given a player
+  	Given a player with a robot
   	And a non empty program
     When a card is taken from the front of the program
     Then the robot executes the action on the card

@@ -215,8 +215,10 @@ public class Robot extends Piece {
 		return this.program;
 	}
 	
-	public void updateProgram(ArrayList<Card> program) {
-		this.program.setProgram(program);
+	public void setProgram(ArrayList<Card> program) {
+		Program p = new Program();
+		p.setProgram(program);
+		this.program = p;
 	}
 
 	@Override

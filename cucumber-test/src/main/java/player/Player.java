@@ -31,7 +31,7 @@ public class Player {
 	public void setProgram(ArrayList<Card> p)
 	{
 		// will get player to select 5 cards according to execution priority
-		myRobot.updateProgram(p);
+		this.myRobot.setProgram(p);
 	}
 	
 	public Program getProgram()

@@ -48,25 +48,32 @@ public class SDCard {
 	
 	// scenario - Programming the cards
 	
-	// @Given("a player")
-	// public void a_player()
+	@Given("a player with a robot")
+	public void a_player_with_a_robot()
+	{
+		this.context.player = new Player();
+		this.context.robot = new Robot();
+		context.player.setRobot(context.robot);
+	}
+
 
 	@And("a non empty program")
 	public void a_non_empty_program() {
 		this.context.program = new Program();
 		ArrayList<Card> cardlst = new ArrayList<> (Arrays.asList(new Card("move1")));
-		this.context.program.setProgram(cardlst);
-		context.player.setProgram(context.program.getProgram());
+		context.player.setProgram(cardlst);
+		context.program = context.player.getProgram();
 	}
 
 	@When("a card is taken from the front of the program")
 	public void a_card_is_taken_from_the_front_of_the_program() {
-	    this.card = context.player.getRobot().getProgram().getTopOfProgram();
+		context.card = context.program.getTopOfProgram();
+	    
 	    
 	}
 	@Then("the robot executes the action on the card")
 	public void the_robot_executes_the_action_on_the_card() {
-	    card.executeAction(context.player.getRobot());
+	    context.card.executeAction(context.player.getRobot());
 	}
 	
 	
