@@ -34,7 +34,7 @@ public class Player {
 		myRobot.updateProgram(p);
 	}
 	
-	public ArrayList<Card> getProgram()
+	public Program getProgram()
 	{
 		return myRobot.getProgram();
 	}

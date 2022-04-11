@@ -211,8 +211,8 @@ public class Robot extends Piece {
 		return board.hasEElementAt(p) && board.getEElementAt(p).isLaserBlocking();
 	}
 	
-	public ArrayList<Card> getProgram(){
-		return this.program.getProgram();
+	public Program getProgram(){
+		return this.program;
 	}
 	
 	public void updateProgram(ArrayList<Card> program) {

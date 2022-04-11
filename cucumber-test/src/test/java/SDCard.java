@@ -56,12 +56,12 @@ public class SDCard {
 		this.context.program = new Program();
 		ArrayList<Card> cardlst = new ArrayList<> (Arrays.asList(new Card("move1")));
 		this.context.program.setProgram(cardlst);
-		context.player.setProgram(context.program);
+		context.player.setProgram(context.program.getProgram());
 	}
 
 	@When("a card is taken from the front of the program")
-	public void a_card_is_taken_from_the_fron_of_the_program() {
-	    this.card = context.player.getTopCardInProgram();
+	public void a_card_is_taken_from_the_front_of_the_program() {
+	    this.card = context.player.getRobot().getProgram().getTopOfProgram();
 	    
 	}
 	@Then("the robot executes the action on the card")
