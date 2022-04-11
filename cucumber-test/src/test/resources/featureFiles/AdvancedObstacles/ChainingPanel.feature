@@ -32,13 +32,14 @@ Feature: Chaining Panel
     When one robot moves
     Then the second robot is at (5, 5)
     
-  Scenario: Robot pulled into a pit #add a respawn point for it
+  Scenario: Robot pulled into a pit 
     Given a game with an empty board
     And two robots chained together
     And a pit on the board at (5, 5)
-    And a respawn point for the second robot
+    And a second respawn point on the board at (3, 4)
+    And the second robot having its respawn point set to the second respawn point
     When the first robot moves 1 step
-    Then the second robot reboots
+    Then the second robot is at (3, 4)
     And the robots get unchained
     
   #Scenario: Robot pulled into a wall
