@@ -16,49 +16,49 @@ Feature: Programming Cards
 
   Scenario: Move the robot one step in the direction it is facing
   	Given a Move1 card
-    And a robot on the board2
-    When the card is executed2
+    And a robot on the board
+    When the card is executed
     Then the robot moves one step in its direction
     
    
   Scenario: Move the robot two steps in the direction it is facing
   	Given a Move2 card
-    And a robot on the board3
-    When the card is executed3
+  	And a robot on the board
+    When the card is executed
     Then the robot moves two steps in its direction
     
   Scenario: Move the robot three steps in the direction it is facing
   	Given a Move3 card
-    And a robot on the board4
-    When the card is executed4
+    And a robot on the board
+    When the card is executed
     Then the robot moves three steps in its direction
     
       
   Scenario: Rotate robot to the right through ninety degrees
   	Given Right Direction card
-    And a robot on the board5
-    When the card is executed5
+    And a robot on the board
+    When the card is executed
     Then the robot moves ninety degrees to the right
     
     
   Scenario: Rotate robot to the right through ninety degrees
   	Given Left turn card
-    And a robot on the board6
-    When the card is executed6
+    And a robot on the board
+    When the card is executed
     Then the robot moves ninety degrees to the left 
 
 
   Scenario: Move the robot at one hundred eighty degrees angle
   	Given UTurn card
-    And a robot on the board7
-    When the card is executed7
+    And a robot on the board
+    When the card is executed
     Then the robot faces opposite orientation
     
     
   Scenario: Move the robot in the downwards direction
   	Given Backup card
-    And a robot on the board8
-    When the card is executed8
+    And a robot on the board
+    When the card is executed
     Then the robot moves one space back without changing its direction
     
 
