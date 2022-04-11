@@ -205,7 +205,7 @@ public class SDCard {
 	
 	@When("a turn left command is executed")
 	public void a_turn_left_command_is_executed() {
-		Card l_card = new TurnRight();
+		Card l_card = new TurnLeft();
 		context.card = l_card;
 		context.card.executeAction(context.robot);
 	}
