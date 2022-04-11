@@ -2,18 +2,18 @@ package board;
 import player.Player;
 
 public class BoardGenerator implements IBoardGenerator {
-	private int difficulty;
 	Player[] players;
+	Difficulty difficulty;
 	
-	public BoardGenerator(int difficulty,  Player[] players) {
+	public BoardGenerator(Difficulty difficulty,  Player[] players) {
 		this.difficulty = difficulty;
 		this.players = players;
 	}
 
 	@Override
 	public Board genEasyBoard() {
-		// TODO Auto-generated method stub
-		return null;
+		Board b = new Board(12,12);
+		return b;
 	}
 
 	@Override
