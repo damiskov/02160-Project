@@ -77,13 +77,6 @@ public class SDCard {
 		context.card = new Move1();
     
 	}
-	@Given("a robot on the board")
-	public void a_robot_on_the_board() {
-		this.context.robot = new Robot();
-		context.robot.setOrientation(Orientation.UP);
-		this.context.board = new Board(12,12);
-		context.board.initialPlacement(context.robot, new Position(5,5));
-	}
 
 	@When("the card is executed")
 	public void the_card_is_executed() {
