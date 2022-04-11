@@ -144,9 +144,13 @@ public class Robot extends Piece {
 	}
 	
 	public void reboot() {
-		setPosition(board.calculatePosition(currentRespawnPoint));
+		Position respawnPointPos = board.calculatePosition(currentRespawnPoint);
+		if (board.hasRobotAt(respawnPointPos)) {
+			board.getRobotAt(respawnPointPos).reboot();
+		}
+		setPosition(respawnPointPos);
 		health = maxHealth;
-		// also must discard all cards in hand and stop moving
+		// TODO: (maybe) also must discard all cards in hand and stop moving
 	}
 
 	public void pullChained(Robot r, int spaces, String dir) {

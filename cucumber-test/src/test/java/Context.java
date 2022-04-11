@@ -32,6 +32,7 @@ public class Context {
 	
 
 	RespawnPoint respawnPoint;
+	RespawnPoint respawnPoint2;
 	Laser laser;
 	Teleporter sending;
 	Teleporter receiving;

@@ -1,8 +1,6 @@
 import static org.junit.Assert.assertEquals;
 
-import board.Board;
 import board.Position;
-import environment_elements.Wall;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -62,6 +60,11 @@ public class SDRobot {
 	@Then("the first robot is at \\({int}, {int})")
 	public void the_first_robot_is_at(Integer int1, Integer int2) {
 		assertEquals(new Position(int1, int2), context.robot.calculatePosition());
+	}
+	
+	@Then("the second robot is at \\({int}, {int})")
+	public void the_second_robot_is_at(Integer int1, Integer int2) {
+		assertEquals(new Position(int1, int2), context.robot2.calculatePosition());
 	}
 	
 	@Then("the robot is at \\({int}, {int}) and facing {string}")
