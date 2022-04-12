@@ -38,6 +38,7 @@ public class BoardGenerator {
 		Random rand = new Random();
 		while (i < numObstacles)
 		{
+			// random position
 			int x = rand.nextInt(12);
 			int y = 1 + rand.nextInt(11);
 			Position p = new Position(x,y);
@@ -45,11 +46,17 @@ public class BoardGenerator {
 			int o = rand.nextInt(EElist.length);
 			if (!b.hasEElementAt(p))
 			{
-				
+				b.initialPlacement(EElist[o], p);
+				i++;
 			}
 			
 		}
 		
+	}
+	
+	public Board getBoard()
+	{
+		return b;
 	}
 
 }
