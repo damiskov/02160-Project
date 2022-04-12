@@ -2,7 +2,7 @@ package board;
 
 public class BoardFactory {
 	
-	public static Board generateBoard(Difficulty d)
+	public static Board generateBoard(Difficulty d, int numRobots)
 	{
 		if (d.getLevel()==1)
 		{
