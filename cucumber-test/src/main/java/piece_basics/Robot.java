@@ -18,6 +18,8 @@ public class Robot extends Piece {
 	private Robot chainedTo;
 	private String command;	
 	private Program program;
+	private int mostRecentCheckpoint = 0;
+	
 	public static final String ID = "robot";
 	private ChainingPanel ChainedFrom;
 	
@@ -257,6 +259,14 @@ public class Robot extends Piece {
 	@Override
 	public String getPieceID() {
 		return ID;
+	}
+
+	public int getMostRecentCheckpoint() {
+		return mostRecentCheckpoint;
+	}
+
+	public void setMostRecentCheckpoint(int mostRecentCheckpoint) {
+		this.mostRecentCheckpoint = mostRecentCheckpoint;
 	}
 
 }

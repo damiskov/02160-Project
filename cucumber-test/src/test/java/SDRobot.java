@@ -85,6 +85,11 @@ public class SDRobot {
 	    context.robot.move(1);
 	}
 	
+	@When("the robot moves {int} step")
+	public void the_robot_moves_step(Integer int1) {
+		context.robot.move(int1);
+	}
+	
 	@When("the first robot moves {int} step")
 	public void the_first_robot_moves_step(Integer int1) {
 		context.robot.move(int1);
