@@ -5,6 +5,7 @@ import java.util.List;
 
 import board.Position;
 import cards.Card;
+import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
 import cards.Program;
 
@@ -18,6 +19,7 @@ public class Robot extends Piece {
 	private String command;	
 	private Program program;
 	public static final String ID = "robot";
+	private ChainingPanel ChainedFrom;
 	
 	public Robot() {
 		orientation = Orientation.UP;
@@ -236,6 +238,14 @@ public class Robot extends Piece {
 	
 	public Program getProgram(){
 		return this.program;
+	}
+	
+	public void setChainedFrom(ChainingPanel chainedFrom) {
+		this.ChainedFrom = chainedFrom;
+	}
+	
+	public ChainingPanel getChainedFrom() {
+		return this.ChainedFrom;
 	}
 	
 	public void setProgram(ArrayList<Card> program) {

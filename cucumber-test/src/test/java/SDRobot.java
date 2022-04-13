@@ -1,5 +1,8 @@
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import board.Board;
 import board.Position;
 import io.cucumber.java.en.Given;
@@ -7,6 +10,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import piece_basics.Orientation;
 import piece_basics.Robot;
+import cards.Card;
+import cards.Move2;
 
 public class SDRobot {
 	private Context context;
@@ -31,7 +36,8 @@ public class SDRobot {
 	
 	@Given("a program for the robot")
 	public void a_program_for_the_robot() {
-		//define this
+		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new Move2(), new Move2(), new Move2(), new Move2(), new Move2()));
+		context.robot.setProgram(gram);
 	}
 
 	@Given("a robot on the board at \\({int}, {int}) facing {string}")
@@ -128,7 +134,7 @@ public class SDRobot {
 //	    assertEquals(context.robot2.calculatePosition(), new Position(int1, int2));
 //	}
 	
-	
+
 	@Then("the second robot takes damage")
 	public void the_second_robot_takes_damage() {
 	    assertEquals(2, context.robot2.getHealth());

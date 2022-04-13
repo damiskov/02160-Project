@@ -63,21 +63,13 @@ public class ChainingPanel extends EnvironmentElement {
 			
 			board.getRobotAt(calculatePosition()).setChainable(true);
 			chainRobots(board.getRobotAt(calculatePosition()), toChain);
-			
-			
-//			for (Piece p : board.getPieceLists().get(ChainingPanel.ID)) { 
-//				if (p instanceof ChainingPanel) {
-//					ChainingPanel c = (ChainingPanel) p;
-//					if(c.isActive() == false) { 
-//						c.setActive(true);
-//					} 
-//				}
-//			}
+			toChain.getChainedFrom().setActive(true);
 			
 			
 		}
 		else if (isActive() == true && board.getRobotAt(calculatePosition()).isChainable() == false){
 			board.getRobotAt(calculatePosition()).setChainable(true);
+			board.getRobotAt(calculatePosition()).setChainedFrom((ChainingPanel) board.getEElementAt(calculatePosition()));
 			setActive(false);
 		} 
 	}

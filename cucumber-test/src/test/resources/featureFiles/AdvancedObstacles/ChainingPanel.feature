@@ -18,7 +18,7 @@ Feature: Chaining Panel
     And a chainable robot
     When the board elements activate
     Then the robots get chained together
-    #And the inactive chaining panel become active again
+    And the inactive chaining panel become active again
 
   Scenario: De-chaining the robots
     Given a game with an empty board
