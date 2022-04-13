@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import piece_basics.EnvironmentElement;
 import cards.Card;
+import cards.Program;
 
 public class ReversalPanel extends EnvironmentElement {
 
@@ -18,14 +19,14 @@ public class ReversalPanel extends EnvironmentElement {
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) {
-			ArrayList<Card> program = board.getRobotAt(calculatePosition()).getProgram();
-			int programLength = program.size();
+			Program program = board.getRobotAt(calculatePosition()).getProgram();
+			int programLength = program.getProgram().size();
 			
 			for (int i = 0; i < programLength; i++) {
-				newProg.add(program.get(i).getOppositeCard());
+				newProg.add(program.getProgram().get(i).getOppositeCard());
 			}
 			
-			board.getRobotAt(calculatePosition()).updateProgram(newProg);
+			board.getRobotAt(calculatePosition()).setProgram(newProg);
 		}
 
 	}
