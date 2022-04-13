@@ -15,4 +15,12 @@ public class HeartLabel extends JLabel {
 	public HeartLabel() {
 		setIcon(fullHeart);
 	}
+	
+	public void fill() {
+		setIcon(fullHeart);
+	}
+	
+	public void empty() {
+		setIcon(emptyHeart);
+	}
 }

@@ -27,4 +27,8 @@ public class RobotStatusIndicator extends JPanel {
 		
 		setMaximumSize(new Dimension(getMaximumSize().width, robotIcon.getMaximumSize().height));
 	}
+	
+	public void setHealth(int health) {
+		heartIndicator.setHealth(health);
+	}
 }

@@ -15,9 +15,17 @@ public class StatusPanel extends JPanel {
 	public StatusPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		add(new RobotStatusIndicator());
+		// temporary, for testing
+		RobotStatusIndicator rsi1 = new RobotStatusIndicator();
+		rsi1.setHealth(4);
+		add(rsi1);
+		
 		add(Box.createRigidArea(new Dimension(0, 5)));
-		add(new RobotStatusIndicator());
+		
+		RobotStatusIndicator rsi2 = new RobotStatusIndicator();
+		rsi2.setHealth(0);
+		add(rsi2);
+		
 		add(Box.createVerticalGlue());
 //		
 //		setPreferredSize(new Dimension(500, 800));
