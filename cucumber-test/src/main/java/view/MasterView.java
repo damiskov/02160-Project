@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
@@ -17,7 +18,7 @@ public class MasterView extends JFrame{
 	
 	private BoardPanel boardPanel;
 	private JPanel cardPanel;
-	
+	private StatusPanel statusPanel;
 	
 	public MasterView(MasterController masterController) {
 		this.controller = masterController;
@@ -32,9 +33,16 @@ public class MasterView extends JFrame{
 		
 		boardPanel = new BoardPanel(12, 12);
 		cardPanel = new CardPanel();
+		statusPanel = new StatusPanel();
 		
 		add(boardPanel, GridBagLayoutUtils.constraint(0, 0, 0));
 		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 0));
+		
+		GridBagConstraints spConstraint = new GridBagConstraints();
+		spConstraint.gridx = 1;
+		spConstraint.gridy = 0;
+		spConstraint.fill = GridBagConstraints.VERTICAL;
+		add(statusPanel, spConstraint);
 		
 		
 		pack();
