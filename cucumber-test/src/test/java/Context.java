@@ -32,6 +32,7 @@ public class Context {
 	
 
 	RespawnPoint respawnPoint;
+	RespawnPoint respawnPoint2;
 	Laser laser;
 	Teleporter sending;
 	Teleporter receiving;
@@ -39,6 +40,7 @@ public class Context {
 	Fire fire;
 	ReversalPanel revpan;
 	ChainingPanel chainpan;
+	ChainingPanel chainpan2;
 	Player player;
 	Player host;
 	Button startButton;

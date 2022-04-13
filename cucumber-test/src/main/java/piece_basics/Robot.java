@@ -13,11 +13,10 @@ public class Robot extends Piece {
 	private int health = 3;
 	private final int maxHealth = 3;
 	private RespawnPoint currentRespawnPoint;
-	private boolean chainable;
+	private boolean chainable = false;
 	private Robot chainedTo;
 	private String command;	
-	private Program program; //setter method?
-	
+	private Program program;
 	public static final String ID = "robot";
 	
 	public Robot() {
@@ -95,19 +94,41 @@ public class Robot extends Piece {
 		board.setPosition(this, p);
 	}
 	public void move(int spaces) {
-		switch(orientation) {
-		case UP:
-			shiftY(spaces);
-			break;
-		case RIGHT:
-			shiftX(spaces);
-			break;
-		case DOWN:
-			shiftY(-spaces);
-			break;
-		case LEFT:
-			shiftX(-spaces);
-			break;
+		if(this.getChainedTo() == null) {
+			switch(orientation) {
+			case UP:
+				shiftY(spaces);
+				break;
+			case RIGHT:
+				shiftX(spaces);
+				break;
+			case DOWN:
+				shiftY(-spaces);
+				break;
+			case LEFT:
+				shiftX(-spaces);
+				break;
+			}
+		}
+		else {
+			switch(orientation) {
+			case UP:
+				shiftY(spaces);
+				this.getChainedTo().shiftY(spaces);
+				break;
+			case RIGHT:
+				shiftX(spaces);
+				this.getChainedTo().shiftX(spaces);
+				break;
+			case DOWN:
+				shiftY(-spaces);
+				this.getChainedTo().shiftY(-spaces);
+				break;
+			case LEFT:
+				shiftX(-spaces);
+				this.getChainedTo().shiftX(-spaces);
+				break;
+			}
 		}
 	}
 
@@ -145,20 +166,22 @@ public class Robot extends Piece {
 	}
 	
 	public void reboot() {
-		setPosition(board.calculatePosition(currentRespawnPoint));
+		//unchains the robot when it reboots
+		if (getChainedTo() != null) {
+			getChainedTo().setChainedTo(null);
+			getChainedTo().setChainable(false);
+			setChainable(false);
+			setChainedTo(null);
+		}
+		
+		Position respawnPointPos = board.calculatePosition(currentRespawnPoint);
+		if (board.hasRobotAt(respawnPointPos) && board.getRobotAt(respawnPointPos) != this) {
+			board.getRobotAt(respawnPointPos).reboot();
+		}
+		setPosition(respawnPointPos);
 		health = maxHealth;
-		// also must discard all cards in hand and stop moving
+		// TODO: (maybe) also must discard all cards in hand and stop moving
 	}
-
-	public void pullChained(Robot r, int spaces, String dir) {
-		if (dir == "X") {
-			r.shiftX(spaces);
-		}
-		else if (dir == "Y") {
-			r.shiftY(spaces);
-		}
-	}
-	
 
 	@Override
 	public void performRegisterAction() {
