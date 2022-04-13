@@ -47,7 +47,6 @@ public class ChainingPanel extends EnvironmentElement {
 	
 	public void chainRobots(Robot r1, Robot r2) {
 		if(r1.isChainable() == true && r2.isChainable() == true) {
-			System.out.println(r1 + " has been chained to robot " + r2);
 			r1.setChainedTo(r2);
 			r2.setChainedTo(r1);
 			r1.setChainable(false);
