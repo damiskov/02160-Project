@@ -30,8 +30,9 @@ public class Teleporter extends EnvironmentElement {
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition()) && IsSending() == true) {
+			Robot r = board.getRobotAt(calculatePosition());
 			board.moveRobotFromTo(calculatePosition(), receiving.calculatePosition());
-			System.out.println(board.getRobotAt(calculatePosition()) + " is being moved to " + receiving.calculatePosition());
+			System.out.println( r + " is being moved to " + receiving.calculatePosition());
 		}
 	}
 }
