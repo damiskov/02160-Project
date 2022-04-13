@@ -11,11 +11,13 @@ public class OilSpill extends EnvironmentElement {
 	
 	@Override
 	public void performRegisterAction() {
-		p = calculatePosition();
-		board.removeEElement(p);
-		board.initialPlacement(new Fire(), p);
-		
-		board.getRobotAt(p).takeDamage();
+		if (board.hasRobotAt(calculatePosition())) {
+			p = calculatePosition();
+			board.removeEElement(p);
+			board.initialPlacement(new Fire(), p);
+			
+			board.getRobotAt(p).takeDamage();
+		}
 	}
 
 	@Override

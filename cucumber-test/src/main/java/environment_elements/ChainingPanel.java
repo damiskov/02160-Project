@@ -58,20 +58,22 @@ public class ChainingPanel extends EnvironmentElement {
 	
 	@Override
 	public void performRegisterAction() {
-		if(noChainable(board.getPieceLists().get(Robot.ID)) == true && isActive() == true &&
-			board.getRobotAt(calculatePosition()).isChainable() == false) {
-			
-			board.getRobotAt(calculatePosition()).setChainable(true);
-			chainRobots(board.getRobotAt(calculatePosition()), toChain);
-			toChain.getChainedFrom().setActive(true);
-			
-			
+		if (board.hasRobotAt(calculatePosition())) {
+			if(noChainable(board.getPieceLists().get(Robot.ID)) == true && isActive() == true &&
+				board.getRobotAt(calculatePosition()).isChainable() == false) {
+				
+				board.getRobotAt(calculatePosition()).setChainable(true);
+				chainRobots(board.getRobotAt(calculatePosition()), toChain);
+				toChain.getChainedFrom().setActive(true);
+				
+				
+			}
+			else if (isActive() == true && board.getRobotAt(calculatePosition()).isChainable() == false){
+				board.getRobotAt(calculatePosition()).setChainable(true);
+				board.getRobotAt(calculatePosition()).setChainedFrom((ChainingPanel) board.getEElementAt(calculatePosition()));
+				setActive(false);
+			} 
 		}
-		else if (isActive() == true && board.getRobotAt(calculatePosition()).isChainable() == false){
-			board.getRobotAt(calculatePosition()).setChainable(true);
-			board.getRobotAt(calculatePosition()).setChainedFrom((ChainingPanel) board.getEElementAt(calculatePosition()));
-			setActive(false);
-		} 
 	}
 
 	@Override
