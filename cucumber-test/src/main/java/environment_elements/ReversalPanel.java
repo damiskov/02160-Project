@@ -26,7 +26,7 @@ public class ReversalPanel extends EnvironmentElement {
 			for (int i = 0; i < programLength; i++) {
 				newProg.getProgram().add(program.getProgram().get(i).getOppositeCard());
 			}
-			
+			System.out.println(board.getRobotAt(calculatePosition()) + " got the moves in its program reversed");
 			board.getRobotAt(calculatePosition()).setProgram(newProg.getProgram());
 		}
 

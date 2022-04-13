@@ -10,6 +10,7 @@ Feature: Chaining Panel
     Then the robot becomes chainable
     And the chaining panel becomes inactive
 
+
   Scenario: Chain connection
     Given a game with an empty board
     And a chaining panel on the board at (5, 5)

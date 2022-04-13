@@ -129,11 +129,6 @@ public class SDRobot {
 	    }
 	}
 	
-//	@Then("the second robot stays at \\({int}, {int})")
-//	public void the_second_robot_stays_at(Integer int1, Integer int2) {
-//	    assertEquals(context.robot2.calculatePosition(), new Position(int1, int2));
-//	}
-	
 
 	@Then("the second robot takes damage")
 	public void the_second_robot_takes_damage() {

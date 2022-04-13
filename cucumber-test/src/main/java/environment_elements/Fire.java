@@ -12,6 +12,7 @@ public class Fire extends EnvironmentElement{
 	public void performRegisterAction() {
 		//robot gets damaged by fire
 		if(board.hasRobotAt(calculatePosition())) {
+			System.out.println(board.getRobotAt(calculatePosition()) + " got damaged by the fire");
 			board.getRobotAt(calculatePosition()).takeDamage();
 		}
 		

@@ -16,6 +16,7 @@ public class OilSpill extends EnvironmentElement {
 			board.removeEElement(p); //removes the OilSpill
 			board.initialPlacement(new Fire(), p); //places the fire
 			
+			System.out.println(board.getRobotAt(calculatePosition()) + " got damaged by the fire");
 			board.getRobotAt(p).takeDamage(); //damages the robot
 		}
 	}
