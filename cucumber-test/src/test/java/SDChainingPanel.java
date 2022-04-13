@@ -80,9 +80,14 @@ public class SDChainingPanel {
 	}
 
 	
-	@Then("nothing changes")
-	public void nothing_changes() {
+	@Then("the chaining panel is still inactive")
+	public void the_chaining_panel_is_still_inactive() {
 		assertEquals(context.chainpan2.isActive(),false);
+		assertEquals(context.robot.getChainedTo(),null);
+	}
+	
+	@Then("the robot is still not chained")
+	public void the_robot_is_still_not_chained() {
 		assertEquals(context.robot.getChainedTo(),null);
 	}
 }
