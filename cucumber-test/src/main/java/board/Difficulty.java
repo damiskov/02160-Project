@@ -1,7 +1,7 @@
 package board;
 
 public class Difficulty {
-	int level;
+	private int level;
 
 	public Difficulty(int level) {
 		this.level = level;

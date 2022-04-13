@@ -22,9 +22,21 @@ public class SDRespawnPoint {
 	    context.respawnPoint = rp;
 	}
 	
+	@Given("a second respawn point on the board at \\({int}, {int})")
+	public void a_second_respawn_point_on_the_board_at(Integer int1, Integer int2) {
+		RespawnPoint rp = new RespawnPoint();
+	    context.board.initialPlacement(rp, int1, int2);
+	    context.respawnPoint2 = rp;
+	}
+	
 	@Given("the robot having its respawn point set")
 	public void the_robot_having_its_respawn_point_set() {
 	    context.robot.setRespawnPoint(context.respawnPoint);
+	}
+	
+	@Given("the second robot having its respawn point set to the second respawn point")
+	public void the_second_robot_having_its_respawn_point_set_to_the_second_respawn_point() {
+	    context.robot2.setRespawnPoint(context.respawnPoint2);
 	}
 
 	@Then("the robot is back at max health")

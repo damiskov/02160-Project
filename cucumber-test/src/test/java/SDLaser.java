@@ -13,17 +13,11 @@ public class SDLaser {
 		this.context = context;
 	}
 	
-	@Given("a laser on the board")
-	public void a_laser_on_the_board() {
+	@Given("a laser on the board at \\({int}, {int})")
+	public void a_laser_on_the_board(Integer int1, Integer int2) {
 		Laser l = new Laser();
-		context.board.initialPlacement(l, 6, 5);
+		context.board.initialPlacement(l, int1, int2);
 	    context.laser = l;
-	}
-	
-	@When("the robot steps into the laser")
-	public void the_robot_steps_into_the_laser() {
-		context.robot.shiftX(1);
-		context.laser.performRegisterAction();
 	}
 	
 	@Then("the robot loses life points")

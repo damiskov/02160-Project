@@ -1,18 +1,26 @@
 package cards;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hand 
 {
-    private List<Card> cardList;
+    private ArrayList<Card> cardList;
 
-    public Hand(List<Card> cardList)
+    public Hand()
     {
-        this.cardList = cardList;
+
     }
 
-    public List<Card> getHand()
+    public ArrayList<Card> getHand()
     {
         return cardList;
     }
+    
+    public void setHand(ArrayList<Card> cardList)
+    {
+    	this.cardList = cardList;
+    }
+    
+    
 }

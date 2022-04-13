@@ -7,11 +7,15 @@ public class OilSpill extends EnvironmentElement {
 
 	public static final String ID = "oil_spill";
 
+	public Position p; //ask Andrea about this
+	
 	@Override
 	public void performRegisterAction() {
-		Position p = this.getPosition();
-		board.removeEElement(this.getX(),this.getY());
+		p = calculatePosition();
+		board.removeEElement(p);
 		board.initialPlacement(new Fire(), p);
+		
+		board.getRobotAt(p).takeDamage();
 	}
 
 	@Override

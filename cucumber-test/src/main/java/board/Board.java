@@ -92,7 +92,7 @@ public class Board implements IBoard {
 	}
 
 	@Override
-	public Position getPosition(Robot r) {
+	public Position calculatePosition(Robot r) {
 		for (int i = 0; i < numColumns; i++) {
 			for (int j = 0; j < numRows; j++) {
 				var pr = getCell(i, j).robot;
@@ -105,7 +105,7 @@ public class Board implements IBoard {
 	}
 
 	@Override
-	public Position getPosition(EnvironmentElement e) {
+	public Position calculatePosition(EnvironmentElement e) {
 		for (int i = 0; i < numColumns; i++) {
 			for (int j = 0; j < numRows; j++) {
 				var pe = getCell(i, j).eElement;
@@ -119,29 +119,33 @@ public class Board implements IBoard {
 	
 	@Override
 	public void moveRobotFromTo(Position oldPos, Position newPos) {
-		Cell oldCell = getCell(oldPos);
-		Robot r = oldCell.robot;
-		getCell(newPos).robot = r;
-		oldCell.robot = null;
-		if (hasEElementAt(newPos)) {
-			getEElementAt(newPos).performImmediateAction(r);
+		if (!oldPos.equals(newPos)) {
+			Cell oldCell = getCell(oldPos);
+			Robot r = oldCell.robot;
+			getCell(newPos).robot = r;
+			oldCell.robot = null;
+			if (hasEElementAt(newPos)) {
+				getEElementAt(newPos).performImmediateAction(r);
+			}
 		}
 	}
 	
 	public void moveEElementFromTo(Position oldPos, Position newPos) {
-		Cell oldCell = getCell(oldPos);
-		getCell(newPos).eElement = oldCell.eElement;
-		oldCell.eElement = null;
+		if (!oldPos.equals(newPos)) {
+			Cell oldCell = getCell(oldPos);
+			getCell(newPos).eElement = oldCell.eElement;
+			oldCell.eElement = null;
+		}
 	}
 	
 	@Override
 	public void setPosition(Robot r, Position p) {
-		moveRobotFromTo(getPosition(r), p);
+		moveRobotFromTo(calculatePosition(r), p);
 	}
 
 	@Override
 	public void setPosition(EnvironmentElement e, Position p) {
-		moveEElementFromTo(getPosition(e), p);
+		moveEElementFromTo(calculatePosition(e), p);
 	}
 
 	@Override
@@ -163,14 +167,15 @@ public class Board implements IBoard {
 	public EnvironmentElement getEElementAt(Position p) {
 		return getCell(p).eElement;
 	}
-
-	public void removeEElement(int x, int y) {
-		getCell(x, y).eElement = null;
+	
+	@Override
+	public void removeRobot(Position p) {
+		getCell(p).robot = null;
 	}
 	
 	@Override
-	public void removeRobot(int x, int y) {
-		getCell(x, y).robot = null;
+	public void removeEElement(Position p) {
+		getCell(p).eElement = null;
 	}
 	
 	@Override

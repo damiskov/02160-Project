@@ -14,23 +14,18 @@ public class SDOilSpill{
 	public SDOilSpill(Context context) {
 		this.context = context;		
 	}
-
-	@Given("an oil spill on the board")
-	public void an_oil_spill_on_the_board() {
-		OilSpill s = new OilSpill();
-		context.board.initialPlacement(s, 6, 5);
-	    context.spill = s;
-	}
 	
-	@When("the robot steps into the oil spill")
-	public void the_robot_steps_into_the_oil_spill() {
-		context.robot.shiftX(1);
-		context.spill.performRegisterAction();
+	@Given("an oil spill on the board at \\({int}, {int})")
+	public void an_oil_spill_on_the_board_at(Integer int1, Integer int2) {
+		OilSpill s = new OilSpill();
+		context.board.initialPlacement(s, int1, int2);
+	    context.spill = s;
 	}
 	
 	@Then("the oil spill ignites")
 	public void the_oil_spill_ignites() {
-		assertTrue(context.board.getEElementAt(context.fire.getPosition()) instanceof Fire);
+		assertTrue(context.board.getEElementAt(context.spill.p) instanceof Fire);
+	//	assertTrue(context.board.getEElementAt(context.fire.calculatePosition()) instanceof Fire);
 	}
 	
 }

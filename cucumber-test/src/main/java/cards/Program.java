@@ -4,19 +4,30 @@ import java.util.ArrayList;
 
 public class Program {
 	
-	private ArrayList<Card> cardList;
+	private ArrayList<Card> program;
 	
-	public Program(ArrayList<Card> cardList)
+	public Program()
 	{
-		this.cardList = cardList;
+	}
+	
+	// getter and setter for program
+	
+	public void setProgram(ArrayList<Card> cardList)
+	{
+		this.program = cardList;
+	}
+	
+	public ArrayList<Card> getProgram()
+	{
+		return this.program;
 	}
 	
 	// Simulates process of taking a card from the top of a program
 	
 	public Card getTopOfProgram()
 	{
-		Card topCard = cardList.get(0);
-		cardList.remove(0);
+		Card topCard = program.get(0);
+		program.remove(0);
 		return topCard;
 	}
 
