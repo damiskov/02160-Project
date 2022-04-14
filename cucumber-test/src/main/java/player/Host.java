@@ -1,6 +1,4 @@
-import player.Player;
-
-
+package player;
 public class Host extends Player {
 	
 	public Host()

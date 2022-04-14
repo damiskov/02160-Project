@@ -15,7 +15,7 @@ public class ConveyorBelt extends EnvironmentElement {
 
 	@Override
 	public void performRegisterAction() {
-		// if a robot is on top of the conveyer, push the robot in the conveyer's direction unless there is a robot or wall in the way
+		// if a robot is on top of the conveyor, push the robot in the conveyor's direction unless there is a robot or wall in the way
 		Position p = calculatePosition();
 		
 		if (board.hasRobotAt(p)) {
@@ -36,13 +36,13 @@ public class ConveyorBelt extends EnvironmentElement {
 				break;
 			}
 			
-			if (board.coordinateWithinBounds(newP) && !isBlocking(newP)) {
+			if (board.coordinateWithinBounds(newP) && !conveyorBlocking(newP)) {
 				board.moveRobotFromTo(p, newP);
 			}
 		}
 	}
 	
-	private boolean isBlocking(Position p) {
+	private boolean conveyorBlocking(Position p) {
 		return board.hasRobotAt(p) || (board.hasEElementAt(p) && board.getEElementAt(p).isConveyorBlocking());
 	}
 

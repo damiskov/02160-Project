@@ -1,7 +1,6 @@
 package piece_basics;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import board.Position;
 import cards.Card;
@@ -136,18 +135,14 @@ public class Robot extends Piece {
 		}
 	}
 
+	public void heal() {
+		if (health < maxHealth) health++;
+	}
 	public void takeDamage() {
 		health--;
 		if (health == 0) reboot();
 	}
-	public void heal() {
-		if (health < maxHealth) health++;
-	}
 	
-	//is this method still relevant?
-	public void setHealth(int x) {
-		this.health = x;
-	}
 	public int getHealth() {
 		return this.health;
 	}
