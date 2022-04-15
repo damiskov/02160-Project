@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -14,6 +15,7 @@ public class StatusPanel extends JPanel {
 
 	public StatusPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 		
 		// temporary, for testing
 		RobotStatusIndicator rsi1 = new RobotStatusIndicator();
