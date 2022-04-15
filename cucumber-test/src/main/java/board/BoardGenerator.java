@@ -22,7 +22,7 @@ public class BoardGenerator {
 										new Laser(),
 										new OilSpill(),
 										new Teleporter()};
-		int[] startPositionsX = {5,6,4,7,3,7,2,1};
+		int[] startPositionsX = {5,6,4,7,3,8,2,9};
 		
 		// Initial placement of robots
 		// Will have X between 0-11 and Y between 1-11 (0th row is used for robot spawn points)
@@ -40,7 +40,7 @@ public class BoardGenerator {
 		{
 			// random position
 			int x = rand.nextInt(12);
-			int y = 1 + rand.nextInt(11);
+			int y = 2 + rand.nextInt(10); // First and second rows totally free of obstacles
 			Position p = new Position(x,y);
 			// random obstacle
 			int o = rand.nextInt(EElist.length);
