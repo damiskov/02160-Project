@@ -10,7 +10,6 @@ Feature: Chaining Panel
     Then the robot becomes chainable
     And the chaining panel becomes inactive
 
-
   Scenario: Chain connection
     Given a game with an empty board
     And a chaining panel on the board at (5, 5)
@@ -31,7 +30,8 @@ Feature: Chaining Panel
     Given a game with an empty board
     And two robots chained together
     When one robot moves
-    Then the second robot is at (5, 5)
+    Then the first robot is at (9, 5)
+    And the second robot is at (5, 5)
     
   Scenario: Robot pulled into a pit 
     Given a game with an empty board
@@ -43,12 +43,12 @@ Feature: Chaining Panel
     Then the second robot is at (3, 4)
     And the robots get unchained
     
-  #Scenario: Robot pulled into a wall
-    #Given a game with an empty board
-    #And two robots chained together
-    #And a wall on the board at (5, 5)
-    #When one robot moves
-    #Then the second robot stays at (5, 4)
+  Scenario: Robot pulled into a wall
+    Given a game with an empty board
+    And two robots chained together
+    And a wall on the board at (5, 5)
+    When one robot moves
+    Then the second robot is at (4, 5)
     
   Scenario: Robot steps on inactive chaining panel
     Given a game with an empty board
