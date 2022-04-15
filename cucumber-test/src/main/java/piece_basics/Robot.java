@@ -247,7 +247,7 @@ public class Robot extends Piece {
 	
 	public void setProgram(ArrayList<Card> program) {
 		Program p = new Program();
-		p.setProgram(program);
+		p.setCardList(program);
 		this.program = p;
 	}
 

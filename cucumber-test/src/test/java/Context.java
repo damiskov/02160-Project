@@ -2,6 +2,9 @@ import board.Board;
 import board.Game;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
+
+import java.util.ArrayList;
+
 import board.*;
 import piece_basics.*;
 import environment_elements.ConveyorBelt;
@@ -54,5 +57,6 @@ public class Context {
 	Deck deck;
 	Hand hand;
 	Program program;
+	ArrayList<Card> gram;
 
 }
