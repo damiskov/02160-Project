@@ -1,6 +1,6 @@
-Feature: Activation phase
+Feature: Activation phase priority
 
-  Scenario: The activation phase activates a conveyor belt, and then a gear 
+  Scenario: A conveyor belt is activated before a gear
   	Given a game with an empty board
   	And a robot on the board at (5, 5) facing "up"
   	And a conveyor belt on the board at (5, 5) facing "up"

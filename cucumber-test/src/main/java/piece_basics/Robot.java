@@ -1,12 +1,13 @@
 package piece_basics;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import board.Position;
 import cards.Card;
+import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
 import environment_elements.Wall;
+import cards.Program;
 
 public class Robot extends Piece {
 	private Orientation orientation;
@@ -16,9 +17,11 @@ public class Robot extends Piece {
 	private boolean chainable = false;
 	private Robot chainedTo;
 	private String command;	
-	private ArrayList<Card> program; 
+	private Program program;
+	private int mostRecentCheckpoint = 0;
 	
 	public static final String ID = "robot";
+	private ChainingPanel ChainedFrom;
 	
 	public Robot() {
 		orientation = Orientation.UP;
@@ -147,18 +150,14 @@ public class Robot extends Piece {
 		}
 	}
 
+	public void heal() {
+		if (health < maxHealth) health++;
+	}
 	public void takeDamage() {
 		health--;
 		if (health == 0) reboot();
 	}
-	public void heal() {
-		if (health < maxHealth) health++;
-	}
 	
-	//is this method still relevant?
-	public void setHealth(int x) {
-		this.health = x;
-	}
 	public int getHealth() {
 		return this.health;
 	}
@@ -249,12 +248,22 @@ public class Robot extends Piece {
 		return board.hasEElementAt(p) && board.getEElementAt(p).isLaserBlocking();
 	}
 	
-	public ArrayList<Card> getProgram(){
+	public Program getProgram(){
 		return this.program;
 	}
 	
-	public void updateProgram(ArrayList<Card> program) {
-		this.program = program;
+	public void setChainedFrom(ChainingPanel chainedFrom) {
+		this.ChainedFrom = chainedFrom;
+	}
+	
+	public ChainingPanel getChainedFrom() {
+		return this.ChainedFrom;
+	}
+	
+	public void setProgram(ArrayList<Card> program) {
+		Program p = new Program();
+		p.setProgram(program);
+		this.program = p;
 	}
 
 	@Override
@@ -263,5 +272,13 @@ public class Robot extends Piece {
 	}
 	
 
+
+	public int getMostRecentCheckpoint() {
+		return mostRecentCheckpoint;
+	}
+
+	public void setMostRecentCheckpoint(int mostRecentCheckpoint) {
+		this.mostRecentCheckpoint = mostRecentCheckpoint;
+	}
 
 }

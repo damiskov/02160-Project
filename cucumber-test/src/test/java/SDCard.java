@@ -1,6 +1,8 @@
 import io.cucumber.java.en.*;
 import piece_basics.Orientation;
+
 import piece_basics.Robot;
+
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,7 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 import board.Board;
+
 import board.Position;
 import cards.*;
 import player.*;
@@ -37,36 +41,44 @@ public class SDCard {
 	@When("a Hand is created")
 	public void a_Hand_is_created() {
 		Hand hand = context.deck.genHand();
+		context.hand = hand;
 	    
 	}
 	
 	@Then("the player accepts nine cards")
 	public void the_player_accepts_nine_cards() {
-	    context.player.setHand(context.deck.genHand());
+	    context.player.setHand(context.hand);
 	}
 	
 	
 	// scenario - Programming the cards
 	
-	// @Given("a player")
-	// public void a_player()
+	@Given("a player with a robot")
+	public void a_player_with_a_robot()
+	{
+		this.context.player = new Player();
+		this.context.robot = new Robot();
+		context.player.setRobot(context.robot);
+	}
+
 
 	@And("a non empty program")
 	public void a_non_empty_program() {
 		this.context.program = new Program();
 		ArrayList<Card> cardlst = new ArrayList<> (Arrays.asList(new Card("move1")));
-		this.context.program.setProgram(cardlst);
-		context.player.setProgram(context.program);
+		context.player.setProgram(cardlst);
+		context.program = context.player.getProgram();
 	}
 
 	@When("a card is taken from the front of the program")
-	public void a_card_is_taken_from_the_fron_of_the_program() {
-	    this.card = context.player.getTopCardInProgram();
+	public void a_card_is_taken_from_the_front_of_the_program() {
+		context.card = context.program.getTopOfProgram();
+	    
 	    
 	}
 	@Then("the robot executes the action on the card")
 	public void the_robot_executes_the_action_on_the_card() {
-	    card.executeAction(context.player.getRobot());
+	    context.card.executeAction(context.player.getRobot());
 	}
 	
 	
@@ -181,6 +193,178 @@ public class SDCard {
 	    assertEquals(context.board.calculatePosition(context.robot), new Position(5,4));
 	}
 	
+
+	
+	
+//	ROBOT MOVEMENT
+	
+	//RIGHT AND LEFT
+	
+	@When("a turn right command is executed")
+	public void a_turn_right_command_is_executed() {
+		Card r_card = new TurnRight();
+		context.card = r_card;
+		context.card.executeAction(context.robot);
+	}
+	
+	@When("a turn left command is executed")
+	public void a_turn_left_command_is_executed() {
+		Card l_card = new TurnLeft();
+		context.card = l_card;
+		context.card.executeAction(context.robot);
+	}
+	
+	@Then("the robot is at \\({int}, {int}) facing {string}")
+	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
+		assertEquals(new Position(int1, int2), context.robot.calculatePosition());
+		
+		if (string == "up") {
+			assertEquals(Orientation.UP, context.robot.getOrientation());
+		} else if (string == "down") {
+			assertEquals(Orientation.DOWN, context.robot.getOrientation());
+		} else if (string == "right") {
+			assertEquals(Orientation.RIGHT, context.robot.getOrientation());
+		} else if (string == "left") {
+			assertEquals(Orientation.LEFT, context.robot.getOrientation());
+		}
+		
+	}
+	
+	
+	
+	
+//@When("a turn right command is executed")
+
+//@Then("the robot is at \\({int}, {int}) facing {string}")
+
+
+
+
+	
+	
+	
+
+//@When("a turn right command is executed")
+
+//	@Then("the robot is at \\({int}, {int}) facing {string}")
+//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
+
+
+
+	
+	
+	
+
+//@When("a turn right command is executed")
+
+//	@Then("the robot is at \\({int}, {int}) facing {string}")
+//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
+
+
+
+	
+	
+	
+
+//@When("a turn right command is executed")
+	
+//	@Then("the robot is at \\({int}, {int}) facing {string}")
+//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
+
+
+
+	
+	
+
+//@When("a turn left command is executed")
+
+//	@Then("the robot is at \\({int}, {int}) facing {string}")
+//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
+
+
+
+	
+	
+
+//@When("a turn left command is executed")
+
+//	@Then("the robot is at \\({int}, {int}) facing {string}")
+//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
+
+
+
+	
+	
+
+//@When("a turn left command is executed")
+
+//	@Then("the robot is at \\({int}, {int}) facing {string}")
+//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
+
+
+
+	
+	
+
+//@When("a turn left command is executed")
+
+//	@Then("the robot is at \\({int}, {int}) facing {string}")
+//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
+
+
+	
+	//FORWARD AND BACKWARD
+	
+	@When("a move forward command is executed")
+	public void a_move_forward_command_is_executed() {
+		Card f_card = new Move1();
+		context.card = f_card;
+		context.card.executeAction(context.robot);
+	}
+	
+	@When("a move backward command is executed")
+	public void a_move_backward_command_is_executed() {
+		Card b_card = new BackUp();
+		context.card = b_card;
+		context.card.executeAction(context.robot);
+	}
+	
+
+	@When("a move forward {int} command is executed")
+	public void a_move_forward_command_is_executed(Integer int1) {
+		
+		Card f_card = new Card("move1");
+		
+		if (int1 == 2) {
+			f_card = new Move2();
+		} else if(int1 == 3) {
+			f_card = new Move3();
+		}
+		
+		context.card = f_card;
+		context.card.executeAction(context.robot);
+	}
 
 
 }

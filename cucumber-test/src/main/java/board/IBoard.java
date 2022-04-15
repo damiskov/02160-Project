@@ -17,10 +17,8 @@ public interface IBoard {
 	Position calculatePosition(EnvironmentElement e);
 	
 	void moveRobotFromTo(Position oldPos, Position newPos);
-	void moveEElementFromTo(Position oldPos, Position newPos);
 	
 	void setPosition(Robot r, Position p);
-	void setPosition(EnvironmentElement e, Position p);
 	
 	void removeRobot(Position p);
 	void removeEElement(Position p);
