@@ -80,8 +80,8 @@ public class SDRobot {
 		assertEquals(new Position(int1, int2), context.robot2.calculatePosition());
 	}
 	
-	@When("the robot moves one step {string}")
-	public void the_robot_moves_one_step(String string) {
+	@When("the robot tries to move one step")
+	public void the_robot_tries_to_move_one_step(){
 		context.robot.move(1);
 	}
 	
@@ -89,6 +89,7 @@ public class SDRobot {
 	public void the_robot_stays_at(Integer int1, Integer int2) {
 		assertEquals(new Position(int1, int2), context.robot.calculatePosition());	
 	}
+	
 	
 	@When("one robot moves")
 	public void one_robot_moves() {
