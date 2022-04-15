@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Program {
 	
-	private ArrayList<Card> program;
+	private ArrayList<Card> program = new ArrayList<Card>();
 	
 	public Program()
 	{

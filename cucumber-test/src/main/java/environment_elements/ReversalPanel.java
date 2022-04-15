@@ -9,7 +9,8 @@ import cards.Program;
 public class ReversalPanel extends EnvironmentElement {
 
 	public static final String ID = "reversal_panel";
-	public ArrayList<Card> newProg = new ArrayList<Card>();
+	//public ArrayList<Card> newProg = new ArrayList<Card>();
+	public Program newProg = new Program();
 
 	@Override
 	public String getPieceID() {
@@ -23,10 +24,10 @@ public class ReversalPanel extends EnvironmentElement {
 			int programLength = program.getProgram().size();
 			
 			for (int i = 0; i < programLength; i++) {
-				newProg.add(program.getProgram().get(i).getOppositeCard());
+				newProg.getProgram().add(program.getProgram().get(i).getOppositeCard());
 			}
-			
-			board.getRobotAt(calculatePosition()).setProgram(newProg);
+			System.out.println(board.getRobotAt(calculatePosition()) + " got the moves in its program reversed");
+			board.getRobotAt(calculatePosition()).setProgram(newProg.getProgram());
 		}
 
 	}
