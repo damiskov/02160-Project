@@ -4,23 +4,24 @@ Feature: Wall
 	 Given a game with an empty board
 	 And a wall on the board at (6, 5)
    And a robot on the board at (5, 5) facing "right"
-   When the robot moves one step "right"
+   When the robot tries to move one step 
    Then the robot stays at (5, 5)
    
   Scenario: Wall stops the robot from the left side
 	 Given a game with an empty board
-	 And a wall on the board at (6, 5)
+	 And a wall on the board at (4, 5)
    And a robot on the board at (5, 5) facing "left"
-   When the robot moves one step "left"
+   When the robot tries to move one step
    Then the robot stays at (5, 5)
   
   #Scenario: Wall stops the robot from the front side
-#	 Given a game with an empty board
-#	 And a wall on the board at (6, 5)
+   #Given a game with an empty board
+   #And a wall on the board at ()
    #And a robot on the board at (5, 5) facing "up"
    #When the robot moves one step "up"
    #Then the robot stays at (5, 5)
-  #
+  
+  
   #Scenario: Wall stops the robot from the back side
 #	 Given a game with an empty board
 #	 And a wall on the board at (6, 5)

@@ -88,7 +88,7 @@ public class Robot extends Piece {
 	//checking wall collision	
 	private boolean wallCollision(Position p) {
 
-		if (board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion()) {
+		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
 			board.setPosition(this, p);
 		}
 		return false;	
@@ -107,7 +107,6 @@ public class Robot extends Piece {
 		Position p = calculatePosition();
 		p.incrY(spaces);
 		board.setPosition(this, p);
-		wallCollision(p);
 		
 	}
 	public void move(int spaces) {
