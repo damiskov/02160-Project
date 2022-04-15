@@ -1,14 +1,86 @@
 Feature: Wall
-# error because Cannot invoke "board.Board.initialPlacement(piece_basics.EnvironmentElement, int, int)" 
-#because "board" is null
 
-#	@tag1
-#	Scenario: Wall stops the robot from the right side
-#	 Given a wall on the right side of the robot
-#	 And a robot on the board
-#	 When robot bumps into the wall from the right side
-#	 Then wall stops the robot from the right
-#	
+	Scenario: Wall stops the robot from the right side
+	 Given a game with an empty board
+	 And a wall on the board at (6, 5)
+   And a robot on the board at (5, 5) facing "right"
+   When the robot moves one step "right"
+   Then the robot stays at (5, 5)
+   
+  Scenario: Wall stops the robot from the left side
+	 Given a game with an empty board
+	 And a wall on the board at (6, 5)
+   And a robot on the board at (5, 5) facing "left"
+   When the robot moves one step "left"
+   Then the robot stays at (5, 5)
+  
+  #Scenario: Wall stops the robot from the front side
+#	 Given a game with an empty board
+#	 And a wall on the board at (6, 5)
+   #And a robot on the board at (5, 5) facing "up"
+   #When the robot moves one step "up"
+   #Then the robot stays at (5, 5)
+  #
+  #Scenario: Wall stops the robot from the back side
+#	 Given a game with an empty board
+#	 And a wall on the board at (6, 5)
+   #And a robot on the board at (5, 5) facing "down"
+   #When the robot moves one step "down"
+   #Then the robot stays at (5, 5)
+   
+   
+  #Scenario: Wall stops the robot from the back side
+#	 Given a game with an empty board
+#	 And a wall on the board at (6, 5)
+   #And a robot on the board at (5, 5) facing "down"
+   #When the robot moves one step "down"
+   #Then the robot stays at (5, 5)
+   #
+   #
+  #Scenario: Wall stops the robot from the back side
+#	 Given a game with an empty board
+#	 And a wall on the board at (6, 5)
+   #And a robot on the board at (5, 5) facing "down"
+   #When the robot moves one step "down"
+   #Then the robot stays at (5, 5)
+  #
+  #Scenario: Wall stops the robot from the front side
+#	 Given a game with an empty board
+#	 And a wall on the board at (6, 5)
+   #And a robot on the board at (5, 5) facing "left"
+   #When the robot moves one step to the "left"
+   #Then the robot stays at (5, 5)
+  
+  #Scenario: Wall stops the robot from the right side
+#	 Given a game with an empty board
+#	 And a wall on the board at (6, 5)
+   #And a robot on the board at (5, 5) facing "right"
+   #When the robot moves three steps to the "right"
+   #Then the robot moves to (6, 5) is the same as staying at (5, 5)
+#
+#	Scenario: Wall stops the robot from the left side
+#	 Given a game with an empty board
+#	 And a wall on the board at (6, 5)
+   #And a robot on the board at (5, 5) facing "right"
+   #When the robot moves one step to the "right"
+   #Then the robot moves to (6, 5) is the same as staying at (5, 5)
+#
+#	Scenario: Wall stops the robot from the left side
+#	 Given a game with an empty board
+#	 And a wall on the board at (6, 5)
+   #And a robot on the board at (5, 5) facing "right"
+   #When the robot moves one step to the "right"
+   #Then the robot moves to (6, 5) is the same as staying at (5, 5)
+   #
+  #Scenario: Wall stops the robot from the left side
+#	 Given a game with an empty board
+#	 And a wall on the board at (6, 5)
+   #And a robot on the board at (5, 5) facing "right"
+   #When the robot moves one step to the "right"
+   #Then the robot moves to (6, 5) is the same as staying at (5, 5)
+#
+   #
+   #
 #	Scenario: Wall stops the robot from the left side
 #	 Given a wall on the left side of the robot
 #	 And a robot on the board

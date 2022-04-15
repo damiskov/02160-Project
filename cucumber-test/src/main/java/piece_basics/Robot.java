@@ -6,6 +6,7 @@ import java.util.List;
 import board.Position;
 import cards.Card;
 import environment_elements.RespawnPoint;
+import environment_elements.Wall;
 
 public class Robot extends Piece {
 	private Orientation orientation;
@@ -80,21 +81,35 @@ public class Robot extends Piece {
 			orientation = Orientation.UP;
 			break;
 		}
+	}	
+	//checking wall collision	
+	private boolean wallCollision(Position p) {
+
+		if (board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion()) {
+			board.setPosition(this, p);
+		}
+		return false;	
 	}
 	
 	public void shiftX(int spaces) {
-		// TODO: Add wall collision logic
+		
 		Position p = calculatePosition();
 		p.incrX(spaces);
-		board.setPosition(this, p);
+		wallCollision(p);
+		
 	}
+
 	public void shiftY(int spaces) {
+		
 		Position p = calculatePosition();
 		p.incrY(spaces);
 		board.setPosition(this, p);
+		wallCollision(p);
+		
 	}
 	public void move(int spaces) {
-		if(this.getChainedTo() == null) {
+		
+		if(this.getChainedTo() == null){
 			switch(orientation) {
 			case UP:
 				shiftY(spaces);
@@ -246,5 +261,7 @@ public class Robot extends Piece {
 	public String getPieceID() {
 		return ID;
 	}
+	
+
 
 }
