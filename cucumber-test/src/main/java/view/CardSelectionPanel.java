@@ -1,10 +1,9 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 
-import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,22 +14,27 @@ import utils.ImageUtils;
 public class CardSelectionPanel extends JPanel {
 
 	private static final long serialVersionUID = -2862362827324913955L;
+	
+	private static final int cardWidth = 96;
+	private static final int cardHeight = 133;;
 
 	private JButton cardButton;
 	private SelectionIcon selectionIcon;
 	
 	public CardSelectionPanel(String cardID) {
-		
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-//		setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		
-		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/" + cardID + ".png", 96, 133));
+		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/" + cardID + ".png", cardWidth, cardHeight));
 		cardButton = new JButton(icon);
 		cardButton.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 		cardButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-//		cardButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		// temporary?
+		cardButton.setName(cardID);
+		//
 		add(cardButton);
+		
+		add(Box.createRigidArea(new Dimension(0, 5)));
+		
 		selectionIcon = new SelectionIcon();
 		selectionIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(selectionIcon);

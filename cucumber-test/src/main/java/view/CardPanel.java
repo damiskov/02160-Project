@@ -25,7 +25,6 @@ public class CardPanel extends JPanel {
 
 	private static final long serialVersionUID = 4888662845263342484L;
 
-	private Image move1, move2, move3, turnLeft, turnRight, moveBack, uTurn;
 	int card_width;
 	int card_height;
 	int number_cards;
@@ -43,104 +42,73 @@ public class CardPanel extends JPanel {
 
 		// given a hand
 		// go through that hand and for each card create a button
-		number_cards = 7;
-		card_width = 96;
-		card_height = 133;
-		space_between_cards = 10;
-
-		canvas_width = (card_width + space_between_cards) * 9;
-		canvas_height = card_height + 2 * space_between_cards;
-
+		
+//		number_cards = 7;
+		// card width and height are now specified as static final variables in CardSelectionPanel
+//		card_width = 96;
+//		card_height = 133;
+//		space_between_cards = 10;
+//
+//		canvas_width = (card_width + space_between_cards) * 9;
+//		canvas_height = card_height + 2 * space_between_cards;
+//
 //		setPreferredSize(new Dimension(canvas_width, canvas_height));
 
 		// create buttons with images according to move
 
-		setLayout(new FlowLayout());
+		setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
+		
+		// temporary
+		for (String id: List.of("move1", "turnleft", "movebackward", "move3", "move2", "turnright", "uturn")) {
+			CardSelectionPanel b = new CardSelectionPanel(id);
+			hand.add(b);
+			add(b);
+		}
+		//
 
-		CardSelectionPanel b1 = new CardSelectionPanel("move1");
-		hand.add(b1);
-		add(b1);
+		for (CardSelectionPanel csp : hand) {
+			SelectionIcon selectionIcon = csp.getSelectionIcon();
+			JButton cardButton = csp.getCardButton();
 
-		CardSelectionPanel b2 = new CardSelectionPanel("turnleft");
-		hand.add(b2);
-		add(b2);
-
-		CardSelectionPanel b3 = new CardSelectionPanel("movebackward");
-		hand.add(b3);
-		add(b3);
-
-		CardSelectionPanel b4 = new CardSelectionPanel("move3");
-		hand.add(b4);
-		add(b4);
-
-		CardSelectionPanel b5 = new CardSelectionPanel("move2");
-		hand.add(b5);
-		add(b5);
-
-		CardSelectionPanel b6 = new CardSelectionPanel("turnright");
-		hand.add(b6);
-		add(b6);
-
-		CardSelectionPanel b7 = new CardSelectionPanel("uturn");
-		hand.add(b7);
-		add(b7);
-
-		for (int i = 0; i < hand.size(); i++) {
-			CardSelectionPanel csp = hand.get(i);
-			SelectionIcon icon = csp.getSelectionIcon();
-
-			csp.getCardButton().addActionListener(new ActionListener() {
+			cardButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					System.out.println("button " + cardButton.getName() + " clicked");
 
-					// refer to JButton clicked
-					Object source = e.getSource();
-					if (source instanceof JButton) {
-						JButton btn = (JButton) source;
-
-						System.out.println("button " + btn.getName() + " clicked");
-
-						if (orderedCards.contains(csp)) {
-							orderedCards.remove(csp);
-							System.out.println("BUTTON REMOVED");
-							
-							// empty circle
-							icon.empty();
-						} else {
-							orderedCards.add(csp);
-							System.out.println("BUTTON ADDED");
-						}
-
-						for (int i = 0; i < orderedCards.size(); i++) {
-
-							System.out.println(i + 1 + " -> " + orderedCards.get(i).getName());
-							orderedCards.get(i).getSelectionIcon().setNumber(i + 1);
-
-						}
+					if (orderedCards.contains(csp)) {
+						orderedCards.remove(csp);
+						System.out.println("BUTTON REMOVED");
+						// empty circle
+						selectionIcon.empty();
+					} else {
+						orderedCards.add(csp);
+						System.out.println("BUTTON ADDED");
+					}
+					
+					// update selection icon numbers
+					for (int i = 0; i < orderedCards.size(); i++) {
+						System.out.println(i + 1 + " -> " + orderedCards.get(i).getCardButton().getName());
+						orderedCards.get(i).getSelectionIcon().setNumber(i + 1);
 					}
 
 				}
 
 			});
-
 		}
-
-//        jB.addActionListener(new TheHandler());
-
 	}
 
-	private Image createImage(String path, int card_width, int card_height) {
-
-		ImageIcon image1 = new ImageIcon(path);
-		Image image2 = image1.getImage().getScaledInstance(card_width, card_height, 0);
-
-		return image2;
-	}
-
-//	
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-	}
+//	private Image createImage(String path, int card_width, int card_height) {
+//
+//		ImageIcon image1 = new ImageIcon(path);
+//		Image image2 = image1.getImage().getScaledInstance(card_width, card_height, 0);
+//
+//		return image2;
+//	}
+//
+////	
+//	@Override
+//	public void paintComponent(Graphics g) {
+//		super.paintComponent(g);
+//
+//	}
 }
