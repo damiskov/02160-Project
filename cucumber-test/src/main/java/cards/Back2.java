@@ -1,21 +1,24 @@
+
 package cards;
+
 import piece_basics.Robot;
 
-public class Move2 extends Card 
-{
-    public Move2()
+
+public class Back2 extends Card {
+	
+    public Back2()
     {
-        super("move2");
+        super("back2");
     }
 
     @Override
     public void executeAction(Robot r)
     {
-        r.move(2);
+        r.move(-2);
     }
     
     @Override
     public Card getOppositeCard() {
-    	return new Back2();
+    	return new Move2();
     }
 }
