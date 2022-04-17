@@ -27,6 +27,7 @@ public class ApplicationController {
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
+			// do nothing, use default look and feel
 		}
 		
 		ApplicationController app = new ApplicationController();

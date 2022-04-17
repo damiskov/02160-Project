@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -14,7 +15,6 @@ import utils.GridBagLayoutUtils;
 
 public class MasterView extends JFrame{
 	
-	
 	private static final long serialVersionUID = 3L;
 	
 	private MasterController controller;
@@ -26,7 +26,7 @@ public class MasterView extends JFrame{
 	// for testing
 	private JButton blackScreenButton;
 	
-	private JButton blackScreen;
+	private BlackScreen blackScreen;
 	
 	public MasterView(MasterController masterController) {
 		this.controller = masterController;
@@ -49,23 +49,29 @@ public class MasterView extends JFrame{
 		blackScreenButton = new JButton("Black screen");
 		MasterView masterView = this;
 		blackScreenButton.addActionListener(e -> {
-			System.out.println("Button pressed");
-			masterView.removeElements();
-			masterView.addBlackScreen();
+			masterView.displayBlackScreen(2);
 		});
 		
 		addElements();
 		pack();
-		
-		System.out.println(getWidth());
 		
 		setVisible(true);
 		
 		// maximize the window
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 	}
+	
+	public void displayBlackScreen(int playerTurn) {
+		removeElements();
+		addBlackScreen(playerTurn);
+	}
+	
+	public void hideBlackScreen() {
+		removeBlackScreen();
+		addElements();
+	}
 
-	public void addElements() {
+	private void addElements() {
 		setLayout(new GridBagLayout());
 		add(boardPanel, GridBagLayoutUtils.constraint(0, 0, 0));
 		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 0));
@@ -81,22 +87,22 @@ public class MasterView extends JFrame{
 		repaint();
 	}
 	
-	public void removeElements() {
+	private void removeElements() {
 		remove(boardPanel);
 		remove(cardPanel);
 		remove(statusPanel);
 		remove(blackScreenButton);
 	}
 	
-	public void addBlackScreen() {
-		setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-		add(blackScreen);
-		blackScreen.setPreferredSize(new Dimension(getWidth(), getHeight()));
+	private void addBlackScreen(int playerTurn) {
+		setLayout(new BorderLayout());
+		add(blackScreen, BorderLayout.CENTER);
+		blackScreen.setPlayerTurnText(playerTurn);
 		revalidate();
 		repaint();
 	}
 	
-	public void removeBlackScreen() {
+	private void removeBlackScreen() {
 		remove(blackScreen);
 	}
 }
