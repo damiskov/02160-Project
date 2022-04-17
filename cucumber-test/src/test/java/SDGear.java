@@ -18,11 +18,11 @@ private Context context;
 	
 	@Given("a gear on the board at \\({int}, {int}) spinning {string}")
 	public void a_gear_on_the_board_at_spinning(Integer int1, Integer int2, String string) {
-	    Gear g;
+	    Gear g = null;
 	    switch (string.toLowerCase()) {
-	    case "clockwise": case "right":
+	    case "clockwise": 
 	    	g = new Gear(false); break;
-	    case "counterclockwise": case "anticlockwise": case "left":
+	    case "counterclockwise": 
 	    	g = new Gear(true); break;
     	default:
     		throw new IllegalArgumentException("Invalid direction");
@@ -31,37 +31,37 @@ private Context context;
 	    context.gear = g;
 	}
 	
-	@Given("a gear pointing towards right")
-	public void a_gear_pointing_towards_right() {
-		Board board = context.board;
-		Gear g = new Gear( false);
-		context.gear = g;
-		board.initialPlacement(g, 6, 5);
-	}
-	
-	@When("robot steps on a gear")
-	public void robot_steps_on_a_gear() {
-		context.robot.shiftX(1);
-	}
-	
-	@Then("gear turns the robot towards right")
-	public void gear_turns_the_robot_towards_right() {
-		context.gear.performRegisterAction();
-		assertEquals(Orientation.RIGHT, context.robot.getOrientation());
-		
-	}
-	
-	@Given("a gear pointing towards left")
-	public void a_gear_pointing_towards_left() {
-		Board board = context.board;
-		Gear g = new Gear(true);
-		context.gear = g;
-		board.initialPlacement(g, 6, 5);
-	}
-	@Then("gear turns the robot towards left")
-	public void gear_turns_the_robot_towards_left() {
-		context.gear.performRegisterAction();
-	    assertEquals(Orientation.LEFT,context.robot.getOrientation());
-	}
+//	@Given("a gear pointing towards right")
+//	public void a_gear_pointing_towards_right() {
+//		Board board = context.board;
+//		Gear g = new Gear( false);
+//		context.gear = g;
+//		board.initialPlacement(g, 6, 5);
+//	}
+//	
+//	@When("robot steps on a gear")
+//	public void robot_steps_on_a_gear() {
+//		context.robot.shiftX(1);
+//	}
+//	
+//	@Then("gear turns the robot towards right")
+//	public void gear_turns_the_robot_towards_right() {
+//		context.gear.performRegisterAction();
+//		assertEquals(Orientation.RIGHT, context.robot.getOrientation());
+//		
+//	}
+//	
+//	@Given("a gear pointing towards left")
+//	public void a_gear_pointing_towards_left() {
+//		Board board = context.board;
+//		Gear g = new Gear(true);
+//		context.gear = g;
+//		board.initialPlacement(g, 6, 5);
+//	}
+//	@Then("gear turns the robot towards left")
+//	public void gear_turns_the_robot_towards_left() {
+//		context.gear.performRegisterAction();
+//	    assertEquals(Orientation.LEFT,context.robot.getOrientation());
+//	}
 
 }

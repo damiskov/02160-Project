@@ -15,13 +15,13 @@ public class Sprite implements ISprite {
 	private int height;
 	
 	private AffineTransform affineTransform = new AffineTransform();
-	private int canvasHeight;
+	private BoardPanel canvas;
 	
-	public Sprite(Image image, int x, int y, int degrees, int canvasHeight) {
+	public Sprite(Image image, int x, int y, int degrees, BoardPanel canvas) {
 		this.image = image;
 		this.width = image.getWidth(null);
 		this.height = image.getHeight(null);
-		this.canvasHeight = canvasHeight;
+		this.canvas = canvas;
 		
 		setX(x);
 		setY(y);
@@ -29,7 +29,7 @@ public class Sprite implements ISprite {
 	}
 	
 	private void updateAffineTransform() {
-		affineTransform.setToTranslation(x, canvasHeight - y - height);
+		affineTransform.setToTranslation(x, canvas.getHeight() - y - height);
 		affineTransform.rotate((Math.PI/180)*degrees, width/2, height/2);
 	}
 	

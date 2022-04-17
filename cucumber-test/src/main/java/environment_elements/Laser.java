@@ -9,8 +9,9 @@ public class Laser extends EnvironmentElement {
 
 	@Override
 	public void performRegisterAction() {
-		if (board.hasRobotAt(getPosition())) {
-			board.getRobotAt(getPosition()).takeDamage();
+		if (board.hasRobotAt(calculatePosition())) {
+			System.out.println(board.getRobotAt(calculatePosition()) + " got damaged by the laser");
+			board.getRobotAt(calculatePosition()).takeDamage();
 		}
 	}
 

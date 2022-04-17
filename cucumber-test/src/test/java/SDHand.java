@@ -1,4 +1,3 @@
-
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -14,6 +13,5 @@ public class SDHand {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
-
-
 }
+

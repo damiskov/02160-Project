@@ -4,54 +4,32 @@ import java.util.ArrayList;
 
 import piece_basics.EnvironmentElement;
 import cards.Card;
+import cards.Program;
 
 public class ReversalPanel extends EnvironmentElement {
 
 	public static final String ID = "reversal_panel";
-
-
-	//to avoid compilation errors
-	@Override
-	public void performRegisterAction() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	//public ArrayList<Card> newProg = new ArrayList<Card>();
+	public Program newProg = new Program();
 
 	@Override
 	public String getPieceID() {
 		return ID;
 	}
-
-	/*implemented based on these assumptions 
-	* - Robot has an attribute Program 
-	* - Program is also a class
-	*/
-	/*Other comments:
-	* - Checks if there is a robot, then iterates through the program, makes a new program with the
-	*   reversed moves and sets that as the robots program
-	* - How do we handle the U-Turn? We can either ignore it or make a new class fullTurn that does
-	*   two U-Turns.
-	*/
-	
-/*	public Program[] newProg;
-=======
-	ArrayList<Card> newProg = new ArrayList<Card>();
->>>>>>> refs/heads/main
 	
 	@Override
 	public void performRegisterAction() {
-		if (board.hasRobotAt(getPosition())) {
-			ArrayList<Card> program = board.getRobotAt(getPosition()).getProgram();
-			int programLength = program.size();
+		if (board.hasRobotAt(calculatePosition())) {
+			Program program = board.getRobotAt(calculatePosition()).getProgram();
+			int programLength = program.getCardList().size();
 			
 			for (int i = 0; i < programLength; i++) {
-				newProg.add(program.get(i).getOppositeCard());
+				newProg.getCardList().add(program.getCardList().get(i).getOppositeCard());
 			}
-			
-			board.getRobotAt(getPosition()).updateProgram(newProg);
+			System.out.println(board.getRobotAt(calculatePosition()) + " got the moves in its program reversed");
+			board.getRobotAt(calculatePosition()).setProgram(newProg.getCardList());
 		}
-<<<<<<< HEAD
-	}*/
+
+	}
 
 }

@@ -2,14 +2,14 @@ package piece_basics;
 import board.Position;
 
 public abstract class EnvironmentElement extends Piece {
-	public Position getPosition() {
-		return board.getPosition(this);
+	public Position calculatePosition() {
+		return board.calculatePosition(this);
 	}
 	public int getX() {
-		return board.getPosition(this).getX();
+		return board.calculatePosition(this).getX();
 	}
 	public int getY() {
-		return board.getPosition(this).getY();
+		return board.calculatePosition(this).getY();
 	}
 	
 	public boolean isConveyorBlocking() {
@@ -18,4 +18,10 @@ public abstract class EnvironmentElement extends Piece {
 	public boolean isLaserBlocking() {
 		return false;
 	}
+	
+	public boolean isWallCollsion() {
+		return false;
+	};
+	
+
 }

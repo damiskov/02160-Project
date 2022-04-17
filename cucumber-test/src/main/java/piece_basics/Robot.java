@@ -1,23 +1,27 @@
 package piece_basics;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import board.Position;
 import cards.Card;
+import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
+import environment_elements.Wall;
+import cards.Program;
 
 public class Robot extends Piece {
 	private Orientation orientation;
 	private int health = 3;
 	private final int maxHealth = 3;
 	private RespawnPoint currentRespawnPoint;
-	private boolean chainable;
+	private boolean chainable = false;
 	private Robot chainedTo;
 	private String command;	
-	private ArrayList<Card> program; //setter method?
+	private Program program;
+	private int mostRecentCheckpoint = 0;
 	
 	public static final String ID = "robot";
+	private ChainingPanel ChainedFrom;
 	
 	public Robot() {
 		orientation = Orientation.UP;
@@ -26,14 +30,14 @@ public class Robot extends Piece {
 	public void setPosition(Position p) {
 		board.setPosition(this, p);
 	}
-	public Position getPosition() {
-		return board.getPosition(this);
+	public Position calculatePosition() {
+		return board.calculatePosition(this);
 	}
 	public int getX() {
-		return board.getPosition(this).getX();
+		return board.calculatePosition(this).getX();
 	}
 	public int getY() {
-		return board.getPosition(this).getY();
+		return board.calculatePosition(this).getY();
 	}
 	
 	public void setRespawnPoint(RespawnPoint r) {
@@ -80,48 +84,79 @@ public class Robot extends Piece {
 			orientation = Orientation.UP;
 			break;
 		}
+	}	
+	//checking wall collision	
+	private boolean wallCollision(Position p) {
+
+		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
+			board.setPosition(this, p);
+		}
+		return false;	
 	}
 	
 	public void shiftX(int spaces) {
-		// TODO: Add wall collision logic
-		Position p = getPosition();
+		
+		Position p = calculatePosition();
 		p.incrX(spaces);
-		board.setPosition(this, p);
+		wallCollision(p);
+		
 	}
+
 	public void shiftY(int spaces) {
-		Position p = getPosition();
+		
+		Position p = calculatePosition();
 		p.incrY(spaces);
 		board.setPosition(this, p);
+		
 	}
 	public void move(int spaces) {
-		switch(orientation) {
-		case UP:
-			shiftY(spaces);
-			break;
-		case RIGHT:
-			shiftX(spaces);
-			break;
-		case DOWN:
-			shiftY(-spaces);
-			break;
-		case LEFT:
-			shiftX(-spaces);
-			break;
+		
+		if(this.getChainedTo() == null){
+			switch(orientation) {
+			case UP:
+				shiftY(spaces);
+				break;
+			case RIGHT:
+				shiftX(spaces);
+				break;
+			case DOWN:
+				shiftY(-spaces);
+				break;
+			case LEFT:
+				shiftX(-spaces);
+				break;
+			}
+		}
+		else {
+			switch(orientation) {
+			case UP:
+				shiftY(spaces);
+				this.getChainedTo().shiftY(spaces);
+				break;
+			case RIGHT:
+				shiftX(spaces);
+				this.getChainedTo().shiftX(spaces);
+				break;
+			case DOWN:
+				shiftY(-spaces);
+				this.getChainedTo().shiftY(-spaces);
+				break;
+			case LEFT:
+				shiftX(-spaces);
+				this.getChainedTo().shiftX(-spaces);
+				break;
+			}
 		}
 	}
 
+	public void heal() {
+		if (health < maxHealth) health++;
+	}
 	public void takeDamage() {
 		health--;
 		if (health == 0) reboot();
 	}
-	public void heal() {
-		if (health < maxHealth) health++;
-	}
 	
-	//is this method still relevant?
-	public void setHealth(int x) {
-		this.health = x;
-	}
 	public int getHealth() {
 		return this.health;
 	}
@@ -144,20 +179,22 @@ public class Robot extends Piece {
 	}
 	
 	public void reboot() {
-		setPosition(board.getPosition(currentRespawnPoint));
+		//unchains the robot when it reboots
+		if (getChainedTo() != null) {
+			getChainedTo().setChainedTo(null);
+			getChainedTo().setChainable(false);
+			setChainable(false);
+			setChainedTo(null);
+		}
+		
+		Position respawnPointPos = board.calculatePosition(currentRespawnPoint);
+		if (board.hasRobotAt(respawnPointPos) && board.getRobotAt(respawnPointPos) != this) {
+			board.getRobotAt(respawnPointPos).reboot();
+		}
+		setPosition(respawnPointPos);
 		health = maxHealth;
-		// also must discard all cards in hand and stop moving
+		// TODO: (maybe) also must discard all cards in hand and stop moving
 	}
-
-	public void pullChained(Robot r, int spaces, String dir) {
-		if (dir == "X") {
-			r.shiftX(spaces);
-		}
-		else if (dir == "Y") {
-			r.shiftY(spaces);
-		}
-	}
-	
 
 	@Override
 	public void performRegisterAction() {
@@ -168,7 +205,7 @@ public class Robot extends Piece {
 		}
 	}
 	private Robot findRobotAhead() {
-		Position p = getPosition();
+		Position p = calculatePosition();
 		
 		switch(orientation) {
 		case UP:
@@ -210,17 +247,37 @@ public class Robot extends Piece {
 		return board.hasEElementAt(p) && board.getEElementAt(p).isLaserBlocking();
 	}
 	
-	public ArrayList<Card> getProgram(){
+	public Program getProgram(){
 		return this.program;
 	}
 	
-	public void updateProgram(ArrayList<Card> program) {
-		this.program = program;
+	public void setChainedFrom(ChainingPanel chainedFrom) {
+		this.ChainedFrom = chainedFrom;
+	}
+	
+	public ChainingPanel getChainedFrom() {
+		return this.ChainedFrom;
+	}
+	
+	public void setProgram(ArrayList<Card> program) {
+		Program p = new Program();
+		p.setCardList(program);
+		this.program = p;
 	}
 
 	@Override
 	public String getPieceID() {
 		return ID;
+	}
+	
+
+
+	public int getMostRecentCheckpoint() {
+		return mostRecentCheckpoint;
+	}
+
+	public void setMostRecentCheckpoint(int mostRecentCheckpoint) {
+		this.mostRecentCheckpoint = mostRecentCheckpoint;
 	}
 
 }

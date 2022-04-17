@@ -1,5 +1,8 @@
 package controller;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 //import application.controller.ApplicationController;
 //import application.controller.LoginController;
 
@@ -20,6 +23,13 @@ public class ApplicationController {
 	}
 	
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// do nothing, use default look and feel
+		}
+		
 		ApplicationController app = new ApplicationController();
 		app.initiate();
 	}

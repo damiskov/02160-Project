@@ -1,6 +1,11 @@
 package environment_elements;
 
+import java.util.Arrays;
+import java.util.List;
+
+import board.IBoard;
 import piece_basics.EnvironmentElement;
+import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
 
@@ -8,13 +13,12 @@ public class ChainingPanel extends EnvironmentElement {
 
 	private boolean active = true;
 	int i;
-	private boolean chainableOnBoard = false; //used for noChainable()
+	private boolean chainableOnBoard; 
+	public Robot toChain;
+
 	
-	public static final String ID = "conveyor_belt";
-	
-	public void chain1(Robot r) {
-		r.setChainable(true);
-	}
+	public static final String ID = "chaining_panel";
+
 	
 	public boolean isActive() {
 		return this.active;
@@ -24,14 +28,17 @@ public class ChainingPanel extends EnvironmentElement {
 		this.active = active;
 	}
 
-	
-	public boolean noChainable(Player[] rs) {
-		for (i = 0; i <= rs.length; i++); {
-			if(rs[i].getRobot().isChainable() == true) {
-				chainableOnBoard = chainableOnBoard || true;
-			
-			} else {
-				chainableOnBoard = chainableOnBoard || false;
+	 
+	public boolean noChainable(List<Piece> rs) {
+		chainableOnBoard = false;
+		for (Piece p : rs) { 
+			if (p instanceof Robot) {
+				Robot r = (Robot) p;
+				if(r.isChainable() == true) { 
+					chainableOnBoard = true;
+					this.toChain = r;
+					break;
+				} 
 			}
 		}
 		return chainableOnBoard;
@@ -40,26 +47,33 @@ public class ChainingPanel extends EnvironmentElement {
 	
 	public void chainRobots(Robot r1, Robot r2) {
 		if(r1.isChainable() == true && r2.isChainable() == true) {
-			System.out.println(r1 + " has been chained to robot " + r2);
+			System.out.println(r1 + " is chained to " + r2);
 			r1.setChainedTo(r2);
 			r2.setChainedTo(r1);
+			r1.setChainable(false);
+			r2.setChainable(false);
 		}
 	}
-	
-	public void unChain(Robot r1, Robot r2) {
-		r1.setChainable(false);
-		r2.setChainable(false);
-		
-		r1.setChainedTo(null); 
-		r2.setChainedTo(null); 
-		}
 	
 	
 	@Override
 	public void performRegisterAction() {
-//		if(noChainable() == false) {
-//			board.getRobotAt(getPosition()).setChainable(true);
-//		}
+		if (board.hasRobotAt(calculatePosition())) {
+			if(noChainable(board.getPieceLists().get(Robot.ID)) == true && isActive() == true &&
+				board.getRobotAt(calculatePosition()).isChainable() == false) {
+				
+				board.getRobotAt(calculatePosition()).setChainable(true);
+				chainRobots(board.getRobotAt(calculatePosition()), toChain);
+				toChain.getChainedFrom().setActive(true);
+				
+				
+			}
+			else if (isActive() == true && board.getRobotAt(calculatePosition()).isChainable() == false){
+				board.getRobotAt(calculatePosition()).setChainable(true);
+				board.getRobotAt(calculatePosition()).setChainedFrom(this);
+				setActive(false);
+			} 
+		}
 	}
 
 	@Override

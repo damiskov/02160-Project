@@ -1,11 +1,13 @@
 package player;
 import piece_basics.Robot;
+
+import java.util.ArrayList;
+
 import cards.*;
 
 public class Player {
 	private Robot myRobot;
 	private Hand hand;
-	private Program program;
 	
 	public void setRobot(Robot r)
 	{
@@ -26,19 +28,15 @@ public class Player {
 	}
 	
 	
-	public void setProgram()
+	public void setProgram(ArrayList<Card> p)
 	{
 		// will get player to select 5 cards according to execution priority
+		this.myRobot.setProgram(p);
 	}
 	
 	public Program getProgram()
 	{
-		return program;
-	}
-	
-	public Card getTopCardInProgram()
-	{
-		return program.getTopOfProgram();
+		return myRobot.getProgram();
 	}
 	
 	

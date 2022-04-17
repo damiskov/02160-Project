@@ -15,23 +15,22 @@ public class SDFire {
 		this.context = context;		
 	}
 	
-	@Given("a fire on the board")
-	public void a_fire_on_the_board() {
+	@Given("a fire on the board at \\({int}, {int})")
+	public void a_fire_on_the_board_at(Integer int1, Integer int2) {
 		Fire f = new Fire();
-		context.board.initialPlacement(f, 6, 5);
+		context.board.initialPlacement(f, int1, int2);
 		context.fire = f;
-	    
 	}
+	
 	@When("the robot steps into the fire")
 	public void the_robot_steps_into_the_fire() {
 		context.robot.shiftX(1);
 		context.fire.performRegisterAction();
 	}
-
+	
 	@Then("the fire spreads to a random adjacent cell")
 	public void the_fire_spreads_to_a_random_adjacent_cell() {
-		assertEquals(context.robot.getHealth(),2);
-		assertTrue(context.board.getEElementAt(context.fire.getP()) instanceof Fire);
+		assertTrue(context.board.getEElementAt(context.fire.p) instanceof Fire);
 	}
 	
 }
