@@ -1,10 +1,14 @@
 package controller;
 
+import board.Game;
+import view.InitiateView;
+
 //import application.controller.ApplicationController;
 //import application.controller.LoginController;
 
 public class ApplicationController {
 	private InitiateController initiateController;
+	private Game game;
 
 	private void initiate() {
 		initiateController = new InitiateController(this);
@@ -12,8 +16,14 @@ public class ApplicationController {
 		
 	}
 	
-	public void startGame(int playerCount) {
-		System.out.println("Game started with " + playerCount + " players.");
+	public void startGame(int playerCount, String difficulty) {
+		game = new Game();
+		game.setDifficulty(difficulty);
+//		game.setPlayers(playerCount);
+		
+//		game.getPlayers().length
+		System.out.println("Game started with " + playerCount + " players and difficulty " + game.getDifficulty());
+
 		
 	}
 	

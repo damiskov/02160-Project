@@ -41,14 +41,28 @@ public class Game {
 		this.difficulty = d;
 		
 	}
-	public void setCurrentPlayer(int i) {
-		// TODO Auto-generated method stub
+	
+	public String getDifficulty() {
+		return this.difficulty;
 		
+	}
+//	public void setCurrentPlayer(int i) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+	
+	public void setPlayers(int num_players) {
+		for (int i = 0; i < num_players; i++ ) {
+			
+			players[i] = new Player();
+			
+		}
 	}
 
 	public Player[] getPlayers() {
 		return players;
 	}
+	
 	
 	// Observer pattern
 	public void activateRegisterActors() {

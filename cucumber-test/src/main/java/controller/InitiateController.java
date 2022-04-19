@@ -13,13 +13,15 @@ public class InitiateController {
 	
 	public InitiateController(ApplicationController application) {
 		this.application = application;
+		// create a new view of the setup window
 		this.view = new InitiateView(this);
 	}
 	
-	public void setPlayers(int value) {
+	public void setGameParameters(int num_players, String difficulty) {
 		view.setVisible(false);
-		application.startGame(value);
+		application.startGame(num_players, difficulty);
 	}
+	
 	
 	public void display() {
 		view.setVisible(true);
