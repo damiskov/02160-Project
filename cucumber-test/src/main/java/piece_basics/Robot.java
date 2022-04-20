@@ -1,5 +1,6 @@
 package piece_basics;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import board.Position;
@@ -92,6 +93,7 @@ public class Robot extends Piece {
 			board.setPosition(this, p);
 		}
 		return false;	
+
 	}
 	
 	public void shiftX(int spaces) {
@@ -100,13 +102,15 @@ public class Robot extends Piece {
 		p.incrX(spaces);
 		wallCollision(p);
 		
+
 	}
+
 
 	public void shiftY(int spaces) {
 		
 		Position p = calculatePosition();
 		p.incrY(spaces);
-		board.setPosition(this, p);
+		wallCollision(p);
 		
 	}
 	public void move(int spaces) {

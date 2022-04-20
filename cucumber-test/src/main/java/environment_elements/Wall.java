@@ -6,6 +6,7 @@ import piece_basics.EnvironmentElement;
 public class Wall extends EnvironmentElement {
 	
 	public static final String ID = "wall";
+	private Wall receiving;
 	
 	@Override
 	public boolean isConveyorBlocking() {
@@ -21,6 +22,12 @@ public class Wall extends EnvironmentElement {
 	public boolean isWallCollsion() {
 		return true;
 	}
+	
+	@Override
+	public boolean doThreeSteps() {
+		return true;
+	}
+	
 	
 	@Override
 	public String getPieceID() {

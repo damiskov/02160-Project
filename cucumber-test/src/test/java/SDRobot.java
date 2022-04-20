@@ -85,10 +85,26 @@ public class SDRobot {
 		context.robot.move(1);
 	}
 	
+//	@When("the robot tries to move two steps")
+//	public void the_robot_tries_to_move_two_steps(){
+//		context.robot.move(1);
+//	}
+	
+	@When("the robot tries to move {int} steps")
+	public void the_robot_tries_to_move_steps(Integer int1) {
+		context.robot.move(int1);
+	}
+	
+//	@When("the robot tries to move three steps")
+//	public void the_robot_tries_to_move_three_steps(){
+//		context.robot.move(1);
+//	}
+	
 	@Then("the robot stays at \\({int}, {int})")
 	public void the_robot_stays_at(Integer int1, Integer int2) {
 		assertEquals(new Position(int1, int2), context.robot.calculatePosition());	
 	}
+
 	
 	
 	@When("one robot moves")
