@@ -21,9 +21,10 @@ public class Board implements IBoard {
 	private int numRows;
 	private int numObstacles;
 	private Map<String, List<Piece>> pieceLists = new HashMap<>();
+	private Game game;
 	
 	// initialize an empty board with a set number of columns and rows
-	public Board(int numColumns, int numRows) {
+	public Board(int numColumns, int numRows, Game game) {
 		this.matrix = new Cell[numColumns][numRows];
 		for (int i = 0; i < numColumns; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -32,10 +33,16 @@ public class Board implements IBoard {
 		}
 		this.numColumns = numColumns;
 		this.numRows = numRows;
+		this.game = game;
 	}
 	
 	// probably not a good idea to have this, only for compatibility with StepsDefinitionBoardGeneration
 	public Board() {}
+	
+	@Override
+	public PropertyChangeSupport getPropertyChangeSupport() {
+		return game.getPropertyChangeSupport();
+	}
 	
 	public void setNumberOfObstacles(int n) {
 		
@@ -64,11 +71,14 @@ public class Board implements IBoard {
 		return matrix[numColumns - y - 1][x];
 	}
 	
+	
+	
 	@Override
 	public void initialPlacement(Robot r, int x, int y) {
 		addToExecutionLists(r);
 		r.setBoard(this);
 		getCell(x, y).robot = r;
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.PLACEMENT, r.getPieceID(),  new Position(x,y));
 	}
 	@Override
 	public void initialPlacement(Robot r, Position p) {
@@ -79,6 +89,7 @@ public class Board implements IBoard {
 		addToExecutionLists(e);
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.PLACEMENT, e.getPieceID(), new Position(x,y));
 	}
 	@Override
 	public void initialPlacement(EnvironmentElement e, Position p) {
@@ -155,14 +166,15 @@ public class Board implements IBoard {
 		return getCell(p).eElement;
 	}
 	
-	@Override
-	public void removeRobot(Position p) {
-		getCell(p).robot = null;
-	}
+//	@Override
+//	public void removeRobot(Position p) {
+//		getCell(p).robot = null;
+//	}
 	
 	@Override
 	public void removeEElement(Position p) {
 		getCell(p).eElement = null;
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.REMOVAL, p);
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package environment_elements;
 
+import board.Position;
+import board.PropertyChangeType;
 import piece_basics.*;
 import piece_basics.EnvironmentElement;
 
@@ -9,9 +11,11 @@ public class Laser extends EnvironmentElement {
 
 	@Override
 	public void performRegisterAction() {
-		if (board.hasRobotAt(calculatePosition())) {
-			System.out.println(board.getRobotAt(calculatePosition()) + " got damaged by the laser");
+		Position p = calculatePosition();
+		if (board.hasRobotAt(p)) {
+			System.out.println(board.getRobotAt(p) + " got damaged by the laser");
 			board.getRobotAt(calculatePosition()).takeDamage();
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ACTIVATION, p);
 		}
 	}
 

@@ -68,7 +68,7 @@ public class BoardPanel extends JPanel {
 		//BoardPanel thisBoardPanel = this;
 		
 		
-		this.board = new Board(10,12);
+		//this.board = new Board(10,12);
 		
 		Robot r = new Robot();
 		board.initialPlacement(r, 8, 0);

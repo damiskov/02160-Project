@@ -3,6 +3,7 @@ package piece_basics;
 import java.util.ArrayList;
 
 import board.Position;
+import board.PropertyChangeType;
 import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
@@ -54,6 +55,7 @@ public class Robot extends Piece {
 		return orientation;
 	}
 	public void turnLeft() {
+		Orientation oldOrientation = orientation;
 		switch(orientation) {
 		case UP:
 			orientation = Orientation.LEFT;
@@ -68,8 +70,10 @@ public class Robot extends Piece {
 			orientation = Orientation.DOWN;
 			break;
 		}
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROTATION, calculatePosition(), oldOrientation, orientation);
 	}
 	public void turnRight() {
+		Orientation oldOrientation = orientation;
 		switch(orientation) {
 		case UP:
 			orientation = Orientation.RIGHT;
@@ -84,12 +88,14 @@ public class Robot extends Piece {
 			orientation = Orientation.UP;
 			break;
 		}
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROTATION, calculatePosition(), oldOrientation, orientation);
 	}	
 	//checking wall collision	
 	private boolean wallCollision(Position p) {
 
 		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
 			board.setPosition(this, p);
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), p);
 		}
 		return false;	
 	}
@@ -202,6 +208,7 @@ public class Robot extends Piece {
 		
 		if (foundRobot != null) {
 			foundRobot.takeDamage();
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROBOTLASER, calculatePosition(), foundRobot.calculatePosition());
 		}
 	}
 	private Robot findRobotAhead() {

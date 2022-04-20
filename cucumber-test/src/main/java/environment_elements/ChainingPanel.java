@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import board.IBoard;
+import board.PropertyChangeType;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
@@ -25,6 +26,9 @@ public class ChainingPanel extends EnvironmentElement {
 	}
 	
 	public void setActive(boolean active) {
+		if (this.active != active) {
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ACTIVATION, calculatePosition());
+		}
 		this.active = active;
 	}
 

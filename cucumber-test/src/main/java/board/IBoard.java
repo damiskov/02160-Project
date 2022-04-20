@@ -20,7 +20,7 @@ public interface IBoard {
 	
 	void setPosition(Robot r, Position p);
 	
-	void removeRobot(Position p);
+//	void removeRobot(Position p);
 	void removeEElement(Position p);
 	
 	boolean hasRobotAt(Position p);
@@ -33,4 +33,5 @@ public interface IBoard {
 	boolean coordinateWithinBounds(int x, int y);
 	
 	Map<String, List<Piece>> getPieceLists();
+	PropertyChangeSupport getPropertyChangeSupport();
 }

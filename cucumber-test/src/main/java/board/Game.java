@@ -34,6 +34,13 @@ public class Game {
 	Board board;
 	String difficulty;
 	private Player[] players;
+	PropertyChangeSupport propertyChangeSupport;
+	
+	public Game(PropertyChangeSupport pcs) {
+		this.propertyChangeSupport = pcs;
+	}
+	
+	
 	public void genBoard() {
 		
 	}
@@ -80,6 +87,11 @@ public class Game {
 	}
 	public void setBoard(Board board) {
 		this.board = board;
+	}
+
+
+	public PropertyChangeSupport getPropertyChangeSupport() {
+		return propertyChangeSupport;
 	}
 	
 }
