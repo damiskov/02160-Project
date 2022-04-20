@@ -6,6 +6,6 @@ public class SpriteFactory {
 
 	public static Sprite getFromPieceID(String pieceID, int size, int x, int y, int degrees, BoardPanel canvas) {
 		String filepath = "images/" + pieceID + ".png";
-		return new Sprite(ImageUtils.scaledImage(filepath, size, size), x, y, degrees, canvas);
+		return new Sprite(ImageUtils.scaledImage(filepath, size, size), x, y, degrees, canvas, pieceID);
 	}
 }

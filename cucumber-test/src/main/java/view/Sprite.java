@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 
+
 public class Sprite implements ISprite {
 
 	private int x;
@@ -13,15 +14,17 @@ public class Sprite implements ISprite {
 	private Image image;
 	private int width;
 	private int height;
+	private String ID;
 	
 	private AffineTransform affineTransform = new AffineTransform();
 	private BoardPanel canvas;
 	
-	public Sprite(Image image, int x, int y, int degrees, BoardPanel canvas) {
+	public Sprite(Image image, int x, int y, int degrees, BoardPanel canvas, String ID) {
 		this.image = image;
 		this.width = image.getWidth(null);
 		this.height = image.getHeight(null);
 		this.canvas = canvas;
+		this.ID = ID;
 		
 		setX(x);
 		setY(y);
@@ -33,6 +36,7 @@ public class Sprite implements ISprite {
 		affineTransform.rotate((Math.PI/180)*degrees, width/2, height/2);
 	}
 	
+	@Override
 	public int getX() {
 		return x;
 	}
@@ -42,6 +46,7 @@ public class Sprite implements ISprite {
 		updateAffineTransform();
 	}
 	
+	@Override
 	public int getY() {
 		return y;
 	}
@@ -59,6 +64,12 @@ public class Sprite implements ISprite {
 		this.degrees = degrees;
 		updateAffineTransform();
 	}
+	
+	@Override
+	public String getID() {
+		return this.ID;
+	}
+	
 
 	@Override
 	public void drawUsing(Graphics2D g2) {
