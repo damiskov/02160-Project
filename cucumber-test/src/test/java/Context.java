@@ -1,6 +1,10 @@
 import board.Board;
 import board.Game;
 import environment_elements.ChainingPanel;
+import environment_elements.Checkpoint;
+
+import java.util.ArrayList;
+
 import board.*;
 import piece_basics.*;
 import environment_elements.ConveyorBelt;
@@ -41,9 +45,11 @@ public class Context {
 	ReversalPanel revpan;
 	ChainingPanel chainpan;
 	ChainingPanel chainpan2;
+	Checkpoint checkpoint;
+	
 	Player player;
 	Player host;
-	Button startButton;
+
 	Piece piece;
 	Card card;
 	int difficulty;
@@ -51,5 +57,6 @@ public class Context {
 	Deck deck;
 	Hand hand;
 	Program program;
+	ArrayList<Card> gram;
 
 }

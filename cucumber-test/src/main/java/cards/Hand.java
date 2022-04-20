@@ -12,15 +12,17 @@ public class Hand
 
     }
 
-    public ArrayList<Card> getHand()
+    public ArrayList<Card> getCardList()
     {
         return cardList;
     }
     
-    public void setHand(ArrayList<Card> cardList)
+    public void setCardList(ArrayList<Card> cardList)
     {
     	this.cardList = cardList;
     }
+
+
     
     
 }

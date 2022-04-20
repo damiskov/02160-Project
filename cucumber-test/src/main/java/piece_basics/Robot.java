@@ -1,11 +1,12 @@
 package piece_basics;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import board.Position;
 import cards.Card;
+import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
+import environment_elements.Wall;
 import cards.Program;
 
 public class Robot extends Piece {
@@ -17,7 +18,10 @@ public class Robot extends Piece {
 	private Robot chainedTo;
 	private String command;	
 	private Program program;
+	private int mostRecentCheckpoint = 0;
+	
 	public static final String ID = "robot";
+	private ChainingPanel ChainedFrom;
 	
 	public Robot() {
 		orientation = Orientation.UP;
@@ -80,21 +84,34 @@ public class Robot extends Piece {
 			orientation = Orientation.UP;
 			break;
 		}
+	}	
+	//checking wall collision	
+	private boolean wallCollision(Position p) {
+
+		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
+			board.setPosition(this, p);
+		}
+		return false;	
 	}
 	
 	public void shiftX(int spaces) {
-		// TODO: Add wall collision logic
+		
 		Position p = calculatePosition();
 		p.incrX(spaces);
-		board.setPosition(this, p);
+		wallCollision(p);
+		
 	}
+
 	public void shiftY(int spaces) {
+		
 		Position p = calculatePosition();
 		p.incrY(spaces);
 		board.setPosition(this, p);
+		
 	}
 	public void move(int spaces) {
-		if(this.getChainedTo() == null) {
+		
+		if(this.getChainedTo() == null){
 			switch(orientation) {
 			case UP:
 				shiftY(spaces);
@@ -132,18 +149,14 @@ public class Robot extends Piece {
 		}
 	}
 
+	public void heal() {
+		if (health < maxHealth) health++;
+	}
 	public void takeDamage() {
 		health--;
 		if (health == 0) reboot();
 	}
-	public void heal() {
-		if (health < maxHealth) health++;
-	}
 	
-	//is this method still relevant?
-	public void setHealth(int x) {
-		this.health = x;
-	}
 	public int getHealth() {
 		return this.health;
 	}
@@ -238,15 +251,33 @@ public class Robot extends Piece {
 		return this.program;
 	}
 	
+	public void setChainedFrom(ChainingPanel chainedFrom) {
+		this.ChainedFrom = chainedFrom;
+	}
+	
+	public ChainingPanel getChainedFrom() {
+		return this.ChainedFrom;
+	}
+	
 	public void setProgram(ArrayList<Card> program) {
 		Program p = new Program();
-		p.setProgram(program);
+		p.setCardList(program);
 		this.program = p;
 	}
 
 	@Override
 	public String getPieceID() {
 		return ID;
+	}
+	
+
+
+	public int getMostRecentCheckpoint() {
+		return mostRecentCheckpoint;
+	}
+
+	public void setMostRecentCheckpoint(int mostRecentCheckpoint) {
+		this.mostRecentCheckpoint = mostRecentCheckpoint;
 	}
 
 }

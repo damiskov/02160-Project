@@ -5,6 +5,7 @@ import environment_elements.ChainingPanel;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import piece_basics.Orientation;
 import piece_basics.Robot;
 
 public class SDChainingPanel {
@@ -35,6 +36,7 @@ public class SDChainingPanel {
 	public void a_chainable_robot() {
 	    Robot r2 = new Robot();
 	    r2.setChainable(true);
+	    r2.setChainedFrom(context.chainpan2);
 	    context.board.initialPlacement(r2, 7, 5);
 	    context.robot2 = r2;
 	}
@@ -53,19 +55,20 @@ public class SDChainingPanel {
 		assertEquals(context.robot, context.robot2.getChainedTo());
 		assertEquals(context.robot2, context.robot.getChainedTo());
 	}
-//	@Then("the inactive chaining panel become active again")
-//	public void the_inactive_chaining_panel_become_active_again() {
-//		assertEquals(true, context.chainpan2.isActive());
-//	}
+	@Then("the inactive chaining panel become active again")
+	public void the_inactive_chaining_panel_become_active_again() {
+		assertEquals(true, context.chainpan2.isActive());
+	}
 
 	
 	@Given("two robots chained together")
 	public void two_robots_chained_together() {
 		Robot r = new Robot();
 	    context.board.initialPlacement(r, 8, 5);
+	    r.setOrientation(Orientation.RIGHT);
 	    context.robot = r;
 		Robot r2 = new Robot();
-	    context.board.initialPlacement(r2, 5, 4);
+	    context.board.initialPlacement(r2, 4, 5);
 	    context.robot2 = r2;
 	    
 		context.robot.setChainedTo(context.robot2);
@@ -79,9 +82,14 @@ public class SDChainingPanel {
 	}
 
 	
-	@Then("nothing changes")
-	public void nothing_changes() {
+	@Then("the chaining panel is still inactive")
+	public void the_chaining_panel_is_still_inactive() {
 		assertEquals(context.chainpan2.isActive(),false);
+		assertEquals(context.robot.getChainedTo(),null);
+	}
+	
+	@Then("the robot is still not chained")
+	public void the_robot_is_still_not_chained() {
 		assertEquals(context.robot.getChainedTo(),null);
 	}
 }

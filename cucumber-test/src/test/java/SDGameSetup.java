@@ -16,15 +16,15 @@ public class SDGameSetup {
 
 	//given a difficulty
 	
-	@When("Start button pressed")
-	public void start_button_pressed() {
-	    context.startButton.press();
-	}
-	@Then("Generate Board")
-	public void generate_board() {
-	    // Generate board
-		// Then display
-	}
+//	@When("Start button pressed")
+//	public void start_button_pressed() {
+//	    context.startButton.press();
+//	}
+//	@Then("Generate Board")
+//	public void generate_board() {
+//	    // Generate board
+//		// Then display
+//	}
 		
 // Scenario 2 - Robot assignment 
 //given a player

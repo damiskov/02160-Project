@@ -16,6 +16,6 @@ public class Move2 extends Card
     
     @Override
     public Card getOppositeCard() {
-    	return new back2();
+    	return new Back2();
     }
 }

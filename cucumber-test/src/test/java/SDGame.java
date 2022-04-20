@@ -8,11 +8,6 @@ public class SDGame {
 	public SDGame(Context context) {
 		this.context = context;
 	}
-
-	@Given("a game")
-	public void a_game() {
-	    context.game = new Game();
-	}
 	
 	@Given("a game with an empty board")
 	public void a_game_with_an_empty_board() {

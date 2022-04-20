@@ -1,5 +1,8 @@
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import board.Board;
 import board.Position;
 import io.cucumber.java.en.Given;
@@ -7,6 +10,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import piece_basics.Orientation;
 import piece_basics.Robot;
+import cards.Card;
+import cards.Move2;
 
 public class SDRobot {
 	private Context context;
@@ -31,7 +36,8 @@ public class SDRobot {
 	
 	@Given("a program for the robot")
 	public void a_program_for_the_robot() {
-		//define this
+		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new Move2(), new Move2(), new Move2(), new Move2(), new Move2()));
+		context.robot.setProgram(gram);
 	}
 
 	@Given("a robot on the board at \\({int}, {int}) facing {string}")
@@ -74,9 +80,25 @@ public class SDRobot {
 		assertEquals(new Position(int1, int2), context.robot2.calculatePosition());
 	}
 	
+	@When("the robot tries to move one step")
+	public void the_robot_tries_to_move_one_step(){
+		context.robot.move(1);
+	}
+	
+	@Then("the robot stays at \\({int}, {int})")
+	public void the_robot_stays_at(Integer int1, Integer int2) {
+		assertEquals(new Position(int1, int2), context.robot.calculatePosition());	
+	}
+	
+	
 	@When("one robot moves")
 	public void one_robot_moves() {
 	    context.robot.move(1);
+	}
+	
+	@When("the robot moves {int} step")
+	public void the_robot_moves_step(Integer int1) {
+		context.robot.move(int1);
 	}
 	
 	@When("the first robot moves {int} step")
@@ -123,12 +145,7 @@ public class SDRobot {
 	    }
 	}
 	
-//	@Then("the second robot stays at \\({int}, {int})")
-//	public void the_second_robot_stays_at(Integer int1, Integer int2) {
-//	    assertEquals(context.robot2.calculatePosition(), new Position(int1, int2));
-//	}
-	
-	
+
 	@Then("the second robot takes damage")
 	public void the_second_robot_takes_damage() {
 	    assertEquals(2, context.robot2.getHealth());

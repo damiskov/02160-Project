@@ -1,5 +1,9 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,14 +17,18 @@ import utils.GridBagLayoutUtils;
 
 public class MasterView extends JFrame{
 	
-	
 	private static final long serialVersionUID = 3L;
 	
 	private MasterController controller;
 	
 	private BoardPanel boardPanel;
 	private JPanel cardPanel;
+	private StatusPanel statusPanel;
 	
+	// for testing
+	private JButton blackScreenButton;
+	
+	private BlackScreen blackScreen;
 	
 	public MasterView(MasterController masterController) {
 		this.controller = masterController;
@@ -35,24 +43,68 @@ public class MasterView extends JFrame{
 		
 		boardPanel = new BoardPanel(10, 12);
 		cardPanel = new CardPanel();
+		statusPanel = new StatusPanel();
 		
-		add(boardPanel, GridBagLayoutUtils.constraint(0, 0, 0));
-		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 0));
-		JButton btnStart = new JButton("Start Game");
-		btnStart.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				//boardPanel.addSprite("robot", 0, 0, 0);
-				//boardPanel.removeSprite("robot", 8, 8);
-			}
+		blackScreen = new BlackScreen(this);
+		
+		// temporary
+		blackScreenButton = new JButton("Black screen");
+		MasterView masterView = this;
+		blackScreenButton.addActionListener(e -> {
+			masterView.displayBlackScreen(2);
 		});
-		add(btnStart, GridBagLayoutUtils.constraint(0, 2, 0));
 		
+		addElements();
 		pack();
+		
 		setVisible(true);
 		
 		// maximize the window
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+	}
+	
+	public void displayBlackScreen(int playerTurn) {
+		removeElements();
+		addBlackScreen(playerTurn);
+	}
+	
+	public void hideBlackScreen() {
+		removeBlackScreen();
+		addElements();
+	}
+
+	private void addElements() {
+		setLayout(new GridBagLayout());
+		add(boardPanel, GridBagLayoutUtils.constraint(0, 0, 10));
+		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 10));
+		
+		GridBagConstraints spConstraint = new GridBagConstraints();
+		spConstraint.gridx = 1;
+		spConstraint.gridy = 0;
+		spConstraint.fill = GridBagConstraints.VERTICAL;
+		add(statusPanel, spConstraint);
+		
+		add(blackScreenButton, GridBagLayoutUtils.constraint(1, 1, 0));
+		revalidate();
+		repaint();
+	}
+	
+	private void removeElements() {
+		remove(boardPanel);
+		remove(cardPanel);
+		remove(statusPanel);
+		remove(blackScreenButton);
+	}
+	
+	private void addBlackScreen(int playerTurn) {
+		setLayout(new BorderLayout());
+		add(blackScreen, BorderLayout.CENTER);
+		blackScreen.setPlayerTurnText(playerTurn);
+		revalidate();
+		repaint();
+	}
+	
+	private void removeBlackScreen() {
+		remove(blackScreen);
 	}
 }

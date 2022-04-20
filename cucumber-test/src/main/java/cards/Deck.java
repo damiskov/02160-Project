@@ -67,7 +67,7 @@ public class Deck
             numbers.remove(y);
         }
         Hand h = new Hand();
-        h.setHand(hand);
+        h.setCardList(hand);
         return h;
     }
 }
