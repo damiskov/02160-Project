@@ -41,7 +41,7 @@ public class BoardRetriever
 	public Board retrieveBoard(String filename) 
 	{
 		Board b = new Board(12,12);
-		String path = System.getProperty("user.dir") + "boards\\" + filename;
+		String path = "boards\\" + filename;
 		// Open the file
 		FileInputStream fstream = null;
 		try {
