@@ -10,6 +10,7 @@ import piece_basics.Orientation;
 public class BoardRetriever  
 {  
 	
+	
 	private HashMap<Character, EnvironmentElement> asciiToEE = new HashMap<>();
 	private void initialiseHM()
 	{
@@ -57,8 +58,11 @@ public class BoardRetriever
 			while ((strLine = br.readLine()) != null)   {
 				for (int i = 0; i < strLine.length(); i++)
 				{
-					b.initialPlacement(asciiToEE.get(strLine.charAt(i)), i, j);
-					System.out.println(strLine.charAt(i));
+					if (!(asciiToEE.get(strLine.charAt(i))==null))
+					{
+						b.initialPlacement(asciiToEE.get(strLine.charAt(i)), i, j);
+					}
+					
 				}
 				j++;
 			  
