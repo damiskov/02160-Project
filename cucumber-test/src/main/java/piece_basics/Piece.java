@@ -1,5 +1,7 @@
 package piece_basics;
 
+import java.io.IOException;
+
 import board.IBoard;
 
 public abstract class Piece {
@@ -13,4 +15,6 @@ public abstract class Piece {
 	public void performImmediateAction(Robot r) {}
 	
 	public abstract String getPieceID();
+
+
 }

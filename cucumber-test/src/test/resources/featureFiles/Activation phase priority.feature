@@ -1,4 +1,4 @@
-Feature: Activation phase
+Feature: Activation phase priority
 
   Scenario: A conveyor belt is activated before a gear
   	Given a game with an empty board

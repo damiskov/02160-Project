@@ -1,11 +1,13 @@
 package piece_basics;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import board.Position;
 import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
+import environment_elements.Wall;
 import cards.Program;
 
 public class Robot extends Piece {
@@ -83,21 +85,37 @@ public class Robot extends Piece {
 			orientation = Orientation.UP;
 			break;
 		}
+	}	
+	//checking wall collision	
+	private boolean wallCollision(Position p) {
+
+		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
+			board.setPosition(this, p);
+		}
+		return false;	
+
 	}
 	
 	public void shiftX(int spaces) {
-		// TODO: Add wall collision logic
+		
 		Position p = calculatePosition();
 		p.incrX(spaces);
-		board.setPosition(this, p);
+		wallCollision(p);
+		
+
 	}
+
+
 	public void shiftY(int spaces) {
+		
 		Position p = calculatePosition();
 		p.incrY(spaces);
-		board.setPosition(this, p);
+		wallCollision(p);
+		
 	}
 	public void move(int spaces) {
-		if(this.getChainedTo() == null) {
+		
+		if(this.getChainedTo() == null){
 			switch(orientation) {
 			case UP:
 				shiftY(spaces);
@@ -247,7 +265,7 @@ public class Robot extends Piece {
 	
 	public void setProgram(ArrayList<Card> program) {
 		Program p = new Program();
-		p.setProgram(program);
+		p.setCardList(program);
 		this.program = p;
 	}
 
@@ -255,6 +273,8 @@ public class Robot extends Piece {
 	public String getPieceID() {
 		return ID;
 	}
+	
+
 
 	public int getMostRecentCheckpoint() {
 		return mostRecentCheckpoint;

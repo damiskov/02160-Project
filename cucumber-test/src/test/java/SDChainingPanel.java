@@ -5,6 +5,7 @@ import environment_elements.ChainingPanel;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import piece_basics.Orientation;
 import piece_basics.Robot;
 
 public class SDChainingPanel {
@@ -64,9 +65,10 @@ public class SDChainingPanel {
 	public void two_robots_chained_together() {
 		Robot r = new Robot();
 	    context.board.initialPlacement(r, 8, 5);
+	    r.setOrientation(Orientation.RIGHT);
 	    context.robot = r;
 		Robot r2 = new Robot();
-	    context.board.initialPlacement(r2, 5, 4);
+	    context.board.initialPlacement(r2, 4, 5);
 	    context.robot2 = r2;
 	    
 		context.robot.setChainedTo(context.robot2);

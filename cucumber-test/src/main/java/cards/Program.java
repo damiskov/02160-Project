@@ -12,12 +12,12 @@ public class Program {
 	
 	// getter and setter for program
 	
-	public void setProgram(ArrayList<Card> cardList)
+	public void setCardList(ArrayList<Card> cardList)
 	{
 		this.program = cardList;
 	}
 	
-	public ArrayList<Card> getProgram()
+	public ArrayList<Card> getCardList()
 	{
 		return this.program;
 	}

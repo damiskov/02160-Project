@@ -21,13 +21,13 @@ public class ReversalPanel extends EnvironmentElement {
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) {
 			Program program = board.getRobotAt(calculatePosition()).getProgram();
-			int programLength = program.getProgram().size();
+			int programLength = program.getCardList().size();
 			
 			for (int i = 0; i < programLength; i++) {
-				newProg.getProgram().add(program.getProgram().get(i).getOppositeCard());
+				newProg.getCardList().add(program.getCardList().get(i).getOppositeCard());
 			}
 			System.out.println(board.getRobotAt(calculatePosition()) + " got the moves in its program reversed");
-			board.getRobotAt(calculatePosition()).setProgram(newProg.getProgram());
+			board.getRobotAt(calculatePosition()).setProgram(newProg.getCardList());
 		}
 
 	}
