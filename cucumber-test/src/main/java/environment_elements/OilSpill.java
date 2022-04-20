@@ -12,20 +12,20 @@ public class OilSpill extends EnvironmentElement {
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) {
-			setPosition(calculatePosition());
-			board.removeEElement(getPosition()); //removes the OilSpill
-			board.initialPlacement(new Fire(), getPosition()); //places the fire
+			setP(calculatePosition());
+			board.removeEElement(getP()); //removes the OilSpill
+			board.initialPlacement(new Fire(), getP()); //places the fire
 			
-			System.out.println(board.getRobotAt(getPosition()) + " got damaged by the fire");
-			board.getRobotAt(getPosition()).takeDamage(); //damages the robot
+			System.out.println(board.getRobotAt(getP()) + " got damaged by the fire");
+			board.getRobotAt(getP()).takeDamage(); //damages the robot
 		}
 	}
 
-	public void setPosition(Position pos) {
+	public void setP(Position pos) {
 		this.p = pos;
 	}
 	
-	public Position getPosition() {
+	public Position getP() {
 		return this.p;
 	}
 	@Override
