@@ -30,7 +30,7 @@ public class SDBoardGeneration {
 	public void generate_board()
 	{
 		new BoardFactory();
-		Board b = BoardFactory.generateBoard(d, robots.length, robots);
+		Board b = BoardFactory.generateBoard(d, robots);
 	}
 
 
