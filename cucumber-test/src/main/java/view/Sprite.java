@@ -4,8 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 
-import utils.ImageUtils;
-
 public class Sprite implements ISprite {
 
 	private int x;
@@ -28,10 +26,6 @@ public class Sprite implements ISprite {
 		setX(x);
 		setY(y);
 		setRotation(degrees);
-	}
-	
-	public Sprite(String pieceID, int size, int x, int y, int degrees, BoardPanel canvas) {
-		this(ImageUtils.scaledImage("images/" + pieceID + ".png", size, size), x, y, degrees, canvas);
 	}
 	
 	private void updateAffineTransform() {

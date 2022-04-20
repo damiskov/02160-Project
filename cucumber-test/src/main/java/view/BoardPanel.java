@@ -45,10 +45,10 @@ public class BoardPanel extends JPanel {
 		backgroundTile = ImageUtils.scaledImage("images/tile.png", pixelsPerCell, pixelsPerCell);
 		
 		// temporary, for testing
-		spriteList.add(new Sprite("arrow", pixelsPerCell, pixelsPerCell, pixelsPerCell, 0, this));
-		spriteList.add(new Sprite("arrow", pixelsPerCell, pixelsPerCell*2, pixelsPerCell*4, 90, this));
-		spriteList.add(new Sprite("circle", pixelsPerCell, pixelsPerCell*6, pixelsPerCell*4, 0, this));
-		spriteList.add(new Sprite("arrow", pixelsPerCell, pixelsPerCell*6, pixelsPerCell*4, 0, this));
+		spriteList.add(SpriteFactory.getFromPieceID("arrow", pixelsPerCell, pixelsPerCell, pixelsPerCell, 0, this));
+		spriteList.add(SpriteFactory.getFromPieceID("arrow", pixelsPerCell, pixelsPerCell*2, pixelsPerCell*4, 90, this));
+		spriteList.add(SpriteFactory.getFromPieceID("circle", pixelsPerCell, pixelsPerCell*6, pixelsPerCell*4, 0, this));
+		spriteList.add(SpriteFactory.getFromPieceID("arrow", pixelsPerCell, pixelsPerCell*6, pixelsPerCell*4, 0, this));
 	}
 	
 	@Override
