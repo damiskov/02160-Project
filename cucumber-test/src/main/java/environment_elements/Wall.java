@@ -24,7 +24,7 @@ public class Wall extends EnvironmentElement {
 	}
 	
 	@Override
-	public boolean doThreeSteps() {
+	public boolean wallOnOtherCells() {
 		return true;
 	}
 	

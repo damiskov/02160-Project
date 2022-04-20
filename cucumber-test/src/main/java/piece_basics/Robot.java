@@ -2,6 +2,7 @@ package piece_basics;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import board.Position;
 import cards.Card;
@@ -16,6 +17,7 @@ public class Robot extends Piece {
 	private final int maxHealth = 3;
 	private RespawnPoint currentRespawnPoint;
 	private boolean chainable = false;
+	private boolean wallOnBoard;
 	private Robot chainedTo;
 	private String command;	
 	private Program program;
@@ -86,6 +88,18 @@ public class Robot extends Piece {
 			break;
 		}
 	}	
+	
+	//checking wallcollision after 2 or 3 steps 
+//	private boolean wallOnOtherCells() {
+//		
+//		//(TODO: for loop) 
+//		for () {
+//			
+//		}
+//		return wallOnBoard = false;
+//		
+//	}
+	
 	//checking wall collision	
 	private boolean wallCollision(Position p) {
 

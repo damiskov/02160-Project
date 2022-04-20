@@ -59,8 +59,32 @@ public class SDRobot {
 	    context.robot = r;
 	}
 	
+	@Given("a second robot on the board at \\({int}, {int}) facing {string}")
+	public void a_second_robot_on_the_board_at_facing(Integer int1, Integer int2, String string) {
+	    Robot r = new Robot();
+	    switch (string.toLowerCase()) {
+	    case "up":
+	    	r.setOrientation(Orientation.UP); break;
+	    case "right":
+	    	r.setOrientation(Orientation.RIGHT); break;
+	    case "down":
+	    	r.setOrientation(Orientation.DOWN); break;
+	    case "left":
+	    	r.setOrientation(Orientation.LEFT); break;
+    	default:
+    		throw new IllegalArgumentException("Invalid orientation");
+	    }
+	    context.board.initialPlacement(r, int1, int2);
+	    context.robot2 = r;
+	}
+	
 	@When("the robot moves to \\({int}, {int})")
 	public void the_robot_moves_to(Integer int1, Integer int2) {
+	    context.board.setPosition(context.robot, new Position(int1, int2));
+	}
+	
+	@When("the first robot moves to \\({int}, {int})")
+	public void the_first_robot_moves_to(Integer int1, Integer int2) {
 	    context.board.setPosition(context.robot, new Position(int1, int2));
 	}
 	
@@ -73,6 +97,7 @@ public class SDRobot {
 	public void the_first_robot_is_at(Integer int1, Integer int2) {
 		assertEquals(new Position(int1, int2), context.robot.calculatePosition());
 	}
+	
 	
 	
 	@Then("the second robot is at \\({int}, {int})")
