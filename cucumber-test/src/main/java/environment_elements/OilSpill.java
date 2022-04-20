@@ -7,20 +7,27 @@ public class OilSpill extends EnvironmentElement {
 
 	public static final String ID = "oil_spill";
 
-	public Position p; //the public position is declared here
+	private Position p; //the public position is declared here
 	
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) {
-			p = calculatePosition();//the position is initiated here
-			board.removeEElement(p); //removes the OilSpill
-			board.initialPlacement(new Fire(), p); //places the fire
+			setPosition(calculatePosition());
+			board.removeEElement(getPosition()); //removes the OilSpill
+			board.initialPlacement(new Fire(), getPosition()); //places the fire
 			
-			System.out.println(board.getRobotAt(p) + " got damaged by the fire");
-			board.getRobotAt(p).takeDamage(); //damages the robot
+			System.out.println(board.getRobotAt(getPosition()) + " got damaged by the fire");
+			board.getRobotAt(getPosition()).takeDamage(); //damages the robot
 		}
 	}
 
+	public void setPosition(Position pos) {
+		this.p = pos;
+	}
+	
+	public Position getPosition() {
+		return this.p;
+	}
 	@Override
 	public String getPieceID() {
 		return ID;

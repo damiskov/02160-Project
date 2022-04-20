@@ -4,35 +4,36 @@ import board.Position;
 import piece_basics.EnvironmentElement;
 
 public class Fire extends EnvironmentElement{
-	public Position p;	//the public position is declared here
+	private Position p;	//the public position is declared here
 	public static final String ID = "fire";
 	private int spreadCounter = 0;
 	
 	@Override
 	public void performRegisterAction() {
+		setPosition(calculatePosition());
 		//robot gets damaged by fire
-		if(board.hasRobotAt(calculatePosition())) {
-			System.out.println(board.getRobotAt(calculatePosition()) + " got damaged by the fire");
-			board.getRobotAt(calculatePosition()).takeDamage();
+		if(board.hasRobotAt(getPosition())) {
+			System.out.println(board.getRobotAt(getPosition()) + " got damaged by the fire");
+			board.getRobotAt(getPosition()).takeDamage();
 		}
 		
 		if(getSpreadCounter() <= 4 ) {
-			p = calculatePosition(); //calculates old position
+			//p = calculatePosition(); //calculates old position
 	
 			//randomly generates new position for the fire to spread to
-			int x_c = p.getX();
-			int y_c = p.getY();
+			int x_c = getPosition().getX();
+			int y_c = getPosition().getY();
 			int newX = x_c + (int)(Math.random() * 3) -1;
 			int newY = y_c + (int)(Math.random() * 3) -1;
 	
 			
-			p.setX(newX); //the position is initiated here to have the position of the new fire
-			p.setY(newY);
+			getPosition().setX(newX); //the position is initiated here to have the position of the new fire
+			getPosition().setY(newY);
 	
-			board.initialPlacement(new Fire(), p); //places the fire
+			board.initialPlacement(new Fire(), getPosition()); //places the fire
 			
 			//sets the spread counter on the new fire so it does not spread
-			((Fire) board.getEElementAt(p)).setSpreadCounter(5);
+			((Fire) board.getEElementAt(getPosition())).setSpreadCounter(5);
 			
 			
 			//increments spread counter on the original fire
@@ -42,6 +43,14 @@ public class Fire extends EnvironmentElement{
 
 	}
 
+	public void setPosition(Position pos) {
+		this.p = pos;
+	}
+	
+	public Position getPosition() {
+		return this.p;
+	}
+	
 	public void incrementSpreadCounter() {
 		spreadCounter ++;
 	}
