@@ -73,8 +73,8 @@ public class MasterView extends JFrame{
 
 	private void addElements() {
 		setLayout(new GridBagLayout());
-		add(boardPanel, GridBagLayoutUtils.constraint(0, 0, 0));
-		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 0));
+		add(boardPanel, GridBagLayoutUtils.constraint(0, 0, 10));
+		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 10));
 		
 		GridBagConstraints spConstraint = new GridBagConstraints();
 		spConstraint.gridx = 1;
