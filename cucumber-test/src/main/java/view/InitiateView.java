@@ -74,8 +74,16 @@ public class InitiateView extends JFrame{
 		btnStart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(difficulty.getSelection().getActionCommand());
-				controller.setParameters(sliderPlayers.getValue(),difficulty.getSelection().getActionCommand());
+
+				int num_players = sliderPlayers.getValue();
+				String difficulty_selected = difficulty.getSelection().getActionCommand();
+				
+				controller.setGameParameters(num_players, difficulty_selected);
+				
+
+//				System.out.println(difficulty.getSelection().getActionCommand());
+//				controller.setParameters(sliderPlayers.getValue(),difficulty.getSelection().getActionCommand());
+
 			}
 		});
 		
