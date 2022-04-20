@@ -1,5 +1,7 @@
 package piece_basics;
 import board.Position;
+import environment_elements.Teleporter;
+import environment_elements.Wall;
 
 public abstract class EnvironmentElement extends Piece {
 	public Position calculatePosition() {
@@ -21,7 +23,13 @@ public abstract class EnvironmentElement extends Piece {
 	
 	public boolean isWallCollsion() {
 		return false;
-	};
+	}
+	public boolean doThreeSteps() {
+		return false;
+	}
+	public void setReceiving(Wall receiving) {
+		
+	}
 	
 
 }
