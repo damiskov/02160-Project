@@ -27,6 +27,17 @@ public class BoardGenerator {
 		this.robots = robots;
 	}
 	
+	public static void main(String[] args)
+	{
+		String[] files = {"E1", "E2", "E3", "M1", "M2", "M3", "H1", "H2", "H3"};
+		BoardRetriever BR = new BoardRetriever();
+		for (String i : files)
+		{
+			System.out.println(i);
+			BR.retrieveBoard(i);
+			
+		}
+	}
 	
 	
 	public Board getBoard()

@@ -24,11 +24,16 @@ public class BoardRetriever
 		asciiToEE.put('<', new ConveyorBelt(Orientation.LEFT));
 		asciiToEE.put('v', new ConveyorBelt(Orientation.DOWN));
 		asciiToEE.put('H', new HealthStation());
-		asciiToEE.put('-', new Laser());
-		asciiToEE.put('L', new Gear(true));
-		asciiToEE.put('G', new Gear(false));
+		asciiToEE.put('L', new Laser());
+		asciiToEE.put('A', new Gear(true));
+		asciiToEE.put('K', new Gear(false));
 		asciiToEE.put('R', new ReversalPanel());
 		asciiToEE.put('C', new ChainingPanel());
+		asciiToEE.put('1', new Checkpoint(1));
+		asciiToEE.put('2', new Checkpoint(2));
+		asciiToEE.put('3', new Checkpoint(3));
+		asciiToEE.put('4', new Checkpoint(4));
+		asciiToEE.put('5', new Checkpoint(5));
 		asciiToEE.put(' ', null);
 		
 	}
@@ -41,7 +46,7 @@ public class BoardRetriever
 	public Board retrieveBoard(String filename) 
 	{
 		Board b = new Board(12,12);
-		String path = "boards\\" + filename;
+		String path = "boards/" + filename + ".txt";
 		// Open the file
 		FileInputStream fstream = null;
 		try {
