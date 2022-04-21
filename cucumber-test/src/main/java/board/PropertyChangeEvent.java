@@ -1,18 +1,19 @@
 package board;
 
 import piece_basics.Orientation;
+import piece_basics.Piece;
 
 public class PropertyChangeEvent {
 
 	private PropertyChangeType propertyChangeType;
-	private String ID;
+	private Piece piece;
 	private Position posCurrent;
 	private Position posNew;
 	private Orientation orientationOld;
 	private Orientation orientationNew;
 	
 	
-	public PropertyChangeEvent(PropertyChangeType propertyChangeType, String ID, Position posCurrent, Position posNew,
+	public PropertyChangeEvent(PropertyChangeType propertyChangeType, Piece piece, Position posCurrent, Position posNew,
 			Orientation orientOld, Orientation orientNew) {
 		super();
 		this.propertyChangeType = propertyChangeType;
@@ -20,7 +21,7 @@ public class PropertyChangeEvent {
 		this.posNew = posNew;
 		this.orientationOld = orientOld;
 		this.orientationNew = orientNew;
-		this.ID = ID;
+		this.piece = piece;
 		
 	}
 
@@ -29,9 +30,10 @@ public class PropertyChangeEvent {
 	public PropertyChangeType getPropertyChangeType() {
 		return propertyChangeType;
 	}
-	
-	public String getID() {
-		return ID;
+
+
+	public Piece getPiece() {
+		return piece;
 	}
 
 

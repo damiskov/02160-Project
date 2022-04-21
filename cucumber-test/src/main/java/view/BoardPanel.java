@@ -13,7 +13,7 @@ import board.*;
 import environment_elements.Laser;
 import environment_elements.Pit;
 import piece_basics.EnvironmentElement;
-import piece_basics.Orientation;
+import piece_basics.Piece;
 import piece_basics.Robot;
 import utils.ImageUtils;
 
@@ -21,7 +21,7 @@ public class BoardPanel extends JPanel {
 
 	private static final long serialVersionUID = -2140843137512577992L;
 	
-	private static final int maxDimension = 500;
+	private static final int maxDimension = 600;
 	
 	private Image backgroundTile;
 	
@@ -32,11 +32,11 @@ public class BoardPanel extends JPanel {
 	private int height;
 	private Board board;
 	
-	private List<ISprite> spriteList = new ArrayList<>();
+	private List<Sprite> spriteList = new ArrayList<>();
 
-	public BoardPanel(int rows, int cols) {
-		this.rows = rows;
-		this.cols = cols;
+	public BoardPanel(IBoard board) {
+		this.rows = board.getNumRows();
+		this.cols = board.getNumColumns();
 		
 		if (rows >= cols) {
 			pixelsPerCell = maxDimension/rows;
@@ -117,36 +117,21 @@ public class BoardPanel extends JPanel {
 		
 	}
 
-	private static int orientationToDegrees(Orientation o) {
-		switch(o) {
-		case UP:
-			return 270;
-		case RIGHT:
-			return 0;
-		case DOWN:
-			return 90;
-		case LEFT:
-			return 180;
-		}
-		return 0;
-			
-	}	
-	
-	public void addSprite(String ID, Position p) {
-		spriteList.add(SpriteFactory.getFromPieceID(ID, pixelsPerCell, pixelsPerCell*p.getX(), pixelsPerCell*p.getY(), 0, this));
+	public void addSprite(Piece piece, Position p) {
+		spriteList.add(SpriteFactory.getFromPiece(piece, pixelsPerCell, this));
 		repaint();
 		
 		//System.out.println("add_action");
 	}
-	public void removeSprite(String ID, Position p) {
+	public void removeSprite(Piece piece, Position p) {
 		int x = p.getX();
 		int y = p.getY();
 		
 		//System.out.println("selection_action");
-		for (ISprite sprite: spriteList) {
+		for (Sprite sprite: spriteList) {
 			
 			//System.out.println(sprite.getID() + " " +sprite.getX() + " " + sprite.getY() );
-			if(sprite.getID().equals(ID) && sprite.getX()==pixelsPerCell*x && sprite.getY()==pixelsPerCell*y) {
+			if(sprite.getX()==pixelsPerCell*x && sprite.getY()==pixelsPerCell*y) {
 				 spriteList.remove(sprite);
 				 
 				 //System.out.println("remove_action");
@@ -170,7 +155,7 @@ public class BoardPanel extends JPanel {
 			}
 		}
 		
-		for (ISprite sprite: spriteList) {
+		for (Sprite sprite: spriteList) {
 			sprite.drawUsing(g2);
 		}
 	}
@@ -183,10 +168,10 @@ public class BoardPanel extends JPanel {
 	public void propertyChange(PropertyChangeEvent pci) {
 		switch (pci.getPropertyChangeType()) {
 		case PLACEMENT:
-			addSprite(pci.getID(), pci.getPosCurrent());
+			addSprite(pci.getPiece(), pci.getPosCurrent());
 			break;
 		case REMOVAL:
-			removeSprite(pci.getID(), pci.getPosCurrent());
+			removeSprite(pci.getPiece(), pci.getPosCurrent());
 			break;
 		case ACTIVATION:
 			activateSprite(pci);

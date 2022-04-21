@@ -82,7 +82,7 @@ public class Board implements IBoard {
 		addToExecutionLists(r);
 		r.setBoard(this);
 		getCell(x, y).robot = r;
-		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.PLACEMENT, r.getPieceID(),  new Position(x,y));
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.PLACEMENT, r,  new Position(x,y));
 	}
 	@Override
 	public void initialPlacement(Robot r, Position p) {
@@ -93,7 +93,7 @@ public class Board implements IBoard {
 		addToExecutionLists(e);
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
-		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.PLACEMENT, e.getPieceID(), new Position(x,y));
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.PLACEMENT, e, new Position(x,y));
 	}
 	@Override
 	public void initialPlacement(EnvironmentElement e, Position p) {
@@ -197,5 +197,15 @@ public class Board implements IBoard {
 	public Map<String, List<Piece>> getPieceLists() {
 		return pieceLists;
 	}
+
+	public int getNumColumns() {
+		return numColumns;
+	}
+
+	public int getNumRows() {
+		return numRows;
+	}
+	
+	
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import piece_basics.Orientation;
+import piece_basics.Piece;
 import view.PropertyChangeListener;
 
 public class PropertyChangeSupport {
@@ -25,8 +26,8 @@ public class PropertyChangeSupport {
 	}
 	
 	// for adding elements
-	public void firePropertyChange(PropertyChangeType propertyChangeType, String ID, Position pos) {
-		firePropertyChange(new PropertyChangeEvent(propertyChangeType, ID, pos, null, null, null));
+	public void firePropertyChange(PropertyChangeType propertyChangeType, Piece piece, Position pos) {
+		firePropertyChange(new PropertyChangeEvent(propertyChangeType, piece, pos, null, null, null));
 	}
 	
 	// for activating or removing elements

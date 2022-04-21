@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import board.Game;
+import board.IBoard;
 import board.PropertyChangeEvent;
 import controller.MasterController;
 import utils.GridBagLayoutUtils;
@@ -31,18 +33,18 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	private BlackScreen blackScreen;
 	
-	public MasterView(MasterController masterController) {
+	public MasterView(MasterController masterController, Game game) {
 		this.controller = masterController;
-		initGUI();
+		initGUI(game.getBoard());
 	}
 
-	private void initGUI() {
+	private void initGUI(IBoard board) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("RoboRally Game of " + controller.playerCount + " players on " + controller.difficulty + " difficulty");
 		
 		setLayout(new GridBagLayout());
 		
-		boardPanel = new BoardPanel(12, 12);
+		boardPanel = new BoardPanel(board);
 		cardPanel = new CardPanel();
 		statusPanel = new StatusPanel();
 		

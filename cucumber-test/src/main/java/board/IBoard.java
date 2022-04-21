@@ -34,4 +34,7 @@ public interface IBoard {
 	
 	Map<String, List<Piece>> getPieceLists();
 	PropertyChangeSupport getPropertyChangeSupport();
+	
+	int getNumRows();
+	int getNumColumns();
 }
