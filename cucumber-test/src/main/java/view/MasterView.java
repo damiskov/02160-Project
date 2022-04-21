@@ -17,6 +17,7 @@ import board.IBoard;
 import controller.MasterController;
 import property_changes.PropertyChangeEvent;
 import property_changes.PropertyChangeListener;
+import property_changes.PropertyChangeType;
 import utils.GridBagLayoutUtils;
 
 public class MasterView extends JFrame implements PropertyChangeListener {
@@ -36,18 +37,18 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	public MasterView(MasterController masterController, Game game) {
 		this.controller = masterController;
-		initGUI(game.getBoard());
+		initGUI(game);
 	}
 
-	private void initGUI(IBoard board) {
+	private void initGUI(Game game) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("RoboRally Game of " + controller.playerCount + " players on " + controller.difficulty + " difficulty");
 		
 		setLayout(new GridBagLayout());
 		
-		boardPanel = new BoardPanel(board);
+		boardPanel = new BoardPanel(game.getBoard());
 		cardPanel = new CardPanel();
-		statusPanel = new StatusPanel();
+		statusPanel = new StatusPanel(game.getNumPlayers());
 		
 		blackScreen = new BlackScreen(this);
 		
@@ -114,7 +115,11 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent pci) {
-		boardPanel.propertyChange(pci);
+		if (pci.getPropertyChangeType() == PropertyChangeType.HEALTH_CHANGE) {
+			statusPanel.setHealth(pci.getRobotNum(), pci.getHealth());
+		} else {
+			boardPanel.propertyChange(pci);
+		}
 		
 	}
 }

@@ -8,8 +8,6 @@ import piece_basics.Robot;
 import utils.ImageUtils;
 
 public class SpriteFactory {
-	
-	private static int nextRobotNumber = 1;
 
 	public static Sprite getFromPiece(Piece piece, int cellSize, BoardPanel canvas) {
 		if (piece instanceof EnvironmentElement) {
@@ -33,8 +31,7 @@ public class SpriteFactory {
 			int x = robot.getX()*cellSize;
 			int y = robot.getY()*cellSize;
 			
-			String filepath = "images/robot" + nextRobotNumber + ".png";
-			nextRobotNumber++;
+			String filepath = "images/robot" + robot.getRobotNumber() + ".png";
 			
 			return new Sprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, robot.getOrientation().getDegrees(), canvas);
 		} else {

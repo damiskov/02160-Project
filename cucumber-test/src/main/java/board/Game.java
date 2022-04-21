@@ -41,11 +41,13 @@ public class Game {
 	String difficulty;
 	private Player[] players;
 	PropertyChangeSupport propertyChangeSupport;
+	int numPlayers;
 	
 	public Game() {}
 	
-	public Game(PropertyChangeSupport pcs) {
+	public Game(PropertyChangeSupport pcs, int numPlayers) {
 		this.propertyChangeSupport = pcs;
+		this.numPlayers = numPlayers;
 		
 		// temporary
 		board = new Board(12, 12, this);
@@ -111,7 +113,8 @@ public class Game {
 	
 	// temporary
 	public void testPlacements() {
-		board.initialPlacement(new Robot(), 0, 0);
+		Robot r1 = new Robot();
+		board.initialPlacement(r1, 0, 0);
 		board.initialPlacement(new Robot(), 1, 0);
 		board.initialPlacement(new Robot(), 2, 0);
 		board.initialPlacement(new Robot(), 3, 0);
@@ -134,10 +137,28 @@ public class Game {
 		board.initialPlacement(new HealthStation(), 3, 3);
 		board.initialPlacement(new OilSpill(), 4, 3);
 		board.initialPlacement(new Pit(), 5, 3);
-		board.initialPlacement(new RespawnPoint(), 6, 3);
+		RespawnPoint rp = new RespawnPoint();
+		r1.setRespawnPoint(rp);
+		board.initialPlacement(rp, 6, 3);
 		board.initialPlacement(new ReversalPanel(), 7, 3);
 		board.initialPlacement(new Teleporter(), 8, 3);
 		board.initialPlacement(new Wall(), 9, 3);
+		
+		new Thread(() -> {
+			try {
+				for (int i = 0; i < 5; i++) {
+					Thread.sleep(1000);
+					r1.takeDamage();
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}).start();
+	}
+
+	public int getNumPlayers() {
+		return numPlayers;
 	}
 	
 }

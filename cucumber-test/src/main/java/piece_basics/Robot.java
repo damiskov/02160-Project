@@ -11,10 +11,14 @@ import property_changes.PropertyChangeType;
 import cards.Program;
 
 public class Robot extends Piece {
-	private Orientation orientation;
-	private int health = 3;
-	private final int maxHealth = 3;
+	private static int nextRobotNumber = 1;
+	private int robotNumber;
+	
+	private Orientation orientation = Orientation.UP;
+	private int health;
+	private final int maxHealth = 5;
 	private RespawnPoint currentRespawnPoint;
+	private ChainingPanel ChainedFrom;
 	private boolean chainable = false;
 	private Robot chainedTo;
 	private String command;	
@@ -22,10 +26,11 @@ public class Robot extends Piece {
 	private int mostRecentCheckpoint = 0;
 	
 	public static final String ID = "robot";
-	private ChainingPanel ChainedFrom;
 	
 	public Robot() {
-		orientation = Orientation.UP;
+		health = maxHealth;
+		robotNumber = nextRobotNumber;
+		nextRobotNumber++;
 	}
 	
 	public void setPosition(Position p) {
@@ -158,13 +163,13 @@ public class Robot extends Piece {
 	public void heal() {
 		if (health < maxHealth) {
 			health++;
-			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.HEALTH_CHANGE, calculatePosition(), health);
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.HEALTH_CHANGE, calculatePosition(), health, robotNumber);
 		}
 	}
 	public void takeDamage() {
 		health--;
 		if (health == 0) reboot();
-		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.HEALTH_CHANGE, calculatePosition(), health);
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.HEALTH_CHANGE, calculatePosition(), health, robotNumber);
 	}
 	
 	public int getHealth() {
@@ -289,6 +294,10 @@ public class Robot extends Piece {
 
 	public void setMostRecentCheckpoint(int mostRecentCheckpoint) {
 		this.mostRecentCheckpoint = mostRecentCheckpoint;
+	}
+
+	public int getRobotNumber() {
+		return robotNumber;
 	}
 
 }

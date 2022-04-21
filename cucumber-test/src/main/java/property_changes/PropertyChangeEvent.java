@@ -13,10 +13,11 @@ public class PropertyChangeEvent {
 	private Orientation orientationOld;
 	private Orientation orientationNew;
 	private int health;
+	private int robotNum;
 	
 	
 	public PropertyChangeEvent(PropertyChangeType propertyChangeType, Piece piece, Position posCurrent, Position posNew,
-			Orientation orientOld, Orientation orientNew, int health) {
+			Orientation orientOld, Orientation orientNew, int health, int robotNum) {
 		super();
 		this.propertyChangeType = propertyChangeType;
 		this.posCurrent = posCurrent;
@@ -25,6 +26,7 @@ public class PropertyChangeEvent {
 		this.orientationNew = orientNew;
 		this.piece = piece;
 		this.health = health;
+		this.robotNum = robotNum;
 	}
 
 
@@ -57,6 +59,19 @@ public class PropertyChangeEvent {
 	public Orientation getOrientationNew() {
 		return orientationNew;
 	}
+
+	
+	public int getRobotNum() {
+		return robotNum;
+	}
+	
+
+	public int getHealth() {
+		return health;
+	}
+
+
+	
 
 	
 	

@@ -16,10 +16,11 @@ public class RobotStatusIndicator extends JPanel {
 	private JLabel robotIcon;
 	private HeartIndicator heartIndicator;
 
-	public RobotStatusIndicator() {
+	public RobotStatusIndicator(int playerNumber) {
 		setLayout(new FlowLayout());
 		
-		robotIcon = new JLabel(new ImageIcon(ImageUtils.scaledImage("images/icon.png", 50, 50)));
+		String imageFilepath = "images/robot" + playerNumber + ".png";
+		robotIcon = new JLabel(new ImageIcon(ImageUtils.scaledImage(imageFilepath, 50, 50)));
 		add(robotIcon);
 		
 		heartIndicator = new HeartIndicator(5);

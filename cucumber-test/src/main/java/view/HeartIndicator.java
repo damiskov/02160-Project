@@ -28,7 +28,7 @@ public class HeartIndicator extends JPanel {
 	}
 	
 	public void setHealth(int health) {
-		for (int i = 0; i < health-1; i++) {
+		for (int i = 0; i < health; i++) {
 			hearts[i].fill();
 		}
 		for (int i = health; i < maxHealth; i++) {

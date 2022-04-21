@@ -21,7 +21,7 @@ public class MasterController {
 		this.difficulty = difficulty;
 		
 		PropertyChangeSupport pci = new PropertyChangeSupport();
-		Game game = new Game(pci);
+		Game game = new Game(pci, playerCount);
 		this.view = new MasterView(this, game);
 		pci.addSubscriber(view);
 		
