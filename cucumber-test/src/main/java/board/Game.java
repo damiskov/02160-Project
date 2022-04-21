@@ -36,8 +36,14 @@ public class Game {
 	private Player[] players;
 	PropertyChangeSupport propertyChangeSupport;
 	
+	public Game() {}
+	
 	public Game(PropertyChangeSupport pcs) {
 		this.propertyChangeSupport = pcs;
+		
+		// temporary
+		board = new Board(12, 12, this);
+		board.initialPlacement(new Robot(), 2, 2);
 	}
 	
 	

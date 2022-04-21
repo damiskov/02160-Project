@@ -49,7 +49,7 @@ public class BoardPanel extends JPanel {
 		
 		setPreferredSize(new Dimension(width, height));
 		
-		backgroundTile = ImageUtils.scaledImage("images/panel.png", pixelsPerCell, pixelsPerCell);
+		backgroundTile = ImageUtils.scaledImage("images/tile.png", pixelsPerCell, pixelsPerCell);
 		
 		// temporary, for testing
 		//spriteList.add(SpriteFactory.getFromPieceID("arrow", pixelsPerCell, pixelsPerCell, pixelsPerCell, 0, this));
@@ -70,55 +70,55 @@ public class BoardPanel extends JPanel {
 		
 		//this.board = new Board(10,12);
 		
-		Robot r = new Robot();
-		board.initialPlacement(r, 8, 0);
-		r.setOrientation(Orientation.DOWN);
-		
-		Laser l = new Laser();
-		board.initialPlacement(l, 1, 5);
-		
-		Pit p = new Pit();
-		board.initialPlacement(p, 4, 3);
-		Pit p1 = new Pit();
-		board.initialPlacement(p1, 0, 0);
-		Laser p2 = new Laser();
-		board.initialPlacement(p2, 0, 9);
-		Pit p3 = new Pit();
-		board.initialPlacement(p3, 11, 0);
-		Laser p4 = new Laser();
-		board.initialPlacement(p4, 11, 9);
+//		Robot r = new Robot();
+//		board.initialPlacement(r, 8, 0);
+//		r.setOrientation(Orientation.DOWN);
+//		
+//		Laser l = new Laser();
+//		board.initialPlacement(l, 1, 5);
+//		
+//		Pit p = new Pit();
+//		board.initialPlacement(p, 4, 3);
+//		Pit p1 = new Pit();
+//		board.initialPlacement(p1, 0, 0);
+//		Laser p2 = new Laser();
+//		board.initialPlacement(p2, 0, 9);
+//		Pit p3 = new Pit();
+//		board.initialPlacement(p3, 11, 0);
+//		Laser p4 = new Laser();
+//		board.initialPlacement(p4, 11, 9);
 	
 		
 		
 		
 		
 		
-		System.out.println(r.getOrientation());
+//		System.out.println(r.getOrientation());
 		
 		
 		//ConveyorBelt c = new EnvironmentElement();
 		
 		//addSprite(r.getPieceID(),r.calculatePosition.getX(),r.calculatePosition.getY())
 		//System.out.println(this.cols+ "X" + this.rows);
-		for (int i=0; i<this.cols; i++) {
-			
-			for (int j=0; j<this.rows; j++) {
-				//System.out.println(i+ "x" + j);
-				if(board.hasEElementAt(new Position(i,j))){
-					//System.out.println(i + " " + j);
-					addSprite(proxyE(i, j).getPieceID(),i,j, 0);
-				}
-				else if(board.hasRobotAt(new Position(i,j))){
-					//System.out.println(i + " " + j);
-					addSprite(proxyR(i, j).getPieceID(),i,j,orientationToDegrees(proxyR(i, j)));
-				}
-			}
-		}
+//		for (int i=0; i<this.cols; i++) {
+//			
+//			for (int j=0; j<this.rows; j++) {
+//				//System.out.println(i+ "x" + j);
+//				if(board.hasEElementAt(new Position(i,j))){
+//					//System.out.println(i + " " + j);
+//					addSprite(proxyE(i, j).getPieceID(),i,j, 0);
+//				}
+//				else if(board.hasRobotAt(new Position(i,j))){
+//					//System.out.println(i + " " + j);
+//					addSprite(proxyR(i, j).getPieceID(),i,j,orientationToDegrees(proxyR(i, j)));
+//				}
+//			}
+//		}
 		
 	}
 
-	private int orientationToDegrees(Robot r) {
-		switch(r.getOrientation()) {
+	private static int orientationToDegrees(Orientation o) {
+		switch(o) {
 		case UP:
 			return 270;
 		case RIGHT:
@@ -132,22 +132,15 @@ public class BoardPanel extends JPanel {
 			
 	}	
 	
-	private EnvironmentElement proxyE(int cols, int rows) {
-		//System.out.println(cols + "-" + rows);
-		return board.getEElementAt(new Position(cols,rows));
-	}
-	private Robot proxyR(int cols, int rows) {
-		//System.out.println(cols + "_" + rows);
-		return board.getRobotAt(new Position(cols,rows));
-	}
-	
-	public void addSprite(String ID, int x, int y, int a) {
-		spriteList.add(SpriteFactory.getFromPieceID(ID, pixelsPerCell, pixelsPerCell*x, pixelsPerCell*y, a, this));
+	public void addSprite(String ID, Position p) {
+		spriteList.add(SpriteFactory.getFromPieceID(ID, pixelsPerCell, pixelsPerCell*p.getX(), pixelsPerCell*p.getY(), 0, this));
 		repaint();
 		
 		//System.out.println("add_action");
 	}
-	public void removeSprite(String ID, int x, int y) {
+	public void removeSprite(String ID, Position p) {
+		int x = p.getX();
+		int y = p.getY();
 		
 		//System.out.println("selection_action");
 		for (ISprite sprite: spriteList) {
@@ -185,5 +178,56 @@ public class BoardPanel extends JPanel {
 	@Override
 	public int getHeight() {
 		return height;
+	}
+
+	public void propertyChange(PropertyChangeEvent pci) {
+		switch (pci.getPropertyChangeType()) {
+		case PLACEMENT:
+			addSprite(pci.getID(), pci.getPosCurrent());
+			break;
+		case REMOVAL:
+			removeSprite(pci.getID(), pci.getPosCurrent());
+			break;
+		case ACTIVATION:
+			activateSprite(pci);
+			break;
+		case MOVEMENT:
+			moveSprite(pci);
+			break;
+		case TELEPORT:
+			teleportSprite(pci);
+			break;
+		case ROTATION:
+			rotateSprite(pci);
+			break;
+		case ROBOTLASER:
+			displayRobotLaser(pci);
+			break;
+		}
+	}
+	
+	private void activateSprite(PropertyChangeEvent pci) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void moveSprite(PropertyChangeEvent pci) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void teleportSprite(PropertyChangeEvent pci) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void rotateSprite(PropertyChangeEvent pci) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void displayRobotLaser(PropertyChangeEvent pci) {
+		// TODO Auto-generated method stub
+		
 	}
 }

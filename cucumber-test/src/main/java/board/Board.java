@@ -24,7 +24,7 @@ public class Board implements IBoard {
 	private Game game;
 	
 	// initialize an empty board with a set number of columns and rows
-	public Board(int numColumns, int numRows, Game game) {
+	public Board(int numColumns, int numRows) {
 		this.matrix = new Cell[numColumns][numRows];
 		for (int i = 0; i < numColumns; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -33,6 +33,10 @@ public class Board implements IBoard {
 		}
 		this.numColumns = numColumns;
 		this.numRows = numRows;
+	}
+	
+	public Board(int numColumns, int numRows, Game game) {
+		this(numColumns, numRows);
 		this.game = game;
 	}
 	

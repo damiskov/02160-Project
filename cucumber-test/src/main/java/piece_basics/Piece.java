@@ -10,7 +10,7 @@ public abstract class Piece {
 		this.board = board;
 	}
 	
-	public PropertyChangeSupport getPropertyChangeSupport() {
+	protected PropertyChangeSupport getPropertyChangeSupport() {
 		return board.getPropertyChangeSupport();
 	}
 	

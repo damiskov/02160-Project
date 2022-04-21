@@ -12,10 +12,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import board.PropertyChangeEvent;
 import controller.MasterController;
 import utils.GridBagLayoutUtils;
 
-public class MasterView extends JFrame{
+public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	private static final long serialVersionUID = 3L;
 	
@@ -41,7 +42,7 @@ public class MasterView extends JFrame{
 		
 		setLayout(new GridBagLayout());
 		
-		boardPanel = new BoardPanel(10, 12);
+		boardPanel = new BoardPanel(12, 12);
 		cardPanel = new CardPanel();
 		statusPanel = new StatusPanel();
 		
@@ -106,5 +107,11 @@ public class MasterView extends JFrame{
 	
 	private void removeBlackScreen() {
 		remove(blackScreen);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent pci) {
+		boardPanel.propertyChange(pci);
+		
 	}
 }
