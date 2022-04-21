@@ -15,6 +15,7 @@ import environment_elements.Pit;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
+import property_changes.PropertyChangeEvent;
 import utils.ImageUtils;
 
 public class BoardPanel extends JPanel {
@@ -185,7 +186,7 @@ public class BoardPanel extends JPanel {
 		case ROTATION:
 			rotateSprite(pci);
 			break;
-		case ROBOTLASER:
+		case ROBOT_LASER:
 			displayRobotLaser(pci);
 			break;
 		}

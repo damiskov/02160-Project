@@ -3,11 +3,11 @@ package piece_basics;
 import java.util.ArrayList;
 
 import board.Position;
-import board.PropertyChangeType;
 import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
 import environment_elements.Wall;
+import property_changes.PropertyChangeType;
 import cards.Program;
 
 public class Robot extends Piece {
@@ -156,11 +156,15 @@ public class Robot extends Piece {
 	}
 
 	public void heal() {
-		if (health < maxHealth) health++;
+		if (health < maxHealth) {
+			health++;
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.HEALTH_CHANGE, calculatePosition(), health);
+		}
 	}
 	public void takeDamage() {
 		health--;
 		if (health == 0) reboot();
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.HEALTH_CHANGE, calculatePosition(), health);
 	}
 	
 	public int getHealth() {
@@ -208,7 +212,7 @@ public class Robot extends Piece {
 		
 		if (foundRobot != null) {
 			foundRobot.takeDamage();
-			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROBOTLASER, calculatePosition(), foundRobot.calculatePosition());
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROBOT_LASER, calculatePosition(), foundRobot.calculatePosition());
 		}
 	}
 	private Robot findRobotAhead() {

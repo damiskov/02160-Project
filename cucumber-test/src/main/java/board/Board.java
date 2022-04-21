@@ -7,6 +7,8 @@ import java.util.Map;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
+import property_changes.PropertyChangeSupport;
+import property_changes.PropertyChangeType;
 
 // utility class for Board with public attributes. Encapsulation is still respected as this class is fully encapsulated by the Board class
 class Cell {

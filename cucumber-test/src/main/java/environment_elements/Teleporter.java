@@ -1,9 +1,9 @@
 package environment_elements;
 
 import board.Position;
-import board.PropertyChangeType;
 import piece_basics.EnvironmentElement;
 import piece_basics.Robot;
+import property_changes.PropertyChangeType;
 
 public class Teleporter extends EnvironmentElement {
 	private Teleporter receiving;

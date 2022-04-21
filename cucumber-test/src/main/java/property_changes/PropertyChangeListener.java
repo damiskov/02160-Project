@@ -1,6 +1,4 @@
-package view;
-
-import board.PropertyChangeEvent;
+package property_changes;
 
 public interface PropertyChangeListener {
 

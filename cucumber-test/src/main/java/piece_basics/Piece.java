@@ -1,7 +1,7 @@
 package piece_basics;
 
 import board.IBoard;
-import board.PropertyChangeSupport;
+import property_changes.PropertyChangeSupport;
 
 public abstract class Piece {
 	protected IBoard board;

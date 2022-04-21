@@ -6,6 +6,7 @@ import java.util.Map;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
+import property_changes.PropertyChangeSupport;
 
 public interface IBoard {
 	void initialPlacement(Robot r, int x, int y);

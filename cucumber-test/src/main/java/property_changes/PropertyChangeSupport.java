@@ -1,11 +1,11 @@
-package board;
+package property_changes;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import board.Position;
 import piece_basics.Orientation;
 import piece_basics.Piece;
-import view.PropertyChangeListener;
 
 public class PropertyChangeSupport {
 
@@ -27,22 +27,27 @@ public class PropertyChangeSupport {
 	
 	// for adding elements
 	public void firePropertyChange(PropertyChangeType propertyChangeType, Piece piece, Position pos) {
-		firePropertyChange(new PropertyChangeEvent(propertyChangeType, piece, pos, null, null, null));
+		firePropertyChange(new PropertyChangeEvent(propertyChangeType, piece, pos, null, null, null, 0));
 	}
 	
 	// for activating or removing elements
 	public void firePropertyChange(PropertyChangeType propertyChangeType, Position pos) {
-		firePropertyChange(new PropertyChangeEvent(propertyChangeType, null, pos, null, null, null));
+		firePropertyChange(new PropertyChangeEvent(propertyChangeType, null, pos, null, null, null, 0));
 	}
 	
-	// for movements and teleports
+	// for movements, teleports, and robot lasers
 	public void firePropertyChange(PropertyChangeType propertyChangeType, Position posOld, Position posNew) {
-		firePropertyChange(new PropertyChangeEvent(propertyChangeType, null, posOld, posNew, null, null));
+		firePropertyChange(new PropertyChangeEvent(propertyChangeType, null, posOld, posNew, null, null, 0));
 	}
 	
 	// for rotations
 	public void firePropertyChange(PropertyChangeType propertyChangeType, Position pos, Orientation orientOld, Orientation orientNew) {
-		firePropertyChange(new PropertyChangeEvent(propertyChangeType, null, pos, null, orientOld, orientNew));
+		firePropertyChange(new PropertyChangeEvent(propertyChangeType, null, pos, null, orientOld, orientNew, 0));
+	}
+	
+	// for health changes
+	public void firePropertyChange(PropertyChangeType propertyChangeType, Position pos, int health) {
+		firePropertyChange(new PropertyChangeEvent(propertyChangeType, null, pos, null, null, null, health));
 	}
 	
 	

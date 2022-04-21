@@ -14,8 +14,9 @@ import javax.swing.JPanel;
 
 import board.Game;
 import board.IBoard;
-import board.PropertyChangeEvent;
 import controller.MasterController;
+import property_changes.PropertyChangeEvent;
+import property_changes.PropertyChangeListener;
 import utils.GridBagLayoutUtils;
 
 public class MasterView extends JFrame implements PropertyChangeListener {

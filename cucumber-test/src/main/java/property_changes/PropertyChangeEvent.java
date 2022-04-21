@@ -1,5 +1,6 @@
-package board;
+package property_changes;
 
+import board.Position;
 import piece_basics.Orientation;
 import piece_basics.Piece;
 
@@ -11,10 +12,11 @@ public class PropertyChangeEvent {
 	private Position posNew;
 	private Orientation orientationOld;
 	private Orientation orientationNew;
+	private int health;
 	
 	
 	public PropertyChangeEvent(PropertyChangeType propertyChangeType, Piece piece, Position posCurrent, Position posNew,
-			Orientation orientOld, Orientation orientNew) {
+			Orientation orientOld, Orientation orientNew, int health) {
 		super();
 		this.propertyChangeType = propertyChangeType;
 		this.posCurrent = posCurrent;
@@ -22,7 +24,7 @@ public class PropertyChangeEvent {
 		this.orientationOld = orientOld;
 		this.orientationNew = orientNew;
 		this.piece = piece;
-		
+		this.health = health;
 	}
 
 

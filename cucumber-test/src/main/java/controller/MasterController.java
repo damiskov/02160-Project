@@ -2,7 +2,7 @@ package controller;
 
 
 import board.Game;
-import board.PropertyChangeSupport;
+import property_changes.PropertyChangeSupport;
 import view.MasterView;
 
 public class MasterController {

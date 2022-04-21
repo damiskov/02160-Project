@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import board.IBoard;
-import board.PropertyChangeType;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
+import property_changes.PropertyChangeType;
 
 public class ChainingPanel extends EnvironmentElement {
 

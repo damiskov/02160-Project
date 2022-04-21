@@ -19,6 +19,7 @@ import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
+import property_changes.PropertyChangeSupport;
 
 public class Game {
 	

@@ -3,7 +3,6 @@ package view;
 import environment_elements.ConveyorBelt;
 import environment_elements.Gear;
 import piece_basics.EnvironmentElement;
-import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import utils.ImageUtils;
@@ -33,13 +32,9 @@ public class SpriteFactory {
 			Robot robot = (Robot) piece;
 			int x = robot.getX()*cellSize;
 			int y = robot.getY()*cellSize;
-			System.out.println(x);
-			System.out.println(y);
 			
 			String filepath = "images/robot" + nextRobotNumber + ".png";
 			nextRobotNumber++;
-			
-			System.out.println(filepath);
 			
 			return new Sprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, robot.getOrientation().getDegrees(), canvas);
 		} else {
