@@ -2,6 +2,10 @@ package board;
 import cards.Deck;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
 import environment_elements.ConveyorBelt;
@@ -144,17 +148,22 @@ public class Game {
 		board.initialPlacement(new Teleporter(), 8, 3);
 		board.initialPlacement(new Wall(), 9, 3);
 		
-		new Thread(() -> {
-			try {
-				for (int i = 0; i < 5; i++) {
-					Thread.sleep(1000);
-					r1.takeDamage();
+		new SwingWorker<Void, Void>() {
+			@Override
+			public Void doInBackground() {
+				try {
+					for (int i = 0; i < 5; i++) {
+						Thread.sleep(1000);
+						SwingUtilities.invokeLater(() -> r1.takeDamage());
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return null;
 			}
-		}).start();
+			
+		}.execute();
 	}
 
 	public int getNumPlayers() {

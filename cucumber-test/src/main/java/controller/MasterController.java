@@ -8,11 +8,12 @@ import view.MasterView;
 public class MasterController {
 	
 	private ApplicationController application;
-	private MasterView view;
 	public int playerCount;
 	public String difficulty;
 	
+	private MasterView view;
 	private Game game;
+	private PropertyChangeSupport pci;
 	
 	
 	MasterController(ApplicationController application, int playerCount, String difficulty){
@@ -20,8 +21,8 @@ public class MasterController {
 		this.playerCount = playerCount; 
 		this.difficulty = difficulty;
 		
-		PropertyChangeSupport pci = new PropertyChangeSupport();
-		Game game = new Game(pci, playerCount);
+		pci = new PropertyChangeSupport();
+		game = new Game(pci, playerCount);
 		this.view = new MasterView(this, game);
 		pci.addSubscriber(view);
 		
