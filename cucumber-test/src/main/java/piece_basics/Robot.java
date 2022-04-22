@@ -74,7 +74,7 @@ public class Robot extends Piece {
 	}
 	public void turnRight() {
 		switch(orientation) {
-		case UP:
+		case UP:  
 			orientation = Orientation.RIGHT;
 			break;
 		case RIGHT:
@@ -101,10 +101,10 @@ public class Robot extends Piece {
 		return false;	
 
 	}
-	
+	//!board.getEElementAt(posToMoveTo).isWallCollsion())
 	private void tryMoveRobot(Position posToMoveTo) {
 		System.out.println(board.hasRobotAt(posToMoveTo));
-		if (((board.hasEElementAt(posToMoveTo) && !board.getEElementAt(posToMoveTo).isWallCollsion())) || ((board.hasEElementAt(posToMoveTo)== false))) {
+		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) || ((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
 			board.setPosition(this, posToMoveTo);
 		} else if (board.hasRobotAt(posToMoveTo)){
 			Robot toBePushedRobot = board.getRobotAt(posToMoveTo);
@@ -120,6 +120,7 @@ public class Robot extends Piece {
 	}
 	
 	public void shiftX(int spaces) {
+	
 		for (int i = 0; i < spaces; i++) {
 			Position p = calculatePosition();
 			p.incrX(1);
