@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +28,16 @@ private static final long serialVersionUID = -2140843137512577992L;
 	
 	private BoardCreationController controller;
 	
-	private JButton element;
+	
 	
 	private int rows;
 	private int cols;
 	private int pixelsPerCell;
 	private int width;
 	private int height;
+	
+	int col = 0;
+	int row = 0;
 	
 
 	public BoardCreationPanel(int rows, int cols, BoardCreationController controller) {
@@ -42,6 +46,10 @@ private static final long serialVersionUID = -2140843137512577992L;
 		setRowsCols(rows, cols);
 		setPixelsPerCell();	
 		setWidthHeight();
+		
+		//set layout
+		GridBagLayout boardLayout = new GridBagLayout();
+		setLayout(boardLayout);
 		
 		setPreferredSize(new Dimension(width, height));
 		
@@ -73,9 +81,9 @@ private static final long serialVersionUID = -2140843137512577992L;
 	
 	private void setPixelsPerCell() {
 		if (rows >= cols) {
-			pixelsPerCell = maxDimension/rows;
+			pixelsPerCell = maxDimension/(rows);
 		} else {
-			pixelsPerCell = maxDimension/cols;
+			pixelsPerCell = maxDimension/(cols);
 		}
 	}
 	
@@ -85,21 +93,22 @@ private static final long serialVersionUID = -2140843137512577992L;
 	}
 	
 	private void createCellButtons() {
+		
 		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/tile.png", pixelsPerCell, pixelsPerCell));
 		
 		
-		for (int col = 0; col < cols; col++) {
+		for(int col = 0; col < cols; col++) {
 			for (int row = 0; row < rows; row++) {
 				
 					
 					
-					element = new JButton(icon);
+					JButton element = new JButton(icon);
 					element.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 					element.setAlignmentX(Component.CENTER_ALIGNMENT);
 					element.setName("tile");
 					
 					element.addActionListener(e -> {
-						System.out.println("Element clicked");
+						System.out.println("Element clicked" );
 						
 						if (controller.elementIsActive()) {
 							
@@ -122,7 +131,9 @@ private static final long serialVersionUID = -2140843137512577992L;
 					
 //					add(Box.createRigidArea(new Dimension(0, 5)));
 				
+				
 			}
+
 		}
 	}
 	
