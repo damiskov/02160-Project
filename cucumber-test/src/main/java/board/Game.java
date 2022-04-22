@@ -32,13 +32,13 @@ public class Game {
 	);
 	
 	Board board;
-	String difficulty;
+	private Difficulty difficulty;
 	private Player[] players;
 	public void genBoard() {
 		
 	}
-	public void setDifficulty(String d) {
-		this.difficulty = d;
+	public void setDifficulty(int i) {
+		this.difficulty.setLevel(i);
 		
 	}
 	public void setCurrentPlayer(int i) {

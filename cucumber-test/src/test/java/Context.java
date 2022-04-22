@@ -48,11 +48,12 @@ public class Context {
 	Checkpoint checkpoint;
 	
 	Player player;
+	Player player1;
 	Player host;
 	Button startButton;
 	Piece piece;
 	Card card;
-	int difficulty;
+	Difficulty d;
 	
 	Deck deck;
 	Hand hand;
