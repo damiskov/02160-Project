@@ -15,6 +15,8 @@ public class ApplicationController {
 	private Game game;
 
 	private MasterController masterController;
+	
+	private BoardCreationController boardCreationController;
 
 	private void initiate() {
 		initiateController = new InitiateController(this);
@@ -35,6 +37,13 @@ public class ApplicationController {
 		masterController = new MasterController(this, playerCount, difficulty);
 		masterController.display();
 
+	}
+	
+	public void startBoardCreationUI() {
+		
+		boardCreationController = new BoardCreationController(this);
+		boardCreationController.display();
+		
 	}
 	
 	public static void main(String[] args) {

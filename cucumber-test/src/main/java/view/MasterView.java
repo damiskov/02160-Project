@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.BoardCreationController;
 import controller.MasterController;
 import utils.GridBagLayoutUtils;
 
@@ -18,6 +19,7 @@ public class MasterView extends JFrame{
 	private static final long serialVersionUID = 3L;
 	
 	private MasterController controller;
+
 	
 	private BoardPanel boardPanel;
 	private JPanel cardPanel;
@@ -32,6 +34,7 @@ public class MasterView extends JFrame{
 		this.controller = masterController;
 		initGUI();
 	}
+	
 
 	private void initGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,4 +108,5 @@ public class MasterView extends JFrame{
 	private void removeBlackScreen() {
 		remove(blackScreen);
 	}
+	
 }

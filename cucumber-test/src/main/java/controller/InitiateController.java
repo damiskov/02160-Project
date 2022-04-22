@@ -25,6 +25,13 @@ public class InitiateController {
 
 	}
 	
+	public void boardCreationUI() {
+		
+		view.setVisible(false);
+		application.startBoardCreationUI();
+		
+	}
+	
 	
 	public void display() {
 		view.setVisible(true);
