@@ -24,11 +24,8 @@ public abstract class EnvironmentElement extends Piece {
 	public boolean isWallCollsion() {
 		return false;
 	}
-	public boolean doThreeSteps() {
+	public boolean wallOnOtherCells(){
 		return false;
-	}
-	public void setReceiving(Wall receiving) {
-		
 	}
 	
 

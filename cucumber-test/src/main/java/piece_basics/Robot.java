@@ -2,6 +2,7 @@ package piece_basics;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import board.Position;
 import cards.Card;
@@ -16,6 +17,7 @@ public class Robot extends Piece {
 	private final int maxHealth = 3;
 	private RespawnPoint currentRespawnPoint;
 	private boolean chainable = false;
+	private boolean wallOnBoard;
 	private Robot chainedTo;
 	private String command;	
 	private Program program;
@@ -86,6 +88,10 @@ public class Robot extends Piece {
 			break;
 		}
 	}	
+	
+	//checking wallcollision after 2 or 3 steps 
+
+
 	//checking wall collision	
 	private boolean wallCollision(Position p) {
 
@@ -96,13 +102,29 @@ public class Robot extends Piece {
 
 	}
 	
+	private void tryMoveRobot(Position posToMoveTo) {
+		System.out.println(board.hasRobotAt(posToMoveTo));
+		if (((board.hasEElementAt(posToMoveTo) && !board.getEElementAt(posToMoveTo).isWallCollsion())) || ((board.hasEElementAt(posToMoveTo)== false))) {
+			board.setPosition(this, posToMoveTo);
+		} else if (board.hasRobotAt(posToMoveTo)){
+			Robot toBePushedRobot = board.getRobotAt(posToMoveTo);
+			System.out.println("X initial position: " + toBePushedRobot.getX());
+			toBePushedRobot.setOrientation(this.orientation);
+			System.out.println("X Position moved to: " + toBePushedRobot.getX());
+			toBePushedRobot.move(1);
+			board.setPosition(this, posToMoveTo);
+		} else {
+			System.out.println("no robot");
+			return;
+		}
+	}
+	
 	public void shiftX(int spaces) {
-		
-		Position p = calculatePosition();
-		p.incrX(spaces);
-		wallCollision(p);
-		
-
+		for (int i = 0; i < spaces; i++) {
+			Position p = calculatePosition();
+			p.incrX(1);
+			tryMoveRobot(p);
+		}
 	}
 
 
@@ -110,12 +132,14 @@ public class Robot extends Piece {
 		
 		Position p = calculatePosition();
 		p.incrY(spaces);
-		wallCollision(p);
+		tryMoveRobot(p);
 		
 	}
+	
 	public void move(int spaces) {
-		
-		if(this.getChainedTo() == null){
+		System.out.println("Number of spaces to move: " + spaces);
+ 
+		if(this.getChainedTo() == null) {
 			switch(orientation) {
 			case UP:
 				shiftY(spaces);

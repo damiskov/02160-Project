@@ -95,7 +95,7 @@ public class SDRobot {
 	
 	@When("the first robot moves to \\({int}, {int})")
 	public void the_first_robot_moves_to(Integer int1, Integer int2) {
-	    context.board.setPosition(context.robot, new Position(int1, int2));
+		context.board.setPosition(context.robot, new Position(int1, int2));
 	}
 	
 	@Then("the robot is at \\({int}, {int})")
@@ -120,20 +120,16 @@ public class SDRobot {
 		context.robot.move(1);
 	}
 	
-//	@When("the robot tries to move two steps")
-//	public void the_robot_tries_to_move_two_steps(){
-//		context.robot.move(1);
-//	}
-	
-	@When("the robot tries to move {int} steps")
-	public void the_robot_tries_to_move_steps(Integer int1) {
-		context.robot.move(int1);
+	@When("the robot tries to move two steps")
+	public void the_robot_tries_to_move_two_steps(){
+		context.robot.move(1);
 	}
 	
-//	@When("the robot tries to move three steps")
-//	public void the_robot_tries_to_move_three_steps(){
-//		context.robot.move(1);
-//	}
+	@When("the robot tries to move three steps")
+	public void the_robot_tries_to_move_three_steps() {
+		context.robot.move(1);
+	}
+
 	
 	@Then("the robot stays at \\({int}, {int})")
 	public void the_robot_stays_at(Integer int1, Integer int2) {
@@ -149,6 +145,10 @@ public class SDRobot {
 	
 	@When("the robot moves {int} step")
 	public void the_robot_moves_step(Integer int1) {
+		context.robot.move(int1);
+	}
+	@When("the robot tries to move {int} steps")
+	public void the_robot_tries_to_move_steps(Integer int1) {
 		context.robot.move(int1);
 	}
 	
