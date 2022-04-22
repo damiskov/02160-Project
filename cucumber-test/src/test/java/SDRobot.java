@@ -11,7 +11,11 @@ import io.cucumber.java.en.When;
 import piece_basics.Orientation;
 import piece_basics.Robot;
 import cards.Card;
+import cards.Move1;
 import cards.Move2;
+import cards.Move3;
+import cards.TurnLeft;
+import cards.TurnRight;
 
 public class SDRobot {
 	private Context context;
@@ -36,7 +40,7 @@ public class SDRobot {
 	
 	@Given("a program for the robot")
 	public void a_program_for_the_robot() {
-		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new Move2(), new Move2(), new Move2(), new Move2(), new Move2()));
+		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new Move2(), new Move3(), new Move1(), new TurnLeft(), new TurnRight()));
 		context.robot.setProgram(gram);
 	}
 
