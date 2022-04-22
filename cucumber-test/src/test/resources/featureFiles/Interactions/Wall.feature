@@ -7,27 +7,27 @@ Feature: Wall
    When the robot tries to move one step 
    Then the robot stays at (5, 5)
   
-  Scenario: Wall stops the robot from the right side on first step
-	 Given a game with an empty board
-	 And a wall on the board at (6, 5)
-   And a robot on the board at (5, 5) facing "right"
-   When the robot tries to move 2 steps 
-   Then the robot stays at (5, 5)
-   
-  Scenario: Wall stops the robot from the right side with two steps
-	 Given a game with an empty board
-	 And a wall on the board at (7, 5)
-   And a robot on the board at (5, 5) facing "right"
-   When the robot tries to move 2 steps
-   Then the robot stays at (6, 5)
+  #Scenario: Wall stops the robot from the right side on first step
+#	 Given a game with an empty board
+#	 And a wall on the board at (6, 5)
+   #And a robot on the board at (5, 5) facing "right"
+   #When the robot tries to move 2 steps 
+   #Then the robot stays at (5, 5)
+   #
+  #Scenario: Wall stops the robot from the right side with two steps
+#	 Given a game with an empty board
+#	 And a wall on the board at (7, 5)
+   #And a robot on the board at (5, 5) facing "right"
+   #When the robot tries to move 2 steps
+   #Then the robot stays at (6, 5)
   
-  Scenario: Wall stops the robot from the right side with three steps
-	 Given a game with an empty board
-	 And a wall on the board at (8, 5)
-   And a robot on the board at (5, 5) facing "right"
-   When the robot tries to move 3 steps 
-   Then the robot stays at (7, 5)
-   
+  #Scenario: Wall stops the robot from the right side with three steps
+#	 Given a game with an empty board
+#	 And a wall on the board at (8, 5)
+   #And a robot on the board at (5, 5) facing "right"
+   #When the robot tries to move 3 steps 
+   #Then the robot stays at (7, 5)
+   #
   Scenario: Wall stops the robot from the left side
 	 Given a game with an empty board
 	 And a wall on the board at (4, 5)

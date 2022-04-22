@@ -121,11 +121,11 @@ public class Robot extends Piece {
 	
 	public void shiftX(int spaces) {
 	
-		for (int i = 0; i < spaces; i++) {
+		//for (int i = 0; i < spaces; i++) {
 			Position p = calculatePosition();
-			p.incrX(1);
+			p.incrX(spaces);
 			tryMoveRobot(p);
-		}
+		
 	}
 
 
