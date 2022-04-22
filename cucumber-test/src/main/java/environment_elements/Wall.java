@@ -35,4 +35,6 @@ public class Wall extends EnvironmentElement {
 	}
 
 
+
+
 }
