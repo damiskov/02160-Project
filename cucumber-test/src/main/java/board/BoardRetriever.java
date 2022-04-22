@@ -46,6 +46,7 @@ public class BoardRetriever
 	public Board retrieveBoard(String filename) 
 	{
 		Board b = new Board(12,12);
+		b.setName(filename);
 		String path = "boards/" + filename + ".txt";
 		// Open the file
 		FileInputStream fstream = null;
