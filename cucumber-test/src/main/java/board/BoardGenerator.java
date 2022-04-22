@@ -9,19 +9,19 @@ import piece_basics.Robot;
 public class BoardGenerator {
 	
 	private Board b;
-	Robot[] robots;
-	String[] easyFiles = {"E1", "E2", "E3"};
-	String[] mediumFiles = {"M1", "M2", "M3"};
-    String[] hardFiles = {"H1", "H2", "H3"};
-    String[] customFiles = {};
- 	Position[] startingPositions = {new Position(10,6),
-									new Position(10,7),
-									new Position(10,5),
-									new Position(10,8),
-									new Position(10,4),
-									new Position(10,8),
-									new Position(10,3),
-									new Position(10,9)
+	private Robot[] robots;
+	private String[] easyFiles = {"E1", "E2", "E3"};
+	private String[] mediumFiles = {"M1", "M2", "M3"};
+	private String[] hardFiles = {"H1", "H2", "H3"};
+	private String[] customFiles = {};
+	private Position[] startingPositions = {new Position(6,11),
+									new Position(7,11),
+									new Position(5,11),
+									new Position(8,11),
+									new Position(4,11),
+									new Position(9,11),
+									new Position(3,11),
+									new Position(10,11)
 			
 	};
 	
@@ -45,6 +45,7 @@ public class BoardGenerator {
 		b.setDifficulty(new Difficulty(1));
 		for (int i = 0; i < robots.length; i++)
 		{
+			System.out.println(robots[i]);
 			b.initialPlacement(robots[i], startingPositions[i]);
 		}
 		return b;

@@ -88,9 +88,12 @@ public class Board implements IBoard {
 	}
 	
 	private void addToExecutionLists(Piece piece) {
-		String id = piece.getPieceID();
-		pieceLists.computeIfAbsent(id, k -> new ArrayList<Piece>());
-		pieceLists.get(id).add(piece);
+		if (piece != null)
+		{
+			String id = piece.getPieceID();
+			pieceLists.computeIfAbsent(id, k -> new ArrayList<Piece>());
+			pieceLists.get(id).add(piece);
+		}
 	}
 
 	@Override

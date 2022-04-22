@@ -66,6 +66,7 @@ public class BoardRetriever
 				{
 					if (!(asciiToEE.get(strLine.charAt(i))==null))
 					{
+						System.out.println(asciiToEE.get(strLine.charAt(i)));
 						b.initialPlacement(asciiToEE.get(strLine.charAt(i)), i, j);
 					}
 					
