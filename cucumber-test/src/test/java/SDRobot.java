@@ -76,6 +76,7 @@ public class SDRobot {
 	    }
 	    context.board.initialPlacement(r, int1, int2);
 	    context.robot2 = r;
+	    
 	}
 	
 	@When("the robot moves to \\({int}, {int})")
@@ -131,6 +132,8 @@ public class SDRobot {
 	@When("one robot moves")
 	public void one_robot_moves() {
 	    context.robot.move(1);
+	    
+
 	}
 	
 	@When("the robot moves {int} step")
