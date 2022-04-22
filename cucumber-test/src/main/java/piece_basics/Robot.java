@@ -99,8 +99,8 @@ public class Robot extends Piece {
 	private boolean wallCollision(Position p) {
 
 		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
-			board.setPosition(this, p);
 			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), p);
+			board.setPosition(this, p);
 		}
 		return false;	
 	}
@@ -206,6 +206,7 @@ public class Robot extends Piece {
 		if (board.hasRobotAt(respawnPointPos) && board.getRobotAt(respawnPointPos) != this) {
 			board.getRobotAt(respawnPointPos).reboot();
 		}
+		System.out.println(calculatePosition());
 		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.TELEPORT, calculatePosition(), respawnPointPos);
 		setPosition(respawnPointPos);
 		health = maxHealth;

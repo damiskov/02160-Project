@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 import board.*;
 import environment_elements.Laser;
@@ -218,7 +220,53 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void moveRobot(PropertyChangeEvent pci) {
-		// TODO Auto-generated method stub
+		System.out.println("handling");
+		Position pCurr = pci.getPosCurrent();
+		Position pNew = pci.getPosNew();
+		Position pDiff = pNew.subtract(pCurr);
+		Sprite robotSprite = getRobotSpriteAtPosition(pCurr);
+		System.out.println(pDiff + " " + pCurr + " " + pNew);
+		double screenDiffX = pDiff.getX()*cellWidth;
+		double screenDiffY = pDiff.getY()*cellWidth;
+		double screenShiftX = screenDiffX/30;
+		double screenShiftY = screenDiffY/30;
+		
+		int screenFinalX = pNew.getX()*cellWidth;
+		int screenFinalY = pNew.getY()*cellWidth;
+		
+		new SwingWorker<Void, Void>() {
+			@Override
+			public Void doInBackground() {
+				try {
+					double screenX = robotSprite.getX();
+					double screenY = robotSprite.getY();
+					for (int i = 0; i < 29; i++) {
+						System.out.println("moving");
+						screenX += screenShiftX;
+						screenY += screenShiftY;
+						Thread.sleep(1000/60);
+						int screenXInt = (int) screenX;
+						int screenYInt = (int) screenY;
+						SwingUtilities.invokeLater(() -> {
+							robotSprite.setX(screenXInt);
+							robotSprite.setY(screenYInt);
+							repaint();
+						});
+					}
+					SwingUtilities.invokeLater(() -> {
+						robotSprite.setX(screenFinalX);
+						robotSprite.setY(screenFinalY);
+						System.out.println(screenFinalX + " " + screenFinalY);
+						repaint();
+					});
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
+			}
+			
+		}.execute();
 		
 	}
 	
@@ -232,7 +280,53 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void rotateSprite(PropertyChangeEvent pci) {
-		// TODO Auto-generated method stub
+		System.out.println("turning");
+		
+		//Still dosent work, event needs to include which way the robot turns or figure out better from old - new
+		
+		double degCurr = pci.getOrientationOld().getDegrees();
+		double degNew = pci.getOrientationNew().getDegrees();
+		double degDiff;
+		if((degCurr < degNew) || ((degNew==0) && (degCurr==270))) {
+			degDiff = 90;
+		} else {
+			degDiff = -90;
+		}
+		int degNewInt = (int) degNew;
+		Position p = pci.getPosCurrent();
+		Sprite robotSprite = getRobotSpriteAtPosition(p);
+		System.out.println(degCurr + " " + degNew + " " + degDiff);
+		
+
+		new SwingWorker<Void, Void>() {
+			@Override
+			public Void doInBackground() {
+				try {
+					double deg = robotSprite.getRotation();
+					for (int i = 0; i < 29; i++) {
+						System.out.println("rotating");
+						deg += degDiff/30;
+						Thread.sleep(1000/60);
+						int degInt = (int) deg;
+						SwingUtilities.invokeLater(() -> {
+							robotSprite.setRotation(degInt);
+							repaint();
+						});
+					}
+					SwingUtilities.invokeLater(() -> {
+						robotSprite.setRotation(degNewInt);
+						
+						//System.out.println(screenFinalX + " " + screenFinalY);
+						repaint();
+					});
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
+			}
+			
+		}.execute();
 		
 	}
 	

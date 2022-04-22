@@ -118,7 +118,8 @@ public class Game {
 	// temporary
 	public void testPlacements() {
 		Robot r1 = new Robot();
-		board.initialPlacement(r1, 0, 0);
+		board.initialPlacement(r1, 0, 4);
+		r1.turnLeft();
 		board.initialPlacement(new Robot(), 1, 0);
 		board.initialPlacement(new Robot(), 2, 0);
 		board.initialPlacement(new Robot(), 3, 0);
@@ -148,22 +149,31 @@ public class Game {
 		board.initialPlacement(new Teleporter(), 8, 3);
 		board.initialPlacement(new Wall(), 9, 3);
 		
-		new SwingWorker<Void, Void>() {
-			@Override
-			public Void doInBackground() {
-				try {
-					for (int i = 0; i < 5; i++) {
-						Thread.sleep(1000);
-						SwingUtilities.invokeLater(() -> r1.takeDamage());
-					}
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return null;
-			}
-			
-		}.execute();
+//		SwingWorker sw = new SwingWorker<Void, Void>() {
+//			@Override
+//			public Void doInBackground() {
+//				try {
+//					for (int i = 0; i < 5; i++) {
+//						Thread.sleep(1000);
+//						SwingUtilities.invokeLater(() -> r1.takeDamage());
+//					}
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				return null;
+//			}
+//			
+//		};
+//		sw.execute();
+		
+	
+		//r1.move(1);
+		//r1.turnLeft();
+		//r1.move(1);
+		
+		
+		
 	}
 
 	public int getNumPlayers() {

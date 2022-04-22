@@ -136,6 +136,7 @@ public class Board implements IBoard {
 	
 	@Override
 	public void moveRobotFromTo(Position oldPos, Position newPos) {
+		System.out.println("here");
 		if (!oldPos.equals(newPos)) {
 			Cell oldCell = getCell(oldPos);
 			Robot r = oldCell.robot;
