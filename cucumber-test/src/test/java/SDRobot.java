@@ -31,6 +31,16 @@ public class SDRobot {
 	    context.robot = r;
 	}
 	
+	@Given("two robots on the board")
+	public void two_robots_on_the_board() {
+		Robot r = new Robot();
+		context.board.initialPlacement(r, 1, 3);
+	    context.robot = r;
+	    Robot r2 = new Robot();
+		context.board.initialPlacement(r2, 4, 7);
+	    context.robot2 = r2;
+	}
+	
 	@Given("a second robot on the board at \\({int}, {int})")
 	public void a_second_robot_on_the_board_at(Integer int1, Integer int2) {
 		Robot r = new Robot();
@@ -80,6 +90,7 @@ public class SDRobot {
 	    }
 	    context.board.initialPlacement(r, int1, int2);
 	    context.robot2 = r;
+	    
 	}
 	
 	@When("the robot moves to \\({int}, {int})")
@@ -89,7 +100,7 @@ public class SDRobot {
 	
 	@When("the first robot moves to \\({int}, {int})")
 	public void the_first_robot_moves_to(Integer int1, Integer int2) {
-	    context.board.setPosition(context.robot, new Position(int1, int2));
+		context.board.setPosition(context.robot, new Position(int1, int2));
 	}
 	
 	@Then("the robot is at \\({int}, {int})")
@@ -114,20 +125,16 @@ public class SDRobot {
 		context.robot.move(1);
 	}
 	
-//	@When("the robot tries to move two steps")
-//	public void the_robot_tries_to_move_two_steps(){
-//		context.robot.move(1);
-//	}
-	
-	@When("the robot tries to move {int} steps")
-	public void the_robot_tries_to_move_steps(Integer int1) {
-		context.robot.move(int1);
+	@When("the robot tries to move two steps")
+	public void the_robot_tries_to_move_two_steps(){
+		context.robot.move(1);
 	}
 	
-//	@When("the robot tries to move three steps")
-//	public void the_robot_tries_to_move_three_steps(){
-//		context.robot.move(1);
-//	}
+	@When("the robot tries to move three steps")
+	public void the_robot_tries_to_move_three_steps() {
+		context.robot.move(1);
+	}
+
 	
 	@Then("the robot stays at \\({int}, {int})")
 	public void the_robot_stays_at(Integer int1, Integer int2) {
@@ -139,10 +146,16 @@ public class SDRobot {
 	@When("one robot moves")
 	public void one_robot_moves() {
 	    context.robot.move(1);
+	    
+
 	}
 	
 	@When("the robot moves {int} step")
 	public void the_robot_moves_step(Integer int1) {
+		context.robot.move(int1);
+	}
+	@When("the robot tries to move {int} steps")
+	public void the_robot_tries_to_move_steps(Integer int1) {
 		context.robot.move(int1);
 	}
 	
