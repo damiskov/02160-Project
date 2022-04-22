@@ -28,29 +28,30 @@ public class BoardPanel extends JPanel {
 	
 	private int rows;
 	private int cols;
-	private int pixelsPerCell;
+	private int cellWidth;
 	private int width;
 	private int height;
 	private Board board;
 	
-	private List<Sprite> spriteList = new ArrayList<>();
+	private List<Sprite> eElementSpriteList = new ArrayList<>();
+	private List<Sprite> robotSpriteList = new ArrayList<>();
 
 	public BoardPanel(IBoard board) {
 		this.rows = board.getNumRows();
 		this.cols = board.getNumColumns();
 		
 		if (rows >= cols) {
-			pixelsPerCell = maxDimension/rows;
+			cellWidth = maxDimension/rows;
 		} else {
-			pixelsPerCell = maxDimension/cols;
+			cellWidth = maxDimension/cols;
 		}
 		
-		width = cols*pixelsPerCell;
-		height = rows*pixelsPerCell;
+		width = cols*cellWidth;
+		height = rows*cellWidth;
 		
 		setPreferredSize(new Dimension(width, height));
 		
-		backgroundTile = ImageUtils.scaledImage("images/tile.png", pixelsPerCell, pixelsPerCell);
+		backgroundTile = ImageUtils.scaledImage("images/tile.png", cellWidth, cellWidth);
 		
 		// temporary, for testing
 		//spriteList.add(SpriteFactory.getFromPieceID("arrow", pixelsPerCell, pixelsPerCell, pixelsPerCell, 0, this));
@@ -119,28 +120,42 @@ public class BoardPanel extends JPanel {
 	}
 
 	public void addSprite(Piece piece, Position p) {
-		spriteList.add(SpriteFactory.getFromPiece(piece, pixelsPerCell, this));
+		if (piece instanceof EnvironmentElement) {
+			eElementSpriteList.add(SpriteFactory.getFromPiece(piece, cellWidth, this));
+		} else if (piece instanceof Robot) {
+			robotSpriteList.add(SpriteFactory.getFromPiece(piece, cellWidth, this));
+		} else {
+			throw new IllegalArgumentException("Piece must be either a Robot or an EnvironmentElement");
+		}
 		repaint();
-		
-		//System.out.println("add_action");
 	}
-	public void removeSprite(Piece piece, Position p) {
+	public void removeEElementSprite(Piece piece, Position p) {
+		eElementSpriteList.remove(getEElementSpriteAtPosition(p));
+		repaint();
+	}
+	
+	public Sprite getEElementSpriteAtPosition(Position p) {
 		int x = p.getX();
 		int y = p.getY();
 		
-		//System.out.println("selection_action");
-		for (Sprite sprite: spriteList) {
-			
-			//System.out.println(sprite.getID() + " " +sprite.getX() + " " + sprite.getY() );
-			if(sprite.getX()==pixelsPerCell*x && sprite.getY()==pixelsPerCell*y) {
-				 spriteList.remove(sprite);
-				 
-				 //System.out.println("remove_action");
-				 break;
+		for (Sprite sprite: eElementSpriteList) {
+			if(sprite.getX()==cellWidth*x && sprite.getY()==cellWidth*y) {
+				 return sprite;
 			}
-			
 		}
-		repaint();
+		return null;
+	}
+	
+	public Sprite getRobotSpriteAtPosition(Position p) {
+		int x = p.getX();
+		int y = p.getY();
+		
+		for (Sprite sprite: robotSpriteList) {
+			if(sprite.getX()==cellWidth*x && sprite.getY()==cellWidth*y) {
+				 return sprite;
+			}
+		}
+		return null;
 	}
 	
 	
@@ -152,11 +167,14 @@ public class BoardPanel extends JPanel {
 		
 		for (int col = 0; col < cols; col++) {
 			for (int row = 0; row < rows; row++) {
-				g2.drawImage(backgroundTile, col*pixelsPerCell, row*pixelsPerCell, null);
+				g2.drawImage(backgroundTile, col*cellWidth, row*cellWidth, null);
 			}
 		}
 		
-		for (Sprite sprite: spriteList) {
+		for (Sprite sprite: eElementSpriteList) {
+			sprite.drawUsing(g2);
+		}
+		for (Sprite sprite: robotSpriteList) {
 			sprite.drawUsing(g2);
 		}
 	}
@@ -172,22 +190,24 @@ public class BoardPanel extends JPanel {
 			addSprite(pci.getPiece(), pci.getPosCurrent());
 			break;
 		case REMOVAL:
-			removeSprite(pci.getPiece(), pci.getPosCurrent());
+			removeEElementSprite(pci.getPiece(), pci.getPosCurrent());
 			break;
 		case ACTIVATION:
 			activateSprite(pci);
 			break;
 		case MOVEMENT:
-			moveSprite(pci);
+			moveRobot(pci);
 			break;
 		case TELEPORT:
-			teleportSprite(pci);
+			teleportRobot(pci);
 			break;
 		case ROTATION:
 			rotateSprite(pci);
 			break;
 		case ROBOT_LASER:
 			displayRobotLaser(pci);
+			break;
+		default:
 			break;
 		}
 	}
@@ -197,14 +217,18 @@ public class BoardPanel extends JPanel {
 		
 	}
 	
-	private void moveSprite(PropertyChangeEvent pci) {
+	private void moveRobot(PropertyChangeEvent pci) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	private void teleportSprite(PropertyChangeEvent pci) {
-		// TODO Auto-generated method stub
-		
+	private void teleportRobot(PropertyChangeEvent pci) {
+		Position posCurrent = pci.getPosCurrent();
+		Sprite sprite = getRobotSpriteAtPosition(posCurrent);
+		Position posNew = pci.getPosNew();
+		sprite.setX(posNew.getX()*cellWidth);
+		sprite.setY(posNew.getY()*cellWidth);
+		repaint();
 	}
 	
 	private void rotateSprite(PropertyChangeEvent pci) {

@@ -35,7 +35,7 @@ public class SpriteFactory {
 			
 			return new Sprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, robot.getOrientation().getDegrees(), canvas);
 		} else {
-			throw new IllegalArgumentException("Piece must be either an EnvironmentElement or a Robot");
+			throw new IllegalArgumentException("Piece must be either a Robot or an EnvironmentElement");
 		}
 	}
 }

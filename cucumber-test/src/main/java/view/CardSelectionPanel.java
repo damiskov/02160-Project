@@ -15,8 +15,8 @@ public class CardSelectionPanel extends JPanel {
 
 	private static final long serialVersionUID = -2862362827324913955L;
 	
-	private static final int cardWidth = 96;
-	private static final int cardHeight = 133;;
+	private static final int cardWidth = (int) (96*0.8);
+	private static final int cardHeight = (int) (133*0.8);;
 
 	private JButton cardButton;
 	private SelectionIcon selectionIcon;
