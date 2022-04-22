@@ -28,13 +28,14 @@ public class ElementSelectionPanel extends JPanel {
 	
 	int elemWidth = 50;
 	int elemHeight = 50;
-	
-	JButton element;
-
 	int canvas_width;
 	int canvas_height;
 
-	JButton button_b;
+//	JButton button_b;
+	JButton element;
+	private Border blackBorder;
+	private Border emptyBorder;
+	FlowLayout elementsLayout;
 	
 	private List<String> elementIDs;
 	//to track all the selected elements
@@ -42,27 +43,42 @@ public class ElementSelectionPanel extends JPanel {
 
 	public ElementSelectionPanel(BoardCreationController controller) {
 		
-		elementIDs =  new ArrayList<String>() {
+		setController(controller);
 		
-
-			{
-				add("arrow");
-				add("circle");
-				add("green_circle");
-				add("empty_circle");
-				add("heart");
-				add("icon");
-			}
-				
-			};
+		createElementsIDList();
+		createBorders();
+		createLayout();
 		
-
-		Border blackBorder = BorderFactory.createLineBorder(Color.BLACK, 3);
-		Border emptyBorder = BorderFactory.createEmptyBorder();
+		createElementsButtons();
+	}
+	
+	private void setController(BoardCreationController c) {
+		controller = c;
+	}
+	
+	private void createElementsIDList() {
 		
-		FlowLayout elementsLayout = new FlowLayout(FlowLayout.CENTER, 10, 0);
+		elementIDs =  new ArrayList<String>() ;
+		elementIDs.add("arrow");
+		elementIDs.add("circle");
+		elementIDs.add("green_circle");
+		elementIDs.add("empty_circle");
+		elementIDs.add("heart");
+		elementIDs.add("icon");
+		
+	}
+	
+	private void createBorders() {
+		blackBorder = BorderFactory.createLineBorder(Color.BLACK, 3);
+		emptyBorder = BorderFactory.createEmptyBorder();
+	}
+	
+	private void createLayout() {
+		elementsLayout = new FlowLayout(FlowLayout.CENTER, 10, 0);
 		setLayout(elementsLayout);
-		
+	}
+	
+	private void createElementsButtons() {
 		
 		for ( String id : elementIDs) {
 			
@@ -82,19 +98,12 @@ public class ElementSelectionPanel extends JPanel {
 				selected.setPreferredSize(new Dimension(icon.getIconWidth()*4/3, icon.getIconHeight()*4/3));
 				
 				for (JButton elem : elemButtonsList) {
-					
-					
-				
+
 					if (elem != e.getSource()) {
 						elem.setBorder(emptyBorder);
 						elem.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 					}
-					
 				}
-				
-			     
-			     
-				
 			});
 			
 			elemButtonsList.add(element);
@@ -102,6 +111,7 @@ public class ElementSelectionPanel extends JPanel {
 			add(Box.createRigidArea(new Dimension(0, 5)));
 			
 		}
+		
 	}
 	
 }

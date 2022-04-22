@@ -20,8 +20,8 @@ public class BoardCreationController {
 
 	
 	
-	BoardCreationController(ApplicationController application){
-		
+	BoardCreationController(ApplicationController appl){
+		application = appl;
 		element_is_selected = false;
 		
 		this.view = new BoardCreationView(this);
@@ -30,6 +30,13 @@ public class BoardCreationController {
 
 	public void display() {
 		view.setVisible(true);
+	}
+	
+	public void initiateSetupMenu() {
+		
+		view.setVisible(false);
+		application.initiate();
+		
 	}
 	
 	public boolean elementIsActive() {

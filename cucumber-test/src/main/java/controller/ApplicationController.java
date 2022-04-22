@@ -18,7 +18,7 @@ public class ApplicationController {
 	
 	private BoardCreationController boardCreationController;
 
-	private void initiate() {
+	public void initiate() {
 		initiateController = new InitiateController(this);
 		initiateController.display();
 		

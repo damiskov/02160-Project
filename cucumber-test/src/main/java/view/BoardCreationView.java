@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -31,7 +32,7 @@ public class BoardCreationView extends JFrame{
 	// for testing
 	
 	public BoardCreationView(BoardCreationController boardCreationController) {
-		this.controller = boardCreationController;
+		setController(boardCreationController);
 		initGUI();
 	}
 	
@@ -48,6 +49,10 @@ public class BoardCreationView extends JFrame{
 		cancelButton = new JButton("Cancel");
 		createButton = new JButton("Create");
 		
+		cancelButton.addActionListener(e -> {
+			controller.initiateSetupMenu();
+		}); 
+		
 		addElements();
 		pack();
 		
@@ -62,20 +67,14 @@ public class BoardCreationView extends JFrame{
 		add(boardPanel, GridBagLayoutUtils.constraint(0, 0, 10));
 		add(elements, GridBagLayoutUtils.constraint(1, 0, 10));
 		
-//		GridBagConstraints spConstraint = new GridBagConstraints();
-//		spConstraint.gridx = 1;
-//		spConstraint.gridy = 0;
-//		spConstraint.fill = GridBagConstraints.VERTICAL;
-//		add(elementSelectionPanel, spConstraint);
-		
 		add(cancelButton, GridBagLayoutUtils.constraint(1, 1, 0));
 		add(createButton, GridBagLayoutUtils.constraint(1, 2, 0));
 		revalidate();
 		repaint();
 	}
 	
-	private void removeElements() {
-		remove(boardPanel);
+	private void setController(BoardCreationController boardCreationController) {
+		controller = boardCreationController;
 	}
 	
 	

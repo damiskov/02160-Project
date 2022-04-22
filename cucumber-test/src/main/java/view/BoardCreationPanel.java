@@ -24,7 +24,6 @@ private static final long serialVersionUID = -2140843137512577992L;
 	
 	private static final int maxDimension = 600;
 	
-	private Image backgroundTile;
 	
 	private BoardCreationController controller;
 	
@@ -36,24 +35,56 @@ private static final long serialVersionUID = -2140843137512577992L;
 	private int width;
 	private int height;
 	
-	private List<ISprite> spriteList = new ArrayList<>();
 
 	public BoardCreationPanel(int rows, int cols, BoardCreationController controller) {
-		this.rows = rows;
-		this.cols = cols;
+		setController(controller);
 		
+		setRowsCols(rows, cols);
+		setPixelsPerCell();	
+		setWidthHeight();
+		
+		setPreferredSize(new Dimension(width, height));
+		
+		createCellButtons();
+		
+	}
+
+	
+	@Override
+	public int getHeight() {
+		return height;
+	}
+	
+	public void addElement(String e, int x, int y) {
+		
+//		spriteList.add(SpriteFactory.getFromPieceID(e, pixelsPerCell, pixelsPerCell * x, pixelsPerCell * y, 0, this));
+//		repaint();
+		
+	}
+	
+	private void setController(BoardCreationController c) {
+		controller = c;
+	}
+	
+	private void setRowsCols( int r, int c ) {
+		rows = r;
+		cols = c;
+	}
+	
+	private void setPixelsPerCell() {
 		if (rows >= cols) {
 			pixelsPerCell = maxDimension/rows;
 		} else {
 			pixelsPerCell = maxDimension/cols;
 		}
-		
+	}
+	
+	private void setWidthHeight() {
 		width = cols*pixelsPerCell;
 		height = rows*pixelsPerCell;
-		
-		setPreferredSize(new Dimension(width, height));
-		
-		backgroundTile = ImageUtils.scaledImage("images/tile.png", pixelsPerCell, pixelsPerCell);
+	}
+	
+	private void createCellButtons() {
 		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/tile.png", pixelsPerCell, pixelsPerCell));
 		
 		
@@ -93,21 +124,6 @@ private static final long serialVersionUID = -2140843137512577992L;
 				
 			}
 		}
-		
-	}
-	
-
-	
-	@Override
-	public int getHeight() {
-		return height;
-	}
-	
-	public void addElement(String e, int x, int y) {
-		
-//		spriteList.add(SpriteFactory.getFromPieceID(e, pixelsPerCell, pixelsPerCell * x, pixelsPerCell * y, 0, this));
-//		repaint();
-		
 	}
 	
 }
