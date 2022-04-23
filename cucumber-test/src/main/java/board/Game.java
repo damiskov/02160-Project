@@ -65,11 +65,6 @@ public class Game {
 		this.difficulty.setLevel(i);
 		
 	}
-	
-	public String getDifficulty() {
-		return this.difficulty;
-		
-	}
 //	public void setCurrentPlayer(int i) {
 //		// TODO Auto-generated method stub
 //		
@@ -118,8 +113,15 @@ public class Game {
 	// temporary
 	public void testPlacements() {
 		Robot r1 = new Robot();
-		board.initialPlacement(r1, 0, 4);
-		r1.turnLeft();
+		board.initialPlacement(r1, 0, 3);
+//		r1.turnLeft();
+//		r1.turnLeft();
+//		r1.turnLeft();
+//		r1.turnLeft();
+//		r1.turnRight();
+//		r1.turnRight();
+//		r1.turnRight();
+//		r1.turnRight();
 		board.initialPlacement(new Robot(), 1, 0);
 		board.initialPlacement(new Robot(), 2, 0);
 		board.initialPlacement(new Robot(), 3, 0);
@@ -149,25 +151,10 @@ public class Game {
 		board.initialPlacement(new Teleporter(), 8, 3);
 		board.initialPlacement(new Wall(), 9, 3);
 		
-//		SwingWorker sw = new SwingWorker<Void, Void>() {
-//			@Override
-//			public Void doInBackground() {
-//				try {
-//					for (int i = 0; i < 5; i++) {
-//						Thread.sleep(1000);
-//						SwingUtilities.invokeLater(() -> r1.takeDamage());
-//					}
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				return null;
-//			}
-//			
-//		};
-//		sw.execute();
-		
 	
+		activateRegisterActors();
+		r1.move(1);
+		
 		//r1.move(1);
 		//r1.turnLeft();
 		//r1.move(1);

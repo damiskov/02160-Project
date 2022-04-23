@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.Image;
+
+import environment_elements.ChainingPanel;
 import environment_elements.ConveyorBelt;
 import environment_elements.Gear;
 import piece_basics.EnvironmentElement;
@@ -22,6 +25,10 @@ public class SpriteFactory {
 			} else if (eElement instanceof ConveyorBelt) {
 				ConveyorBelt conveyorBelt = (ConveyorBelt) eElement;
 				return new Sprite(ImageUtils.scaledImage("images/conveyor_belt.png", cellSize, cellSize), x, y, conveyorBelt.getOrientation().getDegrees(), canvas);
+			} else if (eElement instanceof ChainingPanel){
+				Image defaultImage = ImageUtils.scaledImage("images/chaining_panel.png", cellSize, cellSize);
+				Image emptyImage = ImageUtils.scaledImage("images/chaining_panel_empty.png", cellSize, cellSize);
+				return new ImageToggleSprite(defaultImage, emptyImage, x, y, 0, canvas);
 			} else {
 				String filepath = "images/" + eElement.getPieceID() + ".png";
 				return new Sprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, 0, canvas);

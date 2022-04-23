@@ -61,9 +61,18 @@ public class Sprite {
 		updateAffineTransform();
 	}
 	
+	public void activate() {};
 
 	public void drawUsing(Graphics2D g2) {
 		g2.drawImage(image, affineTransform, null);
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 	
