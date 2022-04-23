@@ -8,9 +8,7 @@ public class Hand
     private ArrayList<Card> cardList;
 
     public Hand()
-    {
-
-    }
+    {}
 
     public ArrayList<Card> getCardList()
     {

@@ -22,10 +22,12 @@ public class Board implements IBoard {
 	private int numColumns;
 	private int numRows;
 	private int numObstacles;
+	private Difficulty difficulty;
+	private String name;
 	private Map<String, List<Piece>> pieceLists = new HashMap<>();
 	private Game game;
 	
-	// initialize an empty board with a set number of columns and rows
+	// initialise an empty board with a set number of columns and rows
 	public Board(int numColumns, int numRows) {
 		this.matrix = new Cell[numColumns][numRows];
 		for (int i = 0; i < numColumns; i++) {
@@ -103,9 +105,12 @@ public class Board implements IBoard {
 	}
 	
 	private void addToExecutionLists(Piece piece) {
-		String id = piece.getPieceID();
-		pieceLists.computeIfAbsent(id, k -> new ArrayList<Piece>());
-		pieceLists.get(id).add(piece);
+		if (piece != null)
+		{
+			String id = piece.getPieceID();
+			pieceLists.computeIfAbsent(id, k -> new ArrayList<Piece>());
+			pieceLists.get(id).add(piece);
+		}
 	}
 
 	@Override
@@ -152,6 +157,7 @@ public class Board implements IBoard {
 	public void setPosition(Robot r, Position p) {
 		moveRobotFromTo(calculatePosition(r), p);
 	}
+	
 
 	@Override
 	public boolean hasRobotAt(Position p) {
@@ -210,5 +216,21 @@ public class Board implements IBoard {
 	}
 	
 	
+
+	public Difficulty getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

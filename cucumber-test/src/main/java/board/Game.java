@@ -41,8 +41,8 @@ public class Game {
 			/* Checkpoint.ID */
 	);
 	
-	IBoard board;
-	String difficulty;
+	Board board;
+	private Difficulty difficulty;
 	private Player[] players;
 	PropertyChangeSupport propertyChangeSupport;
 	int numPlayers;
@@ -61,8 +61,8 @@ public class Game {
 	public void genBoard() {
 		
 	}
-	public void setDifficulty(String d) {
-		this.difficulty = d;
+	public void setDifficulty(int i) {
+		this.difficulty.setLevel(i);
 		
 	}
 	

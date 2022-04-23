@@ -6,6 +6,7 @@ import piece_basics.EnvironmentElement;
 public class Wall extends EnvironmentElement {
 	
 	public static final String ID = "wall";
+	private Wall receiving;
 	
 	@Override
 	public boolean isConveyorBlocking() {
@@ -23,9 +24,17 @@ public class Wall extends EnvironmentElement {
 	}
 	
 	@Override
+	public boolean wallOnOtherCells() {
+		return true;
+	}
+	
+	
+	@Override
 	public String getPieceID() {
 		return ID;
 	}
+
+
 
 
 }

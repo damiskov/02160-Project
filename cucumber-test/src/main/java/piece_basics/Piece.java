@@ -1,5 +1,7 @@
 package piece_basics;
 
+import java.io.IOException;
+
 import board.IBoard;
 import property_changes.PropertyChangeSupport;
 
@@ -18,4 +20,6 @@ public abstract class Piece {
 	public void performImmediateAction(Robot r) {}
 	
 	public abstract String getPieceID();
+
+
 }

@@ -1,6 +1,5 @@
-Feature: Difficulty setup
-# error because, The step 'an easy difficulty' is undefined.
-
+#Feature: Difficulty setup
+#
   #Scenario: Select from default difficulties
     #Given an easy difficulty
     #Then set number of obstacles

@@ -1,6 +1,8 @@
 package piece_basics;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import board.Position;
 import cards.Card;
@@ -20,6 +22,7 @@ public class Robot extends Piece {
 	private RespawnPoint currentRespawnPoint;
 	private ChainingPanel ChainedFrom;
 	private boolean chainable = false;
+	private boolean wallOnBoard;
 	private Robot chainedTo;
 	private String command;	
 	private Program program;
@@ -80,7 +83,7 @@ public class Robot extends Piece {
 	public void turnRight() {
 		Orientation oldOrientation = orientation;
 		switch(orientation) {
-		case UP:
+		case UP:  
 			orientation = Orientation.RIGHT;
 			break;
 		case RIGHT:
@@ -95,6 +98,10 @@ public class Robot extends Piece {
 		}
 		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROTATION, calculatePosition(), oldOrientation, orientation);
 	}	
+	
+	//checking wallcollision after 2 or 3 steps 
+
+
 	//checking wall collision	
 	private boolean wallCollision(Position p) {
 
@@ -103,26 +110,48 @@ public class Robot extends Piece {
 			board.setPosition(this, p);
 		}
 		return false;	
+
+	}
+	//!board.getEElementAt(posToMoveTo).isWallCollsion())
+	private void tryMoveRobot(Position posToMoveTo) {
+		System.out.println(board.hasRobotAt(posToMoveTo));
+		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) || ((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
+			board.setPosition(this, posToMoveTo);
+		} else if (board.hasRobotAt(posToMoveTo)){
+			Robot toBePushedRobot = board.getRobotAt(posToMoveTo);
+			System.out.println("X initial position: " + toBePushedRobot.getX());
+			toBePushedRobot.setOrientation(this.orientation);
+			System.out.println("X Position moved to: " + toBePushedRobot.getX());
+			toBePushedRobot.move(1);
+			board.setPosition(this, posToMoveTo);
+		} else {
+			System.out.println("no robot");
+			return;
+		}
 	}
 	
 	public void shiftX(int spaces) {
-		
-		Position p = calculatePosition();
-		p.incrX(spaces);
-		wallCollision(p);
+	
+		//for (int i = 0; i < spaces; i++) {
+			Position p = calculatePosition();
+			p.incrX(spaces);
+			tryMoveRobot(p);
 		
 	}
+
 
 	public void shiftY(int spaces) {
 		
 		Position p = calculatePosition();
 		p.incrY(spaces);
-		board.setPosition(this, p);
+		tryMoveRobot(p);
 		
 	}
+	
 	public void move(int spaces) {
-		
-		if(this.getChainedTo() == null){
+		System.out.println("Number of spaces to move: " + spaces);
+ 
+		if(this.getChainedTo() == null) {
 			switch(orientation) {
 			case UP:
 				shiftY(spaces);
