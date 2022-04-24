@@ -11,6 +11,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import piece_basics.Robot;
 import player.Player;
+import property_changes.PropertyChangeSupport;
 
 public class SDBoardGeneration {
 	
@@ -26,15 +27,15 @@ public class SDBoardGeneration {
 	@Given("two players")
 	public void two_players() {
 	    Player player = new Player();
-	    Player player1 = new Player();
+	    Player player2 = new Player();
 	    context.player = player;
-	    context.player1 = player1;
+	    context.player2 = player2;
 	}
 	
 	@Given("robots for the players")
 	public void robots_for_the_players() {
 	    context.player.setRobot(new Robot());
-	    context.player1.setRobot(new Robot());
+	    context.player2.setRobot(new Robot());
 	}
 
 	@Given("an easy difficulty")
@@ -54,8 +55,9 @@ public class SDBoardGeneration {
 	@When ("a board is generated")
 	public void a_board_is_generated()
 	{
-		Robot[] r = {context.player.getRobot(),context.player1.getRobot()};
-		Board b = BoardFactory.generateBoard(context.d, r);
+		Robot[] r = {context.player.getRobot(),context.player2.getRobot()};
+		PropertyChangeSupport pcs = new PropertyChangeSupport();
+		Board b = BoardFactory.generateBoard(context.d, r, pcs);
 		context.board = b;
 	}
 	

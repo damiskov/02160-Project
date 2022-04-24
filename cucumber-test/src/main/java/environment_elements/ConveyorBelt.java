@@ -51,4 +51,8 @@ public class ConveyorBelt extends EnvironmentElement {
 		return ID;
 	}
 
+	public Orientation getOrientation() {
+		return orientation;
+	}
+
 }

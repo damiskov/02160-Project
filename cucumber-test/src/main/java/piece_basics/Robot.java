@@ -9,14 +9,19 @@ import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
 import environment_elements.Wall;
+import property_changes.PropertyChangeType;
 import cards.Program;
 import java.lang.Math;  
 
 public class Robot extends Piece {
-	private Orientation orientation;
-	private int health = 3;
-	private final int maxHealth = 3;
+	private static int nextRobotNumber = 1;
+	private int robotNumber;
+	
+	private Orientation orientation = Orientation.UP;
+	private int health;
+	public static final int MAX_ROBOT_HEALTH = 3;
 	private RespawnPoint currentRespawnPoint;
+	private ChainingPanel ChainedFrom;
 	private boolean chainable = false;
 	private boolean wallOnBoard;
 	private Robot chainedTo;
@@ -25,10 +30,11 @@ public class Robot extends Piece {
 	private int mostRecentCheckpoint = 0;
 	
 	public static final String ID = "robot";
-	private ChainingPanel ChainedFrom;
 	
 	public Robot() {
-		orientation = Orientation.UP;
+		health = MAX_ROBOT_HEALTH;
+		robotNumber = nextRobotNumber;
+		nextRobotNumber++;
 	}
 	
 	public void setPosition(Position p) {
@@ -58,6 +64,7 @@ public class Robot extends Piece {
 		return orientation;
 	}
 	public void turnLeft() {
+		Orientation oldOrientation = orientation;
 		switch(orientation) {
 		case UP:
 			orientation = Orientation.LEFT;
@@ -72,8 +79,10 @@ public class Robot extends Piece {
 			orientation = Orientation.DOWN;
 			break;
 		}
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROTATION, calculatePosition(), oldOrientation, orientation);
 	}
 	public void turnRight() {
+		Orientation oldOrientation = orientation;
 		switch(orientation) {
 		case UP:  
 			orientation = Orientation.RIGHT;
@@ -88,24 +97,29 @@ public class Robot extends Piece {
 			orientation = Orientation.UP;
 			break;
 		}
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROTATION, calculatePosition(), oldOrientation, orientation);
 	}	
 	
 	//checking wallcollision after 2 or 3 steps 
+
 
 
 //	//checking wall collision	
 //	private boolean wallCollision(Position p) {
 //
 //		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
+//			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), p);
 //			board.setPosition(this, p);
 //		}
 //		return false;	
 //
 //	}
 	//!board.getEElementAt(posToMoveTo).isWallCollsion())
+	
 	private void tryMoveRobot(Position posToMoveTo) {
 		System.out.println(board.hasRobotAt(posToMoveTo));
 		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) || ((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), posToMoveTo);
 			board.setPosition(this, posToMoveTo);
 		} else if (board.hasRobotAt(posToMoveTo)){
 			Robot toBePushedRobot = board.getRobotAt(posToMoveTo);
@@ -113,6 +127,7 @@ public class Robot extends Piece {
 			toBePushedRobot.setOrientation(this.orientation);
 			System.out.println("X Position moved to: " + toBePushedRobot.getX());
 			toBePushedRobot.move(1);
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), posToMoveTo);
 			board.setPosition(this, posToMoveTo);
 		} else {
 			System.out.println("no robot");
@@ -183,11 +198,15 @@ public class Robot extends Piece {
 	}
 
 	public void heal() {
-		if (health < maxHealth) health++;
+		if (health < MAX_ROBOT_HEALTH) {
+			health++;
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.HEALTH_CHANGE, calculatePosition(), health, robotNumber);
+		}
 	}
 	public void takeDamage() {
 		health--;
 		if (health == 0) reboot();
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.HEALTH_CHANGE, calculatePosition(), health, robotNumber);
 	}
 	
 	public int getHealth() {
@@ -195,7 +214,7 @@ public class Robot extends Piece {
 	}
 	
 	public int getMaxHealth() {
-		return this.maxHealth;
+		return this.MAX_ROBOT_HEALTH;
 	}
 	
 	public boolean isChainable() {
@@ -224,8 +243,10 @@ public class Robot extends Piece {
 		if (board.hasRobotAt(respawnPointPos) && board.getRobotAt(respawnPointPos) != this) {
 			board.getRobotAt(respawnPointPos).reboot();
 		}
+		System.out.println(calculatePosition());
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.TELEPORT, calculatePosition(), respawnPointPos);
 		setPosition(respawnPointPos);
-		health = maxHealth;
+		health = MAX_ROBOT_HEALTH;
 		// TODO: (maybe) also must discard all cards in hand and stop moving
 	}
 
@@ -235,6 +256,7 @@ public class Robot extends Piece {
 		
 		if (foundRobot != null) {
 			foundRobot.takeDamage();
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROBOT_LASER, calculatePosition(), foundRobot.calculatePosition());
 		}
 	}
 	private Robot findRobotAhead() {
@@ -311,6 +333,10 @@ public class Robot extends Piece {
 
 	public void setMostRecentCheckpoint(int mostRecentCheckpoint) {
 		this.mostRecentCheckpoint = mostRecentCheckpoint;
+	}
+
+	public int getRobotNumber() {
+		return robotNumber;
 	}
 
 }
