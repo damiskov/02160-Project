@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Program {
 	
-	private ArrayList<Card> program = new ArrayList<Card>();
+	private ArrayList<Card> cardList = new ArrayList<Card>();
 	
 	public Program()
 	{
@@ -14,20 +14,20 @@ public class Program {
 	
 	public void setCardList(ArrayList<Card> cardList)
 	{
-		this.program = cardList;
+		this.cardList = cardList;
 	}
 	
 	public ArrayList<Card> getCardList()
 	{
-		return this.program;
+		return this.cardList;
 	}
 	
 	// Simulates process of taking a card from the top of a program
 	
 	public Card getTopOfProgram()
 	{
-		Card topCard = program.get(0);
-		program.remove(0);
+		Card topCard = cardList.get(0);
+		cardList.remove(0);
 		return topCard;
 	}
 
