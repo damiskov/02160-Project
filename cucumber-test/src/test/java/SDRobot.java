@@ -2,6 +2,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 
 import board.Board;
 import board.Position;
@@ -50,7 +51,8 @@ public class SDRobot {
 	
 	@Given("a program for the robot")
 	public void a_program_for_the_robot() {
-		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new Move2(), new Move3(), new Move1(), new TurnLeft(), new TurnRight()));
+		Stack<Card> gram = new Stack<Card>();
+		gram.addAll(Arrays.asList(new Move2(), new Move3(), new Move1(), new TurnLeft(), new TurnRight()));
 		context.robot.setProgram(gram);
 	}
 

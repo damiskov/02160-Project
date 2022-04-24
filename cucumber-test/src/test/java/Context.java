@@ -4,6 +4,7 @@ import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import board.*;
 import piece_basics.*;
@@ -58,6 +59,6 @@ public class Context {
 	Deck deck;
 	Hand hand;
 	Program program;
-	ArrayList<Card> gram;
+	Stack<Card> gram;
 
 }

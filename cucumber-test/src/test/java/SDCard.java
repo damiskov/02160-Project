@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.Stack;
 
 import board.Board;
 
@@ -65,7 +65,8 @@ public class SDCard {
 	@And("a non empty program")
 	public void a_non_empty_program() {
 		this.context.program = new Program();
-		ArrayList<Card> cardlst = new ArrayList<> (Arrays.asList(new Card("move1")));
+		Stack<Card> cardlst = new Stack<Card>();
+		cardlst.addAll(Arrays.asList(new Card("move1")));
 		context.player.setProgram(cardlst);
 		context.program = context.player.getProgram();
 	}
