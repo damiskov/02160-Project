@@ -12,8 +12,7 @@ Feature: Programming Cards
   	And a non empty program
     When a card is taken from the front of the program
     Then the robot executes the action on the card
-    #they are giving errors, should fix it first
-  #
+
   #ROBOT TURNING RIGHT
  	Scenario: A robot turns right from pointing up
   	Given a game with an empty board
@@ -65,7 +64,7 @@ Feature: Programming Cards
     Then the robot is at (5, 5) facing "up"
     
   #ROBOT MOVING FORWARD
-  #
+  
   Scenario: A robot moves forward when pointing right
   	Given a game with an empty board
   	And a robot on the board at (5, 5) facing "right"
@@ -163,7 +162,7 @@ Feature: Programming Cards
     Then the robot moves ninety degrees to the right
     
     
-  Scenario: Rotate robot to the right through ninety degrees
+  Scenario: Rotate robot to the left through ninety degrees
   	Given Left turn card
     And a robot on the board
     When the card is executed
@@ -182,81 +181,5 @@ Feature: Programming Cards
     And a robot on the board
     When the card is executed
     Then the robot moves one space back without changing its direction
-    
-
-
-  #Scenario: Move the robot two steps in the direction it is facing
-  #	Given a two steps card
-    #And a robot on the board
-    #When the card is executed
-    #Then the robot moves two steps in its direction
-    #
-  #Scenario: Move the robot three steps in the direction it is facing
-  #	Given three steps card
-    #And a robot on the board
-    #When the card is executed
-    #Then the robot moves three steps in its direction
-    #
-      #
-  #Scenario: Move the robot towards right at ninety degrees angle
-  #	Given Right Direction card
-    #And a robot on the board
-    #When the card is executed
-    #Then the robot moves ninety degrees to the right
-    #
-  #Scenario: Move the robot towards left at ninety degrees angle
-  #	Given Left Direction card
-    #And a robot on the board
-    #When the card is executed
-    #Then the robot moves ninety degrees to the left
-    #
-      #
-  #Scenario: Move the robot at one hundred eighty degrees angle
-  #	Given U-turn card
-    #And a robot on the board
-    #When the card is executed
-    #Then the robot moves one hundred eighty degrees so it faces opposite direction
-    #
-        #
-  #Scenario: Move the robot in the downwards direction
-  #	Given Backup card
-    #And a robot on the board
-    #When the card is executed
-    #Then the robot moves one space back without changing its direction
-    #
-    
-    
-    
-    
-    
-    
-    
-  #@tag1
-  #Scenario: Robot turns right
-  #	Given a board
-#	  And A turn right command
-#	  And a robot on the board
-#	  Then Robot turns right
-#	 
-#	Scenario: Robot turns left
-#		Given a board
-#	  And A turn left command
-#	  And a robot on the board
-#	  Then Robot turns left
-#	
-#	Scenario: Robot moves forward
-#		Given a board
-#	  And A move forward command
-#	  And a robot on the board
-#	  Then Robot moves forward
-#	
-#	Scenario: Robot moves backwards
-#		Given a board
-#		And a move backwards command
-#		And a robot on the board
-#		Then Robot moves backward
-	
-#
-#
 
    
