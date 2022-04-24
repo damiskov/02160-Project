@@ -10,9 +10,9 @@ public class SDButton {
 		this.context = context;
 	}
 
-	@Given("a start button")
-	public void a_board() {
-	    context.startButton = new Button();
-	}
+//	@Given("a start button")
+//	public void a_board() {
+//	    context.startButton = new Button();
+//	}
 	
 }

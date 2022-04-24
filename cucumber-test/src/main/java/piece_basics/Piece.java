@@ -3,12 +3,17 @@ package piece_basics;
 import java.io.IOException;
 
 import board.IBoard;
+import property_changes.PropertyChangeSupport;
 
 public abstract class Piece {
 	protected IBoard board;
 	
 	public void setBoard(IBoard board) {
 		this.board = board;
+	}
+	
+	protected PropertyChangeSupport getPropertyChangeSupport() {
+		return board.getPropertyChangeSupport();
 	}
 	
 	public void performRegisterAction() {}

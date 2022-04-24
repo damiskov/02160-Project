@@ -135,7 +135,8 @@ Feature: Programming Cards
   
 
   Scenario: Move the robot one step in the direction it is facing
-  	Given a Move1 card
+  	Given a game with an empty board
+  	And a Move1 card
     And a robot on the board
     When the card is executed
     Then the robot moves one step in its direction
@@ -143,41 +144,47 @@ Feature: Programming Cards
    
 
   Scenario: Move the robot two steps in the direction it is facing
-  	Given a Move2 card
+  	Given a game with an empty board
+  	And a Move2 card
   	And a robot on the board
     When the card is executed
     Then the robot moves two steps in its direction
     
   Scenario: Move the robot three steps in the direction it is facing
-  	Given a Move3 card
+  	Given a game with an empty board
+  	And a Move3 card
     And a robot on the board
     When the card is executed
     Then the robot moves three steps in its direction
     
       
   Scenario: Rotate robot to the right through ninety degrees
-  	Given Right Direction card
+  	Given a game with an empty board
+  	And Right Direction card
     And a robot on the board
     When the card is executed
     Then the robot moves ninety degrees to the right
     
     
-  Scenario: Rotate robot to the left through ninety degrees
-  	Given Left turn card
+  Scenario: Rotate robot to the right through ninety degrees
+  	Given a game with an empty board
+  	And Left turn card
     And a robot on the board
     When the card is executed
     Then the robot moves ninety degrees to the left 
 
 
   Scenario: Move the robot at one hundred eighty degrees angle
-  	Given UTurn card
+  	Given a game with an empty board
+  	And UTurn card
     And a robot on the board
     When the card is executed
     Then the robot faces opposite orientation
     
     
   Scenario: Move the robot in the downwards direction
-  	Given Backup card
+  	Given a game with an empty board
+  	And Backup card
     And a robot on the board
     When the card is executed
     Then the robot moves one space back without changing its direction

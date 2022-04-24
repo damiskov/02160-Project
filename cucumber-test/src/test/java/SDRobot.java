@@ -192,12 +192,11 @@ public class SDRobot {
 	
 	@Given("a robot on the board")
 	public void a_robot_on_the_board() {
-
-	    this.context.robot = new Robot();
+	    context.robot = new Robot();
 	    context.robot.setOrientation(Orientation.UP);
-		this.context.board = new Board(12,12);
 		context.board.initialPlacement(context.robot, new Position(5,5));
 	}
+	
 	@When("the robot takes enough damage to kill it")
 	public void the_robot_takes_enough_damage_to_kill_it() {
 	    for (int i = 0; i < 3; i++) {
