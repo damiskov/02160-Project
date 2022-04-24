@@ -29,4 +29,8 @@ public class Gear extends EnvironmentElement {
 		return ID;
 	}
 
+	public boolean isCounterClockwise() {
+		return counterClockwise;
+	}
+
 }

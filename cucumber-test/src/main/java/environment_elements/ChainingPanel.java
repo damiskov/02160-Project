@@ -8,6 +8,7 @@ import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
+import property_changes.PropertyChangeType;
 
 public class ChainingPanel extends EnvironmentElement {
 
@@ -25,6 +26,9 @@ public class ChainingPanel extends EnvironmentElement {
 	}
 	
 	public void setActive(boolean active) {
+		if (this.active != active) {
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ACTIVATION, calculatePosition());
+		}
 		this.active = active;
 	}
 

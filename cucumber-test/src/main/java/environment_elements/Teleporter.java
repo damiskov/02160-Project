@@ -1,7 +1,9 @@
 package environment_elements;
 
+import board.Position;
 import piece_basics.EnvironmentElement;
 import piece_basics.Robot;
+import property_changes.PropertyChangeType;
 
 public class Teleporter extends EnvironmentElement {
 	private Teleporter receiving;
@@ -29,10 +31,14 @@ public class Teleporter extends EnvironmentElement {
 
 	@Override
 	public void performRegisterAction() {
-		if (board.hasRobotAt(calculatePosition()) && IsSending() == true) {
-			Robot r = board.getRobotAt(calculatePosition());
-			board.moveRobotFromTo(calculatePosition(), receiving.calculatePosition());
+		Position p = calculatePosition();
+		if (board.hasRobotAt(p) && IsSending() == true) {
+			Robot r = board.getRobotAt(p);
+			Position receivingP = receiving.calculatePosition();
+			board.moveRobotFromTo(p, receivingP);
 			System.out.println( r + " is being moved to " + receiving.calculatePosition());
+			// TODO: if there is a robot on the receiving teleporter, kill it
+			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.TELEPORT, p, receivingP);
 		}
 	}
 }

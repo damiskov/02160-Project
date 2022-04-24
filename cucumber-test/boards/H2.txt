@@ -5,8 +5,8 @@
 L3C   H    L
  P  O      ^
          1 ^
-  R R   vvv^
+  R     vvv^
       P     
- O  4T   H  
+ O  4S   H  
             
             
