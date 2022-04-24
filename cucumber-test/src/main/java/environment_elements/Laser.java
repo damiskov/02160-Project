@@ -3,7 +3,7 @@ package environment_elements;
 import board.Position;
 import piece_basics.*;
 import piece_basics.EnvironmentElement;
-import property_changes.PropertyChangeType;
+import property_changes.ActivationEvent;
 
 public class Laser extends EnvironmentElement {
 	
@@ -15,7 +15,7 @@ public class Laser extends EnvironmentElement {
 		if (board.hasRobotAt(p)) {
 			System.out.println(board.getRobotAt(p) + " got damaged by the laser");
 			board.getRobotAt(calculatePosition()).takeDamage();
-			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ACTIVATION, p);
+			getPropertyChangeSupport().firePropertyChange(new ActivationEvent(p));
 		}
 	}
 

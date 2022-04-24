@@ -9,7 +9,11 @@ import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
 import environment_elements.Wall;
-import property_changes.PropertyChangeType;
+import property_changes.HealthChangeEvent;
+import property_changes.MovementEvent;
+import property_changes.RobotLaserEvent;
+import property_changes.RotationEvent;
+import property_changes.TeleportEvent;
 import cards.Program;
 
 public class Robot extends Piece {
@@ -78,7 +82,7 @@ public class Robot extends Piece {
 			orientation = Orientation.DOWN;
 			break;
 		}
-		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROTATION, calculatePosition(), oldOrientation, orientation);
+		getPropertyChangeSupport().firePropertyChange(new RotationEvent(calculatePosition(), oldOrientation, orientation));
 	}
 	public void turnRight() {
 		Orientation oldOrientation = orientation;
@@ -96,27 +100,27 @@ public class Robot extends Piece {
 			orientation = Orientation.UP;
 			break;
 		}
-		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROTATION, calculatePosition(), oldOrientation, orientation);
+		getPropertyChangeSupport().firePropertyChange(new RotationEvent(calculatePosition(), oldOrientation, orientation));
 	}	
 	
 	//checking wallcollision after 2 or 3 steps 
 
 
-	//checking wall collision	
-	private boolean wallCollision(Position p) {
-
-		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
-			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), p);
-			board.setPosition(this, p);
-		}
-		return false;	
-
-	}
+//	//checking wall collision	
+//	private boolean wallCollision(Position p) {
+//
+//		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
+//			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), p);
+//			board.setPosition(this, p);
+//		}
+//		return false;	
+//
+//	}
 	//!board.getEElementAt(posToMoveTo).isWallCollsion())
 	private void tryMoveRobot(Position posToMoveTo) {
 		System.out.println(board.hasRobotAt(posToMoveTo));
 		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) || ((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
-			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), posToMoveTo);
+			getPropertyChangeSupport().firePropertyChange(new MovementEvent(calculatePosition(), posToMoveTo));
 			board.setPosition(this, posToMoveTo);
 		} else if (board.hasRobotAt(posToMoveTo)){
 			Robot toBePushedRobot = board.getRobotAt(posToMoveTo);
@@ -124,7 +128,7 @@ public class Robot extends Piece {
 			toBePushedRobot.setOrientation(this.orientation);
 			System.out.println("X Position moved to: " + toBePushedRobot.getX());
 			toBePushedRobot.move(1);
-			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), posToMoveTo);
+			getPropertyChangeSupport().firePropertyChange(new MovementEvent(calculatePosition(), posToMoveTo));
 			board.setPosition(this, posToMoveTo);
 		} else {
 			System.out.println("no robot");
@@ -194,13 +198,13 @@ public class Robot extends Piece {
 	public void heal() {
 		if (health < MAX_ROBOT_HEALTH) {
 			health++;
-			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.HEALTH_CHANGE, calculatePosition(), health, robotNumber);
+			getPropertyChangeSupport().firePropertyChange(new HealthChangeEvent(health, robotNumber));
 		}
 	}
 	public void takeDamage() {
 		health--;
 		if (health == 0) reboot();
-		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.HEALTH_CHANGE, calculatePosition(), health, robotNumber);
+		getPropertyChangeSupport().firePropertyChange(new HealthChangeEvent(health, robotNumber));
 	}
 	
 	public int getHealth() {
@@ -238,7 +242,7 @@ public class Robot extends Piece {
 			board.getRobotAt(respawnPointPos).reboot();
 		}
 		System.out.println(calculatePosition());
-		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.TELEPORT, calculatePosition(), respawnPointPos);
+		getPropertyChangeSupport().firePropertyChange(new TeleportEvent(calculatePosition(), respawnPointPos));
 		setPosition(respawnPointPos);
 		health = MAX_ROBOT_HEALTH;
 		// TODO: (maybe) also must discard all cards in hand and stop moving
@@ -250,7 +254,7 @@ public class Robot extends Piece {
 		
 		if (foundRobot != null) {
 			foundRobot.takeDamage();
-			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROBOT_LASER, calculatePosition(), foundRobot.calculatePosition());
+			getPropertyChangeSupport().firePropertyChange(new RobotLaserEvent(calculatePosition(), foundRobot.calculatePosition()));
 		}
 	}
 	private Robot findRobotAhead() {

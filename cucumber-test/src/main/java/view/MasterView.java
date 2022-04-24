@@ -10,9 +10,9 @@ import javax.swing.JPanel;
 
 import board.Game;
 import controller.MasterController;
-import property_changes.PropertyChangeEvent;
+import property_changes.HealthChangeEvent;
+import property_changes.IPropertyChangeEvent;
 import property_changes.PropertyChangeListener;
-import property_changes.PropertyChangeType;
 import utils.GridBagLayoutUtils;
 
 public class MasterView extends JFrame implements PropertyChangeListener {
@@ -109,11 +109,12 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent pci) {
-		if (pci.getPropertyChangeType() == PropertyChangeType.HEALTH_CHANGE) {
-			statusPanel.setHealth(pci.getRobotNum(), pci.getHealth());
+	public void propertyChange(IPropertyChangeEvent pce) {
+		if (pce instanceof HealthChangeEvent) {
+			HealthChangeEvent hce = (HealthChangeEvent) pce;
+			statusPanel.setHealth(hce.getRobotNum(), hce.getHealth());
 		} else {
-			boardPanel.propertyChange(pci);
+			boardPanel.propertyChange(pce);
 		}
 		
 	}
