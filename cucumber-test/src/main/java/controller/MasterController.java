@@ -13,7 +13,7 @@ public class MasterController {
 	
 	private MasterView view;
 	private Game game;
-	private PropertyChangeSupport pci;
+	private PropertyChangeSupport pcs;
 	
 	
 	MasterController(ApplicationController application, int playerCount, String difficulty){
@@ -21,10 +21,10 @@ public class MasterController {
 		this.playerCount = playerCount; 
 		this.difficulty = difficulty;
 		
-		pci = new PropertyChangeSupport();
-		game = new Game(pci, playerCount);
+		pcs = new PropertyChangeSupport();
+		game = new Game(pcs, playerCount);
 		this.view = new MasterView(this, game);
-		pci.addSubscriber(view);
+		pcs.addSubscriber(view);
 		
 		game.testPlacements();
 	}

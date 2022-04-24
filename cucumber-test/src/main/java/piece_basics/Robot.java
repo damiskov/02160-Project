@@ -18,7 +18,7 @@ public class Robot extends Piece {
 	
 	private Orientation orientation = Orientation.UP;
 	private int health;
-	private final int maxHealth = 5;
+	public static final int MAX_ROBOT_HEALTH = 3;
 	private RespawnPoint currentRespawnPoint;
 	private ChainingPanel ChainedFrom;
 	private boolean chainable = false;
@@ -31,7 +31,7 @@ public class Robot extends Piece {
 	public static final String ID = "robot";
 	
 	public Robot() {
-		health = maxHealth;
+		health = MAX_ROBOT_HEALTH;
 		robotNumber = nextRobotNumber;
 		nextRobotNumber++;
 	}
@@ -192,7 +192,7 @@ public class Robot extends Piece {
 	}
 
 	public void heal() {
-		if (health < maxHealth) {
+		if (health < MAX_ROBOT_HEALTH) {
 			health++;
 			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.HEALTH_CHANGE, calculatePosition(), health, robotNumber);
 		}
@@ -208,7 +208,7 @@ public class Robot extends Piece {
 	}
 	
 	public int getMaxHealth() {
-		return this.maxHealth;
+		return this.MAX_ROBOT_HEALTH;
 	}
 	
 	public boolean isChainable() {
@@ -240,7 +240,7 @@ public class Robot extends Piece {
 		System.out.println(calculatePosition());
 		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.TELEPORT, calculatePosition(), respawnPointPos);
 		setPosition(respawnPointPos);
-		health = maxHealth;
+		health = MAX_ROBOT_HEALTH;
 		// TODO: (maybe) also must discard all cards in hand and stop moving
 	}
 

@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import piece_basics.Robot;
 import utils.ImageUtils;
 
 public class RobotStatusIndicator extends JPanel {
@@ -23,7 +24,7 @@ public class RobotStatusIndicator extends JPanel {
 		robotIcon = new JLabel(new ImageIcon(ImageUtils.scaledImage(imageFilepath, 50, 50)));
 		add(robotIcon);
 		
-		heartIndicator = new HeartIndicator(5);
+		heartIndicator = new HeartIndicator(Robot.MAX_ROBOT_HEALTH);
 		add(heartIndicator);
 		
 		setMaximumSize(new Dimension(getMaximumSize().width, robotIcon.getMaximumSize().height));

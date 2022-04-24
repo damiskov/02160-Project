@@ -48,7 +48,7 @@ public class Context {
 	Checkpoint checkpoint;
 	
 	Player player;
-	Player player1;
+	Player player2;
 	Player host;
 
 	Piece piece;
