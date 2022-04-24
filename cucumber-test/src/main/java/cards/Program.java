@@ -1,23 +1,23 @@
 package cards;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Program {
 	
-	private ArrayList<Card> cardList = new ArrayList<Card>();
+	private Stack<Card> cardList = new Stack<Card>();
 	
 	public Program()
-	{
-	}
+	{}
 	
 	// getter and setter for program
 	
-	public void setCardList(ArrayList<Card> cardList)
+	public void setCardList(Stack<Card> cardList)
 	{
-		this.cardList = cardList;
+		this.cardList=cardList;
 	}
 	
-	public ArrayList<Card> getCardList()
+	public Stack<Card> getCardList()
 	{
 		return this.cardList;
 	}
@@ -26,9 +26,7 @@ public class Program {
 	
 	public Card getTopOfProgram()
 	{
-		Card topCard = cardList.get(0);
-		cardList.remove(0);
-		return topCard;
+		return cardList.pop();
 	}
 
 }

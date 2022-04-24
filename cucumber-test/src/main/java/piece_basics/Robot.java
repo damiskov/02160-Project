@@ -3,6 +3,7 @@ package piece_basics;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import board.Position;
 import cards.Card;
@@ -292,9 +293,9 @@ public class Robot extends Piece {
 		return this.ChainedFrom;
 	}
 	
-	public void setProgram(ArrayList<Card> program) {
+	public void setProgram(Stack<Card> stack) {
 		Program p = new Program();
-		p.setCardList(program);
+		p.setCardList(stack);
 		this.program = p;
 	}
 
