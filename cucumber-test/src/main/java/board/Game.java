@@ -62,8 +62,9 @@ public class Game {
 				}
 			}
 		}
-		
 	}
+	
+	
 	public void setBoard(Board board) {
 		this.board = board;
 	}
