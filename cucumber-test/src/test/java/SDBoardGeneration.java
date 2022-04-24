@@ -11,6 +11,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import piece_basics.Robot;
 import player.Player;
+import property_changes.PropertyChangeSupport;
 
 public class SDBoardGeneration {
 	
@@ -55,7 +56,8 @@ public class SDBoardGeneration {
 	public void a_board_is_generated()
 	{
 		Robot[] r = {context.player.getRobot(),context.player2.getRobot()};
-		Board b = BoardFactory.generateBoard(context.d, r);
+		PropertyChangeSupport pcs = new PropertyChangeSupport();
+		Board b = BoardFactory.generateBoard(context.d, r, pcs);
 		context.board = b;
 	}
 	

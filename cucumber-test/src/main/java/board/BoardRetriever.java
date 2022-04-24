@@ -6,6 +6,7 @@ import java.util.HashMap;
 import environment_elements.*;
 import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
+import property_changes.PropertyChangeSupport;
 
 public class BoardRetriever  
 {  
@@ -43,9 +44,9 @@ public class BoardRetriever
 		this.initialiseHM();
 	}
 	
-	public Board retrieveBoard(String filename) 
+	public Board retrieveBoard(String filename, PropertyChangeSupport pcs) 
 	{
-		Board b = new Board(12,12);
+		Board b = new Board(12, 12, pcs);
 		b.setName(filename);
 		String path = "boards/" + filename + ".txt";
 		// Open the file
