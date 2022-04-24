@@ -12,15 +12,15 @@ public class HeartIndicator extends JPanel {
 	private int currentHealth;
 	private HeartLabel[] hearts;
 	
-	public HeartIndicator(int health) {
+	public HeartIndicator(int maxHealth) {
 		setLayout(new FlowLayout(FlowLayout.LEFT, 4, 4));
 		
-		this.currentHealth = health;
-		this.maxHealth = health;
+		this.currentHealth = maxHealth;
+		this.maxHealth = maxHealth;
 		
-		hearts = new HeartLabel[health];
+		hearts = new HeartLabel[maxHealth];
 		
-		for (int i = 0; i < health; i++) {
+		for (int i = 0; i < maxHealth; i++) {
 			HeartLabel hl = new HeartLabel();
 			hearts[i] = hl;
 			add(hl);
@@ -28,7 +28,7 @@ public class HeartIndicator extends JPanel {
 	}
 	
 	public void setHealth(int health) {
-		for (int i = 0; i < health-1; i++) {
+		for (int i = 0; i < health; i++) {
 			hearts[i].fill();
 		}
 		for (int i = health; i < maxHealth; i++) {

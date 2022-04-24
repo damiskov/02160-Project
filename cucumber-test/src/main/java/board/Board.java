@@ -7,6 +7,8 @@ import java.util.Map;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
+import property_changes.PropertyChangeSupport;
+import property_changes.PropertyChangeType;
 
 // utility class for Board with public attributes. Encapsulation is still respected as this class is fully encapsulated by the Board class
 class Cell {
@@ -23,6 +25,7 @@ public class Board implements IBoard {
 	private Difficulty difficulty;
 	private String name;
 	private Map<String, List<Piece>> pieceLists = new HashMap<>();
+	private PropertyChangeSupport propertyChangeSupport;
 	
 	// initialise an empty board with a set number of columns and rows
 	public Board(int numColumns, int numRows) {
@@ -36,8 +39,18 @@ public class Board implements IBoard {
 		this.numRows = numRows;
 	}
 	
+	public Board(int numColumns, int numRows, PropertyChangeSupport propertyChangeSupport) {
+		this(numColumns, numRows);
+		this.propertyChangeSupport = propertyChangeSupport;
+	}
+	
 	// probably not a good idea to have this, only for compatibility with StepsDefinitionBoardGeneration
 	public Board() {}
+	
+	@Override
+	public PropertyChangeSupport getPropertyChangeSupport() {
+		return propertyChangeSupport;
+	}
 	
 	public void setNumberOfObstacles(int n) {
 		
@@ -66,11 +79,14 @@ public class Board implements IBoard {
 		return matrix[numColumns - y - 1][x];
 	}
 	
+	
+	
 	@Override
 	public void initialPlacement(Robot r, int x, int y) {
 		addToExecutionLists(r);
 		r.setBoard(this);
 		getCell(x, y).robot = r;
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.PLACEMENT, r,  new Position(x,y));
 	}
 	@Override
 	public void initialPlacement(Robot r, Position p) {
@@ -81,6 +97,7 @@ public class Board implements IBoard {
 		addToExecutionLists(e);
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.PLACEMENT, e, new Position(x,y));
 	}
 	@Override
 	public void initialPlacement(EnvironmentElement e, Position p) {
@@ -124,6 +141,7 @@ public class Board implements IBoard {
 	
 	@Override
 	public void moveRobotFromTo(Position oldPos, Position newPos) {
+		System.out.println("here");
 		if (!oldPos.equals(newPos)) {
 			Cell oldCell = getCell(oldPos);
 			Robot r = oldCell.robot;
@@ -161,14 +179,15 @@ public class Board implements IBoard {
 		return getCell(p).eElement;
 	}
 	
-	@Override
-	public void removeRobot(Position p) {
-		getCell(p).robot = null;
-	}
+//	@Override
+//	public void removeRobot(Position p) {
+//		getCell(p).robot = null;
+//	}
 	
 	@Override
 	public void removeEElement(Position p) {
 		getCell(p).eElement = null;
+		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.REMOVAL, p);
 	}
 	
 	@Override
@@ -188,6 +207,15 @@ public class Board implements IBoard {
 		return pieceLists;
 	}
 
+	public int getNumColumns() {
+		return numColumns;
+	}
+
+	public int getNumRows() {
+		return numRows;
+	}
+	
+	
 
 	public Difficulty getDifficulty() {
 		return difficulty;

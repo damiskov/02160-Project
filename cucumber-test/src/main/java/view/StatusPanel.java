@@ -7,30 +7,35 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import property_changes.PropertyChangeEvent;
+
 public class StatusPanel extends JPanel {
 	
 	private static final long serialVersionUID = 7879846621866023722L;
 	
 	private RobotStatusIndicator[] statusIndicators;
 
-	public StatusPanel() {
+	public StatusPanel(int numPlayers) {
+		statusIndicators = new RobotStatusIndicator[numPlayers];
+		
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 		
-		// temporary, for testing
-		RobotStatusIndicator rsi1 = new RobotStatusIndicator();
-		rsi1.setHealth(4);
-		add(rsi1);
-		
-		add(Box.createRigidArea(new Dimension(0, 5)));
-		
-		RobotStatusIndicator rsi2 = new RobotStatusIndicator();
-		rsi2.setHealth(0);
-		add(rsi2);
+		for (int i = 0; i < numPlayers; i++) {
+			RobotStatusIndicator rsi = new RobotStatusIndicator(i+1);
+			add(rsi);
+			statusIndicators[i] = rsi;
+			
+			add(Box.createRigidArea(new Dimension(0, 5)));
+		}
 		
 		add(Box.createVerticalGlue());
 //		
 //		setPreferredSize(new Dimension(500, 800));
 		
+	}
+	
+	public void setHealth(int robotNum, int health) {
+		statusIndicators[robotNum-1].setHealth(health);
 	}
 }

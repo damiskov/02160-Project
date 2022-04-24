@@ -4,7 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 
-public class Sprite implements ISprite {
+
+public class Sprite {
 
 	private int x;
 	private int y;
@@ -59,10 +60,19 @@ public class Sprite implements ISprite {
 		this.degrees = degrees;
 		updateAffineTransform();
 	}
+	
+	public void activate() {};
 
-	@Override
 	public void drawUsing(Graphics2D g2) {
 		g2.drawImage(image, affineTransform, null);
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 	

@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -10,11 +8,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
 import controller.BoardCreationController;
+import board.Game;
 import controller.MasterController;
+import property_changes.PropertyChangeEvent;
+import property_changes.PropertyChangeListener;
+import property_changes.PropertyChangeType;
 import utils.GridBagLayoutUtils;
 
-public class MasterView extends JFrame{
+public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	private static final long serialVersionUID = 3L;
 	
@@ -30,21 +33,21 @@ public class MasterView extends JFrame{
 	
 	private BlackScreen blackScreen;
 	
-	public MasterView(MasterController masterController) {
+	public MasterView(MasterController masterController, Game game) {
 		this.controller = masterController;
-		initGUI();
+		initGUI(game);
 	}
 	
 
-	private void initGUI() {
+	private void initGUI(Game game) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("RoboRally Game of " + controller.playerCount + " players on " + controller.difficulty + " difficulty");
 		
 		setLayout(new GridBagLayout());
 		
-		boardPanel = new BoardPanel(12, 12);
+		boardPanel = new BoardPanel(game.getBoard());
 		cardPanel = new CardPanel();
-		statusPanel = new StatusPanel();
+		statusPanel = new StatusPanel(game.getNumPlayers());
 		
 		blackScreen = new BlackScreen(this);
 		
@@ -108,5 +111,16 @@ public class MasterView extends JFrame{
 	private void removeBlackScreen() {
 		remove(blackScreen);
 	}
-	
+
+
+	@Override
+	public void propertyChange(PropertyChangeEvent pci) {
+		if (pci.getPropertyChangeType() == PropertyChangeType.HEALTH_CHANGE) {
+			statusPanel.setHealth(pci.getRobotNum(), pci.getHealth());
+		} else {
+			boardPanel.propertyChange(pci);
+		}
+		
+	}
+
 }
