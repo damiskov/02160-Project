@@ -4,7 +4,7 @@ T  3      5
  P  R L  H  
   H    4    
             
- T   O      
+ S   O      
   2W        
   W  P <<<1 
             

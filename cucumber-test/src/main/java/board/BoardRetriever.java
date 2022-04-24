@@ -14,10 +14,18 @@ public class BoardRetriever
 	private HashMap<Character, EnvironmentElement> asciiToEE = new HashMap<>();
 	private void initialiseHM()
 	{
+		// Initialising sending and receiving teleporter
+		Teleporter T1 = new Teleporter();
+		T1.setSending(true);
+		Teleporter T2 = new Teleporter();
+		T2.setSending(false);
+		T1.setReceiving(T2);
+		
 		asciiToEE.put('W', new Wall());
 		asciiToEE.put('P', new Pit());
 		asciiToEE.put('O', new OilSpill());
-		asciiToEE.put('T', new Teleporter());
+		asciiToEE.put('S', T1);
+		asciiToEE.put('T', T2);
 		asciiToEE.put('X', new RespawnPoint());
 		asciiToEE.put('^', new ConveyorBelt(Orientation.UP));
 		asciiToEE.put('>', new ConveyorBelt(Orientation.RIGHT));
@@ -34,6 +42,7 @@ public class BoardRetriever
 		asciiToEE.put('3', new Checkpoint(3));
 		asciiToEE.put('4', new Checkpoint(4));
 		asciiToEE.put('5', new Checkpoint(5));
+		
 		asciiToEE.put(' ', null);
 		
 	}
