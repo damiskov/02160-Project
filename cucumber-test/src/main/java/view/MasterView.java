@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import board.Game;
 import controller.MasterController;
+import property_changes.GameWinEvent;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.PropertyChangeListener;
@@ -63,6 +64,11 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 	}
 	
+	private void displayWinScreen(int winningPlayerNum) {
+		removeElements();
+		addWinScreen(winningPlayerNum);
+	}
+	
 	public void displayBlackScreen(int playerTurn) {
 		removeElements();
 		addBlackScreen(playerTurn);
@@ -104,6 +110,13 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		repaint();
 	}
 	
+	private void addWinScreen(int winningPlayerNum) {
+		setLayout(new BorderLayout());
+		add(new WinScreen(this, winningPlayerNum), BorderLayout.CENTER);
+		revalidate();
+		repaint();
+	}
+	
 	private void removeBlackScreen() {
 		remove(blackScreen);
 	}
@@ -113,6 +126,9 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		if (pce instanceof HealthChangeEvent) {
 			HealthChangeEvent hce = (HealthChangeEvent) pce;
 			statusPanel.setHealth(hce.getRobotNum(), hce.getHealth());
+		} else if (pce instanceof GameWinEvent) {
+			GameWinEvent gwe = (GameWinEvent) pce;
+			displayWinScreen(gwe.getWinningPlayerNum());
 		} else {
 			boardPanel.propertyChange(pce);
 		}
