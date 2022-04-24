@@ -129,7 +129,7 @@ public class Game {
 		board.initialPlacement(new Gear(false), 1, 2);
 		
 		board.initialPlacement(new ChainingPanel(), 0, 3);
-		board.initialPlacement(new Checkpoint(0), 1, 3);
+		board.initialPlacement(new Checkpoint(1, true), 1, 3);
 		board.initialPlacement(new Fire(), 2, 3);
 		board.initialPlacement(new HealthStation(), 3, 3);
 		board.initialPlacement(new OilSpill(), 4, 3);
@@ -141,30 +141,33 @@ public class Game {
 		board.initialPlacement(new Teleporter(), 8, 3);
 		board.initialPlacement(new Wall(), 9, 3);
 		
-		r1.move(1);
+//		r1.move(1);
 		
-		r1.move(1);
-		r1.turnRight();
-		r1.move(1);
-		r1.turnRight();
-		r1.move(1);
-		r1.turnRight();
-		r1.move(1);
-		r1.turnRight();
+		r2.turnRight();
+//		r2.move(1);
+		
+//		r1.move(1);
+//		r1.turnRight();
+//		r1.move(1);
+//		r1.turnRight();
+//		r1.move(1);
+//		r1.turnRight();
+//		r1.move(1);
+//		r1.turnRight();
 		
 	
-		activateRegisterActors();
-		r2.move(2);
-		r2.turnLeft();
-		r2.move(-2);
-		r2.turnLeft();
-		r2.move(-1);
-		r2.turnLeft();
-		r2.move(-1);
-		r2.turnLeft();
-		r2.move(-1);
-		r2.turnLeft();
-		r2.move(-1);
+//		activateRegisterActors();
+//		r2.move(2);
+//		r2.turnLeft();
+//		r2.move(-2);
+//		r2.turnLeft();
+//		r2.move(-1);
+//		r2.turnLeft();
+//		r2.move(-1);
+//		r2.turnLeft();
+//		r2.move(-1);
+//		r2.turnLeft();
+//		r2.move(-1);
 		
 		//r1.move(1);
 		//r1.turnLeft();
