@@ -1,10 +1,6 @@
 package board;
-import cards.Deck;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
@@ -54,7 +50,7 @@ public class Game {
 		this.numPlayers = numPlayers;
 		
 		// temporary
-		board = new Board(12, 12, this);
+		board = new Board(12, 12, pcs);
 	}
 	
 	

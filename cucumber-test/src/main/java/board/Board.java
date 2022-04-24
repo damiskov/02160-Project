@@ -25,7 +25,7 @@ public class Board implements IBoard {
 	private Difficulty difficulty;
 	private String name;
 	private Map<String, List<Piece>> pieceLists = new HashMap<>();
-	private Game game;
+	private PropertyChangeSupport propertyChangeSupport;
 	
 	// initialise an empty board with a set number of columns and rows
 	public Board(int numColumns, int numRows) {
@@ -39,9 +39,9 @@ public class Board implements IBoard {
 		this.numRows = numRows;
 	}
 	
-	public Board(int numColumns, int numRows, Game game) {
+	public Board(int numColumns, int numRows, PropertyChangeSupport propertyChangeSupport) {
 		this(numColumns, numRows);
-		this.game = game;
+		this.propertyChangeSupport = propertyChangeSupport;
 	}
 	
 	// probably not a good idea to have this, only for compatibility with StepsDefinitionBoardGeneration
@@ -49,7 +49,7 @@ public class Board implements IBoard {
 	
 	@Override
 	public PropertyChangeSupport getPropertyChangeSupport() {
-		return game.getPropertyChangeSupport();
+		return propertyChangeSupport;
 	}
 	
 	public void setNumberOfObstacles(int n) {
