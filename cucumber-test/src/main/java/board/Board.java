@@ -52,18 +52,6 @@ public class Board implements IBoard {
 		return propertyChangeSupport;
 	}
 	
-	public void setNumberOfObstacles(int n) {
-		
-		this.numObstacles = n;
-		
-	}
-	
-	public int getNumberObstacles() {
-		
-		return numObstacles;
-		
-	}
-	
 	public void setMatrix(Cell[][] m) {
 		this.matrix = m;
 		this.numRows = matrix.length;
