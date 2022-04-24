@@ -25,7 +25,7 @@ import player.Player;
 public class Context {
 	Board board;
 	Robot robot;
-	Robot robot2; //needed for the chaining panel
+	Robot robot2; //needed for the chaining panel //also used in robot bumping
 	ConveyorBelt conveyorBelt;
 	Gear gear;
 	HealthStation healthStation;
@@ -48,11 +48,12 @@ public class Context {
 	Checkpoint checkpoint;
 	
 	Player player;
+	Player player1;
 	Player host;
 
 	Piece piece;
 	Card card;
-	int difficulty;
+	Difficulty d;
 	
 	Deck deck;
 	Hand hand;

@@ -11,7 +11,11 @@ import io.cucumber.java.en.When;
 import piece_basics.Orientation;
 import piece_basics.Robot;
 import cards.Card;
+import cards.Move1;
 import cards.Move2;
+import cards.Move3;
+import cards.TurnLeft;
+import cards.TurnRight;
 
 public class SDRobot {
 	private Context context;
@@ -27,6 +31,16 @@ public class SDRobot {
 	    context.robot = r;
 	}
 	
+	@Given("two robots on the board")
+	public void two_robots_on_the_board() {
+		Robot r = new Robot();
+		context.board.initialPlacement(r, 1, 3);
+	    context.robot = r;
+	    Robot r2 = new Robot();
+		context.board.initialPlacement(r2, 4, 7);
+	    context.robot2 = r2;
+	}
+	
 	@Given("a second robot on the board at \\({int}, {int})")
 	public void a_second_robot_on_the_board_at(Integer int1, Integer int2) {
 		Robot r = new Robot();
@@ -36,7 +50,7 @@ public class SDRobot {
 	
 	@Given("a program for the robot")
 	public void a_program_for_the_robot() {
-		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new Move2(), new Move2(), new Move2(), new Move2(), new Move2()));
+		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new Move2(), new Move3(), new Move1(), new TurnLeft(), new TurnRight()));
 		context.robot.setProgram(gram);
 	}
 
@@ -59,9 +73,34 @@ public class SDRobot {
 	    context.robot = r;
 	}
 	
+	@Given("a second robot on the board at \\({int}, {int}) facing {string}")
+	public void a_second_robot_on_the_board_at_facing(Integer int1, Integer int2, String string) {
+	    Robot r = new Robot();
+	    switch (string.toLowerCase()) {
+	    case "up":
+	    	r.setOrientation(Orientation.UP); break;
+	    case "right":
+	    	r.setOrientation(Orientation.RIGHT); break;
+	    case "down":
+	    	r.setOrientation(Orientation.DOWN); break;
+	    case "left":
+	    	r.setOrientation(Orientation.LEFT); break;
+    	default:
+    		throw new IllegalArgumentException("Invalid orientation");
+	    }
+	    context.board.initialPlacement(r, int1, int2);
+	    context.robot2 = r;
+	    
+	}
+	
 	@When("the robot moves to \\({int}, {int})")
 	public void the_robot_moves_to(Integer int1, Integer int2) {
 	    context.board.setPosition(context.robot, new Position(int1, int2));
+	}
+	
+	@When("the first robot moves to \\({int}, {int})")
+	public void the_first_robot_moves_to(Integer int1, Integer int2) {
+		context.board.setPosition(context.robot, new Position(int1, int2));
 	}
 	
 	@Then("the robot is at \\({int}, {int})")
@@ -75,6 +114,7 @@ public class SDRobot {
 	}
 	
 	
+	
 	@Then("the second robot is at \\({int}, {int})")
 	public void the_second_robot_is_at(Integer int1, Integer int2) {
 		assertEquals(new Position(int1, int2), context.robot2.calculatePosition());
@@ -85,19 +125,37 @@ public class SDRobot {
 		context.robot.move(1);
 	}
 	
+	@When("the robot tries to move two steps")
+	public void the_robot_tries_to_move_two_steps(){
+		context.robot.move(1);
+	}
+	
+	@When("the robot tries to move three steps")
+	public void the_robot_tries_to_move_three_steps() {
+		context.robot.move(1);
+	}
+
+	
 	@Then("the robot stays at \\({int}, {int})")
 	public void the_robot_stays_at(Integer int1, Integer int2) {
 		assertEquals(new Position(int1, int2), context.robot.calculatePosition());	
 	}
+
 	
 	
 	@When("one robot moves")
 	public void one_robot_moves() {
 	    context.robot.move(1);
+	    
+
 	}
 	
 	@When("the robot moves {int} step")
 	public void the_robot_moves_step(Integer int1) {
+		context.robot.move(int1);
+	}
+	@When("the robot tries to move {int} steps")
+	public void the_robot_tries_to_move_steps(Integer int1) {
 		context.robot.move(int1);
 	}
 	

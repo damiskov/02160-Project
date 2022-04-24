@@ -30,7 +30,7 @@ public class SDFire {
 	
 	@Then("the fire spreads to a random adjacent cell")
 	public void the_fire_spreads_to_a_random_adjacent_cell() {
-		assertTrue(context.board.getEElementAt(context.fire.p) instanceof Fire);
+		assertTrue(context.board.getEElementAt(context.fire.getP()) instanceof Fire);
 	}
 	
 }

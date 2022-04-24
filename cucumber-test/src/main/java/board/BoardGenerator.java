@@ -5,57 +5,79 @@ import environment_elements.*;
 import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
 import piece_basics.Robot;
+
 public class BoardGenerator {
 	
 	private Board b;
+	private Robot[] robots;
+	private String[] easyFiles = {"E1", "E2", "E3"};
+	private String[] mediumFiles = {"M1", "M2", "M3"};
+	private String[] hardFiles = {"H1", "H2", "H3"};
+	private String[] customFiles = {};
+	private Position[] startingPositions = {new Position(6,11),
+									new Position(7,11),
+									new Position(5,11),
+									new Position(8,11),
+									new Position(4,11),
+									new Position(9,11),
+									new Position(3,11),
+									new Position(10,11)
+			
+	};
 	
-	public BoardGenerator(int numObstacles, int numRobots, Robot[] robots)
+	public BoardGenerator(Robot[] robots)
 	{
-		b = new Board(12,12);
-		b.setNumberOfObstacles(numObstacles);
-		EnvironmentElement[] EElist = {new Gear(true), new Gear(false),
-										new ConveyorBelt(Orientation.UP), new ConveyorBelt(Orientation.DOWN), new ConveyorBelt(Orientation.RIGHT), new ConveyorBelt(Orientation.LEFT),
-										new HealthStation(),
-										new Pit(),
-										new Wall(),
-										new ReversalPanel(),
-										new Laser(),
-										new OilSpill(),
-										new Teleporter()};
-		int[] startPositionsX = {5,6,4,7,3,7,2,1};
-		
-		// Initial placement of robots
-		// Will have X between 0-11 and Y between 1-11 (0th row is used for robot spawn points)
-		
-		for (int i = 0; i < numRobots; i++)
-		{
-			b.initialPlacement(robots[i], startPositionsX[i], 0);
-			
-		}
-		
-		// Placement of obstacles
-		int i = 0;
-		Random rand = new Random();
-		while (i < numObstacles)
-		{
-			// random position
-			int x = rand.nextInt(12);
-			int y = 1 + rand.nextInt(11);
-			Position p = new Position(x,y);
-			// random obstacle
-			int o = rand.nextInt(EElist.length);
-			if (!b.hasEElementAt(p))
-			{
-				b.initialPlacement(EElist[o], p);
-				i++;
-			}
-			
-		}
-		
+		this.robots = robots;
 	}
 	
 	public Board getBoard()
 	{
+		return b;
+	}
+
+
+
+	public Board getEasyBoard() {
+		Random rand = new Random();
+		int x = rand.nextInt(3);
+		BoardRetriever BR = new BoardRetriever();
+		b = BR.retrieveBoard(easyFiles[x]);
+		b.setDifficulty(new Difficulty(1));
+		for (int i = 0; i < robots.length; i++)
+		{
+			System.out.println(robots[i]);
+			b.initialPlacement(robots[i], startingPositions[i]);
+		}
+		return b;
+	}
+
+
+
+	public Board getMediumBoard() {
+		Random rand = new Random();
+		int x = rand.nextInt(3);
+		BoardRetriever BR = new BoardRetriever();
+		b = BR.retrieveBoard(mediumFiles[x]);
+		b.setDifficulty(new Difficulty(2));
+		for (int i = 0; i < robots.length; i++)
+		{
+			b.initialPlacement(robots[i], startingPositions[i]);
+		}
+		return b;
+	}
+
+
+
+	public Board getHardBoard() {
+		Random rand = new Random();
+		int x = rand.nextInt(3);
+		BoardRetriever BR = new BoardRetriever();
+		b = BR.retrieveBoard(hardFiles[x]);
+		b.setDifficulty(new Difficulty(3));
+		for (int i = 0; i < robots.length; i++)
+		{
+			b.initialPlacement(robots[i], startingPositions[i]);
+		}
 		return b;
 	}
 

@@ -1,6 +1,8 @@
 package piece_basics;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import board.Position;
 import cards.Card;
@@ -8,6 +10,7 @@ import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
 import environment_elements.Wall;
 import cards.Program;
+import java.lang.Math;  
 
 public class Robot extends Piece {
 	private Orientation orientation;
@@ -15,6 +18,7 @@ public class Robot extends Piece {
 	private final int maxHealth = 3;
 	private RespawnPoint currentRespawnPoint;
 	private boolean chainable = false;
+	private boolean wallOnBoard;
 	private Robot chainedTo;
 	private String command;	
 	private Program program;
@@ -71,7 +75,7 @@ public class Robot extends Piece {
 	}
 	public void turnRight() {
 		switch(orientation) {
-		case UP:
+		case UP:  
 			orientation = Orientation.RIGHT;
 			break;
 		case RIGHT:
@@ -85,33 +89,62 @@ public class Robot extends Piece {
 			break;
 		}
 	}	
-	//checking wall collision	
-	private boolean wallCollision(Position p) {
+	
+	//checking wallcollision after 2 or 3 steps 
 
-		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
-			board.setPosition(this, p);
+
+//	//checking wall collision	
+//	private boolean wallCollision(Position p) {
+//
+//		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
+//			board.setPosition(this, p);
+//		}
+//		return false;	
+//
+//	}
+	//!board.getEElementAt(posToMoveTo).isWallCollsion())
+	private void tryMoveRobot(Position posToMoveTo) {
+		System.out.println(board.hasRobotAt(posToMoveTo));
+		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) || ((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
+			board.setPosition(this, posToMoveTo);
+		} else if (board.hasRobotAt(posToMoveTo)){
+			Robot toBePushedRobot = board.getRobotAt(posToMoveTo);
+			System.out.println("X initial position: " + toBePushedRobot.getX());
+			toBePushedRobot.setOrientation(this.orientation);
+			System.out.println("X Position moved to: " + toBePushedRobot.getX());
+			toBePushedRobot.move(1);
+			board.setPosition(this, posToMoveTo);
+		} else {
+			System.out.println("no robot");
+			return;
 		}
-		return false;	
 	}
 	
 	public void shiftX(int spaces) {
-		
-		Position p = calculatePosition();
-		p.incrX(spaces);
-		wallCollision(p);
-		
+		int absSpaces = Math.abs(spaces);
+		for (int i = 0; i < absSpaces; i++) {
+			Position p = calculatePosition();
+			int increment = spaces < 0 ? -1 : 1;
+			p.incrX(increment);
+			tryMoveRobot(p);
+		}
 	}
 
+
 	public void shiftY(int spaces) {
-		
-		Position p = calculatePosition();
-		p.incrY(spaces);
-		board.setPosition(this, p);
-		
+		int absSpaces = Math.abs(spaces);
+		for (int i = 0; i < absSpaces; i++) {
+			Position p = calculatePosition();
+			int increment = spaces < 0 ? -1 : 1;
+			p.incrY(increment);
+			tryMoveRobot(p);
+		}
 	}
+	
 	public void move(int spaces) {
-		
-		if(this.getChainedTo() == null){
+		System.out.println("Number of spaces to move: " + spaces);
+ 
+		if(this.getChainedTo() == null) {
 			switch(orientation) {
 			case UP:
 				shiftY(spaces);

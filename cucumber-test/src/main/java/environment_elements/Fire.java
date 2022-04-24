@@ -4,44 +4,48 @@ import board.Position;
 import piece_basics.EnvironmentElement;
 
 public class Fire extends EnvironmentElement{
-	public Position p;	//the public position is declared here
+	private Position p;	
 	public static final String ID = "fire";
 	private int spreadCounter = 0;
 	
 	@Override
 	public void performRegisterAction() {
-		//robot gets damaged by fire
-		if(board.hasRobotAt(calculatePosition())) {
-			System.out.println(board.getRobotAt(calculatePosition()) + " got damaged by the fire");
-			board.getRobotAt(calculatePosition()).takeDamage();
+		setP(calculatePosition());
+		if(board.hasRobotAt(getP())) {
+			System.out.println(board.getRobotAt(getP()) + " got damaged by the fire");
+			board.getRobotAt(getP()).takeDamage();
 		}
 		
 		if(getSpreadCounter() <= 4 ) {
-			p = calculatePosition(); //calculates old position
-	
-			//randomly generates new position for the fire to spread to
-			int x_c = p.getX();
-			int y_c = p.getY();
+
+			int x_c = getP().getX();
+			int y_c = getP().getY();
 			int newX = x_c + (int)(Math.random() * 3) -1;
 			int newY = y_c + (int)(Math.random() * 3) -1;
 	
 			
-			p.setX(newX); //the position is initiated here to have the position of the new fire
-			p.setY(newY);
+			getP().setX(newX); 
+			getP().setY(newY);
 	
-			board.initialPlacement(new Fire(), p); //places the fire
+			board.initialPlacement(new Fire(), getP()); 
 			
-			//sets the spread counter on the new fire so it does not spread
-			((Fire) board.getEElementAt(p)).setSpreadCounter(5);
+			((Fire) board.getEElementAt(getP())).setSpreadCounter(5);
 			
 			
-			//increments spread counter on the original fire
 			incrementSpreadCounter();
 		}
 		
 
 	}
 
+	public void setP(Position pos) {
+		this.p = pos;
+	}
+	
+	public Position getP() {
+		return this.p;
+	}
+	
 	public void incrementSpreadCounter() {
 		spreadCounter ++;
 	}
