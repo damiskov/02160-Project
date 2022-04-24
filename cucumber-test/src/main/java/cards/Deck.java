@@ -9,15 +9,19 @@ import java.util.Random;
 public class Deck
 {
     
-    List<String> actions = Arrays.asList("move1", "move2", "move3", "turnRight", "turnLeft", "backUp", "uTurn");
-    List<Card> cards = new ArrayList<>();
-    List<Integer> numbers = new ArrayList<>();
+    private List<String> actions = Arrays.asList("move1", "move2", "move3", "turnRight", "turnLeft", "backUp", "uTurn");
+    private List<Card> cards = new ArrayList<>();
+    private List<Integer> numbers = new ArrayList<>();
     
-
-
     public Deck()
     {
-        // Generating base deck 
+        regenDeck();
+    }
+    
+    private void regenDeck()
+    {
+    	this.cards = new ArrayList<>();
+    	// Generating base deck 
         addToDeck("move1", 48);
         addToDeck("move2", 24);
         addToDeck("move3", 8);
@@ -30,8 +34,9 @@ public class Deck
 
             this.numbers.add(i);
         }
-
+    	
     }
+    
 
     // adds a certain "action" "num" amount of times to deck
     public void addToDeck(String action, int num)
@@ -47,6 +52,7 @@ public class Deck
 
     public Hand genHand()
     {
+    	regenDeck();
         // empty hand
         ArrayList<Card> hand = new ArrayList<Card>();
         // 0 - 8 (9 cards in hand)
@@ -69,5 +75,10 @@ public class Deck
         Hand h = new Hand();
         h.setCardList(hand);
         return h;
+    }
+        
+    public List<Card> getDeck()
+    {
+    	return cards;
     }
 }
