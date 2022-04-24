@@ -10,6 +10,7 @@ import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
 import environment_elements.Wall;
 import cards.Program;
+import java.lang.Math;  
 
 public class Robot extends Piece {
 	private Orientation orientation;
@@ -92,15 +93,15 @@ public class Robot extends Piece {
 	//checking wallcollision after 2 or 3 steps 
 
 
-	//checking wall collision	
-	private boolean wallCollision(Position p) {
-
-		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
-			board.setPosition(this, p);
-		}
-		return false;	
-
-	}
+//	//checking wall collision	
+//	private boolean wallCollision(Position p) {
+//
+//		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
+//			board.setPosition(this, p);
+//		}
+//		return false;	
+//
+//	}
 	//!board.getEElementAt(posToMoveTo).isWallCollsion())
 	private void tryMoveRobot(Position posToMoveTo) {
 		System.out.println(board.hasRobotAt(posToMoveTo));
@@ -120,21 +121,24 @@ public class Robot extends Piece {
 	}
 	
 	public void shiftX(int spaces) {
-	
-		//for (int i = 0; i < spaces; i++) {
+		int absSpaces = Math.abs(spaces);
+		for (int i = 0; i < absSpaces; i++) {
 			Position p = calculatePosition();
-			p.incrX(spaces);
+			int increment = spaces < 0 ? -1 : 1;
+			p.incrX(increment);
 			tryMoveRobot(p);
-		
+		}
 	}
 
 
 	public void shiftY(int spaces) {
-		
-		Position p = calculatePosition();
-		p.incrY(spaces);
-		tryMoveRobot(p);
-		
+		int absSpaces = Math.abs(spaces);
+		for (int i = 0; i < absSpaces; i++) {
+			Position p = calculatePosition();
+			int increment = spaces < 0 ? -1 : 1;
+			p.incrY(increment);
+			tryMoveRobot(p);
+		}
 	}
 	
 	public void move(int spaces) {
