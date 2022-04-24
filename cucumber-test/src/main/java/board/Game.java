@@ -113,16 +113,9 @@ public class Game {
 	// temporary
 	public void testPlacements() {
 		Robot r1 = new Robot();
-		board.initialPlacement(r1, 0, 3);
-//		r1.turnLeft();
-//		r1.turnLeft();
-//		r1.turnLeft();
-//		r1.turnLeft();
-//		r1.turnRight();
-//		r1.turnRight();
-//		r1.turnRight();
-//		r1.turnRight();
-		board.initialPlacement(new Robot(), 1, 0);
+		board.initialPlacement(r1, 0, 0);
+		Robot r2 = new Robot();
+		board.initialPlacement(r2, 0, 3);
 		board.initialPlacement(new Robot(), 2, 0);
 		board.initialPlacement(new Robot(), 3, 0);
 		board.initialPlacement(new Robot(), 4, 0);
@@ -145,15 +138,36 @@ public class Game {
 		board.initialPlacement(new OilSpill(), 4, 3);
 		board.initialPlacement(new Pit(), 5, 3);
 		RespawnPoint rp = new RespawnPoint();
-		r1.setRespawnPoint(rp);
+		r2.setRespawnPoint(rp);
 		board.initialPlacement(rp, 6, 3);
 		board.initialPlacement(new ReversalPanel(), 7, 3);
 		board.initialPlacement(new Teleporter(), 8, 3);
 		board.initialPlacement(new Wall(), 9, 3);
 		
+		r1.move(1);
+		
+		r1.move(1);
+		r1.turnRight();
+		r1.move(1);
+		r1.turnRight();
+		r1.move(1);
+		r1.turnRight();
+		r1.move(1);
+		r1.turnRight();
+		
 	
 		activateRegisterActors();
-		r1.move(1);
+		r2.move(2);
+		r2.turnLeft();
+		r2.move(-2);
+		r2.turnLeft();
+		r2.move(-1);
+		r2.turnLeft();
+		r2.move(-1);
+		r2.turnLeft();
+		r2.move(-1);
+		r2.turnLeft();
+		r2.move(-1);
 		
 		//r1.move(1);
 		//r1.turnLeft();

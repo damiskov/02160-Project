@@ -156,16 +156,16 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void moveRobot(PropertyChangeEvent pci) {
-		System.out.println("handling");
+//		System.out.println("handling");
 		Position pCurr = pci.getPosCurrent();
 		Position pNew = pci.getPosNew();
-		Position pDiff = pNew.subtract(pCurr);
+//		Position pDiff = pNew.subtract(pCurr);
 		Sprite robotSprite = getRobotSpriteAtPosition(pCurr);
-		System.out.println(pDiff + " " + pCurr + " " + pNew);
-		double screenDiffX = pDiff.getX()*cellWidth;
-		double screenDiffY = pDiff.getY()*cellWidth;
-		double screenShiftX = screenDiffX/30;
-		double screenShiftY = screenDiffY/30;
+//		System.out.println(pDiff + " " + pCurr + " " + pNew);
+//		double screenDiffX = pDiff.getX()*cellWidth;
+//		double screenDiffY = pDiff.getY()*cellWidth;
+//		double screenShiftX = screenDiffX/30;
+//		double screenShiftY = screenDiffY/30;
 		
 		int screenFinalX = pNew.getX()*cellWidth;
 		int screenFinalY = pNew.getY()*cellWidth;
@@ -227,18 +227,18 @@ public class BoardPanel extends JPanel {
 		
 		//Still dosent work, event needs to include which way the robot turns or figure out better from old - new
 		
-		double degCurr = pci.getOrientationOld().getDegrees();
+//		double degCurr = pci.getOrientationOld().getDegrees();
 		double degNew = pci.getOrientationNew().getDegrees();
-		double degDiff;
-		if(((degCurr < degNew) || ((degNew==0) && (degCurr==270))) && !(degCurr == 0 && degNew == 270)) {
-			degDiff = 90;
-		} else {
-			degDiff = -90;
-		}
+//		double degDiff;
+//		if(((degCurr < degNew) || ((degNew==0) && (degCurr==270))) && !(degCurr == 0 && degNew == 270)) {
+//			degDiff = 90;
+//		} else {
+//			degDiff = -90;
+//		}
 		int degNewInt = (int) degNew;
 		Position p = pci.getPosCurrent();
 		Sprite robotSprite = getRobotSpriteAtPosition(p);
-		System.out.println(degCurr + " " + degNew + " " + degDiff);
+//		System.out.println(degCurr + " " + degNew + " " + degDiff);
 		
 		
 		
