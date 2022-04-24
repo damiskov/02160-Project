@@ -42,10 +42,6 @@ public class Game {
 		
 	}
 	
-	public String getDifficulty() {
-		return this.difficulty;
-		
-	}
 //	public void setCurrentPlayer(int i) {
 //		// TODO Auto-generated method stub
 //		

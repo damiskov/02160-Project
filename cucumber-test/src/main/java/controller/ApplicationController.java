@@ -27,11 +27,12 @@ public class ApplicationController {
 	public void startGame(int playerCount, String difficulty) {
 
 		game = new Game();
-		game.setDifficulty(difficulty);
+		
+//		game.setDifficulty(difficulty);
 //		game.setPlayers(playerCount);
 		
 //		game.getPlayers().length
-		System.out.println("Game started with " + playerCount + " players and difficulty " + game.getDifficulty());
+//		System.out.println("Game started with " + playerCount + " players and difficulty " + difficulty);
 
 		//System.out.println("Game started with " + playerCount + " players.");
 		masterController = new MasterController(this, playerCount, difficulty);

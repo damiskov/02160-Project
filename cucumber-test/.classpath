@@ -19,11 +19,8 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
 	<classpathentry kind="src" path="images"/>
-=======
 	<classpathentry kind="src" path="boards"/>
->>>>>>> refs/heads/main
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-13">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
