@@ -11,7 +11,7 @@ public class Teleporter extends EnvironmentElement {
 		this.Sending = isSending;
 	}
 	
-	public boolean IsSending(/*Teleporter t*/) {
+	public boolean IsSending() {
 		return this.Sending;
 	}
 	
