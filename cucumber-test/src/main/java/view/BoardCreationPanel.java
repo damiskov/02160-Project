@@ -15,7 +15,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import board.Board;
+import board.Position;
 import controller.BoardCreationController;
+import environment_elements.ConveyorBelt;
+import piece_basics.EnvironmentElement;
+import piece_basics.Orientation;
 import utils.GridBagLayoutUtils;
 import utils.ImageUtils;
 
@@ -35,12 +40,16 @@ private static final long serialVersionUID = -2140843137512577992L;
 	private int pixelsPerCell;
 	private int width;
 	private int height;
+	private Board newBoard;
 	
 	int col = 0;
 	int row = 0;
 	
 
-	public BoardCreationPanel(int rows, int cols, BoardCreationController controller) {
+	public BoardCreationPanel(int rows, int cols, BoardCreationController controller, Board newBrd) {
+		
+		newBoard = newBrd;
+		
 		setController(controller);
 		
 		setRowsCols(rows, cols);
@@ -97,17 +106,15 @@ private static final long serialVersionUID = -2140843137512577992L;
 		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/tile.png", pixelsPerCell, pixelsPerCell));
 		
 		
-		for(int col = 0; col < cols; col++) {
-			for (int row = 0; row < rows; row++) {
+		while(col < cols) {
+			while (row < rows) {
 				
+					JButton cell = new JButton(icon);
+					cell.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
+					cell.setAlignmentX(Component.CENTER_ALIGNMENT);
+					cell.setName("tile");
 					
-					
-					JButton element = new JButton(icon);
-					element.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
-					element.setAlignmentX(Component.CENTER_ALIGNMENT);
-					element.setName("tile");
-					
-					element.addActionListener(e -> {
+					cell.addActionListener(e -> {
 						System.out.println("Element clicked" );
 						
 						if (controller.elementIsActive()) {
@@ -118,8 +125,19 @@ private static final long serialVersionUID = -2140843137512577992L;
 							
 							// check if env = element.getIcon()?
 							ImageIcon env = new ImageIcon(ImageUtils.scaledImage("images/" + controller.getSelectedElement() + ".png", pixelsPerCell, pixelsPerCell));
-							JButton selectedElement = (JButton) e.getSource();
-							selectedElement.setIcon(env);
+							JButton selectedCell = (JButton) e.getSource();
+							selectedCell.setIcon(env);
+							
+							// if has EnvElement at this pos
+							// then remove it and add this new element
+							if (newBoard.hasEElementAt(new Position(col, row))) {
+								newBoard.removeEElement(new Position (col, row));
+								newBoard.initialPlacement(createEElement(controller.getSelectedElement()), new Position(col, row));
+							} else {
+								newBoard.initialPlacement(createEElement(controller.getSelectedElement()), new Position(col, row));
+							}
+							
+							System.out.println("removed element at col " + col + " and row at " + row);
 							
 							
 						}
@@ -127,14 +145,25 @@ private static final long serialVersionUID = -2140843137512577992L;
 						repaint();
 						
 					});
-					add(element, GridBagLayoutUtils.constraint(col, row, 0));
+					add(cell, GridBagLayoutUtils.constraint(col, row, 0));
 					
 //					add(Box.createRigidArea(new Dimension(0, 5)));
 				
+					row++;
 				
 			}
+			
+			row = 0;
+			col++;
 
 		}
+	}
+	
+	private EnvironmentElement createEElement (String id){
+		
+		//return new element from the name id
+		return new ConveyorBelt(Orientation.UP);
+		
 	}
 	
 }

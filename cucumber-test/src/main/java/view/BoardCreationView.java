@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import board.Board;
 import controller.BoardCreationController;
 import controller.MasterController;
 import utils.GridBagLayoutUtils;
@@ -29,6 +30,8 @@ public class BoardCreationView extends JFrame{
 	private JButton cancelButton;
 	private JButton createButton;
 	
+	private Board newBoard;
+	
 	// for testing
 	
 	public BoardCreationView(BoardCreationController boardCreationController) {
@@ -43,7 +46,7 @@ public class BoardCreationView extends JFrame{
 		
 		setLayout(new GridBagLayout());
 		
-		boardPanel = new BoardCreationPanel(12, 12, controller);
+		boardPanel = new BoardCreationPanel(12, 12, controller, newBoard);
 		elements = new ElementSelectionPanel(controller);
 		
 		cancelButton = new JButton("Cancel");
@@ -51,6 +54,11 @@ public class BoardCreationView extends JFrame{
 		
 		cancelButton.addActionListener(e -> {
 			controller.initiateSetupMenu();
+		}); 
+		
+		createButton.addActionListener(e -> {
+			//call method in controller that given a board of cells creates a text file
+			
 		}); 
 		
 		addElements();

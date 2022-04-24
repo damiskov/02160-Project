@@ -1,8 +1,11 @@
 package controller;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
+import board.Board;
 import view.BoardCreationView;
 import view.CardSelectionPanel;
 import view.MasterView;
@@ -36,6 +39,13 @@ public class BoardCreationController {
 		
 		view.setVisible(false);
 		application.initiate();
+		
+	}
+	
+	public void saveBoard(Board board) {
+		
+		// save board.matrix in a text file
+		System.out.println("boardGenerated");
 		
 	}
 	
