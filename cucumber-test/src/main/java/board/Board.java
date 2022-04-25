@@ -213,13 +213,11 @@ public class Board implements IBoard {
 
 	@Override
 	public int getNumRows() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getNumColumns() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

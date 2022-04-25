@@ -16,6 +16,8 @@ public abstract class Piece {
 		return board.getPropertyChangeSupport();
 	}
 	
+	
+	
 	public void performRegisterAction() {}
 	public void performImmediateAction(Robot r) {}
 	
