@@ -5,12 +5,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import animations.SpriteMovementAnimation;
 import board.*;
 import environment_elements.Laser;
 import environment_elements.Pit;
@@ -33,6 +36,8 @@ public class BoardPanel extends JPanel {
 	
 	private static final int maxDimension = 600;
 	
+	private final MasterView masterView;
+	
 	private Image backgroundTile;
 	
 	private int rows;
@@ -44,8 +49,11 @@ public class BoardPanel extends JPanel {
 	
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
 	private List<Sprite> robotSpriteList = new ArrayList<>();
+	private Map<Integer, Sprite> robotNumToSpriteMap = new HashMap<>();
 
-	public BoardPanel(IBoard board) {
+	public BoardPanel(IBoard board, MasterView masterView) {
+		this.masterView = masterView;
+		
 		this.rows = board.getNumRows();
 		this.cols = board.getNumColumns();
 		
@@ -67,7 +75,10 @@ public class BoardPanel extends JPanel {
 		if (piece instanceof EnvironmentElement) {
 			eElementSpriteList.add(SpriteFactory.getFromPiece(piece, cellWidth, this));
 		} else if (piece instanceof Robot) {
-			robotSpriteList.add(SpriteFactory.getFromPiece(piece, cellWidth, this));
+			Sprite robotSprite = SpriteFactory.getFromPiece(piece, cellWidth, this);
+			robotSpriteList.add(robotSprite);
+			Robot robot = (Robot) piece;
+			robotNumToSpriteMap.put(robot.getRobotNumber(), robotSprite);
 		} else {
 			throw new IllegalArgumentException("Piece must be either a Robot or an EnvironmentElement");
 		}
@@ -160,61 +171,11 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void moveRobot(MovementEvent me) {
-//		System.out.println("handling");
-		Position pCurr = me.getPosCurrent();
-		Position pNew = me.getPosNew();
-//		Position pDiff = pNew.subtract(pCurr);
-		Sprite robotSprite = getRobotSpriteAtPosition(pCurr);
-//		System.out.println(pDiff + " " + pCurr + " " + pNew);
-//		double screenDiffX = pDiff.getX()*cellWidth;
-//		double screenDiffY = pDiff.getY()*cellWidth;
-//		double screenShiftX = screenDiffX/30;
-//		double screenShiftY = screenDiffY/30;
-		
-		int screenFinalX = pNew.getX()*cellWidth;
-		int screenFinalY = pNew.getY()*cellWidth;
-		
-		
-		
-		robotSprite.setX(screenFinalX);
-		robotSprite.setY(screenFinalY);
-		System.out.println(screenFinalX + " " + screenFinalY);
-		repaint();
-		
-//		new SwingWorker<Void, Void>() {
-//			@Override
-//			public Void doInBackground() {
-//				try {
-//					double screenX = robotSprite.getX();
-//					double screenY = robotSprite.getY();
-//					for (int i = 0; i < 29; i++) {
-//						System.out.println("moving");
-//						screenX += screenShiftX;
-//						screenY += screenShiftY;
-//						Thread.sleep(1000/60);
-//						int screenXInt = (int) screenX;
-//						int screenYInt = (int) screenY;
-//						SwingUtilities.invokeLater(() -> {
-//							robotSprite.setX(screenXInt);
-//							robotSprite.setY(screenYInt);
-//							repaint();
-//						});
-//					}
-//					SwingUtilities.invokeLater(() -> {
-//						robotSprite.setX(screenFinalX);
-//						robotSprite.setY(screenFinalY);
-//						System.out.println(screenFinalX + " " + screenFinalY);
-//						repaint();
-//					});
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				return null;
-//			}
-//			
-//		}.execute();
-		
+		Sprite spriteToMove = robotNumToSpriteMap.get(me.getRobotNum());
+		int screenDiffX = me.getPosChange().getX() * cellWidth;
+		int screenDiffY = me.getPosChange().getY() * cellWidth;
+		masterView.enqueueAnimation(new SpriteMovementAnimation(500, spriteToMove, screenDiffX, screenDiffY));
+		System.out.println("Movement animation enqueued");
 	}
 	
 	private void teleportRobot(TeleportEvent te) {

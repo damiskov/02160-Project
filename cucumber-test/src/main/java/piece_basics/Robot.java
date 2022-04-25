@@ -125,13 +125,13 @@ public class Robot extends Piece {
 	private void tryMoveRobot(Position posToMoveTo, int spaces) {
 		System.out.println(board.hasRobotAt(posToMoveTo));
 		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) || ((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
-			getPropertyChangeSupport().firePropertyChange(new MovementEvent(calculatePosition(), posToMoveTo));
+			getPropertyChangeSupport().firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
 		} else if (board.hasRobotAt(posToMoveTo) && !(hasWallNextRobotShiftPosition(posToMoveTo, spaces))){
 			Robot toBePushedRobot = board.getRobotAt(posToMoveTo);
 			toBePushedRobot.setOrientation(this.orientation);
 			toBePushedRobot.move(1);
-			getPropertyChangeSupport().firePropertyChange(new MovementEvent(calculatePosition(), posToMoveTo));
+			getPropertyChangeSupport().firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
 			
 		} else {

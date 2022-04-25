@@ -4,19 +4,21 @@ import board.Position;
 
 public class MovementEvent implements IPropertyChangeEvent {
 
-	private Position posCurrent;
-	private Position posNew;
+	private int robotNumber;
+	private Position posChange;
 	
-	public MovementEvent(Position posOld, Position posNew) {
-		this.posCurrent = posOld;
-		this.posNew = posNew;
+	public MovementEvent(int robotNumber, Position posChange) {
+		this.robotNumber = robotNumber;
+		this.posChange = posChange;
 	}
-
-	public Position getPosCurrent() {
-		return posCurrent;
+	
+	public int getRobotNum() {
+		return robotNumber;
 	}
-
-	public Position getPosNew() {
-		return posNew;
+	
+	public Position getPosChange() {
+		return posChange;
 	}
+	
+	
 }
