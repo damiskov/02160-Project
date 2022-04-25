@@ -26,12 +26,33 @@ Feature: Chaining Panel
     When one robot reboots
     Then the robots get unchained
     
-  Scenario: Robots pulling on eachother
+  Scenario: Robots pulling on eachother towards right
     Given a game with an empty board
-    And two robots chained together
+    And two robots chained together with one facing right
     When one robot moves
     Then the first robot is at (9, 5)
     And the second robot is at (5, 5)
+    
+  Scenario: Robots pulling on eachother towards left
+    Given a game with an empty board 
+    And two robots chained together with one facing left
+    When one robot moves
+    Then the first robot is at (7, 5)
+    And the second robot is at (3, 5)
+   
+  Scenario: Robots pulling on eachother towards up
+    Given a game with an empty board
+    And two robots chained together with one facing up
+    When one robot moves
+    Then the first robot is at (8, 6)
+    And the second robot is at (4, 6)
+    
+  Scenario: Robots pulling on eachother towards down
+    Given a game with an empty board
+    And two robots chained together with one facing down
+    When one robot moves
+    Then the first robot is at (8, 4)
+    And the second robot is at (4, 4)
     
   Scenario: Robot pulled into a pit 
     Given a game with an empty board

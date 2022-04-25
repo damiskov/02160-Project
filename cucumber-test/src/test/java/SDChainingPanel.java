@@ -75,6 +75,62 @@ public class SDChainingPanel {
 		context.robot2.setChainedTo(context.robot);
 	}
 	
+	@Given("two robots chained together with one facing left")
+	public void two_robots_chained_together_with_one_facing_left() {
+		Robot r = new Robot();
+	    context.board.initialPlacement(r, 8, 5);
+	    r.setOrientation(Orientation.LEFT);
+	    context.robot = r;
+		Robot r2 = new Robot();
+	    context.board.initialPlacement(r2, 4, 5);
+	    context.robot2 = r2;
+	    
+		context.robot.setChainedTo(context.robot2);
+		context.robot2.setChainedTo(context.robot);
+	}
+	
+	@Given("two robots chained together with one facing right")
+	public void two_robots_chained_together_with_one_facing_right() {
+		Robot r = new Robot();
+	    context.board.initialPlacement(r, 8, 5);
+	    r.setOrientation(Orientation.RIGHT);
+	    context.robot = r;
+		Robot r2 = new Robot();
+	    context.board.initialPlacement(r2, 4, 5);
+	    context.robot2 = r2;
+	    
+		context.robot.setChainedTo(context.robot2);
+		context.robot2.setChainedTo(context.robot);
+	}
+	
+	@Given("two robots chained together with one facing up")
+	public void two_robots_chained_together_with_one_facing_up() {
+		Robot r = new Robot();
+	    context.board.initialPlacement(r, 8, 5);
+	    r.setOrientation(Orientation.UP);
+	    context.robot = r;
+		Robot r2 = new Robot();
+	    context.board.initialPlacement(r2, 4, 5);
+	    context.robot2 = r2;
+	    
+		context.robot.setChainedTo(context.robot2);
+		context.robot2.setChainedTo(context.robot);
+	}
+	
+	@Given("two robots chained together with one facing down")
+	public void two_robots_chained_together_with_one_facing_down() {
+		Robot r = new Robot();
+	    context.board.initialPlacement(r, 8, 5);
+	    r.setOrientation(Orientation.DOWN);
+	    context.robot = r;
+		Robot r2 = new Robot();
+	    context.board.initialPlacement(r2, 4, 5);
+	    context.robot2 = r2;
+	    
+		context.robot.setChainedTo(context.robot2);
+		context.robot2.setChainedTo(context.robot);
+	}
+	
 	@Then("the robots get unchained")
 	public void the_robots_get_unchained() {
 		assertEquals(context.robot.getChainedTo(),null);
