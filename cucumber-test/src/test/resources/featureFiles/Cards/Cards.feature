@@ -188,5 +188,16 @@ Feature: Programming Cards
     And a robot on the board
     When the card is executed
     Then the robot moves one space back without changing its direction
-
+    
+  Scenario: Move the robot back in two steps
+  	Given a game with an empty board
+  	And a robot on the board at (5, 5) facing "up"
+    When a move backwards two command is executed
+    Then the robot is at (5, 3) facing "up"
+    
+  Scenario: Move the robot back in three steps
+  	Given a game with an empty board
+  	And a robot on the board at (5, 5) facing "up"
+    When a move backwards three command is executed
+    Then the robot is at (5, 2) facing "up"
    

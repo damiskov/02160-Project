@@ -351,6 +351,20 @@ public class SDCard {
 		context.card.executeAction(context.robot);
 	}
 	
+	@When("a move backwards two command is executed")
+	public void a_move_backwards_two_command_is_executed() {
+		Card b2_card = new Back2();
+		context.card = b2_card;
+		context.card.executeAction(context.robot);
+	}
+	
+	@When("a move backwards three command is executed")
+	public void a_move_backwards_three_command_is_executed() {
+		Card b3_card = new Back3();
+		context.card = b3_card;
+		context.card.executeAction(context.robot);
+	}
+	
 
 	@When("a move forward {int} command is executed")
 	public void a_move_forward_command_is_executed(Integer int1) {
