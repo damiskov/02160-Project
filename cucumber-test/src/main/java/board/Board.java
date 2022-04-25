@@ -195,16 +195,6 @@ public class Board implements IBoard {
 		return pieceLists;
 	}
 
-	public int getNumColumns() {
-		return numColumns;
-	}
-
-	public int getNumRows() {
-		return numRows;
-	}
-	
-	
-
 	public Difficulty getDifficulty() {
 		return difficulty;
 	}
@@ -219,6 +209,18 @@ public class Board implements IBoard {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public int getNumRows() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getNumColumns() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
