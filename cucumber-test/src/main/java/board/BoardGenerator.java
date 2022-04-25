@@ -33,10 +33,10 @@ public class BoardGenerator {
 		this.propertyChangeSupport = propertyChangeSupport;
 	}
 	
-	public Board getBoard()
-	{
-		return b;
-	}
+//	public Board getBoard()
+//	{
+//		return b;
+//	}
 
 
 
