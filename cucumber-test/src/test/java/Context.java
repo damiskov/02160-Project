@@ -27,6 +27,7 @@ public class Context {
 	Board board;
 	Robot robot;
 	Robot robot2; //needed for the chaining panel //also used in robot bumping
+	Robot robot3; //needed to check robot bumping for third robot
 	ConveyorBelt conveyorBelt;
 	Gear gear;
 	HealthStation healthStation;
