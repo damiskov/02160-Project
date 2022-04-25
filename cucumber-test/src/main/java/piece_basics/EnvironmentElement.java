@@ -21,12 +21,5 @@ public abstract class EnvironmentElement extends Piece {
 		return false;
 	}
 	
-	public boolean isWallCollsion() {
-		return false;
-	}
-	public boolean wallOnOtherCells(){
-		return false;
-	}
-	
 
 }

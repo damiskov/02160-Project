@@ -53,18 +53,6 @@ public class Board implements IBoard {
 		return propertyChangeSupport;
 	}
 	
-	public void setNumberOfObstacles(int n) {
-		
-		this.numObstacles = n;
-		
-	}
-	
-	public int getNumberObstacles() {
-		
-		return numObstacles;
-		
-	}
-	
 	public void setMatrix(Cell[][] m) {
 		this.matrix = m;
 		this.numRows = matrix.length;
@@ -207,16 +195,6 @@ public class Board implements IBoard {
 		return pieceLists;
 	}
 
-	public int getNumColumns() {
-		return numColumns;
-	}
-
-	public int getNumRows() {
-		return numRows;
-	}
-	
-	
-
 	public Difficulty getDifficulty() {
 		return difficulty;
 	}
@@ -231,6 +209,16 @@ public class Board implements IBoard {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public int getNumRows() {
+		return 0;
+	}
+
+	@Override
+	public int getNumColumns() {
+		return 0;
 	}
 
 }

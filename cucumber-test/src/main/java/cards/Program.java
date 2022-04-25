@@ -1,34 +1,31 @@
 package cards;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class Program {
 	
-	private ArrayList<Card> program = new ArrayList<Card>();
+	private Stack<Card> cardList = new Stack<Card>();
 	
 	public Program()
-	{
-	}
+	{}
 	
 	// getter and setter for program
 	
-	public void setCardList(ArrayList<Card> cardList)
+	public void setCardList(Stack<Card> cardList)
 	{
-		this.program = cardList;
+		this.cardList=cardList;
 	}
 	
-	public ArrayList<Card> getCardList()
+	public Stack<Card> getCardList()
 	{
-		return this.program;
+		return this.cardList;
 	}
 	
 	// Simulates process of taking a card from the top of a program
 	
 	public Card getTopOfProgram()
 	{
-		Card topCard = program.get(0);
-		program.remove(0);
-		return topCard;
+		return cardList.pop();
 	}
 
 }

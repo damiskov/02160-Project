@@ -3,6 +3,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Stack;
 
 import cards.Card;
 import cards.Move2;
@@ -31,7 +32,7 @@ public class SDProgrammingPhase {
 	}
 	@When("the player chooses the cards for their robot")
 	public void the_player_chooses_the_cards_for_their_robot() {
-		ArrayList<Card> g = new ArrayList<Card>();
+		Stack<Card> g = new Stack<Card>();
 		context.gram = g;
 		Random rand = new Random();
 		for(int i = 0; i <= 5; i++) {

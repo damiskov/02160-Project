@@ -22,10 +22,6 @@ public class Card
         return num;
     }
 
-    public String getAction()
-    {
-        return action;
-    }
     
     public void executeAction(Robot r) {
     

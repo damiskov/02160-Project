@@ -5,6 +5,8 @@ public enum Orientation {
 	DOWN,
 	LEFT,
 	RIGHT;
+	
+	// Only used in UI
 
 	public int getDegrees() {
 		switch(this) {

@@ -2,6 +2,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 
 import board.Board;
 import board.Position;
@@ -53,19 +54,22 @@ public class SDRobot {
 	
 	@Given("a program for the robot")
 	public void a_program_for_the_robot() {
-		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new Move2(), new Move3(), new Move1(), new TurnLeft(), new TurnRight()));
+		Stack<Card> gram = new Stack<Card>();
+		gram.addAll(Arrays.asList(new Move2(), new Move3(), new Move1(), new TurnLeft(), new TurnRight()));
 		context.robot.setProgram(gram);
 	}
 	
 	@Given("a program for the robot with uTurns")
 	public void a_program_for_the_robot_with_u_turns() {
-		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new UTurn(), new UTurn(), new UTurn(), new UTurn(), new UTurn()));
+		Stack<Card> gram = new Stack<Card>();
+		gram.addAll(Arrays.asList(new UTurn(), new UTurn(), new UTurn(), new UTurn(), new UTurn()));
 		context.robot.setProgram(gram);
 	}
 	
 	@Given("an already reversed program for the robot")
 	public void an_already_reversed_program_for_the_robot() {
-		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new Back2(), new Back3(), new Back2(), new Back3(), new Back2()));
+		Stack<Card> gram = new Stack<Card>();
+		gram.addAll(Arrays.asList(new Back2(), new Back3(), new Back2(), new Back3(), new Back2()));
 		context.robot.setProgram(gram);
 	}
 
@@ -108,6 +112,26 @@ public class SDRobot {
 	    
 	}
 	
+
+	@Given("a third robot on the board at \\({int}, {int}) facing {string}")
+	public void a_third_robot_on_the_board_at_facing(Integer int1, Integer int2, String string) {
+	    Robot r = new Robot();
+	    switch (string.toLowerCase()) {
+	    case "up":
+	    	r.setOrientation(Orientation.UP); break;
+	    case "right":
+	    	r.setOrientation(Orientation.RIGHT); break;
+	    case "down":
+	    	r.setOrientation(Orientation.DOWN); break;
+	    case "left":
+	    	r.setOrientation(Orientation.LEFT); break;
+    	default:
+    		throw new IllegalArgumentException("Invalid orientation");
+	    }
+	    context.board.initialPlacement(r, int1, int2);
+	    context.robot3 = r;
+	}
+	
 	@When("the robot moves to \\({int}, {int})")
 	public void the_robot_moves_to(Integer int1, Integer int2) {
 	    context.board.setPosition(context.robot, new Position(int1, int2));
@@ -133,6 +157,11 @@ public class SDRobot {
 	@Then("the second robot is at \\({int}, {int})")
 	public void the_second_robot_is_at(Integer int1, Integer int2) {
 		assertEquals(new Position(int1, int2), context.robot2.calculatePosition());
+	}
+	
+	@Then("the third robot is at \\({int}, {int})")
+	public void the_third_robot_is_at(Integer int1, Integer int2) {
+		assertEquals(new Position(int1, int2), context.robot3.calculatePosition());
 	}
 	
 	@When("the robot tries to move one step")

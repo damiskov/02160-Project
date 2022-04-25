@@ -2,6 +2,7 @@ package player;
 import piece_basics.Robot;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import cards.*;
 
@@ -28,7 +29,7 @@ public class Player {
 	}
 	
 	
-	public void setProgram(ArrayList<Card> p)
+	public void setProgram(Stack<Card> p)
 	{
 		// will get player to select 5 cards according to execution priority
 		this.myRobot.setProgram(p);
