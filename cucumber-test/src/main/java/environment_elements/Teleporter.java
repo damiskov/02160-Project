@@ -3,7 +3,7 @@ package environment_elements;
 import board.Position;
 import piece_basics.EnvironmentElement;
 import piece_basics.Robot;
-import property_changes.PropertyChangeType;
+import property_changes.TeleportEvent;
 
 public class Teleporter extends EnvironmentElement {
 	private Teleporter receiving;
@@ -13,7 +13,7 @@ public class Teleporter extends EnvironmentElement {
 		this.Sending = isSending;
 	}
 	
-	public boolean IsSending(/*Teleporter t*/) {
+	public boolean IsSending() {
 		return this.Sending;
 	}
 	
@@ -38,7 +38,7 @@ public class Teleporter extends EnvironmentElement {
 			board.moveRobotFromTo(p, receivingP);
 			System.out.println( r + " is being moved to " + receiving.calculatePosition());
 			// TODO: if there is a robot on the receiving teleporter, kill it
-			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.TELEPORT, p, receivingP);
+			getPropertyChangeSupport().firePropertyChange(new TeleportEvent(p, receivingP));
 		}
 	}
 }

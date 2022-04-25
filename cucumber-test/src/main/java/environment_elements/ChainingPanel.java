@@ -1,14 +1,11 @@
 package environment_elements;
 
-import java.util.Arrays;
 import java.util.List;
 
-import board.IBoard;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
-import player.Player;
-import property_changes.PropertyChangeType;
+import property_changes.ActivationEvent;
 
 public class ChainingPanel extends EnvironmentElement {
 
@@ -27,7 +24,7 @@ public class ChainingPanel extends EnvironmentElement {
 	
 	public void setActive(boolean active) {
 		if (this.active != active) {
-			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ACTIVATION, calculatePosition());
+			getPropertyChangeSupport().firePropertyChange(new ActivationEvent(calculatePosition()));
 		}
 		this.active = active;
 	}
@@ -50,7 +47,7 @@ public class ChainingPanel extends EnvironmentElement {
 	
 	
 	public void chainRobots(Robot r1, Robot r2) {
-		if(r1.isChainable() == true && r2.isChainable() == true) {
+		if(r1.isChainable() && r2.isChainable()) {
 			System.out.println(r1 + " is chained to " + r2);
 			r1.setChainedTo(r2);
 			r2.setChainedTo(r1);
@@ -63,8 +60,8 @@ public class ChainingPanel extends EnvironmentElement {
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) {
-			if(noChainable(board.getPieceLists().get(Robot.ID)) == true && isActive() == true &&
-				board.getRobotAt(calculatePosition()).isChainable() == false) {
+			if(noChainable(board.getPieceLists().get(Robot.ID)) && isActive() &&
+				!(board.getRobotAt(calculatePosition()).isChainable())) {
 				
 				board.getRobotAt(calculatePosition()).setChainable(true);
 				chainRobots(board.getRobotAt(calculatePosition()), toChain);

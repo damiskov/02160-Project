@@ -17,7 +17,14 @@ import environment_elements.Pit;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
-import property_changes.PropertyChangeEvent;
+import property_changes.ActivationEvent;
+import property_changes.IPropertyChangeEvent;
+import property_changes.MovementEvent;
+import property_changes.PlacementEvent;
+import property_changes.RemovalEvent;
+import property_changes.RobotLaserEvent;
+import property_changes.RotationEvent;
+import property_changes.TeleportEvent;
 import utils.ImageUtils;
 
 public class BoardPanel extends JPanel {
@@ -66,7 +73,7 @@ public class BoardPanel extends JPanel {
 		}
 		repaint();
 	}
-	public void removeEElementSprite(Piece piece, Position p) {
+	public void removeEElementSprite(Position p) {
 		eElementSpriteList.remove(getEElementSpriteAtPosition(p));
 		repaint();
 	}
@@ -121,44 +128,41 @@ public class BoardPanel extends JPanel {
 		return height;
 	}
 
-	public void propertyChange(PropertyChangeEvent pci) {
-		switch (pci.getPropertyChangeType()) {
-		case PLACEMENT:
-			addSprite(pci.getPiece(), pci.getPosCurrent());
-			break;
-		case REMOVAL:
-			removeEElementSprite(pci.getPiece(), pci.getPosCurrent());
-			break;
-		case ACTIVATION:
-			activateSprite(pci);
-			break;
-		case MOVEMENT:
-			moveRobot(pci);
-			break;
-		case TELEPORT:
-			teleportRobot(pci);
-			break;
-		case ROTATION:
-			rotateSprite(pci);
-			break;
-		case ROBOT_LASER:
-			displayRobotLaser(pci);
-			break;
-		default:
-			break;
+	public void propertyChange(IPropertyChangeEvent pci) {
+		if (pci instanceof PlacementEvent) {
+			PlacementEvent pe = (PlacementEvent) pci;
+			addSprite(pe.getPiece(), pe.getPos());
+		} else if (pci instanceof RemovalEvent) {
+			RemovalEvent re = (RemovalEvent) pci;
+			removeEElementSprite(re.getPos());
+		} else if (pci instanceof ActivationEvent) {
+			ActivationEvent ae = (ActivationEvent) pci;
+			activateSprite(ae);
+		} else if (pci instanceof MovementEvent) {
+			MovementEvent me = (MovementEvent) pci;
+			moveRobot(me);
+		} else if (pci instanceof TeleportEvent) {
+			TeleportEvent te = (TeleportEvent) pci;
+			teleportRobot(te);
+		} else if (pci instanceof RotationEvent) {
+			RotationEvent re = (RotationEvent) pci;
+			rotateSprite(re);
+		} else if (pci instanceof RobotLaserEvent) {
+			RobotLaserEvent rle = (RobotLaserEvent) pci;
+			displayRobotLaser(rle);
 		}
 	}
 	
-	private void activateSprite(PropertyChangeEvent pci) {
+	private void activateSprite(ActivationEvent ae) {
 		System.out.println("activating");
-		getEElementSpriteAtPosition(pci.getPosCurrent()).activate();
+		getEElementSpriteAtPosition(ae.getPos()).activate();
 		repaint();
 	}
 	
-	private void moveRobot(PropertyChangeEvent pci) {
+	private void moveRobot(MovementEvent me) {
 //		System.out.println("handling");
-		Position pCurr = pci.getPosCurrent();
-		Position pNew = pci.getPosNew();
+		Position pCurr = me.getPosCurrent();
+		Position pNew = me.getPosNew();
 //		Position pDiff = pNew.subtract(pCurr);
 		Sprite robotSprite = getRobotSpriteAtPosition(pCurr);
 //		System.out.println(pDiff + " " + pCurr + " " + pNew);
@@ -213,22 +217,22 @@ public class BoardPanel extends JPanel {
 		
 	}
 	
-	private void teleportRobot(PropertyChangeEvent pci) {
-		Position posCurrent = pci.getPosCurrent();
+	private void teleportRobot(TeleportEvent te) {
+		Position posCurrent = te.getPosCurrent();
 		Sprite sprite = getRobotSpriteAtPosition(posCurrent);
-		Position posNew = pci.getPosNew();
+		Position posNew = te.getPosNew();
 		sprite.setX(posNew.getX()*cellWidth);
 		sprite.setY(posNew.getY()*cellWidth);
 		repaint();
 	}
 	
-	private void rotateSprite(PropertyChangeEvent pci) {
+	private void rotateSprite(RotationEvent re) {
 		System.out.println("turning");
 		
 		//Still dosent work, event needs to include which way the robot turns or figure out better from old - new
 		
 //		double degCurr = pci.getOrientationOld().getDegrees();
-		double degNew = pci.getOrientationNew().getDegrees();
+		double degNew = re.getOrientationNew().getDegrees();
 //		double degDiff;
 //		if(((degCurr < degNew) || ((degNew==0) && (degCurr==270))) && !(degCurr == 0 && degNew == 270)) {
 //			degDiff = 90;
@@ -236,7 +240,7 @@ public class BoardPanel extends JPanel {
 //			degDiff = -90;
 //		}
 		int degNewInt = (int) degNew;
-		Position p = pci.getPosCurrent();
+		Position p = re.getPos();
 		Sprite robotSprite = getRobotSpriteAtPosition(p);
 //		System.out.println(degCurr + " " + degNew + " " + degDiff);
 		
@@ -276,7 +280,7 @@ public class BoardPanel extends JPanel {
 		
 	}
 	
-	private void displayRobotLaser(PropertyChangeEvent pci) {
+	private void displayRobotLaser(RobotLaserEvent rle) {
 		// TODO Auto-generated method stub
 		
 	}

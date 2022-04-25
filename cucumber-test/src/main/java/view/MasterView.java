@@ -9,10 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import board.Game;
+import board.Position;
 import controller.MasterController;
-import property_changes.PropertyChangeEvent;
+import property_changes.GameWinEvent;
+import property_changes.HealthChangeEvent;
+import property_changes.IPropertyChangeEvent;
 import property_changes.PropertyChangeListener;
-import property_changes.PropertyChangeType;
 import utils.GridBagLayoutUtils;
 
 public class MasterView extends JFrame implements PropertyChangeListener {
@@ -27,6 +29,8 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	// for testing
 	private JButton blackScreenButton;
+	private JButton winScreenButton;
+	//
 	
 	private BlackScreen blackScreen;
 	
@@ -49,10 +53,10 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		
 		// temporary
 		blackScreenButton = new JButton("Black screen");
-		MasterView masterView = this;
-		blackScreenButton.addActionListener(e -> {
-			masterView.displayBlackScreen(2);
-		});
+		blackScreenButton.addActionListener(e -> displayBlackScreen(2));
+		winScreenButton = new JButton("Move robot 2 forward");
+		winScreenButton.addActionListener(e -> game.getBoard().getRobotAt(new Position(0, 3)).move(1));
+		//
 		
 		addElements();
 		pack();
@@ -61,6 +65,11 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		
 		// maximize the window
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+	}
+	
+	private void displayWinScreen(int winningPlayerNum) {
+		removeElements();
+		addWinScreen(winningPlayerNum);
 	}
 	
 	public void displayBlackScreen(int playerTurn) {
@@ -84,7 +93,11 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		spConstraint.fill = GridBagConstraints.VERTICAL;
 		add(statusPanel, spConstraint);
 		
+		// temporary
 		add(blackScreenButton, GridBagLayoutUtils.constraint(1, 1, 0));
+		add(winScreenButton, GridBagLayoutUtils.constraint(2, 1, 0));
+		//
+		
 		revalidate();
 		repaint();
 	}
@@ -93,7 +106,11 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		remove(boardPanel);
 		remove(cardPanel);
 		remove(statusPanel);
+		
+		// temporary
 		remove(blackScreenButton);
+		remove(winScreenButton);
+		//
 	}
 	
 	private void addBlackScreen(int playerTurn) {
@@ -104,16 +121,27 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		repaint();
 	}
 	
+	private void addWinScreen(int winningPlayerNum) {
+		setLayout(new BorderLayout());
+		add(new WinScreen(this, winningPlayerNum), BorderLayout.CENTER);
+		revalidate();
+		repaint();
+	}
+	
 	private void removeBlackScreen() {
 		remove(blackScreen);
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent pci) {
-		if (pci.getPropertyChangeType() == PropertyChangeType.HEALTH_CHANGE) {
-			statusPanel.setHealth(pci.getRobotNum(), pci.getHealth());
+	public void propertyChange(IPropertyChangeEvent pce) {
+		if (pce instanceof HealthChangeEvent) {
+			HealthChangeEvent hce = (HealthChangeEvent) pce;
+			statusPanel.setHealth(hce.getRobotNum(), hce.getHealth());
+		} else if (pce instanceof GameWinEvent) {
+			GameWinEvent gwe = (GameWinEvent) pce;
+			displayWinScreen(gwe.getWinningPlayerNum());
 		} else {
-			boardPanel.propertyChange(pci);
+			boardPanel.propertyChange(pce);
 		}
 		
 	}
