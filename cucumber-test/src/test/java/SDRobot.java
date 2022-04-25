@@ -61,13 +61,15 @@ public class SDRobot {
 	
 	@Given("a program for the robot with uTurns")
 	public void a_program_for_the_robot_with_u_turns() {
-		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new UTurn(), new UTurn(), new UTurn(), new UTurn(), new UTurn()));
+		Stack<Card> gram = new Stack<Card>();
+		gram.addAll(Arrays.asList(new UTurn(), new UTurn(), new UTurn(), new UTurn(), new UTurn()));
 		context.robot.setProgram(gram);
 	}
 	
 	@Given("an already reversed program for the robot")
 	public void an_already_reversed_program_for_the_robot() {
-		ArrayList<Card> gram = new ArrayList<>(Arrays.asList(new Back2(), new Back3(), new Back2(), new Back3(), new Back2()));
+		Stack<Card> gram = new Stack<Card>();
+		gram.addAll(Arrays.asList(new Back2(), new Back3(), new Back2(), new Back3(), new Back2()));
 		context.robot.setProgram(gram);
 	}
 
