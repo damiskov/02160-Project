@@ -1,7 +1,11 @@
 package board;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import environment_elements.*;
 import piece_basics.EnvironmentElement;
@@ -13,6 +17,7 @@ public class BoardRetriever
 	
 	
 	private HashMap<Character, EnvironmentElement> asciiToEE = new HashMap<>();
+	
 	private void initialiseHM()
 	{
 		// Initialising sending and receiving teleporter
@@ -53,50 +58,56 @@ public class BoardRetriever
 		this.initialiseHM();
 	}
 	
-	public Board retrieveBoard(String filename, PropertyChangeSupport pcs) 
+	public Board retrieveBoard(String filename, PropertyChangeSupport pcs)  
 	{
-		Board b = new Board(12, 12, pcs);
-		b.setName(filename);
+		
+		
 		String path = "boards/" + filename + ".txt";
-		// Open the file
-		FileInputStream fstream = null;
+		int numRows=0;
+		int numCols=0;
+		File doc = new File(path);
+		
+		// Finding dimensions of board
+		
+		BufferedReader obj = null;
 		try {
-			fstream = new FileInputStream(path);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-		String strLine;
-		//Read File Line By Line
-		try {
-			int j = 0;
-			while ((strLine = br.readLine()) != null)   {
-				for (int i = 0; i < strLine.length(); i++)
-				{
-					if (!(asciiToEE.get(strLine.charAt(i))==null))
-					{
-						System.out.println(asciiToEE.get(strLine.charAt(i)));
-						b.initialPlacement(asciiToEE.get(strLine.charAt(i)), i, j);
-					}
-					
-				}
-				j++;
-			  
-			  
-			}
-		} catch (IOException e1) {
+			obj = new BufferedReader(new FileReader(doc));
+		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
-		//Close the input stream
+		
+		String str;
 		try {
-			fstream.close();
+			while ((str = obj.readLine()) != null) {
+				numRows++;
+				numCols = str.length();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// Placing environment elements on the board
+		
+		Board b = new Board(numRows, numCols);
+		int j = 0;
+		try {
+			while ((str = obj.readLine()) != null) {
+				for (int i = 0; i < str.length(); i++)
+				{
+					if (!(asciiToEE.get(str.charAt(i))==null)) {
+						b.initialPlacement(asciiToEE.get(str.charAt(i)), new Position(i,j));
+					}
+				}
+				j++;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		return b;
 		
 	}
