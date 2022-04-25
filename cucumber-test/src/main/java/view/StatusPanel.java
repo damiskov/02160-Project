@@ -7,8 +7,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import property_changes.PropertyChangeEvent;
-
 public class StatusPanel extends JPanel {
 	
 	private static final long serialVersionUID = 7879846621866023722L;

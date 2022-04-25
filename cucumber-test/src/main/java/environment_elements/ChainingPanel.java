@@ -1,14 +1,11 @@
 package environment_elements;
 
-import java.util.Arrays;
 import java.util.List;
 
-import board.IBoard;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
-import player.Player;
-import property_changes.PropertyChangeType;
+import property_changes.ActivationEvent;
 
 public class ChainingPanel extends EnvironmentElement {
 
@@ -27,7 +24,7 @@ public class ChainingPanel extends EnvironmentElement {
 	
 	public void setActive(boolean active) {
 		if (this.active != active) {
-			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ACTIVATION, calculatePosition());
+			getPropertyChangeSupport().firePropertyChange(new ActivationEvent(calculatePosition()));
 		}
 		this.active = active;
 	}

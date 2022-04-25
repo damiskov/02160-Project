@@ -1,6 +1,6 @@
 Feature: Checkpoint
 
-  Scenario: Title of your scenario
+  Scenario: A robot steps onto a checkpoint
     Given a game with an empty board
     And checkpoint number 1 on the board at (5, 5)
     And a robot on the board at (4, 5) facing "right"
