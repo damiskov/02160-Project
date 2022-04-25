@@ -23,7 +23,6 @@ public class Robot extends Piece {
 	private RespawnPoint currentRespawnPoint;
 	private ChainingPanel ChainedFrom;
 	private boolean chainable = false;
-	private boolean wallOnBoard;
 	private Robot chainedTo;
 	private String command;	
 	private Program program;
@@ -100,37 +99,37 @@ public class Robot extends Piece {
 		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.ROTATION, calculatePosition(), oldOrientation, orientation);
 	}	
 	
-	//checking wallcollision after 2 or 3 steps 
-
-
-
-//	//checking wall collision	
-//	private boolean wallCollision(Position p) {
-//
-//		if (((board.hasEElementAt(p) && !board.getEElementAt(p).isWallCollsion())) || ((board.hasEElementAt(p)== false))) {
-//			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), p);
-//			board.setPosition(this, p);
-//		}
-//		return false;	
-//
-//	}
-	//!board.getEElementAt(posToMoveTo).isWallCollsion())
 	
-	private void tryMoveRobot(Position posToMoveTo) {
+	private boolean hasWallNextRobotShiftPosition(Position posToMove, int spaces) {
+		Position shiftedNextRobotPos;
+		int increment = spaces / Math.abs(spaces);
+		if (orientation == Orientation.LEFT || orientation == Orientation.RIGHT) {
+			// move on X axis
+			shiftedNextRobotPos = new Position(posToMove.getX() + increment, posToMove.getY());
+		} else {
+			// move on Y axis
+			shiftedNextRobotPos = new Position(posToMove.getX(), posToMove.getY() + increment);
+		}
+		//check to be shifted 2nd robot position
+		if (board.hasEElementAt(shiftedNextRobotPos) && (board.getEElementAt(shiftedNextRobotPos) instanceof Wall)) {
+			return true;
+		}
+		return false;
+	}
+	
+	private void tryMoveRobot(Position posToMoveTo, int spaces) {
 		System.out.println(board.hasRobotAt(posToMoveTo));
 		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) || ((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
 			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), posToMoveTo);
 			board.setPosition(this, posToMoveTo);
-		} else if (board.hasRobotAt(posToMoveTo)){
+		} else if (board.hasRobotAt(posToMoveTo) && !(hasWallNextRobotShiftPosition(posToMoveTo, spaces))){
 			Robot toBePushedRobot = board.getRobotAt(posToMoveTo);
-			System.out.println("X initial position: " + toBePushedRobot.getX());
 			toBePushedRobot.setOrientation(this.orientation);
-			System.out.println("X Position moved to: " + toBePushedRobot.getX());
 			toBePushedRobot.move(1);
 			getPropertyChangeSupport().firePropertyChange(PropertyChangeType.MOVEMENT, calculatePosition(), posToMoveTo);
 			board.setPosition(this, posToMoveTo);
+			
 		} else {
-			System.out.println("no robot");
 			return;
 		}
 	}
@@ -141,7 +140,7 @@ public class Robot extends Piece {
 			Position p = calculatePosition();
 			int increment = spaces < 0 ? -1 : 1;
 			p.incrX(increment);
-			tryMoveRobot(p);
+			tryMoveRobot(p, spaces);
 		}
 	}
 
@@ -152,7 +151,7 @@ public class Robot extends Piece {
 			Position p = calculatePosition();
 			int increment = spaces < 0 ? -1 : 1;
 			p.incrY(increment);
-			tryMoveRobot(p);
+			tryMoveRobot(p, spaces);
 		}
 	}
 	
