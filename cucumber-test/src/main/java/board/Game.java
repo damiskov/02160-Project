@@ -5,6 +5,7 @@ import java.util.Map;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
 import environment_elements.ConveyorBelt;
+import environment_elements.FinalCheckpoint;
 import environment_elements.Fire;
 import environment_elements.Gear;
 import environment_elements.HealthStation;
@@ -129,7 +130,7 @@ public class Game {
 		board.initialPlacement(new Gear(false), 1, 2);
 		
 		board.initialPlacement(new ChainingPanel(), 0, 3);
-		board.initialPlacement(new Checkpoint(1, true), 1, 3);
+		board.initialPlacement(new FinalCheckpoint(1), 1, 3);
 		board.initialPlacement(new Fire(), 2, 3);
 		board.initialPlacement(new HealthStation(), 3, 3);
 		board.initialPlacement(new OilSpill(), 4, 3);
