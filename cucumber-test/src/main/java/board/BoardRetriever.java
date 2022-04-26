@@ -90,7 +90,7 @@ public class BoardRetriever
 		
 		// Placing environment elements on the board
 		
-		Board b = new Board(numRows, numCols);
+		Board b = new Board(numRows, numCols, pcs);
 		int j = 0;
 		try {
 			while ((str = obj.readLine()) != null) {
