@@ -34,6 +34,11 @@ public class SDRespawnPoint {
 	    context.robot.setRespawnPoint(context.respawnPoint);
 	}
 	
+	@Given("the first robot having its respawn point set")
+	public void the_first_robot_having_its_respawn_point_set() {
+		context.robot.setRespawnPoint(context.respawnPoint);
+	}
+	
 	@Given("the second robot having its respawn point set to the second respawn point")
 	public void the_second_robot_having_its_respawn_point_set_to_the_second_respawn_point() {
 	    context.robot2.setRespawnPoint(context.respawnPoint2);
