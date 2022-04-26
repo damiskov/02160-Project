@@ -40,7 +40,6 @@ public class SpriteMovementAnimation extends Animation {
 
 	@Override
 	public void establishNextFrame() {
-		System.out.println("moving");
 		screenSmoothX += screenShiftX;
 		screenSmoothY += screenShiftY;
 		sprite.setX((int) screenSmoothX);

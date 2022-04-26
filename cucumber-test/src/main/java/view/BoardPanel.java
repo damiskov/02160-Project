@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import animations.SpriteActivationAnimation;
 import animations.SpriteMovementAnimation;
 import board.*;
 import environment_elements.Laser;
@@ -98,7 +99,7 @@ public class BoardPanel extends JPanel {
 				 return sprite;
 			}
 		}
-		return null;
+		throw new SpriteNotFoundException("Could not find EElement sprite at " + p);
 	}
 	
 	public Sprite getRobotSpriteAtPosition(Position p) {
@@ -110,7 +111,7 @@ public class BoardPanel extends JPanel {
 				 return sprite;
 			}
 		}
-		return null;
+		throw new SpriteNotFoundException("Could not find robot sprite at " + p);
 	}
 	
 	
@@ -165,9 +166,8 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void activateSprite(ActivationEvent ae) {
-		System.out.println("activating");
-		getEElementSpriteAtPosition(ae.getPos()).activate();
-		repaint();
+		masterView.enqueueAnimation(new SpriteActivationAnimation(getEElementSpriteAtPosition(ae.getPos())));
+		System.out.println("Activation animation enqueued");
 	}
 	
 	private void moveRobot(MovementEvent me) {

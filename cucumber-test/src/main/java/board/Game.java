@@ -143,7 +143,9 @@ public class Game {
 		r1.move(1);
 		r2.move(1);
 		r1.move(1);
-		r2.move(1);
+//		r2.move(1);
+		activateRegisterActors();
+		r1.move(1);
 		propertyChangeSupport.firePropertyChange(new ProgrammingPhaseBeginEvent());
 		
 //		r2.turnRight();
