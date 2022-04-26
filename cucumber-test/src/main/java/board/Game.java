@@ -1,9 +1,12 @@
 package board;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
+import cards.Card;
 import cards.Deck;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
@@ -191,7 +194,7 @@ public class Game {
 	}
 	
 	//creates the robots and associates them to a player (also puts them in a list)
-	public void setRobots(Player[] players) {
+	public void setRobots() {
 		for (int i = 0; i < players.length; i++ ) {
 			players[i].setRobot(new Robot());			
 		}
@@ -204,10 +207,11 @@ public class Game {
 	//makes the board for the game
 	public void genBoard(Difficulty d, Robot[] r, PropertyChangeSupport pcs) {
 		Board b = BoardFactory.generateBoard(d, r, pcs);
+		this.board = b;
 	}
 	
 	//gives a hand for all of the players
-	public void dealCards(Player[] players) {
+	public void dealCards() {
 		for(int i = 0; i < players.length; i++) {
 			players[i].setHand(deck.genHand());
 		}
@@ -216,9 +220,44 @@ public class Game {
 	//initial stuff that we need for the game 
 	public void Begin(int n, Difficulty d, PropertyChangeSupport pcs) {
 		setPlayers(n);
-		setRobots(getPlayers());
+		setRobots();
 		
 		genBoard(d, getRobots(), pcs);
+	}
+	
+	/*
+	 * ADD PLAYERS CHOOSING THE CARDS METHODS
+	 */
+	
+	public void activationPhase() {
+		ArrayList order = new ArrayList();
+		ArrayList orderNum = new ArrayList();
+		
+		//iterates through the programs (5 because 5 cards)
+		for(int j = 0; j < 5; j++) {
+			//creates two arrays, one with all of the cards, one with all of the numbers
+			//the indices of the cards match to the ones of the numbers and also to the players
+			for(int i = 0; i < players.length; i++) {
+				order.add(players[i].getRobot().getProgram().getTopOfProgram());
+				orderNum.add(players[i].getRobot().getProgram().getTopOfProgram().getNum());
+			}
+			
+			for(int k = 0; k < order.size(); k++) {
+				//finds the index of the maximum
+				int max = (int) Collections.max(orderNum);
+				int dex = orderNum.indexOf(max);
+				
+				//executes the card that has the max number
+				Card exNow = ((Card) order.get(dex));
+				exNow.executeAction(players[dex].getRobot());
+				
+				//remove the max in the number array and the corresponding car
+				order.remove(dex);
+				orderNum.remove(dex);
+			}
+			//activates the register actors
+			activateRegisterActors();
+		}
 	}
 	
 	
