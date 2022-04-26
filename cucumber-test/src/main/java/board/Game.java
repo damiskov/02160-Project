@@ -245,15 +245,15 @@ public class Game {
 			for(int k = 0; k < order.size(); k++) {
 				//finds the index of the maximum
 				int max = (int) Collections.max(orderNum);
-				int dex = orderNum.indexOf(max);
+				int idx = orderNum.indexOf(max);
 				
 				//executes the card that has the max number
-				Card exNow = ((Card) order.get(dex));
-				exNow.executeAction(players[dex].getRobot());
+				Card exNow = ((Card) order.get(idx));
+				exNow.executeAction(players[idx].getRobot());
 				
 				//remove the max in the number array and the corresponding car
-				order.remove(dex);
-				orderNum.remove(dex);
+				order.remove(idx);
+				orderNum.remove(idx);
 			}
 			//activates the register actors
 			activateRegisterActors();

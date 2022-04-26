@@ -27,12 +27,14 @@ public class Fire extends EnvironmentElement{
 			getP().setX(newX); 
 			getP().setY(newY);
 	
-			board.initialPlacement(new Fire(), getP()); 
+			if(!(board.hasEElementAt(getP()))) {
+				Fire newFire = new Fire();
+				newFire.setSpreadCounter(5);
+				board.initialPlacement(newFire, getP());
+				incrementSpreadCounter();
+			}
+
 			
-			((Fire) board.getEElementAt(getP())).setSpreadCounter(5);
-			
-			
-			incrementSpreadCounter();
 		}
 		
 
