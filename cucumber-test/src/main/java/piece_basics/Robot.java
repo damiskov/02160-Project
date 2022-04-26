@@ -218,7 +218,7 @@ public class Robot extends Piece {
 	}
 	
 	public int getMaxHealth() {
-		return this.MAX_ROBOT_HEALTH;
+		return MAX_ROBOT_HEALTH;
 	}
 	
 	public boolean isChainable() {
@@ -243,15 +243,18 @@ public class Robot extends Piece {
 			setChainedTo(null);
 		}
 		
-		Position respawnPointPos = board.calculatePosition(currentRespawnPoint);
-		if (board.hasRobotAt(respawnPointPos) && board.getRobotAt(respawnPointPos) != this) {
-			board.getRobotAt(respawnPointPos).reboot();
-		}
-		System.out.println(calculatePosition());
-		getPropertyChangeSupport().firePropertyChange(new TeleportEvent(calculatePosition(), respawnPointPos));
-		setPosition(respawnPointPos);
-		health = MAX_ROBOT_HEALTH;
-		// TODO: (maybe) also must discard all cards in hand and stop moving
+		if (currentRespawnPoint != null) {
+			Position respawnPointPos = board.calculatePosition(currentRespawnPoint);
+			System.out.println("Rebooting to " + respawnPointPos);
+			if (board.hasRobotAt(respawnPointPos) && board.getRobotAt(respawnPointPos) != this) {
+				board.getRobotAt(respawnPointPos).reboot();
+			}
+			System.out.println(calculatePosition());
+			getPropertyChangeSupport().firePropertyChange(new TeleportEvent(calculatePosition(), respawnPointPos));
+			setPosition(respawnPointPos);
+			health = MAX_ROBOT_HEALTH;
+			// TODO: (maybe) also must discard all cards in hand and stop moving
+		} else throw new NullPointerException("Killed a robot with null respawn point");
 	}
 
 	@Override
