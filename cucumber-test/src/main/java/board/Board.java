@@ -11,18 +11,17 @@ import property_changes.PlacementEvent;
 import property_changes.PropertyChangeSupport;
 import property_changes.RemovalEvent;
 
-// utility class for Board with public attributes. Encapsulation is still respected as this class is fully encapsulated by the Board class
-class Cell {
-	public Robot robot;
-	public EnvironmentElement eElement;
-}
-
 public class Board implements IBoard {
+	
+// utility class for Board with public attributes. Encapsulation is still respected as this class is fully encapsulated by the Board class
+	private class Cell {
+		public Robot robot;
+		public EnvironmentElement eElement;
+	}
 
 	private Cell[][] matrix;
 	private int numColumns;
 	private int numRows;
-	private int numObstacles;
 	private Difficulty difficulty;
 	private String name;
 	private Map<String, List<Piece>> pieceLists = new HashMap<>();
