@@ -45,18 +45,10 @@ public class Board implements IBoard {
 		this.propertyChangeSupport = propertyChangeSupport;
 	}
 	
-	// probably not a good idea to have this, only for compatibility with StepsDefinitionBoardGeneration
-	public Board() {}
 	
 	@Override
 	public PropertyChangeSupport getPropertyChangeSupport() {
 		return propertyChangeSupport;
-	}
-	
-	public void setMatrix(Cell[][] m) {
-		this.matrix = m;
-		this.numRows = matrix.length;
-		this.numColumns = matrix[0].length;
 	}
 
 	private Cell getCell(Position p) {
@@ -213,12 +205,12 @@ public class Board implements IBoard {
 
 	@Override
 	public int getNumRows() {
-		return 0;
+		return numRows;
 	}
 
 	@Override
 	public int getNumColumns() {
-		return 0;
+		return numColumns;
 	}
 
 }

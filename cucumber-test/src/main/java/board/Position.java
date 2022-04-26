@@ -31,10 +31,6 @@ public class Position {
 		this.y += delta;
 	}
 
-	public Position subtract(Position other) {
-		return new Position(this.x - other.x, this.y - other.y);
-	}
-	
 	@Override
 	public int hashCode() {
 		return Objects.hash(x, y);

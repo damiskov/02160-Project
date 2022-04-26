@@ -49,7 +49,6 @@ public class Game {
 	Deck deck;
 	private Robot[] robots;
 	
-	public Game() {}
 	
 	public Game(PropertyChangeSupport pcs, int numPlayers) {
 		this.propertyChangeSupport = pcs;
@@ -60,9 +59,6 @@ public class Game {
 	} 
 	
 	
-	public void genBoard() {
-		
-	}
 	public void setDifficulty(int i) {
 		this.difficulty.setLevel(i);
 		
