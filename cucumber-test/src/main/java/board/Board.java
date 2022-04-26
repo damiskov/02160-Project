@@ -205,12 +205,12 @@ public class Board implements IBoard {
 
 	@Override
 	public int getNumRows() {
-		return 0;
+		return numRows;
 	}
 
 	@Override
 	public int getNumColumns() {
-		return 0;
+		return numColumns;
 	}
 
 }
