@@ -1,7 +1,10 @@
 package board;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import cards.Deck;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
 import environment_elements.ConveyorBelt;
@@ -43,6 +46,8 @@ public class Game {
 	private Player[] players;
 	PropertyChangeSupport propertyChangeSupport;
 	int numPlayers;
+	Deck deck;
+	private Robot[] robots;
 	
 	public Game() {}
 	
@@ -52,7 +57,7 @@ public class Game {
 		
 		// temporary
 		board = new Board(12, 12, pcs);
-	}
+	} 
 	
 	
 	public void genBoard() {
@@ -67,17 +72,9 @@ public class Game {
 //		
 //	}
 	
-	public void setPlayers(int num_players) {
-		for (int i = 0; i < num_players; i++ ) {
-			
-			players[i] = new Player();
-			
-		}
-	}
+	
 
-	public Player[] getPlayers() {
-		return players;
-	}
+
 	
 	
 	// Observer pattern
@@ -181,5 +178,53 @@ public class Game {
 	public int getNumPlayers() {
 		return numPlayers;
 	}
+	
+	//creates the players and names them and puts them in a list
+	public void setPlayers(int num_players) {
+		for (int i = 0; i < num_players; i++ ) {
+			
+			players[i] = new Player();
+			String playerN = String.valueOf(i);
+			players[i].setName("Player " + playerN);
+			
+		}
+	}
+	
+	public Player[] getPlayers() {
+		return players;
+	}
+	
+	//creates the robots and associates them to a player (also puts them in a list)
+	public void setRobots(Player[] players) {
+		for (int i = 0; i < players.length; i++ ) {
+			players[i].setRobot(new Robot());			
+		}
+	}
+	
+	public Robot[] getRobots() {
+		return this.robots;
+	}
+	 
+	//makes the board for the game
+	public void genBoard(Difficulty d, Robot[] r, PropertyChangeSupport pcs) {
+		Board b = BoardFactory.generateBoard(d, r, pcs);
+	}
+	
+	//gives a hand for all of the players
+	public void dealCards(Player[] players) {
+		for(int i = 0; i < players.length; i++) {
+			players[i].setHand(deck.genHand());
+		}
+	}
+	
+	//initial stuff that we need for the game 
+	public void Begin(int n, Difficulty d, PropertyChangeSupport pcs) {
+		setPlayers(n);
+		setRobots(getPlayers());
+		
+		genBoard(d, getRobots(), pcs);
+	}
+	
+	
 	
 }
