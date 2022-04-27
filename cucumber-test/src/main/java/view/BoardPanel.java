@@ -87,14 +87,6 @@ public class BoardPanel extends JPanel {
 		repaint();
 	}
 	
-	//add non-piece sprite, only lasers shot by robots use this
-	public void addSprite(Orientation orientation, Position p, boolean endCap) {
-		
-		robotLaserSpriteList.add(SpriteFactory.getLaserSprite(orientation, p, cellWidth, this, endCap));
-		//System.out.println(orientation + " " + p);
-		repaint();
-	}
-	
 	public void removeEElementSprite(Position p) {
 		eElementSpriteList.remove(getEElementSpriteAtPosition(p));
 		repaint();
@@ -218,50 +210,13 @@ public class BoardPanel extends JPanel {
 		System.out.println("rle sequence started");
 		Position startingPosition = rle.getPosStart();
 		Position finishPosition = rle.getPosFinish();
-		Position rollingPosition = startingPosition;
+		//Position rollingPosition = startingPosition;
 		System.out.println("s: " + startingPosition + "f: " + finishPosition);
 		
+		masterView.enqueueAnimation(new SpriteRobotLaserAnimation(500, startingPosition, finishPosition, this, robotLaserSpriteList, cellWidth));
 		//horizontal laser
-		if(startingPosition.getY()==finishPosition.getY()) {	
-			//going right
-			if(startingPosition.getX()<finishPosition.getX()) {
-				addSprite(Orientation.RIGHT, startingPosition, true);
-				while (rollingPosition.getX()<finishPosition.getX()-1){
-					rollingPosition.incrX(1);
-					addSprite(Orientation.RIGHT, rollingPosition, false);
-				}
-				addSprite(Orientation.LEFT, finishPosition, true);
-			//going left
-			} else {
-				addSprite(Orientation.LEFT, startingPosition, true);
-				while (rollingPosition.getX()>finishPosition.getX()+1){
-					rollingPosition.incrX(-1);
-					addSprite(Orientation.LEFT, rollingPosition, false);
-				}
-				addSprite(Orientation.RIGHT, finishPosition, true);
-			}
-			
-		//vertical laser
-		} else if(startingPosition.getX()==finishPosition.getX()) {
-			//going up
-			if(startingPosition.getY()-finishPosition.getY()<0) {
-				addSprite(Orientation.UP, startingPosition, true);
-				while (rollingPosition.getY()<finishPosition.getY()-1){
-					rollingPosition.incrY(1);
-					addSprite(Orientation.UP, rollingPosition, false);
-				}
-				addSprite(Orientation.DOWN, finishPosition, true);
-			//going down
-			} else {
-				addSprite(Orientation.DOWN, startingPosition, true);
-				while (rollingPosition.getY()>finishPosition.getY()+1){
-					rollingPosition.incrY(-1);
-					addSprite(Orientation.DOWN, rollingPosition, false);
-				}
-				addSprite(Orientation.UP, finishPosition, true);
-			}
-		}  
-		masterView.enqueueAnimation(new SpriteRobotLaserAnimation(500, robotLaserSpriteList, cellWidth));
+		 
+		
 		//robotLaserSpriteList.clear();
 		
 		
