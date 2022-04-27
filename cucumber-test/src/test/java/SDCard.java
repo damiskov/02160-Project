@@ -4,12 +4,8 @@ import piece_basics.Robot;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Stack;
-
-import board.Board;
 
 import board.Position;
 import cards.*;
@@ -229,110 +225,6 @@ public class SDCard {
 		
 	}
 	
-	
-	
-	
-//@When("a turn right command is executed")
-
-//@Then("the robot is at \\({int}, {int}) facing {string}")
-
-
-
-
-	
-	
-	
-
-//@When("a turn right command is executed")
-
-//	@Then("the robot is at \\({int}, {int}) facing {string}")
-//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-
-
-
-	
-	
-	
-
-//@When("a turn right command is executed")
-
-//	@Then("the robot is at \\({int}, {int}) facing {string}")
-//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-
-
-
-	
-	
-	
-
-//@When("a turn right command is executed")
-	
-//	@Then("the robot is at \\({int}, {int}) facing {string}")
-//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-
-
-
-	
-	
-
-//@When("a turn left command is executed")
-
-//	@Then("the robot is at \\({int}, {int}) facing {string}")
-//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-
-
-
-	
-	
-
-//@When("a turn left command is executed")
-
-//	@Then("the robot is at \\({int}, {int}) facing {string}")
-//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-
-
-
-	
-	
-
-//@When("a turn left command is executed")
-
-//	@Then("the robot is at \\({int}, {int}) facing {string}")
-//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-
-
-
-	
-	
-
-//@When("a turn left command is executed")
-
-//	@Then("the robot is at \\({int}, {int}) facing {string}")
-//	public void the_robot_is_at_facing(Integer int1, Integer int2, String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-
-
-	
 	//FORWARD AND BACKWARD
 	
 	@When("a move forward command is executed")
@@ -379,5 +271,29 @@ public class SDCard {
 		context.card.executeAction(context.robot);
 	}
 
+	@Given("a non-determined card")
+	public void a_non_determined_card() {
+	    Card c = new Card("card");
+	    context.card = c;
+	}
+	
+	@When("the card gets reversed")
+	public void the_card_gets_reversed() {
+	   card = context.card.getOppositeCard();
+	}
+	
+	@Then("no card is returned")
+	public void no_card_is_returned() {
+	    assertEquals(card, null);
+	}
+	
 
+	@When("the number of the card is set")
+	public void the_number_of_the_card_is_set() {
+	    context.card.setNum(43);
+	}
+	@Then("the card has a number")
+	public void the_card_has_a_number() {
+	    assertEquals(context.card.getNum(), 43);
+	}
 }
