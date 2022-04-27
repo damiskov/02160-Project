@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Image;
-
-import board.Board;
 import board.Position;
 import environment_elements.ChainingPanel;
 import environment_elements.ConveyorBelt;

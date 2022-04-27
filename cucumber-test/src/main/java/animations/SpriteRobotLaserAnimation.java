@@ -65,6 +65,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 		//
 		// There is also a fair bit of logic needed to figure out how to rotate each image so they line up 
 		
+		//horizontal laser
 		if(startingPosition.getY()==finishPosition.getY()) {	
 			
 			//going right
