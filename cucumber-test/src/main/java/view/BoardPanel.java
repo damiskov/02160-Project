@@ -15,10 +15,12 @@ import animations.SpriteActivationAnimation;
 import animations.SpriteMovementAnimation;
 import animations.SpritePlacementAnimation;
 import animations.SpriteRemovalAnimation;
+import animations.SpriteRobotLaserAnimation;
 import animations.SpriteRotationAnimation;
 import animations.SpriteTeleportAnimation;
 import board.*;
 import piece_basics.EnvironmentElement;
+import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import property_changes.ActivationEvent;
@@ -49,6 +51,7 @@ public class BoardPanel extends JPanel {
 	private Board board;
 	
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
+	private List<ImageToggleSprite> robotLaserSpriteList = new ArrayList<>();
 	private List<Sprite> robotSpriteList = new ArrayList<>();
 	private Map<Integer, Sprite> robotNumToSpriteMap = new HashMap<>();
 
@@ -131,6 +134,9 @@ public class BoardPanel extends JPanel {
 		for (Sprite sprite: eElementSpriteList) {
 			sprite.drawUsing(g2);
 		}
+		for (Sprite sprite: robotLaserSpriteList) {
+			sprite.drawUsing(g2);
+		}
 		for (Sprite sprite: robotSpriteList) {
 			sprite.drawUsing(g2);
 		}
@@ -203,7 +209,18 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void displayRobotLaser(RobotLaserEvent rle) {
-		// TODO Auto-generated method stub
+		System.out.println("rle sequence started");
+		Position startingPosition = rle.getPosStart();
+		Position finishPosition = rle.getPosFinish();
+		//Position rollingPosition = startingPosition;
+		System.out.println("s: " + startingPosition + "f: " + finishPosition);
+		
+		masterView.enqueueAnimation(new SpriteRobotLaserAnimation(500, startingPosition, finishPosition, this, robotLaserSpriteList, cellWidth));
+		//horizontal laser
+		 
+		
+		//robotLaserSpriteList.clear();
+		
 		
 	}
 

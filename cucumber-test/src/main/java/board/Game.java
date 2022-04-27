@@ -112,7 +112,7 @@ public class Game {
 		Robot r2 = new Robot();
 		board.initialPlacement(r2, 7, 3);
 		Robot r3 = new Robot();
-		board.initialPlacement(r3, 2, 0);
+		board.initialPlacement(r3, 1, 0);
 		board.initialPlacement(new Robot(), 3, 0);
 		board.initialPlacement(new Robot(), 9, 0);
 		board.initialPlacement(new Robot(), 5, 0);
@@ -148,7 +148,6 @@ public class Game {
 		board.initialPlacement(new Wall(), 9, 3);
 		
 		r1.move(1);
-		propertyChangeSupport.firePropertyChange(new ProgrammingPhaseBeginEvent());
 		
 		r2.turnRight();
 		r2.move(1);
@@ -170,35 +169,12 @@ public class Game {
 		activateRegisterActors();
 		
 		
-//		r2.turnRight();
-//		r2.move(1);
-		
-//		r1.move(1);
-//		r1.turnRight();
-//		r1.move(1);
-//		r1.turnRight();
-//		r1.move(1);
-//		r1.turnRight();
-//		r1.move(1);
-//		r1.turnRight();
-		
 	
-//		activateRegisterActors();
-//		r2.move(2);
-//		r2.turnLeft();
-//		r2.move(-2);
-//		r2.turnLeft();
-//		r2.move(-1);
-//		r2.turnLeft();
-//		r2.move(-1);
-//		r2.turnLeft();
-//		r2.move(-1);
-//		r2.turnLeft();
-//		r2.move(-1);
-		
-		//r1.move(1);
-		//r1.turnLeft();
-		//r1.move(1);
+
+
+		propertyChangeSupport.firePropertyChange(new ProgrammingPhaseBeginEvent());
+
+
 		
 		
 		

@@ -256,6 +256,7 @@ public class Robot extends Piece {
 
 	@Override
 	public void performRegisterAction() {
+		System.out.println("Looking for robot ahead of robot " + robotNumber);
 		Robot foundRobot = findRobotAhead();
 		
 		if (foundRobot != null) {
@@ -266,6 +267,8 @@ public class Robot extends Piece {
 	}
 	private Robot findRobotAhead() {
 		Position p = calculatePosition();
+		
+		System.out.println("Initializing search from position " + p);
 		
 		switch(orientation) {
 		case UP:
