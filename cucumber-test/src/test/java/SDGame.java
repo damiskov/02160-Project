@@ -1,7 +1,11 @@
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import property_changes.PropertyChangeSupport;
 import view.MasterView;
+
+import static org.junit.Assert.assertFalse;
+
 import board.*;
 
 public class SDGame {
@@ -34,5 +38,24 @@ public class SDGame {
 	@When("the board elements activate")
 	public void the_board_elements_activate() {
 		context.game.activateRegisterActors();
+	}
+	
+	@Given("an easy game with {int} players")
+	public void an_easy_game_with_players(Integer int1) {
+		PropertyChangeSupport pcs = new PropertyChangeSupport();
+		Game game = new Game(pcs, 2);
+		game.setDifficulty(1);
+		context.game = game;
+	}
+	
+	@When("the game begins")
+	public void the_game_begins() {
+	    context.game.Begin(context.game.getNumPlayers(), context.game.getDifficulty(), context.game.getPropertyChangeSupport());
+	}
+	
+	@Then("the players are created")
+	public void the_players_are_created() {
+	    //assertFalse(context.game.getPlayers(), null);
+	    
 	}
 }

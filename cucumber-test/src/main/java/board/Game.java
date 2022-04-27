@@ -66,6 +66,11 @@ public class Game {
 		this.difficulty.setLevel(i);
 		
 	}
+	
+	public Difficulty getDifficulty() {
+		return this.difficulty;
+		
+	}
 //	public void setCurrentPlayer(int i) {
 //		// TODO Auto-generated method stub
 //		
