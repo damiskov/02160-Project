@@ -248,7 +248,7 @@ public class Robot extends Piece {
 			board.getRobotAt(respawnPointPos).reboot();
 		}
 		System.out.println(calculatePosition());
-		getPropertyChangeSupport().firePropertyChange(new TeleportEvent(calculatePosition(), respawnPointPos));
+		getPropertyChangeSupport().firePropertyChange(new TeleportEvent(robotNumber, respawnPointPos));
 		setPosition(respawnPointPos);
 		health = MAX_ROBOT_HEALTH;
 		// TODO: (maybe) also must discard all cards in hand and stop moving

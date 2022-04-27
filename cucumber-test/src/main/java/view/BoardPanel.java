@@ -10,15 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 
 import animations.SpriteActivationAnimation;
 import animations.SpriteMovementAnimation;
 import animations.SpriteRotationAnimation;
+import animations.SpriteTeleportAnimation;
 import board.*;
-import environment_elements.Laser;
-import environment_elements.Pit;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
@@ -159,7 +156,7 @@ public class BoardPanel extends JPanel {
 			teleportRobot(te);
 		} else if (pci instanceof RotationEvent) {
 			RotationEvent re = (RotationEvent) pci;
-			rotateSprite(re);
+			rotateRobot(re);
 		} else if (pci instanceof RobotLaserEvent) {
 			RobotLaserEvent rle = (RobotLaserEvent) pci;
 			displayRobotLaser(rle);
@@ -180,15 +177,13 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void teleportRobot(TeleportEvent te) {
-		Position posCurrent = te.getPosCurrent();
-		Sprite sprite = getRobotSpriteAtPosition(posCurrent);
-		Position posNew = te.getPosNew();
-		sprite.setX(posNew.getX()*cellWidth);
-		sprite.setY(posNew.getY()*cellWidth);
-		repaint();
+		Sprite spriteToTeleport = robotNumToSpriteMap.get(te.getRobotNum());
+		int screenNewX = te.getPosNew().getX() * cellWidth;
+		int screenNewY = te.getPosNew().getY() * cellWidth;
+		masterView.enqueueAnimation(new SpriteTeleportAnimation(spriteToTeleport, screenNewX, screenNewY));
 	}
 	
-	private void rotateSprite(RotationEvent re) {
+	private void rotateRobot(RotationEvent re) {
 		
 		Sprite spriteToRotate = robotNumToSpriteMap.get(re.getRobotNum());
 		int diffAngle;
