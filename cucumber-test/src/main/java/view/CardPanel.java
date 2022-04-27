@@ -59,7 +59,7 @@ public class CardPanel extends JPanel {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
 		
 		// temporary
-		for (String id: List.of("move1", "turnleft", "movebackward", "move3", "move2", "turnright", "uturn")) {
+		for (String id: List.of("move1", "turnLeft", "backUp", "move3", "move2", "turnRight", "uTurn")) {
 			CardSelectionPanel b = new CardSelectionPanel(id);
 			hand.add(b);
 			add(b);

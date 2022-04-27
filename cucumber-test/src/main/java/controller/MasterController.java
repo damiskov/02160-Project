@@ -1,7 +1,12 @@
 package controller;
 
 
+import java.util.List;
+import java.util.Stack;
+
 import board.Game;
+import cards.Card;
+import player.Player;
 import property_changes.PropertyChangeSupport;
 import view.MasterView;
 
@@ -33,6 +38,12 @@ public class MasterController {
 		view.setVisible(true);
 	}
 	
+	public void assignCards(Player player, List<Card> cards)
+	{
+		Stack<Card> stack = new Stack<Card>();
+		stack.addAll(cards);
+		player.getRobot().setProgram(stack);
+	}
 	
 
 	
