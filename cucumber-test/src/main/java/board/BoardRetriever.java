@@ -93,7 +93,9 @@ public class BoardRetriever
 		Board b = new Board(numRows, numCols, pcs);
 		int j = 0;
 		try {
-			while ((str = obj.readLine()) != null) {
+			obj = new BufferedReader(new FileReader(doc));
+			while (obj.readLine() != null) {
+				str = obj.readLine();
 				for (int i = 0; i < str.length(); i++)
 				{
 					if (!(asciiToEE.get(str.charAt(i))==null)) {

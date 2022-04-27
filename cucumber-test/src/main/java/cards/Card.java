@@ -6,6 +6,7 @@ public class Card
 {
     private String action;
     private int num;
+    
     public Card(String action)
     {
         this.action = action;
@@ -28,7 +29,7 @@ public class Card
     }
     
     public Card getOppositeCard() {
-    	return new Card("something");
+    	return null;
     }
     
     public String getAction()

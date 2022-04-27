@@ -15,7 +15,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 
 import controller.InitiateController;
-
 import utils.GridBagLayoutUtils;
 
 public class InitiateView extends JFrame{

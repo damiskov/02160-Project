@@ -18,6 +18,10 @@ public class Deck
         regenDeck();
     }
     
+    public List<Card> getCards(){
+    	return cards;
+    }
+    
     private void regenDeck()
     {
     	this.cards = new ArrayList<>();

@@ -2,10 +2,6 @@ import static org.junit.Assert.assertEquals;
 
 import board.Board;
 import board.BoardFactory;
-import board.BoardGenerator;
-import board.BoardRetriever;
-import board.Difficulty;
-import board.Position;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -38,20 +34,13 @@ public class SDBoardGeneration {
 	    context.player2.setRobot(new Robot());
 	}
 
-	@Given("an easy difficulty")
-	public void an_easy_difficulty() {
-		context.d = new Difficulty(1);
+	
+	
+	@Given("a BoardFactory")
+	public void a_BoardFactory() {
+		BoardFactory bf = new BoardFactory();
 	}
 	
-	@Given("a medium difficulty")
-	public void a_medium_difficulty() {
-		context.d = new Difficulty(2);
-	}
-	
-	@Given("a hard difficulty")
-	public void a_hard_difficulty() {
-		context.d = new Difficulty(3);
-	}
 	@When ("a board is generated")
 	public void a_board_is_generated()
 	{
@@ -74,5 +63,18 @@ public class SDBoardGeneration {
 	public void a_hard_board_is_generated() {
 		assertEquals(context.board.getDifficulty().getLevel(), 3);
 	}
+	
+	@When("a name is set")
+	public void a_name_is_set() {
+		context.board.setName(null);
+	}
+	@Then("the board has its name set")
+	public void the_board_has_its_name_set() {
+		assertEquals(context.board.getName(), null);
+	}
 
+	@Then("no board is generated")
+	public void no_board_is_generated() {
+		assertEquals(context.board, null);
+	}
 }

@@ -2,7 +2,6 @@ package environment_elements;
 
 import board.Position;
 import piece_basics.*;
-import piece_basics.EnvironmentElement;
 import property_changes.ActivationEvent;
 
 public class Laser extends EnvironmentElement {
