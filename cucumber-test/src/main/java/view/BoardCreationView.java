@@ -168,15 +168,16 @@ public class BoardCreationView extends JFrame{
  
 		
 		//create new file
-//		final File parentDir = new File("boards");
-//		parentDir.mkdir();
-//		final String name = "newBoard";
-//		final String fileName = name + ".txt";
-//		final File file = new File(parentDir, fileName);
-//		file.createNewFile();
+		final File dir = new File("boards" + File.separatorChar);
+		final String name = "bb2";
+		final String fileName = name + ".txt";
+		final File file = new File(dir+fileName);
+		file.createNewFile();
+		
+		System.out.println("BOARD CREATED AND ADDED TO DIRECTORY BOARDS");
 		
 		
-		PrintWriter writer = new PrintWriter("boards/newBoard.txt", "UTF-8");
+		PrintWriter writer = new PrintWriter("boards/bb2.txt", "UTF-8");
 //		writer.println("The first line");
 //		writer.println("The second line");
 //		writer.close();

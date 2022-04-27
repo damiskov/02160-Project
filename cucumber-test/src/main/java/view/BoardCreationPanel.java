@@ -56,6 +56,11 @@ private static final long serialVersionUID = -2140843137512577992L;
 	private int height;
 	private Board newBoard;
 	
+	//icon for an empty tile
+	ImageIcon icon;
+	
+	private JButton [][] cellButtons;
+	
 	int col = 0;
 	int row = 0;
 	
@@ -80,6 +85,8 @@ private static final long serialVersionUID = -2140843137512577992L;
 		setLayout(boardLayout);
 		
 		setPreferredSize(new Dimension(width, height));
+		
+		cellButtons = new JButton [rows][cols];
 		
 		createCellButtons();
 		
@@ -123,7 +130,7 @@ private static final long serialVersionUID = -2140843137512577992L;
 	
 	private void createCellButtons() {
 		
-		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/tile.png", pixelsPerCell, pixelsPerCell));
+		icon = new ImageIcon(ImageUtils.scaledImage("images/tile.png", pixelsPerCell, pixelsPerCell));
 		
 		
 		while(row < rows) {
@@ -139,6 +146,9 @@ private static final long serialVersionUID = -2140843137512577992L;
 					cell.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 					cell.setAlignmentX(Component.CENTER_ALIGNMENT);
 					cell.setName("tile");
+					
+					//ADD CELL BUTTON TO cellButtons matrix
+					cellButtons[y][x]=cell;
 					
 					cell.addActionListener(e -> {
 
@@ -158,7 +168,7 @@ private static final long serialVersionUID = -2140843137512577992L;
 							// getSelectedElement() is a element ID
 							ImageIcon env = new ImageIcon(ImageUtils.scaledImage("images/" + controller.getSelectedElement() + ".png", pixelsPerCell, pixelsPerCell));
 							
-							selectedCell.setIcon(env);
+//							selectedCell.setIcon(env);
 							
 							// if has EnvElement at this pos
 							// then remove it and add this new element
@@ -181,19 +191,43 @@ private static final long serialVersionUID = -2140843137512577992L;
 							
 							
 							Position pos = new Position(x , y);
+
 							
 							EnvironmentElement newElem = createEElement(controller.getSelectedElement());
 							System.out.println(pos );
-							
-							if (newBoard.hasEElementAt(pos)) {
-								newBoard.removeEElement(pos);
+							if(newElem instanceof Checkpoint) {
+								//if selected element is a checkpoint
+								//visual
+								selectedCell.setIcon(env);
+								
+								int checkpointNumber;
+								
+								checkpointNumber = getCheckpointNumber(controller.getSelectedElement());
+								
+								
+								//search instance of checkpoint 1, given id of the selected element is from checkpoint 1
+								
+								
+								//delete same checkpoint in case it exists
+								removeCheckpointInBoard(checkpointNumber);
 								newBoard.initialPlacement(newElem, pos);
-								System.out.println("HAS ELEMENT IN POSITION ALREADY" );
+								
 							} else {
-								newBoard.initialPlacement(newElem, pos);
-								System.out.println(newBoard.hasEElementAt(pos));
-								System.out.println("DOESNT HAVE ELEMENT IN POSITION" );
+								//visual
+								selectedCell.setIcon(env);
+								
+								//if selected element is not a checkpoint
+								if (newBoard.hasEElementAt(pos)) {
+									newBoard.removeEElement(pos);
+									newBoard.initialPlacement(newElem, pos);
+									System.out.println("HAS ELEMENT IN POSITION ALREADY" );
+								} else {
+									newBoard.initialPlacement(newElem, pos);
+									System.out.println(newBoard.hasEElementAt(pos));
+									System.out.println("DOESNT HAVE ELEMENT IN POSITION" );
+								}
 							}
+							
 							
 							
 							if (newBoard.hasEElementAt(pos)) {
@@ -212,6 +246,8 @@ private static final long serialVersionUID = -2140843137512577992L;
 						
 					});
 					add(cell, GridBagLayoutUtils.constraint(col, row, 0));
+					
+					
 					
 //					add(Box.createRigidArea(new Dimension(0, 5)));
 				
@@ -311,13 +347,77 @@ private static final long serialVersionUID = -2140843137512577992L;
 				HealthStation e = new HealthStation();
 				return e;
 			} else {
-				throw new java.lang.RuntimeException("Invalid input. Please enter a valid Environment Element id");
+				throw new RuntimeException("Invalid input. Please enter a valid Environment Element id");
 			}
 			
 			
 		
 	}
 	
+	
+	private int getCheckpointNumber (String id) {
+		
+		if (id == "checkpoint1") {
+			return 1;
+		} else if(id == "checkpoint2") {
+			return 2;
+		} else if(id == "checkpoint3") {
+			return 3;
+		} else if(id == "checkpoint4") {
+			return 4;
+		} else {
+			throw new RuntimeException("ID from Checkpoint doesn't match any case.");
+		}
+		
+	}
+	
+	private void removeCheckpointInBoard(int checkpointNumber) {
+		
+		for (int col = 0; col < cols; col++) {
+			for (int row = 0; row < rows; row++) {
+				
+				if(newBoard.hasEElementAt(new Position (row, col))) {
+					if(newBoard.getEElementAt(new Position (row, col)) instanceof Checkpoint) {
+						
+						Checkpoint cp = (Checkpoint) newBoard.getEElementAt(new Position (row, col));
+						if ( cp.getNumber() == checkpointNumber) {
+							newBoard.removeEElement(new Position (row, col));
+							cellButtons[col][row].setIcon(icon);
+						}
+						
+						
+						
+					}
+				}
+				
+			}
+		}
+		
+	}
+	
+//	private boolean checkpointInBoard(int checkpointNumber) {
+//		for (int col = 0; col < cols; col++) {
+//			for (int row = 0; row < rows; row++) {
+//				
+//				if(newBoard.hasEElementAt(new Position (row, col))) {
+//					if(newBoard.getEElementAt(new Position (row, col)) instanceof Checkpoint) {
+//						
+//						Checkpoint cp = (Checkpoint) newBoard.getEElementAt(new Position (row, col));
+//						
+//						if ( cp.getNumber() == checkpointNumber) {
+//							return true;
+//						} 
+//						
+//						
+//						
+//					}
+//				}
+//				
+//			}
+//		}
+//		
+//		return false;
+//	}
 
 	
 }
