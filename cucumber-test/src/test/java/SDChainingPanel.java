@@ -148,4 +148,10 @@ public class SDChainingPanel {
 	public void the_robot_is_still_not_chained() {
 		assertEquals(context.robot.getChainedTo(),null);
 	}
+	
+	@Then("the chaining panel is at five, five")
+	public void the_chaining_panel_is_at_five_five() {
+	    assertEquals(context.chainpan.getX(), 5);
+	    assertEquals(context.chainpan.getY(), 5);
+	}
 }
