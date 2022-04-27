@@ -45,8 +45,26 @@ public class SDGame {
 	@Given("an easy game with {int} players")
 	public void an_easy_game_with_players(Integer int1) {
 		PropertyChangeSupport pcs = new PropertyChangeSupport();
-		Game game = new Game(pcs, 2);
+		Game game = new Game(pcs, int1);
 		Difficulty d = new Difficulty(1);
+		game.setDifficulty(d);
+		context.game = game;
+	}
+	
+	@Given("a medium game with {int} players")
+	public void a_medium_game_with_players(Integer int1) {
+		PropertyChangeSupport pcs = new PropertyChangeSupport();
+		Game game = new Game(pcs, int1);
+		Difficulty d = new Difficulty(2);
+		game.setDifficulty(d);
+		context.game = game;
+	}
+	
+	@Given("a hard game with {int} players")
+	public void a_hard_game_with_players(Integer int1) {
+		PropertyChangeSupport pcs = new PropertyChangeSupport();
+		Game game = new Game(pcs, int1);
+		Difficulty d = new Difficulty(3);
 		game.setDifficulty(d);
 		context.game = game;
 	}
@@ -75,5 +93,15 @@ public class SDGame {
 	@Then("the game has an easy board")
 	public void the_game_has_an_easy_board() {
 	    assertEquals(context.game.getBoard().getDifficulty().getLevel(), 1);
+	}
+	
+	@Then("the game has a medium board")
+	public void the_game_has_a_medium_board() {
+	    assertEquals(context.game.getBoard().getDifficulty().getLevel(), 2);
+	}
+	
+	@Then("the game has a hard board")
+	public void the_game_has_a_hard_board() {
+	    assertEquals(context.game.getBoard().getDifficulty().getLevel(), 3);
 	}
 }
