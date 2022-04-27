@@ -4,21 +4,23 @@ import board.Position;
 
 public class TeleportEvent implements IPropertyChangeEvent {
 
-	private Position posCurrent;
+	private int robotNumber;
 	private Position posNew;
 	
-	public TeleportEvent(Position posOld, Position posNew) {
-		this.posCurrent = posOld;
+	public TeleportEvent(int robotNumber, Position posNew) {
+		this.robotNumber = robotNumber;
 		this.posNew = posNew;
 	}
-
-	public Position getPosCurrent() {
-		return posCurrent;
+	
+	public int getRobotNum() {
+		return robotNumber;
 	}
-
+	
 	public Position getPosNew() {
 		return posNew;
 	}
+	
+	
 	
 	
 }

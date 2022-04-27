@@ -17,7 +17,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 	}
 
 	@Override
-	public void initialize() {
+	public void initializeAnimation() {
 		for(ImageToggleSprite toggleSprite : sprites) {
 			toggleSprite.activate();
 		}
@@ -33,7 +33,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 	}
 
 	@Override
-	public void finalize() {
+	public void finalizeAnimation() {
 		for(ImageToggleSprite toggleSprite : sprites) {
 			toggleSprite.activate();
 			

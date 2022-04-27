@@ -38,7 +38,7 @@ public class Teleporter extends EnvironmentElement {
 			board.moveRobotFromTo(p, receivingP);
 			System.out.println( r + " is being moved to " + receiving.calculatePosition());
 			// TODO: if there is a robot on the receiving teleporter, kill it
-			getPropertyChangeSupport().firePropertyChange(new TeleportEvent(p, receivingP));
+			getPropertyChangeSupport().firePropertyChange(new TeleportEvent(r.getRobotNumber(), receivingP));
 		}
 	}
 }
