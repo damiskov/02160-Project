@@ -1,9 +1,12 @@
 package board;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import cards.Card;
+import cards.Deck;
 import environment_elements.ChainingPanel;
-import environment_elements.Checkpoint;
 import environment_elements.ConveyorBelt;
 import environment_elements.FinalCheckpoint;
 import environment_elements.Fire;
@@ -44,6 +47,9 @@ public class Game {
 	private Player[] players;
 	PropertyChangeSupport propertyChangeSupport;
 	int numPlayers;
+	Deck deck;
+	private Robot[] robots;
+	private boolean over;
 	
 	
 	public Game(PropertyChangeSupport pcs, int numPlayers) {
@@ -52,11 +58,18 @@ public class Game {
 		
 		// temporary
 		board = new Board(12, 12, pcs);
+	} 
+	
+	public void setDeck(Deck d) {
+		this.deck = d;
+	}
+	public void setDifficulty(Difficulty d) {
+		this.difficulty = d;
+		
 	}
 	
-	
-	public void setDifficulty(int i) {
-		this.difficulty.setLevel(i);
+	public Difficulty getDifficulty() {
+		return this.difficulty;
 		
 	}
 //	public void setCurrentPlayer(int i) {
@@ -64,17 +77,9 @@ public class Game {
 //		
 //	}
 	
-	public void setPlayers(int num_players) {
-		for (int i = 0; i < num_players; i++ ) {
-			
-			players[i] = new Player();
-			
-		}
-	}
+	
 
-	public Player[] getPlayers() {
-		return players;
-	}
+
 	
 	
 	// Observer pattern
@@ -96,12 +101,13 @@ public class Game {
 		this.board = board;
 	}
 
+	
 
 	public PropertyChangeSupport getPropertyChangeSupport() {
 		return propertyChangeSupport;
 	}
 
-	public IBoard getBoard() {
+	public Board getBoard() {
 		return board;
 	}
 	
@@ -183,5 +189,92 @@ public class Game {
 	public int getNumPlayers() {
 		return numPlayers;
 	}
+	
+	//creates the players and names them and puts them in a list
+	public void setPlayers(int num_players) {
+		 players = new Player[num_players];
+		for (int i = 0; i < num_players; i++ ) {
+			
+			players[i] = new Player();
+			String playerN = String.valueOf(i);
+			players[i].setName("Player " + playerN);
+			
+		}
+	}
+	
+	public Player[] getPlayers() {
+		return players;
+	}
+	
+	//creates the robots and associates them to a player (also puts them in a list)
+	public void setRobots(int num) {
+		robots = new Robot[num];
+		for (int i = 0; i < players.length; i++ ) {
+			players[i].setRobot(new Robot());
+			robots[i] = players[i].getRobot();
+		}
+	}
+	
+	public Robot[] getRobots() {
+		return this.robots;
+	}
+	 
+	//makes the board for the game
+	public void genBoard(Difficulty d, Robot[] r, PropertyChangeSupport pcs) {
+		Board b = BoardFactory.generateBoard(d, r, pcs);
+		this.board = b;
+	}
+	
+	//gives a hand for all of the players
+	public void dealCards() {
+		for(int i = 0; i < players.length; i++) {
+			players[i].setHand(deck.genHand());
+		}
+	}
+	
+	//initial stuff that we need for the game 
+	public void Begin(int n, Difficulty d, PropertyChangeSupport pcs) {
+		setPlayers(n);
+		setRobots(n);
+		
+		genBoard(d, getRobots(), pcs);
+	}
+	
+	/*
+	 * ADD PLAYERS CHOOSING THE CARDS METHODS
+	 */
+	
+	public void activationPhase() {
+		ArrayList order = new ArrayList();
+		ArrayList orderNum = new ArrayList();
+		
+		//iterates through the programs (5 because 5 cards)
+		for(int j = 0; j < 5; j++) {
+			//creates two arrays, one with all of the cards, one with all of the numbers
+			//the indices of the cards match to the ones of the numbers and also to the players
+			for(int i = 0; i < players.length; i++) {
+				order.add(players[i].getRobot().getProgram().getTopOfProgram());
+				orderNum.add(players[i].getRobot().getProgram().getTopOfProgram().getNum());
+			}
+			
+			for(int k = 0; k < order.size() && !(over); k++) {
+				//finds the index of the maximum
+				int max = (int) Collections.max(orderNum);
+				int idx = orderNum.indexOf(max);
+				
+				//executes the card that has the max number
+				Card exNow = ((Card) order.get(idx));
+				exNow.executeAction(players[idx].getRobot());
+				
+				//remove the max in the number array and the corresponding car
+				order.remove(idx);
+				orderNum.remove(idx);
+			}
+			//activates the register actors
+			activateRegisterActors();
+		}
+	}
+	
+	
 	
 }

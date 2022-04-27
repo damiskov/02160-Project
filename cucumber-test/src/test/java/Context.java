@@ -3,11 +3,9 @@ import board.Game;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 import board.*;
-import piece_basics.*;
 import environment_elements.ConveyorBelt;
 import environment_elements.Fire;
 import environment_elements.Gear;
@@ -19,7 +17,7 @@ import environment_elements.RespawnPoint;
 import environment_elements.ReversalPanel;
 import environment_elements.Teleporter;
 import environment_elements.Wall;
-import piece_basics.Robot;
+import piece_basics.*;
 import cards.*;
 import player.Player;
 

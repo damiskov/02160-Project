@@ -200,4 +200,16 @@ Feature: Programming Cards
   	And a robot on the board at (5, 5) facing "up"
     When a move backwards three command is executed
     Then the robot is at (5, 2) facing "up"
-   
+    
+  #only for coverage
+  Scenario: Opposite of a non-determined card
+    Given a non-determined card
+    When the card gets reversed
+    Then no card is returned
+    
+  #only for coverage
+  Scenario: Card has a number
+    Given a Move2 card
+    When the number of the card is set
+    Then the card has a number
+    

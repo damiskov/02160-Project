@@ -18,6 +18,11 @@ public class Wall extends EnvironmentElement {
 		return true;
 	}
 	
+	@Override
+	public boolean isWallCollsion() {
+		return true;
+	}
+	
 	
 	@Override
 	public String getPieceID() {

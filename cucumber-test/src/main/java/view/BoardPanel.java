@@ -37,7 +37,7 @@ public class BoardPanel extends JPanel {
 
 	private static final long serialVersionUID = -2140843137512577992L;
 	
-	private static final int maxDimension = 600;
+	private static final int maxDimension = 500;
 	
 	private final MasterView masterView;
 	
