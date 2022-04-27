@@ -63,6 +63,15 @@ public class SDBoardGeneration {
 	public void a_hard_board_is_generated() {
 		assertEquals(context.board.getDifficulty().getLevel(), 3);
 	}
+	
+	@When("a name is set")
+	public void a_name_is_set() {
+		context.board.setName(null);
+	}
+	@Then("the board has its name set")
+	public void the_board_has_its_name_set() {
+		assertEquals(context.board.getName(), null);
+	}
 
 	@Then("no board is generated")
 	public void no_board_is_generated() {
