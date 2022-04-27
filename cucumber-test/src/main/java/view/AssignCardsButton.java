@@ -21,17 +21,21 @@ import javax.swing.SwingConstants;
 import cards.Card;
 import cards.CardFactory;
 
+import controller.MasterController;
+
 public class AssignCardsButton extends JButton {
 
 	private static final long serialVersionUID = 7870457398446646061L;
 
 	protected final MasterView masterView;
+	private MasterController mc;
 	private Color color;
 	private JLabel textLabel;
 
 
-	public AssignCardsButton(MasterView masterView, Color color) {
+	public AssignCardsButton(MasterView masterView, Color color, MasterController mc) {
 		this.masterView = masterView;
+		this.mc = mc;
 		this.color = color;
 		
 		setLayout(new BorderLayout());
@@ -50,17 +54,19 @@ public class AssignCardsButton extends JButton {
 	}
 	
 	// Mapping card selection panels to cards, so that a program can be assigned to a robot
-	public void cardSelectionPanelToCards(List<CardSelectionPanel> program)
+	public void cardSelectionPanelToCards(int player, List<CardSelectionPanel> program)
 	{
 		List<Card> cards = new ArrayList<Card>();
 		
 		// Iterating over card selection panels, and mapping to card objects using cardFactory method
 		
-		
 		for (CardSelectionPanel c : program)
 		{
 			cards.add(CardFactory.getCard(c.getCardID()));
 		}
+		
+		mc.assignCards(player, cards);
+		
 	}
 
 

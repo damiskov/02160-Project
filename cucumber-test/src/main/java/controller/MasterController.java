@@ -38,11 +38,12 @@ public class MasterController {
 		view.setVisible(true);
 	}
 	
-	public void assignCards(Player player, List<Card> cards)
+	public void assignCards(int player, List<Card> cards)
 	{
 		Stack<Card> stack = new Stack<Card>();
 		stack.addAll(cards);
-		player.getRobot().setProgram(stack);
+		Player p = game.getPlayers()[player];
+		p.getRobot().setProgram(stack);
 	}
 	
 
