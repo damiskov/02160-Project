@@ -35,6 +35,8 @@ import piece_basics.Orientation;
 import piece_basics.Piece;
 import utils.GridBagLayoutUtils;
 import utils.ImageUtils;
+import environment_elements.Pit;
+import environment_elements.HealthStation;
 
 public class BoardCreationPanel extends JPanel {
 	
@@ -270,7 +272,7 @@ private static final long serialVersionUID = -2140843137512577992L;
 				System.out.println("Added ConveyorBelt");
 				if (id == "gear_left") {
 					gear = new Gear(true);
-				} else if (id == "checkpoint2") {
+				} else if (id == "gear_right") {
 					gear = new Gear(false);
 				} 
 				return gear;

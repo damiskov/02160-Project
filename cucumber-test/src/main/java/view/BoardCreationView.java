@@ -271,6 +271,24 @@ public class BoardCreationView extends JFrame{
 				throw new RuntimeException("Error generating character for Checkpoint provided.");
 			}
 
+		} else if (e instanceof Gear) {
+			
+			Gear g = (Gear) (e);
+			
+			if (g.isCounterClockwise()) {
+				return 'A';
+			} else if (!g.isCounterClockwise())  {
+				return 'K';
+			} else {
+				throw new RuntimeException("Error generating character for Gear provided.");
+			}
+
+		} else if (e instanceof Wall) {
+			return 'W';
+		} else if (e instanceof Pit) {
+			return 'P';
+		} else if (e instanceof HealthStation) {
+			return 'H';
 		} else {
 			throw new RuntimeException("Invalid input. Please enter a valid Environment Element.");
 		}

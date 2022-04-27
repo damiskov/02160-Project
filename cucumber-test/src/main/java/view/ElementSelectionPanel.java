@@ -1,10 +1,12 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -78,7 +80,6 @@ public class ElementSelectionPanel extends JPanel {
 		elementIDs.add(ChainingPanel.ID);
 		
 		elementIDs.add(Teleporter.ID);
-//		elementIDs.add(Gear.ID);
 		elementIDs.add(Laser.ID);
 		elementIDs.add(OilSpill.ID);
 		elementIDs.add(ReversalPanel.ID);
@@ -115,9 +116,12 @@ public class ElementSelectionPanel extends JPanel {
 	}
 	
 	private void createLayout() {
-		GridBagLayout TEMPelementsLayout = new GridBagLayout();
+//		GridBagLayout TEMPelementsLayout = new GridBagLayout();
+		GridLayout TEMPelementsLayout = new GridLayout(0, 5, 1, 1);
 //		elementsLayout = new FlowLayout(FlowLayout.CENTER, 10, 0);
 		setLayout(TEMPelementsLayout);
+		
+//		setMaximumSize(new Dimension(Integer.MAX_VALUE, this.getMinimumSize().height));
 	}
 	
 	private void createElementsButtons() {
@@ -154,7 +158,7 @@ public class ElementSelectionPanel extends JPanel {
 			
 			elemButtonsList.add(element);
 			add(element);
-			add(Box.createRigidArea(new Dimension(0, 5)));
+//			add(Box.createRigidArea(new Dimension(0, 5)));
 			
 		}
 		
