@@ -182,6 +182,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			
 			int frames = animation.getNumFrames();
 			System.out.println("Playing animation " + animation.getClass());
+			System.out.println("Running for " + frames + " frames");
 			
 //			final Timer timer = new Timer(1000 / Animation.FRAMES_PER_SECOND, null);
 //			ActionListener performer = new ActionListener() {

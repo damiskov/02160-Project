@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 
 import animations.SpriteActivationAnimation;
 import animations.SpriteMovementAnimation;
+import animations.SpritePlacementAnimation;
+import animations.SpriteRemovalAnimation;
 import animations.SpriteRotationAnimation;
 import animations.SpriteTeleportAnimation;
 import board.*;
@@ -72,20 +74,21 @@ public class BoardPanel extends JPanel {
 
 	public void addSprite(Piece piece, Position p) {
 		if (piece instanceof EnvironmentElement) {
-			eElementSpriteList.add(SpriteFactory.getFromPiece(piece, cellWidth, this));
+			Sprite eElementSprite = SpriteFactory.getFromPiece(piece, cellWidth, this);
+			masterView.enqueueAnimation(new SpritePlacementAnimation(eElementSprite, eElementSpriteList));
 		} else if (piece instanceof Robot) {
 			Sprite robotSprite = SpriteFactory.getFromPiece(piece, cellWidth, this);
-			robotSpriteList.add(robotSprite);
+			masterView.enqueueAnimation(new SpritePlacementAnimation(robotSprite, robotSpriteList));
 			Robot robot = (Robot) piece;
 			robotNumToSpriteMap.put(robot.getRobotNumber(), robotSprite);
 		} else {
 			throw new IllegalArgumentException("Piece must be either a Robot or an EnvironmentElement");
 		}
-		repaint();
 	}
+	
 	public void removeEElementSprite(Position p) {
-		eElementSpriteList.remove(getEElementSpriteAtPosition(p));
-		repaint();
+		System.out.println("Handling removal event");
+		masterView.enqueueAnimation(new SpriteRemovalAnimation(p, this));
 	}
 	
 	public Sprite getEElementSpriteAtPosition(Position p) {
@@ -202,5 +205,9 @@ public class BoardPanel extends JPanel {
 	private void displayRobotLaser(RobotLaserEvent rle) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public List<Sprite> geteElementSpriteList() {
+		return eElementSpriteList;
 	}
 }

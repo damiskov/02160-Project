@@ -114,7 +114,7 @@ public class Game {
 		Robot r3 = new Robot();
 		board.initialPlacement(r3, 2, 0);
 		board.initialPlacement(new Robot(), 3, 0);
-		board.initialPlacement(new Robot(), 4, 0);
+		board.initialPlacement(new Robot(), 9, 0);
 		board.initialPlacement(new Robot(), 5, 0);
 		board.initialPlacement(new Robot(), 10, 0);
 		board.initialPlacement(new Robot(), 11, 0);
@@ -158,6 +158,15 @@ public class Game {
 		r2.turnLeft();
 		r2.move(2);
 		r2.turnLeft();
+		activateRegisterActors();
+		
+		r1.turnLeft();
+		r1.turnLeft();
+		r1.move(1);
+		r1.turnRight();
+		r1.move(2);
+		r1.turnRight();
+		r1.move(1);
 		activateRegisterActors();
 		
 		
