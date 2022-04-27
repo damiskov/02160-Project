@@ -75,6 +75,7 @@ public class Board implements IBoard {
 		int y = p.getY();
 		return matrix[numColumns - y - 1][x];
 	}
+	
 	private Cell getCell(int x, int y) {
 		return matrix[numColumns - y - 1][x];
 	}
@@ -94,9 +95,12 @@ public class Board implements IBoard {
 	}
 	@Override
 	public void initialPlacement(EnvironmentElement e, int x, int y) {
+		System.out.println("placing eelement at " + x + ", " + y);
 		addToExecutionLists(e);
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
+		System.out.println("placed " + getCell(x, y).eElement);
+		System.out.println(hasEElementAt(new Position(x, y)));
 		getPropertyChangeSupport().firePropertyChange(PropertyChangeType.PLACEMENT, e, new Position(x,y));
 	}
 	@Override
@@ -166,6 +170,7 @@ public class Board implements IBoard {
 
 	@Override
 	public boolean hasEElementAt(Position p) {
+		System.out.println("checking for eelement at " + p);
 		return getCell(p).eElement != null;
 	}
 

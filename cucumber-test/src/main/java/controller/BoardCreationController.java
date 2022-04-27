@@ -1,7 +1,6 @@
 package controller;
 
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +18,7 @@ public class BoardCreationController {
 	
 	private String selected_element;
 	private boolean element_is_selected;
+	private Board created_board;
 	
 
 	
@@ -71,15 +71,21 @@ public class BoardCreationController {
 	}
 	
 	public String getSelectedElement() {
-		
 		return selected_element;
-		
 	}
 	
 	public void setSelectedElement( String id) {
 		
 		selected_element = id;
 		
+	}
+	
+	public void setCreatedBoard(Board b) {
+		created_board = b;
+	}
+	
+	public Board getCreatedBoard() {
+		return created_board;
 	}
 	
 }

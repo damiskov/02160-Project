@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,6 +19,20 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import controller.BoardCreationController;
+import environment_elements.ChainingPanel;
+import environment_elements.ConveyorBelt;
+import environment_elements.Fire;
+import environment_elements.Gear;
+import environment_elements.HealthStation;
+import environment_elements.Laser;
+import environment_elements.OilSpill;
+import environment_elements.Pit;
+import environment_elements.RespawnPoint;
+import environment_elements.ReversalPanel;
+import environment_elements.Teleporter;
+import environment_elements.Wall;
+import piece_basics.Orientation;
+import piece_basics.Robot;
 import utils.ImageUtils;
 
 public class ElementSelectionPanel extends JPanel {
@@ -59,12 +74,38 @@ public class ElementSelectionPanel extends JPanel {
 	private void createElementsIDList() {
 		
 		elementIDs =  new ArrayList<String>() ;
-		elementIDs.add("arrow");
-		elementIDs.add("circle");
-		elementIDs.add("green_circle");
-		elementIDs.add("empty_circle");
-		elementIDs.add("heart");
-		elementIDs.add("icon");
+		
+		elementIDs.add(ChainingPanel.ID);
+		
+		elementIDs.add(Teleporter.ID);
+//		elementIDs.add(Gear.ID);
+		elementIDs.add(Laser.ID);
+		elementIDs.add(OilSpill.ID);
+		elementIDs.add(ReversalPanel.ID);
+		elementIDs.add(RespawnPoint.ID);
+		
+		elementIDs.add(Wall.ID);
+		elementIDs.add(Pit.ID);
+		elementIDs.add(HealthStation.ID);
+		
+		//add gears
+		elementIDs.add("gear_left");
+		elementIDs.add("gear_right");
+		
+		//add conveyor belts
+		elementIDs.add("conveyor_beltD");
+		elementIDs.add("conveyor_beltL");
+		elementIDs.add("conveyor_beltR");
+		elementIDs.add("conveyor_beltU");
+		
+		//add checkpoints TEMPORARY
+		elementIDs.add("checkpoint1");
+		elementIDs.add("checkpoint2");
+		elementIDs.add("checkpoint3");
+		elementIDs.add("checkpoint4");
+		
+		
+		/* Checkpoint.ID */
 		
 	}
 	
@@ -74,13 +115,18 @@ public class ElementSelectionPanel extends JPanel {
 	}
 	
 	private void createLayout() {
-		elementsLayout = new FlowLayout(FlowLayout.CENTER, 10, 0);
-		setLayout(elementsLayout);
+		GridBagLayout TEMPelementsLayout = new GridBagLayout();
+//		elementsLayout = new FlowLayout(FlowLayout.CENTER, 10, 0);
+		setLayout(TEMPelementsLayout);
 	}
 	
 	private void createElementsButtons() {
 		
 		for ( String id : elementIDs) {
+			
+			//check if conveyor belt to rotate the icon
+			
+			
 			
 			ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/" + id + ".png", elemWidth, elemHeight));
 			element = new JButton(icon);

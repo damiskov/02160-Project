@@ -24,5 +24,10 @@ public class Checkpoint extends EnvironmentElement {
 	public String getPieceID() {
 		return ID;
 	}
+	
+	public int getNumber() {
+		return number;
+		
+	}
 
 }

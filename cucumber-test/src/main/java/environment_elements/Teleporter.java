@@ -8,6 +8,7 @@ import property_changes.PropertyChangeType;
 public class Teleporter extends EnvironmentElement {
 	private Teleporter receiving;
 	private boolean Sending;
+	private int t;
 	
 	public void setSending(boolean isSending) {
 		this.Sending = isSending;
