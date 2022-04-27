@@ -24,7 +24,7 @@ Scenario: Robot as an obstacle on the left side
 	 Then the first robot is at (5, 5)
 	 Then the second robot is at (4, 5)
 	 
-Scenario: Robot as an obstacle in the forward direction
+Scenario: Robot as an obstacle in the upward direction
 	 Given a game with an empty board
 	 And a robot on the board at (5, 5) facing "up"
 	 And a second robot on the board at (5, 6) facing "up"
@@ -32,7 +32,7 @@ Scenario: Robot as an obstacle in the forward direction
 	 Then the first robot is at (5, 6)
 	 Then the second robot is at (5, 7)
 	 
-Scenario: Robot as an obstacle in the backward direction
+Scenario: Robot as an obstacle in the downward direction
 	 Given a game with an empty board
 	 And a robot on the board at (5, 5) facing "down"
 	 And a second robot on the board at (5, 4) facing "down"
@@ -68,7 +68,7 @@ Scenario: Wall as an obstacle in the way of second robot in the right direction 
 	 Then the first robot is at (5, 5)
 	 Then the second robot is at (6, 5)
 	 
-Scenario: Wall as an obstacle in the way of second robot in the forward direction
+Scenario: Wall as an obstacle in the way of second robot in the upward direction
 	 Given a game with an empty board
 	 And a robot on the board at (5, 5) facing "up"
 	 And a second robot on the board at (5, 6) facing "up"
@@ -76,7 +76,7 @@ Scenario: Wall as an obstacle in the way of second robot in the forward directio
 	 When one robot moves 
 	 Then the first robot is at (5, 5)
 	 Then the second robot is at (5, 6)
-Scenario: Wall as an obstacle in the way of second robot in the backward direction
+Scenario: Wall as an obstacle in the way of second robot in the downward direction
 	 Given a game with an empty board
 	 And a robot on the board at (5, 5) facing "down"
 	 And a second robot on the board at (5, 4) facing "down"
