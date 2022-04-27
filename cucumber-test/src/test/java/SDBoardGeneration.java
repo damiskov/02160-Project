@@ -2,10 +2,6 @@ import static org.junit.Assert.assertEquals;
 
 import board.Board;
 import board.BoardFactory;
-import board.BoardGenerator;
-import board.BoardRetriever;
-import board.Difficulty;
-import board.Position;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

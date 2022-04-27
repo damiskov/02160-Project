@@ -3,7 +3,6 @@ import board.Game;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 import board.*;

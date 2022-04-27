@@ -21,7 +21,7 @@ Scenario: Generate a hard board
   And a hard difficulty 
   When a board is generated
   Then a hard board is generated
-
+  
 #only for coverage
 Scenario: Generate a super hard board and creating an instance of BoardFactory (for 100% although useless)
   Given two players
@@ -30,3 +30,5 @@ Scenario: Generate a super hard board and creating an instance of BoardFactory (
   And a BoardFactory
   When a board is generated
   Then no board is generated
+  
+
