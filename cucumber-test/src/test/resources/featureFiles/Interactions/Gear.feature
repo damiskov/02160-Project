@@ -26,6 +26,5 @@ Feature: Gear
    Scenario: Counterclockwise gear
 	  Given a game with an empty board
 	  And a gear on the board at (5, 5) spinning "counterclockwise" 
-  #  When a counterclockwise gear is placed at (5, 5)
     Then the environment element at (5, 5) is a counterclockwise gear
 	

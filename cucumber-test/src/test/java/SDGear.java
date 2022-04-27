@@ -38,38 +38,5 @@ private Context context;
 	    assertTrue(context.board.getEElementAt(new Position(int1, int2)) instanceof Gear);
 		assertEquals(((Gear) context.board.getEElementAt(new Position(int1, int2))).isCounterClockwise(), true);
 	}
-	
-//	@Given("a gear pointing towards right")
-//	public void a_gear_pointing_towards_right() {
-//		Board board = context.board;
-//		Gear g = new Gear( false);
-//		context.gear = g;
-//		board.initialPlacement(g, 6, 5);
-//	}
-//	
-//	@When("robot steps on a gear")
-//	public void robot_steps_on_a_gear() {
-//		context.robot.shiftX(1);
-//	}
-//	
-//	@Then("gear turns the robot towards right")
-//	public void gear_turns_the_robot_towards_right() {
-//		context.gear.performRegisterAction();
-//		assertEquals(Orientation.RIGHT, context.robot.getOrientation());
-//		
-//	}
-//	
-//	@Given("a gear pointing towards left")
-//	public void a_gear_pointing_towards_left() {
-//		Board board = context.board;
-//		Gear g = new Gear(true);
-//		context.gear = g;
-//		board.initialPlacement(g, 6, 5);
-//	}
-//	@Then("gear turns the robot towards left")
-//	public void gear_turns_the_robot_towards_left() {
-//		context.gear.performRegisterAction();
-//	    assertEquals(Orientation.LEFT,context.robot.getOrientation());
-//	}
 
 }
