@@ -92,4 +92,3 @@ Scenario: Wall as an obstacle in the way of second robot in the left direction
 	 When one robot moves 
 	 Then the first robot is at (6, 5)
 	 Then the second robot is at (5, 5)
-

@@ -160,45 +160,84 @@ public class Robot extends Piece {
 		}
 	}
 	
+	public boolean isValidMove(int moves) {
+		int newX = calculatePosition().getX() + moves;
+		int newY = calculatePosition().getY() + moves;
+		switch(orientation) {
+		case UP:
+			if(!(board.coordinateWithinBounds(calculatePosition().getX(), newY))) {
+				return false;
+			}
+
+		case RIGHT:
+			if(!(board.coordinateWithinBounds(newX, calculatePosition().getY()))) {
+				return false;
+			}
+
+		case DOWN:
+			if(!(board.coordinateWithinBounds(calculatePosition().getX(), newY))) {
+				return false;
+			}
+
+		case LEFT:
+			if(!(board.coordinateWithinBounds(newX, calculatePosition().getY()))) {
+				return false;
+			}
+		}
+		return true;
+		
+		
+		
+		
+		
+	}
 	public void move(int spaces) {
-		System.out.println("Number of spaces to move: " + spaces);
- 
-		if(this.getChainedTo() == null) {
-			switch(orientation) {
-			case UP:
-				shiftY(spaces);
-				break;
-			case RIGHT:
-				shiftX(spaces);
-				break;
-			case DOWN:
-				shiftY(-spaces);
-				break;
-			case LEFT:
-				shiftX(-spaces);
-				break;
+		//if(isValidMove(spaces)) {
+			if(this.getChainedTo() == null) {
+				switch(orientation) {
+				case UP:
+					if(isValidMove(spaces)) {
+					shiftY(spaces);
+					break;}
+				case RIGHT:
+					if(isValidMove(spaces)) {
+					shiftX(spaces);
+					break;}
+				case DOWN:
+					if(isValidMove(-spaces)) {
+					shiftY(-spaces);
+					break;}
+				case LEFT:
+					if(isValidMove(-spaces)) {
+					shiftX(-spaces);
+					break;}
+				}
 			}
-		}
-		else {
-			switch(orientation) {
-			case UP:
-				shiftY(spaces);
-				this.getChainedTo().shiftY(spaces);
-				break;
-			case RIGHT:
-				shiftX(spaces);
-				this.getChainedTo().shiftX(spaces);
-				break;
-			case DOWN:
-				shiftY(-spaces);
-				this.getChainedTo().shiftY(-spaces);
-				break;
-			case LEFT:
-				shiftX(-spaces);
-				this.getChainedTo().shiftX(-spaces);
-				break;
+			else {
+				switch(orientation) {
+				case UP:
+					if(isValidMove(spaces)) {
+					shiftY(spaces);
+					this.getChainedTo().shiftY(spaces);
+					break;}
+				case RIGHT:
+					if(isValidMove(spaces)) {
+					shiftX(spaces);
+					this.getChainedTo().shiftX(spaces);
+					break;}
+				case DOWN:
+					if(isValidMove(-spaces)) {
+					shiftY(-spaces);
+					this.getChainedTo().shiftY(-spaces);
+					break;}
+				case LEFT:
+					if(isValidMove(-spaces)) {
+					shiftX(-spaces);
+					this.getChainedTo().shiftX(-spaces);
+					break;}
+				}
 			}
-		}
+		//}
 	}
 
 	public void heal() {
