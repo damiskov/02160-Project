@@ -52,6 +52,17 @@ public class SDBoardGeneration {
 	public void a_hard_difficulty() {
 		context.d = new Difficulty(3);
 	}
+	
+	@Given("a BoardFactory")
+	public void a_BoardFactory() {
+		BoardFactory bf = new BoardFactory();
+	}
+	
+	@Given("a super hard difficulty")
+	public void a_super_hard_difficulty() {
+		context.d = new Difficulty(4);
+	}
+	
 	@When ("a board is generated")
 	public void a_board_is_generated()
 	{
@@ -75,4 +86,8 @@ public class SDBoardGeneration {
 		assertEquals(context.board.getDifficulty().getLevel(), 3);
 	}
 
+	@Then("no board is generated")
+	public void no_board_is_generated() {
+		assertEquals(context.board, null);
+	}
 }
