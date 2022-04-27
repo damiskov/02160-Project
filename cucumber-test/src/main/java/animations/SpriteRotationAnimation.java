@@ -22,7 +22,7 @@ public class SpriteRotationAnimation extends Animation {
 	}
 
 	@Override
-	public void initialize() {
+	public void initializeAnimation() {
 		int startingAngle = sprite.getRotation();
 		
 		smoothAngle = (double) startingAngle;
@@ -38,7 +38,7 @@ public class SpriteRotationAnimation extends Animation {
 	}
 
 	@Override
-	public void finalize() {
+	public void finalizeAnimation() {
 		sprite.setRotation(finalAngle);
 	}
 

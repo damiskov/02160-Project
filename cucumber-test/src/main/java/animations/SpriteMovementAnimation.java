@@ -27,7 +27,7 @@ public class SpriteMovementAnimation extends Animation {
 	}
 
 	@Override
-	public void initialize() {
+	public void initializeAnimation() {
 		int screenX = sprite.getX();
 		int screenY = sprite.getY();
 		
@@ -47,7 +47,7 @@ public class SpriteMovementAnimation extends Animation {
 	}
 
 	@Override
-	public void finalize() {
+	public void finalizeAnimation() {
 		sprite.setX(screenFinalX);
 		sprite.setY(screenFinalY);
 	}

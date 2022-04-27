@@ -218,7 +218,7 @@ public class Robot extends Piece {
 	}
 	
 	public int getMaxHealth() {
-		return this.MAX_ROBOT_HEALTH;
+		return MAX_ROBOT_HEALTH;
 	}
 	
 	public boolean isChainable() {
@@ -259,6 +259,7 @@ public class Robot extends Piece {
 		Robot foundRobot = findRobotAhead();
 		
 		if (foundRobot != null) {
+			System.out.println("Robot " + getRobotNumber() + " firing at robot " + foundRobot.getRobotNumber());
 			foundRobot.takeDamage();
 			getPropertyChangeSupport().firePropertyChange(new RobotLaserEvent(calculatePosition(), foundRobot.calculatePosition()));
 		}
