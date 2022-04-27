@@ -1,10 +1,8 @@
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
 
-import board.Board;
 import board.Position;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
