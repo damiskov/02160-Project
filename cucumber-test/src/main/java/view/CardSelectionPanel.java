@@ -25,7 +25,7 @@ public class CardSelectionPanel extends JPanel {
 	public CardSelectionPanel(String cardID) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		this.cardID = cardID;
+		this.cardID = cardID; 
 		
 		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/" + cardID + ".png", cardWidth, cardHeight));
 		cardButton = new JButton(icon);

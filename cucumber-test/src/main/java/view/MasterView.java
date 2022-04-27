@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,6 +32,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	// for testing
 	private JButton blackScreenButton;
 	private JButton winScreenButton;
+	private JButton assignCardsButton;
 	//
 	
 	private BlackScreen blackScreen;
@@ -46,7 +49,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		setLayout(new GridBagLayout());
 		
 		boardPanel = new BoardPanel(game.getBoard());
-		cardPanel = new CardPanel();
+		cardPanel = new CardPanel(this, controller);
 		statusPanel = new StatusPanel(game.getNumPlayers());
 		
 		blackScreen = new BlackScreen(this);
@@ -56,6 +59,9 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		blackScreenButton.addActionListener(e -> displayBlackScreen(2));
 		winScreenButton = new JButton("Move robot 2 forward");
 		winScreenButton.addActionListener(e -> game.getBoard().getRobotAt(new Position(0, 3)).move(1));
+		// Button for assign programs to robots
+//		assignCardsButton = new AssignCardsButton(this, Color.BLUE, controller);
+		assignCardsButton = new AssignCardsButton(this, Color.BLUE, controller);
 		//
 		
 		addElements();
@@ -96,7 +102,8 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		// temporary
 		add(blackScreenButton, GridBagLayoutUtils.constraint(1, 1, 0));
 		add(winScreenButton, GridBagLayoutUtils.constraint(2, 1, 0));
-		//
+
+		// 
 		
 		revalidate();
 		repaint();
@@ -142,7 +149,30 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			displayWinScreen(gwe.getWinningPlayerNum());
 		} else {
 			boardPanel.propertyChange(pce);
-		}
-		
+		}	
+	
 	}
+
+//	public void addAssignCardsButton() {
+//		setLayout(new BorderLayout());
+//		add(assignCardsButton, GridBagLayoutUtils.constraint(1, 2, 0));
+//		revalidate();
+//		repaint();
+//		
+//	}
+//
+//	public void removeAssignCardsButton() {
+//		remove(assignCardsButton);
+//		
+//	}
+//	
+//	public void displayAssignCardsButton(List<CardSelectionPanel> cards)
+//	{
+//		if (cards.size()==5)
+//		{
+//			
+//		}
+//			
+//		
+//	}
 }

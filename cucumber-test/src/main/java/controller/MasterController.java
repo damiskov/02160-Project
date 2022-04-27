@@ -15,16 +15,18 @@ public class MasterController {
 	private ApplicationController application;
 	public int playerCount;
 	public String difficulty;
+	private int currentPlayer;
 	
 	private MasterView view;
 	private Game game;
 	private PropertyChangeSupport pcs;
 	
 	
-	MasterController(ApplicationController application, int playerCount, String difficulty){
+	MasterController(ApplicationController application, int playerCount, String difficulty, int currentPlayer){
 		this.application = application;
 		this.playerCount = playerCount; 
-		this.difficulty = difficulty;
+		this.difficulty = difficulty; 
+		this.currentPlayer = currentPlayer;
 		
 		pcs = new PropertyChangeSupport();
 		game = new Game(pcs, playerCount);
@@ -38,13 +40,20 @@ public class MasterController {
 		view.setVisible(true);
 	}
 	
-	public void assignCards(int player, List<Card> cards)
+	public void assignCards(List<Card> cards)
 	{
 		Stack<Card> stack = new Stack<Card>();
 		stack.addAll(cards);
-		Player p = game.getPlayers()[player];
+		Player p = game.getPlayers()[this.currentPlayer];
 		p.getRobot().setProgram(stack);
 	}
+	
+	public int getCurrentPlayer()
+	{
+		return currentPlayer;
+	}
+	
+
 	
 
 	

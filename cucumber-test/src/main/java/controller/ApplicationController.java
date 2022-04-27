@@ -26,7 +26,7 @@ public class ApplicationController {
 //		System.out.println("Game started with " + playerCount + " players and difficulty " + game.getDifficulty());
 
 		//System.out.println("Game started with " + playerCount + " players.");
-		masterController = new MasterController(this, playerCount, difficulty);
+		masterController = new MasterController(this, playerCount, difficulty, 1);
 		masterController.display();
 
 	}

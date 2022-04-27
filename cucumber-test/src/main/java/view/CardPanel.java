@@ -18,13 +18,18 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import cards.Card;
+import cards.CardFactory;
+import controller.MasterController;
 import utils.GridBagLayoutUtils;
 import utils.ImageUtils;
 
 public class CardPanel extends JPanel {
 
 	private static final long serialVersionUID = 4888662845263342484L;
-
+	
+	MasterView mv;
+	
 	int card_width;
 	int card_height;
 	int number_cards;
@@ -35,11 +40,37 @@ public class CardPanel extends JPanel {
 
 	private List<CardSelectionPanel> hand = new ArrayList<>();
 	private List<CardSelectionPanel> orderedCards = new ArrayList<>();
-
+	JButton assignCardsButton;
 	JButton button_b;
 
-	public CardPanel() {
+	public CardPanel(MasterView mv, MasterController mc) {
+		
+		this.mv = mv;
+		
+//		assignCardsButton = new AssignCardsButton(mv, Color.BLUE, mc);
+		String emoji = new String(Character.toChars((int)0x1F916));
+		
+		assignCardsButton = new JButton(emoji);
+		add(assignCardsButton);
+		assignCardsButton.setEnabled(false);
+		
+		assignCardsButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				List<Card> cards = new ArrayList<Card>();
+				
+				// Iterating over card selection panels, and mapping to card objects using cardFactory method
+				
+				for (CardSelectionPanel c : orderedCards)
+				{
+					cards.add(CardFactory.getCard(c.getCardID()));
+				}
+				
+				mc.assignCards(cards);
 
+			}
+
+		});
 		// given a hand
 		// go through that hand and for each card create a button
 		
@@ -57,15 +88,15 @@ public class CardPanel extends JPanel {
 		// create buttons with images according to move
 
 		setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
-		
+
 		// temporary
 		for (String id: List.of("move1", "turnLeft", "backUp", "move3", "move2", "turnRight", "uTurn")) {
 			CardSelectionPanel b = new CardSelectionPanel(id);
-			hand.add(b);
+			hand.add(b); 
 			add(b);
 		}
 		//
-
+		
 		for (CardSelectionPanel csp : hand) {
 			SelectionIcon selectionIcon = csp.getSelectionIcon();
 			JButton cardButton = csp.getCardButton();
@@ -75,14 +106,16 @@ public class CardPanel extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("button " + cardButton.getName() + " clicked");
 
-					if (orderedCards.contains(csp)) {
+					if (!orderedCards.contains(csp) && orderedCards.size()<5) {
+						orderedCards.add(csp);
+						System.out.println("BUTTON ADDED");
+					}
+					else
+					{
 						orderedCards.remove(csp);
 						System.out.println("BUTTON REMOVED");
 						// empty circle
 						selectionIcon.empty();
-					} else {
-						orderedCards.add(csp);
-						System.out.println("BUTTON ADDED");
 					}
 					
 					// update selection icon numbers
@@ -90,12 +123,23 @@ public class CardPanel extends JPanel {
 						System.out.println(i + 1 + " -> " + orderedCards.get(i).getCardButton().getName());
 						orderedCards.get(i).getSelectionIcon().setNumber(i + 1);
 					}
+					
+					if (orderedCards.size()==5)
+					{
+						assignCardsButton.setEnabled(true);
+					}
+					else
+					{
+						assignCardsButton.setEnabled(false);
+					}
 
 				}
 
 			});
 		}
 	}
+	
+
 
 //	private Image createImage(String path, int card_width, int card_height) {
 //

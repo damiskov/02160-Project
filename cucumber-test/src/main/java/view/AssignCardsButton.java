@@ -34,6 +34,7 @@ public class AssignCardsButton extends JButton {
 
 
 	public AssignCardsButton(MasterView masterView, Color color, MasterController mc) {
+		System.out.println("Assign cards button created");
 		this.masterView = masterView;
 		this.mc = mc;
 		this.color = color;
@@ -53,7 +54,7 @@ public class AssignCardsButton extends JButton {
 		middlePanel.add(textLabel);
 	}
 	
-	// Mapping card selection panels to cards, so that a program can be assigned to a robot
+	// Mapping card selection panels to cards	, so that a program can be assigned to a robot
 	public void cardSelectionPanelToCards(int player, List<CardSelectionPanel> program)
 	{
 		List<Card> cards = new ArrayList<Card>();
@@ -65,9 +66,11 @@ public class AssignCardsButton extends JButton {
 			cards.add(CardFactory.getCard(c.getCardID()));
 		}
 		
-		mc.assignCards(player, cards);
+//		mc.assignCards(player, cards);
 		
 	}
+	
+	
 
 
 	
