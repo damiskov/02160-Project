@@ -3,10 +3,6 @@ package property_changes;
 import java.util.ArrayList;
 import java.util.List;
 
-import board.Position;
-import piece_basics.Orientation;
-import piece_basics.Piece;
-
 public class PropertyChangeSupport {
 
 	private List<PropertyChangeListener> subscribers = new ArrayList<>();

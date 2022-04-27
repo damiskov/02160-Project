@@ -3,17 +3,24 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
+import animations.Animation;
+import animations.HealthChangeAnimation;
 import board.Game;
 import board.Position;
 import controller.MasterController;
 import property_changes.GameWinEvent;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
+import property_changes.ProgrammingPhaseBeginEvent;
 import property_changes.PropertyChangeListener;
 import utils.GridBagLayoutUtils;
 
@@ -26,6 +33,8 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	private BoardPanel boardPanel;
 	private JPanel cardPanel;
 	private StatusPanel statusPanel;
+	
+	private Queue<Animation> animationQueue = new ArrayDeque<>();
 	
 	// for testing
 	private JButton blackScreenButton;
@@ -45,7 +54,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		
 		setLayout(new GridBagLayout());
 		
-		boardPanel = new BoardPanel(game.getBoard());
+		boardPanel = new BoardPanel(game.getBoard(), this);
 		cardPanel = new CardPanel();
 		statusPanel = new StatusPanel(game.getNumPlayers());
 		
@@ -136,7 +145,9 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	public void propertyChange(IPropertyChangeEvent pce) {
 		if (pce instanceof HealthChangeEvent) {
 			HealthChangeEvent hce = (HealthChangeEvent) pce;
-			statusPanel.setHealth(hce.getRobotNum(), hce.getHealth());
+			enqueueAnimation(new HealthChangeAnimation(statusPanel, hce.getRobotNum(), hce.getHealth()));
+		} else if (pce instanceof ProgrammingPhaseBeginEvent) {
+			playAllAnimations();
 		} else if (pce instanceof GameWinEvent) {
 			GameWinEvent gwe = (GameWinEvent) pce;
 			displayWinScreen(gwe.getWinningPlayerNum());
@@ -144,5 +155,87 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			boardPanel.propertyChange(pce);
 		}
 		
+	}
+	
+	public void enqueueAnimation(Animation a) {
+		animationQueue.add(a);
+	}
+	
+	/**
+	 * This method dequeues an animation from animationQueue, and creates a new thread (SwingWorker) to play this animation. Once the thread
+	 * is finished, this method is called again, and the process repeats until the queue is empty.
+	 * 
+	 * The worker thread uses SwingUtilities.invokeLater to tell the Event Dispatch Thread to call establishNextFrame on the Animation.
+	 * Then, it sleeps long enough to maintain 60 frames per second, and repeats this as many times as the animation requires,
+	 * given by the getNumFrames method.
+	 * 
+	 * When the thread is done executing, the done method, which executes in the Event Dispatch Thread, calls this method recursively
+	 * 
+	 * All of this is done because recommendations state that sleeps should never be done on the Event Dispatch Thread, but also that
+	 * GUI updates should always be done on this thread. Moreover, we tried making the Event Dispatch Thread sleep, and ran into
+	 * rendering glitches.
+	 */
+	public void playAllAnimations() {
+		if (animationQueue.size() != 0) {
+			Animation animation = animationQueue.remove();
+			animation.initializeAnimation();
+			
+			int frames = animation.getNumFrames();
+			System.out.println("Playing animation " + animation.getClass());
+			System.out.println("Running for " + frames + " frames");
+			
+//			final Timer timer = new Timer(1000 / Animation.FRAMES_PER_SECOND, null);
+//			ActionListener performer = new ActionListener() {
+//				private int currentFrame = 0;
+//
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+//					if (currentFrame < frames) {
+//						currentFrame++;
+//						animation.establishNextFrame();
+//						repaint();
+//					} else if (currentFrame == frames) {
+//						System.out.println("finishing thread for " + animation.getClass());
+//						animation.finalize();
+//						System.out.println("Animation " + animation.getClass() + " finalized");
+//						repaint();
+//						timer.stop();
+//						playAllAnimations();
+//					}
+//				}
+//			};
+//			timer.addActionListener(performer);
+//			timer.start();
+				
+			
+			
+			
+			new SwingWorker<Void, Void>() {
+				@Override
+				public Void doInBackground() {
+					for (int i = 0; i < frames; i++) {
+						try {
+							SwingUtilities.invokeLater(() -> {
+								animation.establishNextFrame();
+								repaint();
+							});
+							Thread.sleep(1000 / Animation.FRAMES_PER_SECOND);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					SwingUtilities.invokeLater(() -> {
+						System.out.println("finishing thread for " + animation.getClass());
+						System.out.flush();
+						animation.finalizeAnimation();
+						repaint();
+						playAllAnimations();
+					});
+					return null;
+				}
+			}.execute();
+		} else {
+			System.out.println("Animations finished");
+		}
 	}
 }

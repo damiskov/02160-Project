@@ -25,7 +25,6 @@ public class Fire extends EnvironmentElement{
 			int y_c = getP().getY();
 			int newX = x_c + (int)(Math.random() * 3) -1;
 			int newY = y_c + (int)(Math.random() * 3) -1;
-	
 			
 			getP().setX(newX); 
 			getP().setY(newY);

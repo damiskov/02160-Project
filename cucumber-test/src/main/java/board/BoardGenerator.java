@@ -1,9 +1,6 @@
 package board;
 import java.util.Random;
 
-import environment_elements.*;
-import piece_basics.EnvironmentElement;
-import piece_basics.Orientation;
 import piece_basics.Robot;
 import property_changes.PropertyChangeSupport;
 
