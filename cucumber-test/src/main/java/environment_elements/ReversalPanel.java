@@ -9,7 +9,6 @@ import cards.Program;
 public class ReversalPanel extends EnvironmentElement {
 
 	public static final String ID = "reversal_panel";
-	//public ArrayList<Card> newProg = new ArrayList<Card>();
 	public Program newProg = new Program();
 
 	@Override
@@ -17,17 +16,19 @@ public class ReversalPanel extends EnvironmentElement {
 		return ID;
 	}
 	
+	//performRegisterAction implements the game functionality of the obstacle
 	@Override
 	public void performRegisterAction() {
-		if (board.hasRobotAt(calculatePosition())) {
-			Program program = board.getRobotAt(calculatePosition()).getProgram();
+		if (board.hasRobotAt(calculatePosition())) { //if there is a robot on the panel
+			Program program = board.getRobotAt(calculatePosition()).getProgram(); //get the robot's program
 			int programLength = program.getCardList().size();
 			
+			//iterate through the program and create a new program with the opposite card of each card in the program
 			for (int i = 0; i < programLength; i++) {
 				newProg.getCardList().add(program.getCardList().get(i).getOppositeCard());
 			}
 			System.out.println(board.getRobotAt(calculatePosition()) + " got the moves in its program reversed");
-			board.getRobotAt(calculatePosition()).setProgram(newProg.getCardList());
+			board.getRobotAt(calculatePosition()).setProgram(newProg.getCardList()); //set the robot's program to be the reversed program
 		}
 
 	}

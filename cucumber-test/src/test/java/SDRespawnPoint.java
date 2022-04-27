@@ -43,6 +43,11 @@ public class SDRespawnPoint {
 	public void the_second_robot_having_its_respawn_point_set_to_the_second_respawn_point() {
 	    context.robot2.setRespawnPoint(context.respawnPoint2);
 	}
+	
+	@Given("the second robot having its respawn point set to the respawn point")
+	public void the_second_robot_having_its_respawn_point_set_to_the_respawn_point() {
+	    context.robot2.setRespawnPoint(context.respawnPoint);
+	}
 
 	@Then("the robot is back at max health")
 	public void the_robot_is_back_at_max_health() {

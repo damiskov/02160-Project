@@ -9,13 +9,14 @@ public class Laser extends EnvironmentElement {
 	
 	public static final String ID = "laser";
 
+	//performRegisterAction implements the game functionality of the obstacle
 	@Override
 	public void performRegisterAction() {
-		Position p = calculatePosition();
-		if (board.hasRobotAt(p)) {
-			System.out.println(board.getRobotAt(p) + " got damaged by the laser");
+		//if it has a robot on the laser, damage the robot
+		if (board.hasRobotAt(calculatePosition())) {
+			System.out.println(board.getRobotAt(calculatePosition()) + " got damaged by the laser");
 			board.getRobotAt(calculatePosition()).takeDamage();
-			getPropertyChangeSupport().firePropertyChange(new ActivationEvent(p));
+			getPropertyChangeSupport().firePropertyChange(new ActivationEvent(calculatePosition()));
 		}
 	}
 
