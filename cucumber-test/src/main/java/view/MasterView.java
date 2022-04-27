@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import animations.Animation;
+import animations.HealthChangeAnimation;
 import board.Game;
 import board.Position;
 import controller.MasterController;
@@ -144,7 +145,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	public void propertyChange(IPropertyChangeEvent pce) {
 		if (pce instanceof HealthChangeEvent) {
 			HealthChangeEvent hce = (HealthChangeEvent) pce;
-			statusPanel.setHealth(hce.getRobotNum(), hce.getHealth());
+			enqueueAnimation(new HealthChangeAnimation(statusPanel, hce.getRobotNum(), hce.getHealth()));
 		} else if (pce instanceof ProgrammingPhaseBeginEvent) {
 			playAllAnimations();
 		} else if (pce instanceof GameWinEvent) {

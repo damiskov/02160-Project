@@ -204,13 +204,13 @@ public class Robot extends Piece {
 	public void heal() {
 		if (health < MAX_ROBOT_HEALTH) {
 			health++;
-			getPropertyChangeSupport().firePropertyChange(new HealthChangeEvent(health, robotNumber));
+			getPropertyChangeSupport().firePropertyChange(new HealthChangeEvent(robotNumber, health));
 		}
 	}
 	public void takeDamage() {
 		health--;
 		if (health == 0) reboot();
-		getPropertyChangeSupport().firePropertyChange(new HealthChangeEvent(health, robotNumber));
+		getPropertyChangeSupport().firePropertyChange(new HealthChangeEvent(robotNumber, health));
 	}
 	
 	public int getHealth() {

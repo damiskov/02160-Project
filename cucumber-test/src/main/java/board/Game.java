@@ -116,8 +116,8 @@ public class Game {
 		board.initialPlacement(new Robot(), 3, 0);
 		board.initialPlacement(new Robot(), 4, 0);
 		board.initialPlacement(new Robot(), 5, 0);
-		board.initialPlacement(new Robot(), 6, 0);
-		board.initialPlacement(new Robot(), 7, 0);
+		board.initialPlacement(new Robot(), 10, 0);
+		board.initialPlacement(new Robot(), 11, 0);
 		
 		board.initialPlacement(new ConveyorBelt(Orientation.RIGHT), 0, 1);
 		board.initialPlacement(new ConveyorBelt(Orientation.DOWN), 1, 1);
@@ -152,6 +152,12 @@ public class Game {
 		
 		r2.turnRight();
 		r2.move(1);
+		activateRegisterActors();
+		
+		r2.turnLeft();
+		r2.turnLeft();
+		r2.move(2);
+		r2.turnLeft();
 		activateRegisterActors();
 		
 		
