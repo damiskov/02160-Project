@@ -83,7 +83,7 @@ public class Robot extends Piece {
 			orientation = Orientation.DOWN;
 			break;
 		}
-		getPropertyChangeSupport().firePropertyChange(new RotationEvent(calculatePosition(), oldOrientation, orientation));
+		getPropertyChangeSupport().firePropertyChange(new RotationEvent(robotNumber, oldOrientation, orientation));
 	}
 	public void turnRight() {
 		Orientation oldOrientation = orientation;
@@ -101,7 +101,7 @@ public class Robot extends Piece {
 			orientation = Orientation.UP;
 			break;
 		}
-		getPropertyChangeSupport().firePropertyChange(new RotationEvent(calculatePosition(), oldOrientation, orientation));
+		getPropertyChangeSupport().firePropertyChange(new RotationEvent(robotNumber, oldOrientation, orientation));
 	}	
 	
 	

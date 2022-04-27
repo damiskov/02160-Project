@@ -15,6 +15,7 @@ import javax.swing.SwingWorker;
 
 import animations.SpriteActivationAnimation;
 import animations.SpriteMovementAnimation;
+import animations.SpriteRotationAnimation;
 import board.*;
 import environment_elements.Laser;
 import environment_elements.Pit;
@@ -188,56 +189,18 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void rotateSprite(RotationEvent re) {
-		System.out.println("turning");
 		
-		//Still dosent work, event needs to include which way the robot turns or figure out better from old - new
-		
-//		double degCurr = pci.getOrientationOld().getDegrees();
-		double degNew = re.getOrientationNew().getDegrees();
-//		double degDiff;
-//		if(((degCurr < degNew) || ((degNew==0) && (degCurr==270))) && !(degCurr == 0 && degNew == 270)) {
-//			degDiff = 90;
-//		} else {
-//			degDiff = -90;
-//		}
-		int degNewInt = (int) degNew;
-		Position p = re.getPos();
-		Sprite robotSprite = getRobotSpriteAtPosition(p);
-//		System.out.println(degCurr + " " + degNew + " " + degDiff);
-		
-		
-		
-		robotSprite.setRotation(degNewInt);
-		repaint();
-		
-
-//		new SwingWorker<Void, Void>() {
-//			@Override
-//			public Void doInBackground() {
-//				try {
-//					double deg = robotSprite.getRotation();
-//					for (int i = 0; i < 29; i++) {
-//						System.out.println("rotating");
-//						deg += degDiff/30;
-//						Thread.sleep(1000/60);
-//						int degInt = (int) deg;
-//						SwingUtilities.invokeLater(() -> {
-//							robotSprite.setRotation(degInt);
-//							repaint();
-//						});
-//					}
-//					SwingUtilities.invokeLater(() -> {
-//						robotSprite.setRotation(degNewInt);
-//						repaint();
-//					});
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				return null;
-//			}
-//			
-//		}.execute();
+		Sprite spriteToRotate = robotNumToSpriteMap.get(re.getRobotNum());
+		int diffAngle;
+		int degCurr = re.getOrientationOld().getDegrees();
+		int degNew = re.getOrientationNew().getDegrees();
+		if(((degCurr < degNew) || ((degNew==0) && (degCurr==270))) && !(degCurr == 0 && degNew == 270)) {
+			diffAngle = 90;
+		} else {
+			diffAngle = -90;
+		}
+		masterView.enqueueAnimation(new SpriteRotationAnimation(500, spriteToRotate, diffAngle));
+		System.out.println("Rotation animation enqueued");
 		
 	}
 	
