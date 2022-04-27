@@ -32,6 +32,7 @@ public class Sprite {
 	private void updateAffineTransform() {
 		affineTransform.setToTranslation(x, canvas.getHeight() - y - height);
 		affineTransform.rotate((Math.PI/180)*degrees, width/2, height/2);
+
 	}
 	
 	public int getX() {
@@ -61,7 +62,9 @@ public class Sprite {
 		updateAffineTransform();
 	}
 	
-	public void activate() {};
+	public void activate() {
+		
+	};
 
 	public void drawUsing(Graphics2D g2) {
 		g2.drawImage(image, affineTransform, null);

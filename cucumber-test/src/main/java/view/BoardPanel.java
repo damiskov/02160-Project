@@ -15,6 +15,7 @@ import javax.swing.SwingWorker;
 
 import animations.SpriteActivationAnimation;
 import animations.SpriteMovementAnimation;
+import animations.SpriteRobotLaserAnimation;
 import animations.SpriteRotationAnimation;
 import board.*;
 import environment_elements.Laser;
@@ -51,7 +52,7 @@ public class BoardPanel extends JPanel {
 	private Board board;
 	
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
-	private List<Sprite> robotLaserSpriteList = new ArrayList<>();
+	private List<ImageToggleSprite> robotLaserSpriteList = new ArrayList<>();
 	private List<Sprite> robotSpriteList = new ArrayList<>();
 	private Map<Integer, Sprite> robotNumToSpriteMap = new HashMap<>();
 
@@ -224,6 +225,7 @@ public class BoardPanel extends JPanel {
 		Position finishPosition = rle.getPosFinish();
 		Position rollingPosition = startingPosition;
 		System.out.println("s: " + startingPosition + "f: " + finishPosition);
+		
 		//horizontal laser
 		if(startingPosition.getY()==finishPosition.getY()) {	
 			//going right
@@ -239,7 +241,7 @@ public class BoardPanel extends JPanel {
 				addSprite(Orientation.LEFT, startingPosition, true);
 				while (rollingPosition.getX()>finishPosition.getX()+1){
 					rollingPosition.incrX(-1);
-					addSprite(Orientation.RIGHT, rollingPosition, false);
+					addSprite(Orientation.LEFT, rollingPosition, false);
 				}
 				addSprite(Orientation.RIGHT, finishPosition, true);
 			}
@@ -259,14 +261,13 @@ public class BoardPanel extends JPanel {
 				addSprite(Orientation.DOWN, startingPosition, true);
 				while (rollingPosition.getY()>finishPosition.getY()+1){
 					rollingPosition.incrY(-1);
-					addSprite(Orientation.UP, rollingPosition, false);
+					addSprite(Orientation.DOWN, rollingPosition, false);
 				}
 				addSprite(Orientation.UP, finishPosition, true);
 			}
-		} else {
-			System.out.println("Bruh something with the root laser went wrong");
-		} 
-		
+		}  
+		masterView.enqueueAnimation(new SpriteRobotLaserAnimation(500, robotLaserSpriteList, cellWidth));
+		//robotLaserSpriteList.clear();
 		
 		
 	}

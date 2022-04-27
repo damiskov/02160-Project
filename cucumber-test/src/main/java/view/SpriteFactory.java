@@ -49,19 +49,21 @@ public class SpriteFactory {
 		}
 	}
 	
-	public static Sprite getLaserSprite(Orientation orientation, Position position, int cellSize, BoardPanel canvas, boolean endCap) {
+	public static ImageToggleSprite getLaserSprite(Orientation orientation, Position position, int cellSize, BoardPanel canvas, boolean endCap) {
 		int x = position.getX()*cellSize;
 		int y = position.getY()*cellSize;
-		int angle;
-		String filepath;
+		
+		Image defaultImageMid = ImageUtils.scaledImage("images/empty_1.png", cellSize, cellSize);
+		Image activeImageMid = ImageUtils.scaledImage("images/laser_mid.png", cellSize, cellSize);
+		Image defaultImageEnd = ImageUtils.scaledImage("images/empty_2.png", cellSize, cellSize);
+		Image activeImageEnd = ImageUtils.scaledImage("images/laser_end.png", cellSize, cellSize);
+		
 		
 		if(endCap) {
-			filepath = "images/laser_end.png";
+			return new ImageToggleSprite(defaultImageEnd, activeImageEnd, x, y, orientation.getDegrees(), canvas);
 		} else {
-			filepath = "images/laser_mid.png";
+			return new ImageToggleSprite(defaultImageMid, activeImageMid, x, y, orientation.getDegrees(), canvas);
 		}
-		
-		return new Sprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, orientation.getDegrees(), canvas);
 		
 	}
 	

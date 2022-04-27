@@ -108,13 +108,13 @@ public class Game {
 	// temporary
 	public void testPlacements() {
 		Robot r1 = new Robot();
-		board.initialPlacement(r1, 9, 11);
+		board.initialPlacement(r1, 5, 5);
 		Robot r2 = new Robot();
-		board.initialPlacement(r2, 11, 9);
+		board.initialPlacement(r2, 7, 5);
 		Robot r3 = new Robot();
-		board.initialPlacement(r3, 9, 7);
+		board.initialPlacement(r3, 8, 5);
 		Robot r4 = new Robot();
-		board.initialPlacement(r4, 9, 9);
+		board.initialPlacement(r4, 9, 8);
 		//board.initialPlacement(new Robot(), 4, 0);
 		//board.initialPlacement(new Robot(), 5, 0);
 		//board.initialPlacement(new Robot(), 6, 0);
@@ -130,7 +130,7 @@ public class Game {
 		
 		board.initialPlacement(new ChainingPanel(), 0, 3);
 		board.initialPlacement(new FinalCheckpoint(1), 1, 3);
-		board.initialPlacement(new Fire(), 2, 3);
+		//board.initialPlacement(new Fire(), 2, 3);
 		board.initialPlacement(new HealthStation(), 3, 3);
 		board.initialPlacement(new OilSpill(), 4, 3);
 		board.initialPlacement(new Pit(), 5, 3);
@@ -141,51 +141,28 @@ public class Game {
 		board.initialPlacement(new Teleporter(), 8, 3);
 		board.initialPlacement(new Wall(), 9, 3);
 		
-//		r1.move(1);
+		r1.move(1);
+		r2.move(1);
+		r3.move(1);
+		r4.turnLeft();
+		//activateRegisterActors();
 		
-		r1.turnLeft();
-		r1.turnLeft();
-
-		r4.turnLeft();
-		r4.turnLeft();
-	//	r2.move(1);
-//		r1.move(1);
-		r2.turnLeft();
-		r3.turnLeft();
-	
+		r1.turnRight();
+		r3.move(1);
+		r4.move(1);
+		//activateRegisterActors();
+		
+		r4.move(1);
+		//activateRegisterActors();
+		
+		r4.turnLeft();		
 		activateRegisterActors();
-//		r1.move(1);
+	
+
 		propertyChangeSupport.firePropertyChange(new ProgrammingPhaseBeginEvent());
 		
-//		r2.turnRight();
-//		r2.move(1);
 		
-//		r1.move(1);
-//		r1.turnRight();
-//		r1.move(1);
-//		r1.turnRight();
-//		r1.move(1);
-//		r1.turnRight();
-//		r1.move(1);
-//		r1.turnRight();
-		
-	
-//		activateRegisterActors();
-//		r2.move(2);
-//		r2.turnLeft();
-//		r2.move(-2);
-//		r2.turnLeft();
-//		r2.move(-1);
-//		r2.turnLeft();
-//		r2.move(-1);
-//		r2.turnLeft();
-//		r2.move(-1);
-//		r2.turnLeft();
-//		r2.move(-1);
-		
-		//r1.move(1);
-		//r1.turnLeft();
-		//r1.move(1);
+
 		
 		
 		
