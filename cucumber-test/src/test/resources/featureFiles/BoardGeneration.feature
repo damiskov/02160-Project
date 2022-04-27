@@ -21,3 +21,10 @@ Scenario: Generate a hard board
   And a hard difficulty 
   When a board is generated
   Then a hard board is generated
+  
+  #only for coverage
+Scenario: Generating a custom board
+  Given a board
+  When a name is set
+  Then the board has its name set
+
