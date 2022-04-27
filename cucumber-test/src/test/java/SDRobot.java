@@ -270,5 +270,12 @@ public class SDRobot {
 	    }
 	    assertEquals(o, context.robot.getOrientation());
 	}
+	
+	@Then("the robot is at five, five")
+	public void the_robot_is_at_five_five() {
+	    assertEquals(context.robot.getX(), 5);
+	    assertEquals(context.robot.getY(), 5);
+
+	}
 
 }

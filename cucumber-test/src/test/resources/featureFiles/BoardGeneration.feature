@@ -37,4 +37,10 @@ Scenario: Naming a custom board
   Given a board
   When a name is set
   Then the board has its name set
+  
+#only for coverage
+Scenario: Checking robot on the board
+  Given a game with an empty board
+  When a robot on the board at (5, 5)
+  Then the robot is at five, five
 

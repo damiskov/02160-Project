@@ -7,14 +7,14 @@ import property_changes.TeleportEvent;
 
 public class Teleporter extends EnvironmentElement {
 	private Teleporter receiving;
-	private boolean Sending;
+	private boolean sending;
 	
 	public void setSending(boolean isSending) {
-		this.Sending = isSending;
+		this.sending = isSending;
 	}
 	
-	public boolean IsSending() {
-		return this.Sending;
+	public boolean isSending() {
+		return this.sending;
 	}
 	
 	public static final String ID = "teleporter";
@@ -32,7 +32,7 @@ public class Teleporter extends EnvironmentElement {
 	@Override
 	public void performRegisterAction() {
 		Position p = calculatePosition();
-		if (board.hasRobotAt(p) && IsSending()) { //if a robot is on a sending teleporter
+		if (board.hasRobotAt(p) && isSending()) { //if a robot is on a sending teleporter
 			Robot r = board.getRobotAt(p);
 			Position receivingP = receiving.calculatePosition();
 			
