@@ -28,11 +28,11 @@ public class CardFactory
         {
             return new BackUp();
         }
-        else if (action.equals("uTurn"))
+        else /*if (action.equals("uTurn"))*/
         {
             return new UTurn();
             
         }
-		return null;
+		//return null;
     }
 }

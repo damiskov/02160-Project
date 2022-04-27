@@ -17,7 +17,7 @@ public class ChainingPanel extends EnvironmentElement {
 	
 	public static final String ID = "chaining_panel";
 
-	//getter and setter for active
+	
 	public boolean isActive() {
 		return this.active;
 	}
@@ -29,7 +29,8 @@ public class ChainingPanel extends EnvironmentElement {
 		this.active = active;
 	}
 
-	//checks for chainable robots on the board
+	/*checks for chainable robots on the board, needed to know if the robot needs 
+	to get chained to another one*/
 	public boolean chainableRobots(List<Piece> rs) {
 		chainableOnBoard = false;
 		for (Piece p : rs) { 
@@ -56,10 +57,10 @@ public class ChainingPanel extends EnvironmentElement {
 		}
 	}
 	
-	//performRegisterAction implements the game functionality of the obstacle
+	
 	@Override
 	public void performRegisterAction() {
-		if (board.hasRobotAt(calculatePosition())) { //if there is a robot on the panel
+		if (board.hasRobotAt(calculatePosition())) { 
 			if(chainableRobots(board.getPieceLists().get(Robot.ID)) && isActive() && //if there are chainable robots on the board
 				!(board.getRobotAt(calculatePosition()).isChainable())) { //and the robot is not chainbale, and is on an active panel
 				

@@ -8,11 +8,10 @@ public class Fire extends EnvironmentElement{
 	public static final String ID = "fire";
 	private int spreadCounter = 0;
 	
-	//performRegisterAction implements the game functionality of the obstacle
 	@Override
 	public void performRegisterAction() {
 		setP(calculatePosition());
-		//if there is a robot on the board, damage it
+		
 		if(board.hasRobotAt(getP())) {
 			System.out.println(board.getRobotAt(getP()) + " got damaged by the fire");
 			board.getRobotAt(getP()).takeDamage();
@@ -31,12 +30,13 @@ public class Fire extends EnvironmentElement{
 			getP().setX(newX); 
 			getP().setY(newY);
 	
-			//if the new position does not have an environment element on it
+			/*creates new fire and makes not be able to spread 
+			so we don't have an infinitely spreading fire*/ 
 			if(!(board.hasEElementAt(getP()))) {
-				Fire newFire = new Fire(); //create new fire, 
-				newFire.setSpreadCounter(5); //make the new fire unable to spread
-				board.initialPlacement(newFire, getP()); //place the fire
-				incrementSpreadCounter(); //increment the spread counter of the old fire
+				Fire newFire = new Fire(); 
+				newFire.setSpreadCounter(5); 
+				board.initialPlacement(newFire, getP()); 
+				incrementSpreadCounter(); 
 			}
 
 			
@@ -45,7 +45,7 @@ public class Fire extends EnvironmentElement{
 
 	}
 
-	//setter and getter for p
+	
 	public void setP(Position pos) {
 		this.p = pos;
 	}
@@ -54,12 +54,12 @@ public class Fire extends EnvironmentElement{
 		return this.p;
 	}
 	
-	//increments the spread counter
+	
 	public void incrementSpreadCounter() {
 		spreadCounter ++;
 	}
 
-	//setter and getter for spread counter
+	
 	public void setSpreadCounter(int spreadCounter) {
 		this.spreadCounter = spreadCounter;
 	}
