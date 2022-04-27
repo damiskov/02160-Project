@@ -116,15 +116,16 @@ public class Robot extends Piece {
 			shiftedNextRobotPos = new Position(posToMove.getX(), posToMove.getY() + increment);
 		}
 		//check to be shifted 2nd robot position
-		if (board.hasEElementAt(shiftedNextRobotPos) && (board.getEElementAt(shiftedNextRobotPos) instanceof Wall)) {
+		if (board.hasEElementAt(shiftedNextRobotPos) && (board.getEElementAt(shiftedNextRobotPos).isWallCollsion())) {
 			return true;
 		}
 		return false;
 	}
 	
+	
 	private void tryMoveRobot(Position posToMoveTo, int spaces) {
 		System.out.println(board.hasRobotAt(posToMoveTo));
-		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) || ((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
+		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo).isWallCollsion()))) || ((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
 			getPropertyChangeSupport().firePropertyChange(new MovementEvent(calculatePosition(), posToMoveTo));
 			board.setPosition(this, posToMoveTo);
 		} else if (board.hasRobotAt(posToMoveTo) && !(hasWallNextRobotShiftPosition(posToMoveTo, spaces))){

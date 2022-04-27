@@ -20,6 +20,9 @@ public abstract class EnvironmentElement extends Piece {
 	public boolean isLaserBlocking() {
 		return false;
 	}
+	public boolean isWallCollsion() {
+		return false;
+	}
 	
 
 }
