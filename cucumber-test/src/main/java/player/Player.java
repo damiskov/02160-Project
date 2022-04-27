@@ -1,10 +1,9 @@
 package player;
-import piece_basics.Robot;
-
 import java.util.ArrayList;
 import java.util.Stack;
 
 import cards.*;
+import piece_basics.Robot;
 
 public class Player {
 	private Robot myRobot;

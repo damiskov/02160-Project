@@ -1,6 +1,7 @@
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import player.Player;
 import property_changes.PropertyChangeSupport;
 
 import static org.junit.Assert.assertEquals;
@@ -23,6 +24,17 @@ public class SDGame {
 	    game.setBoard(board);
 	    context.game = game;
 	    context.board = board;
+	}
+	
+	@Given("a game with one player")
+	public void a_game_with_one_player() {
+		PropertyChangeSupport pcs = new PropertyChangeSupport();
+		Game game = new Game(pcs, 1);
+		game.setPlayers(1);
+		Player p = game.getPlayers()[0];
+		context.game = game;
+		context.player = p;
+		
 	}
 	
 	@Given("a game with a {int} x {int} board")
@@ -102,4 +114,10 @@ public class SDGame {
 	public void the_game_has_a_hard_board() {
 	    assertEquals(context.game.getBoard().getDifficulty().getLevel(), 3);
 	}
+	
+	@When("the game deals the cards")
+		public void the_game_deals_the_cards(){
+			context.game.dealCards();
+	}
+	
 }

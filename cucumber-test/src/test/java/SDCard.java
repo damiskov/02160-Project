@@ -1,8 +1,6 @@
 import io.cucumber.java.en.*;
 import piece_basics.Orientation;
-
 import piece_basics.Robot;
-
 
 import static org.junit.Assert.assertEquals;
 

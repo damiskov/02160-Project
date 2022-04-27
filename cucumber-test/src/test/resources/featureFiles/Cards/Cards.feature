@@ -201,8 +201,4 @@ Feature: Programming Cards
     When a move backwards three command is executed
     Then the robot is at (5, 2) facing "up"
     
- # getNum
- 
-  #Scenario: Finding the first card to execute
-  #	Given a 
-  #	Then    
+    

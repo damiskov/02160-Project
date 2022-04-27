@@ -59,7 +59,9 @@ public class Game {
 		board = new Board(12, 12, pcs);
 	} 
 	
-	
+	public void setDeck(Deck d) {
+		this.deck = d;
+	}
 	public void setDifficulty(Difficulty d) {
 		this.difficulty = d;
 		

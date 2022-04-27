@@ -2,9 +2,9 @@ package environment_elements;
 
 import java.util.ArrayList;
 
-import piece_basics.EnvironmentElement;
 import cards.Card;
 import cards.Program;
+import piece_basics.EnvironmentElement;
 
 public class ReversalPanel extends EnvironmentElement {
 

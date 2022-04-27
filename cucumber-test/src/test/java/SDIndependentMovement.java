@@ -1,8 +1,9 @@
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import piece_basics.Robot;
 import piece_basics.Orientation;
+import piece_basics.Robot;
+
 import static org.junit.Assert.*;
 import board.Board;
 import cards.BackUp;

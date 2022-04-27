@@ -16,6 +16,7 @@ import property_changes.RobotLaserEvent;
 import property_changes.RotationEvent;
 import property_changes.TeleportEvent;
 import cards.Program;
+
 import java.lang.Math;  
 
 public class Robot extends Piece {
