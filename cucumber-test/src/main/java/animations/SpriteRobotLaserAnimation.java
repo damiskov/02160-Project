@@ -1,11 +1,9 @@
 package animations;
 
-import java.awt.Canvas;
 import java.util.List;
 
 import board.Position;
 import piece_basics.Orientation;
-import utils.ImageUtils;
 import view.BoardPanel;
 import view.ImageToggleSprite;
 import view.SpriteFactory;
@@ -33,95 +31,103 @@ public class SpriteRobotLaserAnimation extends Animation {
 	@Override
 	public void initializeAnimation() {
 		
+		// make list of sprites for the laser
+		constructLaserSpriteList(); 
 		
-		if(startingPosition.getY()==finishPosition.getY()) {	
-			//going right
-			if(startingPosition.getX()<finishPosition.getX()) {
-				robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.RIGHT, startingPosition, cellWidth, canvasBP, true));
-				//System.out.println(orientation + " " + p);
-				canvasBP.repaint();
-				while (rollingPosition.getX()<finishPosition.getX()-1){
-					rollingPosition.incrX(1);
-					robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.RIGHT, rollingPosition, cellWidth, canvasBP, false));
-					//System.out.println(orientation + " " + p);
-					canvasBP.repaint();
-				}
-				robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.LEFT, finishPosition, cellWidth, canvasBP, true));
-				//System.out.println(orientation + " " + p);
-				canvasBP.repaint();
-			//going left
-			} else {
-				robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.LEFT, startingPosition, cellWidth, canvasBP, true));
-				//System.out.println(orientation + " " + p);
-				canvasBP.repaint();
-				while (rollingPosition.getX()>finishPosition.getX()+1){
-					rollingPosition.incrX(-1);
-					robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.LEFT, rollingPosition, cellWidth, canvasBP, false));
-					//System.out.println(orientation + " " + p);
-					canvasBP.repaint();
-				}
-				robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.RIGHT, finishPosition, cellWidth, canvasBP, true));
-				//System.out.println(orientation + " " + p);
-				canvasBP.repaint();
-			}
-			
-		//vertical laser
-		} else if(startingPosition.getX()==finishPosition.getX()) {
-			//going up
-			if(startingPosition.getY()-finishPosition.getY()<0) {
-				robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.UP, startingPosition, cellWidth, canvasBP, true));
-				//System.out.println(orientation + " " + p);
-				canvasBP.repaint();
-				while (rollingPosition.getY()<finishPosition.getY()-1){
-					rollingPosition.incrY(1);
-					robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.UP, rollingPosition, cellWidth, canvasBP, false));
-					//System.out.println(orientation + " " + p);
-					canvasBP.repaint();
-				}
-				robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.DOWN, finishPosition, cellWidth, canvasBP, true));
-				//System.out.println(orientation + " " + p);
-				canvasBP.repaint();
-			//going down
-			} else {
-				robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.DOWN, startingPosition, cellWidth, canvasBP, true));
-				//System.out.println(orientation + " " + p);
-				canvasBP.repaint();
-				while (rollingPosition.getY()>finishPosition.getY()+1){
-					rollingPosition.incrY(-1);
-					robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.DOWN, rollingPosition, cellWidth, canvasBP, false));
-					//System.out.println(orientation + " " + p);
-					canvasBP.repaint();
-				}
-				robotLaserSpriteList.add(SpriteFactory.getLaserSprite(Orientation.UP, finishPosition, cellWidth, canvasBP, true));
-				//System.out.println(orientation + " " + p);
-				canvasBP.repaint();
-			}
-		} 
-		
-		
+		// make them visible
 		for(ImageToggleSprite toggleSprite : robotLaserSpriteList) {
 			toggleSprite.activate();
 		}
-	
-
 	}
-
+	
 	@Override
 	public void establishNextFrame() {
 		
-		//do nothing
+		// display the laser on screen for a while
 		
 	}
 
 	@Override
 	public void finalizeAnimation() {
+		// make them invisible
 		for(ImageToggleSprite toggleSprite : robotLaserSpriteList) {
 			toggleSprite.activate();
-			
-			
 		}
+		// clear our list
 		robotLaserSpriteList.clear();
+	}
+
+	private void constructLaserSpriteList() {
+		// This method gets fed two positions [Pos1] -> [Pos2] and makes a laser beam between them
+		//
+		// [laser end at Pos1] [laser mid-section] ... [laser mid-section] [laser end at Pos2]
+		//  make laser start          while loop makes mid sections           make laser end
+		//
+		// There is also a fair bit of logic needed to figure out how to rotate each image so they line up 
 		
+		if(startingPosition.getY()==finishPosition.getY()) {	
+			
+			//going right
+			if(startingPosition.getX()<finishPosition.getX()) {
+				addLaser(Orientation.RIGHT, startingPosition, cellWidth, canvasBP, true);
+				canvasBP.repaint();
+				
+				while (rollingPosition.getX()<finishPosition.getX()-1){
+					rollingPosition.incrX(1);
+					addLaser(Orientation.RIGHT, rollingPosition, cellWidth, canvasBP, false);
+					canvasBP.repaint();
+				}
+				addLaser(Orientation.LEFT, finishPosition, cellWidth, canvasBP, true);
+				canvasBP.repaint();
+				
+			//going left
+			} else {
+				addLaser(Orientation.LEFT, startingPosition, cellWidth, canvasBP, true);
+				canvasBP.repaint();
+				
+				while (rollingPosition.getX()>finishPosition.getX()+1){
+					rollingPosition.incrX(-1);
+					addLaser(Orientation.LEFT, rollingPosition, cellWidth, canvasBP, false);
+					canvasBP.repaint();
+				}
+				addLaser(Orientation.RIGHT, finishPosition, cellWidth, canvasBP, true);
+				canvasBP.repaint();
+			}
+			
+		//vertical laser
+		} else if(startingPosition.getX()==finishPosition.getX()) {
+			
+			//going up
+			if(startingPosition.getY()-finishPosition.getY()<0) {
+				addLaser(Orientation.UP, startingPosition, cellWidth, canvasBP, true);
+				canvasBP.repaint();
+				
+				while (rollingPosition.getY()<finishPosition.getY()-1){
+					rollingPosition.incrY(1);
+					addLaser(Orientation.UP, rollingPosition, cellWidth, canvasBP, false);
+					canvasBP.repaint();
+				}
+				addLaser(Orientation.DOWN, finishPosition, cellWidth, canvasBP, true);
+				canvasBP.repaint();
+				
+			//going down
+			} else {
+				addLaser(Orientation.DOWN, startingPosition, cellWidth, canvasBP, true);
+				canvasBP.repaint();
+				
+				while (rollingPosition.getY()>finishPosition.getY()+1){
+					rollingPosition.incrY(-1);
+					addLaser(Orientation.DOWN, rollingPosition, cellWidth, canvasBP, false);
+					canvasBP.repaint();
+				}
+				addLaser(Orientation.UP, finishPosition, cellWidth, canvasBP, true);
+				canvasBP.repaint();
+			}
+		}
+	}
+	
+	private void addLaser(Orientation orientation, Position position, int cellWidth, BoardPanel canvasBP, boolean horizontal) {
+		robotLaserSpriteList.add(SpriteFactory.getLaserSprite(orientation, position, cellWidth, canvasBP, horizontal));
 	}
 
 }

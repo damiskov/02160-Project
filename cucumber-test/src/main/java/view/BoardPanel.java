@@ -207,18 +207,12 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void displayRobotLaser(RobotLaserEvent rle) {
-		System.out.println("rle sequence started");
 		Position startingPosition = rle.getPosStart();
-		Position finishPosition = rle.getPosFinish();
-		//Position rollingPosition = startingPosition;
-		System.out.println("s: " + startingPosition + "f: " + finishPosition);
+		Position finishPosition = rle.getPosFinish();	
+		//System.out.println("rle sequence started");
+		//System.out.println("Drawing laser: " + startingPosition + "->" + finishPosition);
 		
 		masterView.enqueueAnimation(new SpriteRobotLaserAnimation(500, startingPosition, finishPosition, this, robotLaserSpriteList, cellWidth));
-		//horizontal laser
-		 
-		
-		//robotLaserSpriteList.clear();
-		
-		
+	
 	}
 }
