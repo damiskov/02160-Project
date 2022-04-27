@@ -38,29 +38,11 @@ public class SDBoardGeneration {
 	    context.player2.setRobot(new Robot());
 	}
 
-	@Given("an easy difficulty")
-	public void an_easy_difficulty() {
-		context.d = new Difficulty(1);
-	}
 	
-	@Given("a medium difficulty")
-	public void a_medium_difficulty() {
-		context.d = new Difficulty(2);
-	}
-	
-	@Given("a hard difficulty")
-	public void a_hard_difficulty() {
-		context.d = new Difficulty(3);
-	}
 	
 	@Given("a BoardFactory")
 	public void a_BoardFactory() {
 		BoardFactory bf = new BoardFactory();
-	}
-	
-	@Given("a super hard difficulty")
-	public void a_super_hard_difficulty() {
-		context.d = new Difficulty(4);
 	}
 	
 	@When ("a board is generated")
