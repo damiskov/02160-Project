@@ -2,6 +2,8 @@ package environment_elements;
 import board.Position;
 import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
+import piece_basics.Robot;
+import property_changes.MovementEvent;
 
 public class ConveyorBelt extends EnvironmentElement {
 	
@@ -19,6 +21,7 @@ public class ConveyorBelt extends EnvironmentElement {
 		Position p = calculatePosition();
 		
 		if (board.hasRobotAt(p)) {
+			Robot robot = board.getRobotAt(p);
 			Position newP = calculatePosition();
 			
 			switch (orientation) {
@@ -37,6 +40,7 @@ public class ConveyorBelt extends EnvironmentElement {
 			}
 			
 			if (board.coordinateWithinBounds(newP) && !conveyorBlocking(newP)) {
+				getPropertyChangeSupport().firePropertyChange(new MovementEvent(robot.getRobotNumber(), newP.subtract(p)));
 				board.moveRobotFromTo(p, newP);
 			}
 		}
