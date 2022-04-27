@@ -1,7 +1,9 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import board.Board;
 import board.IBoard;
+import board.Position;
 import environment_elements.Gear;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -29,6 +31,12 @@ private Context context;
 	    }
 	    context.board.initialPlacement(g, int1, int2);
 	    context.gear = g;
+	}
+	
+	@Then("the environment element at \\({int}, {int}) is a counterclockwise gear")
+	public void the_environment_element_at_is_a_counterclockwise_gear(Integer int1, Integer int2) {
+	    assertTrue(context.board.getEElementAt(new Position(int1, int2)) instanceof Gear);
+		assertEquals(((Gear) context.board.getEElementAt(new Position(int1, int2))).isCounterClockwise(), true);
 	}
 	
 //	@Given("a gear pointing towards right")
