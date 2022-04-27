@@ -108,16 +108,17 @@ public class Game {
 	// temporary
 	public void testPlacements() {
 		Robot r1 = new Robot();
-		board.initialPlacement(r1, 0, 0);
+		board.initialPlacement(r1, 9, 11);
 		Robot r2 = new Robot();
-		board.initialPlacement(r2, 1, 0);
+		board.initialPlacement(r2, 11, 9);
 		Robot r3 = new Robot();
-		board.initialPlacement(r3, 2, 0);
-		board.initialPlacement(new Robot(), 3, 0);
-		board.initialPlacement(new Robot(), 4, 0);
-		board.initialPlacement(new Robot(), 5, 0);
-		board.initialPlacement(new Robot(), 6, 0);
-		board.initialPlacement(new Robot(), 7, 0);
+		board.initialPlacement(r3, 9, 7);
+		Robot r4 = new Robot();
+		board.initialPlacement(r4, 9, 9);
+		//board.initialPlacement(new Robot(), 4, 0);
+		//board.initialPlacement(new Robot(), 5, 0);
+		//board.initialPlacement(new Robot(), 6, 0);
+		//board.initialPlacement(new Robot(), 7, 0);
 		
 		board.initialPlacement(new ConveyorBelt(Orientation.RIGHT), 0, 1);
 		board.initialPlacement(new ConveyorBelt(Orientation.DOWN), 1, 1);
@@ -140,14 +141,20 @@ public class Game {
 		board.initialPlacement(new Teleporter(), 8, 3);
 		board.initialPlacement(new Wall(), 9, 3);
 		
-		r1.move(1);
-		r1.move(1);
-		r2.move(1);
-		r1.move(1);
-		r2.turnRight();
+//		r1.move(1);
+		
+		r1.turnLeft();
+		r1.turnLeft();
+
+		r4.turnLeft();
+		r4.turnLeft();
+	//	r2.move(1);
+//		r1.move(1);
+		r2.turnLeft();
 		r3.turnLeft();
+	
 		activateRegisterActors();
-		r1.move(1);
+//		r1.move(1);
 		propertyChangeSupport.firePropertyChange(new ProgrammingPhaseBeginEvent());
 		
 //		r2.turnRight();

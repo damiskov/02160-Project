@@ -2,10 +2,13 @@ package view;
 
 import java.awt.Image;
 
+import board.Board;
+import board.Position;
 import environment_elements.ChainingPanel;
 import environment_elements.ConveyorBelt;
 import environment_elements.Gear;
 import piece_basics.EnvironmentElement;
+import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import utils.ImageUtils;
@@ -45,4 +48,22 @@ public class SpriteFactory {
 			throw new IllegalArgumentException("Piece must be either a Robot or an EnvironmentElement");
 		}
 	}
+	
+	public static Sprite getLaserSprite(Orientation orientation, Position position, int cellSize, BoardPanel canvas, boolean endCap) {
+		int x = position.getX()*cellSize;
+		int y = position.getY()*cellSize;
+		int angle;
+		String filepath;
+		
+		if(endCap) {
+			filepath = "images/laser_end.png";
+		} else {
+			filepath = "images/laser_mid.png";
+		}
+		
+		return new Sprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, orientation.getDegrees(), canvas);
+		
+	}
+	
+	
 }
