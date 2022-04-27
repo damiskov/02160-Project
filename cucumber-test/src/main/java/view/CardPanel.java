@@ -29,6 +29,7 @@ public class CardPanel extends JPanel {
 	private static final long serialVersionUID = 4888662845263342484L;
 	
 	MasterView mv;
+	MasterController mc;
 	
 	int card_width;
 	int card_height;
@@ -40,11 +41,20 @@ public class CardPanel extends JPanel {
 
 	private List<CardSelectionPanel> hand = new ArrayList<>();
 	private List<CardSelectionPanel> orderedCards = new ArrayList<>();
+	
+	
 	JButton assignCardsButton;
 	JButton button_b;
 
 	public CardPanel(MasterView mv, MasterController mc) {
 		
+		// Gets cards from player hand and creates card panel list with becomes card panel 
+		
+		// setCardPanel();
+		
+		// Asssigning attributes
+		
+		this.mc = mc;
 		this.mv = mv;
 		
 //		assignCardsButton = new AssignCardsButton(mv, Color.BLUE, mc);
@@ -63,7 +73,7 @@ public class CardPanel extends JPanel {
 				
 				for (CardSelectionPanel c : orderedCards)
 				{
-					cards.add(CardFactory.getCard(c.getCardID()));
+					// cards.add(CardFactory.getCard(c.getCardID()));
 				}
 				
 				mc.assignCards(cards);
@@ -137,6 +147,18 @@ public class CardPanel extends JPanel {
 
 			});
 		}
+	}
+	
+	
+	
+	private void setCardPanel()
+	{
+		ArrayList<Card> cardHand = mc.getGame().getPlayers()[mc.getCurrentPlayer()].getHand().getCardList();
+		for (Card c : cardHand)
+		{
+			CardSelectionPanel b = new CardSelectionPanel(c.getAction());
+			hand.add(b);
+		} 
 	}
 	
 

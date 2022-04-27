@@ -1,10 +1,9 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.List;
+
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +18,10 @@ import property_changes.IPropertyChangeEvent;
 import property_changes.PropertyChangeListener;
 import utils.GridBagLayoutUtils;
 
+
+
+
+
 public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	private static final long serialVersionUID = 3L;
@@ -32,7 +35,6 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	// for testing
 	private JButton blackScreenButton;
 	private JButton winScreenButton;
-	private JButton assignCardsButton;
 	//
 	
 	private BlackScreen blackScreen;
@@ -60,9 +62,6 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		winScreenButton = new JButton("Move robot 2 forward");
 		winScreenButton.addActionListener(e -> game.getBoard().getRobotAt(new Position(0, 3)).move(1));
 		// Button for assign programs to robots
-//		assignCardsButton = new AssignCardsButton(this, Color.BLUE, controller);
-		assignCardsButton = new AssignCardsButton(this, Color.BLUE, controller);
-		//
 		
 		addElements();
 		pack();

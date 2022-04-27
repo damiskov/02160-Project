@@ -30,5 +30,10 @@ public class Card
     public Card getOppositeCard() {
     	return new Card("something");
     }
+    
+    public String getAction()
+    {
+    	return action;
+    }
 
 }

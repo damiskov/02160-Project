@@ -53,6 +53,12 @@ public class MasterController {
 		return currentPlayer;
 	}
 	
+	
+	public Game getGame()
+	{
+		return game;
+	}
+
 
 	
 

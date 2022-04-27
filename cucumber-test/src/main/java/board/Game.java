@@ -237,8 +237,8 @@ public class Game {
 	 */
 	
 	public void activationPhase() {
-		ArrayList order = new ArrayList();
-		ArrayList orderNum = new ArrayList();
+		ArrayList<Card> order = new ArrayList<Card>();
+		ArrayList<Integer> orderNum = new ArrayList<Integer>();
 		
 		//iterates through the programs (5 because 5 cards)
 		for(int j = 0; j < 5; j++) {
