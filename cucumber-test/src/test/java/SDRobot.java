@@ -208,7 +208,7 @@ public class SDRobot {
 		context.robot.move(int1);
 	}
 	
-	@When("one robot reboots")
+	@When("the first robot reboots")
 	public void one_robot_reboots() {
 	    context.robot.reboot();
 	}

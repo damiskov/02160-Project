@@ -6,12 +6,11 @@ import piece_basics.EnvironmentElement;
 public class OilSpill extends EnvironmentElement {
 
 	public static final String ID = "oil_spill";
-
 	private Position p; 
 	
 	@Override
 	public void performRegisterAction() {
-		if (board.hasRobotAt(calculatePosition())) {
+		if (board.hasRobotAt(calculatePosition())) { 
 			setP(calculatePosition());
 			board.removeEElement(getP()); 
 			board.initialPlacement(new Fire(), getP()); 
@@ -20,6 +19,7 @@ public class OilSpill extends EnvironmentElement {
 			board.getRobotAt(getP()).takeDamage(); 
 		}
 	}
+
 
 	public void setP(Position pos) {
 		this.p = pos;
