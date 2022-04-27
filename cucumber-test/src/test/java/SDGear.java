@@ -1,15 +1,10 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import board.Board;
-import board.IBoard;
 import board.Position;
 import environment_elements.Gear;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import piece_basics.Orientation;
-import piece_basics.Robot;
 
 public class SDGear {
 private Context context;
