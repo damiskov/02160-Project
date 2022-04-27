@@ -177,9 +177,37 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	public void playAllAnimations() {
 		if (animationQueue.size() != 0) {
 			Animation animation = animationQueue.remove();
-			animation.initialize();
+			animation.initializeAnimation();
 			
 			int frames = animation.getNumFrames();
+			System.out.println("Playing animation " + animation.getClass());
+			
+//			final Timer timer = new Timer(1000 / Animation.FRAMES_PER_SECOND, null);
+//			ActionListener performer = new ActionListener() {
+//				private int currentFrame = 0;
+//
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+//					if (currentFrame < frames) {
+//						currentFrame++;
+//						animation.establishNextFrame();
+//						repaint();
+//					} else if (currentFrame == frames) {
+//						System.out.println("finishing thread for " + animation.getClass());
+//						animation.finalize();
+//						System.out.println("Animation " + animation.getClass() + " finalized");
+//						repaint();
+//						timer.stop();
+//						playAllAnimations();
+//					}
+//				}
+//			};
+//			timer.addActionListener(performer);
+//			timer.start();
+				
+			
+			
+			
 			new SwingWorker<Void, Void>() {
 				@Override
 				public Void doInBackground() {
@@ -194,14 +222,14 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 							e.printStackTrace();
 						}
 					}
+					SwingUtilities.invokeLater(() -> {
+						System.out.println("finishing thread for " + animation.getClass());
+						System.out.flush();
+						animation.finalizeAnimation();
+						repaint();
+						playAllAnimations();
+					});
 					return null;
-				}
-
-				@Override
-				public void done() {
-					animation.finalize();
-					repaint();
-					playAllAnimations();
 				}
 			}.execute();
 		} else {

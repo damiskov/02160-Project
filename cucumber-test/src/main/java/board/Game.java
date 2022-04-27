@@ -108,7 +108,7 @@ public class Game {
 	// temporary
 	public void testPlacements() {
 		Robot r1 = new Robot();
-		board.initialPlacement(r1, 0, 0);
+		board.initialPlacement(r1, 5, 5);
 		Robot r2 = new Robot();
 		board.initialPlacement(r2, 1, 0);
 		Robot r3 = new Robot();

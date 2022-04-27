@@ -12,14 +12,16 @@ public class SpriteActivationAnimation extends Animation {
 	}
 
 	@Override
-	public void initialize() {}
+	public void initializeAnimation() {}
 
 	@Override
 	public void establishNextFrame() {}
 
 	@Override
-	public void finalize() {
+	public void finalizeAnimation() {
 		sprite.activate();
 	}
+	
+
 
 }

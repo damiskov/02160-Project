@@ -10,7 +10,7 @@ public abstract class Animation {
 		this.numFrames = (int)(durationMs/1000.0*FRAMES_PER_SECOND);
 	}
 	
-	public abstract void initialize();
+	public abstract void initializeAnimation();
 	
 	public int getNumFrames() {
 		return numFrames;
@@ -18,5 +18,6 @@ public abstract class Animation {
 	
 	public abstract void establishNextFrame();
 	
-	public abstract void finalize();
+	public abstract void finalizeAnimation();
+	
 }
