@@ -62,8 +62,8 @@ public class Game {
 	} 
 	
 	
-	public void setDifficulty(int i) {
-		this.difficulty.setLevel(i);
+	public void setDifficulty(Difficulty d) {
+		this.difficulty = d;
 		
 	}
 	
@@ -100,12 +100,13 @@ public class Game {
 		this.board = board;
 	}
 
+	
 
 	public PropertyChangeSupport getPropertyChangeSupport() {
 		return propertyChangeSupport;
 	}
 
-	public IBoard getBoard() {
+	public Board getBoard() {
 		return board;
 	}
 	
@@ -185,6 +186,7 @@ public class Game {
 	
 	//creates the players and names them and puts them in a list
 	public void setPlayers(int num_players) {
+		 players = new Player[num_players];
 		for (int i = 0; i < num_players; i++ ) {
 			
 			players[i] = new Player();
@@ -199,9 +201,11 @@ public class Game {
 	}
 	
 	//creates the robots and associates them to a player (also puts them in a list)
-	public void setRobots() {
+	public void setRobots(int num) {
+		robots = new Robot[num];
 		for (int i = 0; i < players.length; i++ ) {
-			players[i].setRobot(new Robot());			
+			players[i].setRobot(new Robot());
+			robots[i] = players[i].getRobot();
 		}
 	}
 	
@@ -225,7 +229,7 @@ public class Game {
 	//initial stuff that we need for the game 
 	public void Begin(int n, Difficulty d, PropertyChangeSupport pcs) {
 		setPlayers(n);
-		setRobots();
+		setRobots(n);
 		
 		genBoard(d, getRobots(), pcs);
 	}

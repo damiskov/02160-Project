@@ -7,4 +7,4 @@ Feature: Setting up game
   When the game begins
   Then the players are created
   And the robots for the players are created
-  And a board is generated
+  And the game has an easy board

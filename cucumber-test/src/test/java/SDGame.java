@@ -4,7 +4,9 @@ import io.cucumber.java.en.When;
 import property_changes.PropertyChangeSupport;
 import view.MasterView;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import board.*;
 
@@ -44,7 +46,8 @@ public class SDGame {
 	public void an_easy_game_with_players(Integer int1) {
 		PropertyChangeSupport pcs = new PropertyChangeSupport();
 		Game game = new Game(pcs, 2);
-		game.setDifficulty(1);
+		Difficulty d = new Difficulty(1);
+		game.setDifficulty(d);
 		context.game = game;
 	}
 	
@@ -55,7 +58,22 @@ public class SDGame {
 	
 	@Then("the players are created")
 	public void the_players_are_created() {
-	    //assertFalse(context.game.getPlayers(), null);
-	    
+	    assertEquals(context.game.getPlayers().length, context.game.getNumPlayers());
+	    for(int i = 0; i < context.game.getPlayers().length; i++) {
+	    	assertTrue(context.game.getPlayers()[i] != null);
+	    }
+	}
+	
+	@Then("the robots for the players are created")
+	public void the_robots_for_the_players_are_created() {
+		assertEquals(context.game.getRobots().length, context.game.getNumPlayers());
+	    for(int i = 0; i < context.game.getPlayers().length; i++) {
+	    	assertTrue(context.game.getPlayers()[i].getRobot() != null);
+	    }
+	}
+	
+	@Then("the game has an easy board")
+	public void the_game_has_an_easy_board() {
+	    assertEquals(context.game.getBoard().getDifficulty().getLevel(), 1);
 	}
 }
