@@ -1,15 +1,12 @@
 package board;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 import cards.Card;
 import cards.Deck;
 import environment_elements.ChainingPanel;
-import environment_elements.Checkpoint;
 import environment_elements.ConveyorBelt;
 import environment_elements.FinalCheckpoint;
 import environment_elements.Fire;
@@ -51,6 +48,7 @@ public class Game {
 	int numPlayers;
 	Deck deck;
 	private Robot[] robots;
+	private boolean over;
 	
 	
 	public Game(PropertyChangeSupport pcs, int numPlayers) {
@@ -251,7 +249,7 @@ public class Game {
 				orderNum.add(players[i].getRobot().getProgram().getTopOfProgram().getNum());
 			}
 			
-			for(int k = 0; k < order.size(); k++) {
+			for(int k = 0; k < order.size() && !(over); k++) {
 				//finds the index of the maximum
 				int max = (int) Collections.max(orderNum);
 				int idx = orderNum.indexOf(max);
