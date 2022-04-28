@@ -251,16 +251,13 @@ public class Game {
 	}
 	
 	//initial stuff that we need for the game 
-	public void Begin(int n, Difficulty d, PropertyChangeSupport pcs) {
+	public void begin(int n, Difficulty d, PropertyChangeSupport pcs) {
 		setPlayers(n);
 		setRobots(n);
 		
 		genBoard(d, getRobots());
+		
 	}
-	
-	/*
-	 * ADD PLAYERS CHOOSING THE CARDS METHODS
-	 */
 	
 	public void activationPhase() {
 		ArrayList<CardCommand> order = new ArrayList<>();
@@ -298,5 +295,6 @@ public class Game {
 		}
 	
 	}
+	
 }
 		

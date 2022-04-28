@@ -1,5 +1,6 @@
 package view;
 
+import controller.MasterController;
 import property_changes.GameWinEvent;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -17,7 +18,6 @@ import animations.Animation;
 import animations.HealthChangeAnimation;
 import board.Game;
 import board.Position;
-import controller.MasterController;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.ProgrammingPhaseBeginEvent;

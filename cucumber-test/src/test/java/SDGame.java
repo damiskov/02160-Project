@@ -97,7 +97,7 @@ public class SDGame {
 	
 	@When("the game begins")
 	public void the_game_begins() {
-	    context.game.Begin(context.game.getNumPlayers(), context.game.getDifficulty(), context.game.getPropertyChangeSupport());
+	    context.game.begin(context.game.getNumPlayers(), context.game.getDifficulty(), context.game.getPropertyChangeSupport());
 	}
 	
 	@Then("the players are created")
