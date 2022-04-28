@@ -5,7 +5,7 @@ import java.util.List;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
-import property_changes.ActivationEvent;
+import property_changes.ChainingPanelActivationEvent;
 
 public class ChainingPanel extends EnvironmentElement {
 
@@ -24,7 +24,7 @@ public class ChainingPanel extends EnvironmentElement {
 	
 	public void setActive(boolean active) {
 		if (this.active != active) {
-			getPropertyChangeSupport().firePropertyChange(new ActivationEvent(calculatePosition()));
+			getPropertyChangeSupport().firePropertyChange(new ChainingPanelActivationEvent(calculatePosition()));
 		}
 		this.active = active;
 	}

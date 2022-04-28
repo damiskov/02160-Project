@@ -14,7 +14,7 @@ public class ImageToggleSprite extends Sprite {
 	}
 	
 	@Override
-	public void activate() {
+	public void nextImage() {
 		if (getImage() == imageDefault) {
 			setImage(imageAlternative);
 		} else {

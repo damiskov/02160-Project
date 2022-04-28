@@ -5,6 +5,7 @@ import board.Position;
 import environment_elements.ChainingPanel;
 import environment_elements.ConveyorBelt;
 import environment_elements.Gear;
+import environment_elements.Teleporter;
 import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
 import piece_basics.Piece;
@@ -22,17 +23,21 @@ public class SpriteFactory {
 			if (eElement instanceof Gear) {
 				Gear gear = (Gear) eElement;
 				String filepath = "images/gear" + (gear.isCounterClockwise() ? "_left" : "_right") + ".png";
-				return new Sprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, 0, canvas);
+				return new SingleImageSprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, 0, canvas);
 			} else if (eElement instanceof ConveyorBelt) {
 				ConveyorBelt conveyorBelt = (ConveyorBelt) eElement;
-				return new Sprite(ImageUtils.scaledImage("images/conveyor_belt.png", cellSize, cellSize), x, y, conveyorBelt.getOrientation().getDegrees(), canvas);
+				return new SingleImageSprite(ImageUtils.scaledImage("images/conveyor_belt.png", cellSize, cellSize), x, y, conveyorBelt.getOrientation().getDegrees(), canvas);
 			} else if (eElement instanceof ChainingPanel){
 				Image defaultImage = ImageUtils.scaledImage("images/chaining_panel.png", cellSize, cellSize);
 				Image emptyImage = ImageUtils.scaledImage("images/chaining_panel_empty.png", cellSize, cellSize);
 				return new ImageToggleSprite(defaultImage, emptyImage, x, y, 0, canvas);
+			} else if (eElement instanceof Teleporter) {
+				Teleporter teleporter = (Teleporter) eElement;
+				String filepath = "images/teleporter" + (teleporter.isSending() ? "_orange" : "_blue") + ".png";
+				return new SingleImageSprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, 0, canvas);
 			} else {
 				String filepath = "images/" + eElement.getPieceID() + ".png";
-				return new Sprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, 0, canvas);
+				return new SingleImageSprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, 0, canvas);
 			}
 		} else if (piece instanceof Robot) {
 			Robot robot = (Robot) piece;
@@ -41,7 +46,7 @@ public class SpriteFactory {
 			
 			String filepath = "images/robot" + robot.getRobotNumber() + ".png";
 			
-			return new Sprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, robot.getOrientation().getDegrees(), canvas);
+			return new SingleImageSprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, robot.getOrientation().getDegrees(), canvas);
 		} else {
 			throw new IllegalArgumentException("Piece must be either a Robot or an EnvironmentElement");
 		}
