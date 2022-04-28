@@ -291,6 +291,7 @@ public class Game {
 					break activationPhaseLoop;
 				}
 			}
+			order.clear();
 			
 		//activates the register actors
 		activateRegisterActors();
