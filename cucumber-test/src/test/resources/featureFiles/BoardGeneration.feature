@@ -69,6 +69,7 @@ Scenario: Checking robot on the board
 	  When a position is calculated for an obstacle
 	  Then it throws an exception error
  
+
  #only for coverage  
 	Scenario: Checking robot position
 	  Given a board 
