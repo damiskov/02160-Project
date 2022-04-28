@@ -1,14 +1,12 @@
 package piece_basics;
 
-import java.io.IOException;
-
-import board.IBoard;
+import board.Board;
 import property_changes.PropertyChangeSupport;
 
 public abstract class Piece {
-	protected IBoard board;
+	protected Board board;
 	
-	public void setBoard(IBoard board) {
+	public void setBoard(Board board) {
 		this.board = board;
 	}
 	

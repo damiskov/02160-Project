@@ -1,5 +1,6 @@
 package view;
 
+import property_changes.GameWinEvent;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,8 +18,8 @@ import animations.HealthChangeAnimation;
 import animations.SpritePlacementAnimation;
 import board.Game;
 import board.Position;
+import controller.BoardCreationController;
 import controller.MasterController;
-import property_changes.GameWinEvent;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.ProgrammingPhaseBeginEvent;
@@ -34,6 +35,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	private static final long serialVersionUID = 3L;
 	
 	private MasterController controller;
+
 	
 	private BoardPanel boardPanel;
 	private JPanel cardPanel;
@@ -52,6 +54,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		this.controller = masterController;
 		initGUI(game);
 	}
+	
 
 	private void initGUI(Game game) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -147,6 +150,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		remove(blackScreen);
 	}
 
+
 	@Override
 	public void propertyChange(IPropertyChangeEvent pce) {
 		if (pce instanceof HealthChangeEvent) {
@@ -159,10 +163,8 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			displayWinScreen(gwe.getWinningPlayerNum());
 		} else {
 			boardPanel.propertyChange(pce);
-		}	
-	
+		}
 	}
-	
 	public void enqueueAnimation(Animation a) {
 		animationQueue.add(a);
 	}

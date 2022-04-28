@@ -141,6 +141,7 @@ public class CardPanel extends JPanel {
 	
 	// Uses master controller to access current player and get program
 
+
 	private void setCardPanel()
 	{
 		ArrayList<Card> cardHand = mc.getGame().getPlayers()[mc.getCurrentPlayer()].getHand().getCardList();

@@ -105,6 +105,7 @@ public class Robot extends Piece {
 		getPropertyChangeSupport().firePropertyChange(new RotationEvent(robotNumber, oldOrientation, orientation));
 	}	
 	
+//<<<<<<< HEAD
 	
 	private boolean hasWallNextRobotShiftPosition(Position posToMove, int spaces) {
 		Position shiftedNextRobotPos;
@@ -187,32 +188,32 @@ public class Robot extends Piece {
 			}
 		}
 		return true;
-		
-		
-		
-		
-		
+			
 	}
+	
 	public void move(int spaces) {
-		//if(isValidMove(spaces)) {
 			if(this.getChainedTo() == null) {
 				switch(orientation) {
 				case UP:
 					if(isValidMove(spaces)) {
 					shiftY(spaces);
-					break;}
+					}
+					break;
 				case RIGHT:
 					if(isValidMove(spaces)) {
 					shiftX(spaces);
-					break;}
+					}
+					break;
 				case DOWN:
 					if(isValidMove(-spaces)) {
 					shiftY(-spaces);
-					break;}
+					}
+					break;
 				case LEFT:
 					if(isValidMove(-spaces)) {
 					shiftX(-spaces);
-					break;}
+					}
+					break;
 				}
 			}
 			else {
@@ -221,25 +222,29 @@ public class Robot extends Piece {
 					if(isValidMove(spaces)) {
 					shiftY(spaces);
 					this.getChainedTo().shiftY(spaces);
-					break;}
+					}
+					break;
 				case RIGHT:
 					if(isValidMove(spaces)) {
 					shiftX(spaces);
 					this.getChainedTo().shiftX(spaces);
-					break;}
+					}
+					break;
 				case DOWN:
 					if(isValidMove(-spaces)) {
 					shiftY(-spaces);
 					this.getChainedTo().shiftY(-spaces);
-					break;}
+					}
+					break;
 				case LEFT:
 					if(isValidMove(-spaces)) {
 					shiftX(-spaces);
 					this.getChainedTo().shiftX(-spaces);
-					break;}
+					}
+					break;
 				}
 			}
-		//}
+		
 	}
 
 	public void heal() {
@@ -390,5 +395,11 @@ public class Robot extends Piece {
 	public int getRobotNumber() {
 		return robotNumber;
 	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	
+	
 
 }

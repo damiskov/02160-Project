@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
-
 import piece_basics.Robot;
 
 public class BoardGenerator {

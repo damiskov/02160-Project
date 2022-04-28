@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import cards.Card;
+import cards.CardCommand;
 import cards.Deck;
+import cards.Move1;
 import environment_elements.ChainingPanel;
 import environment_elements.ConveyorBelt;
 import environment_elements.FinalCheckpoint;
@@ -65,8 +67,23 @@ public class Game {
 	public void setDeck(Deck d) {
 		this.deck = d;
 	}
+
 	public void setDifficulty(Difficulty d) {
 		this.difficulty = d;
+	}
+
+	
+	public Game(PropertyChangeSupport pcs, int numPlayers, Board definedBoard) {
+		this.propertyChangeSupport = pcs;
+		this.numPlayers = numPlayers;
+		
+		// temporary
+		board = definedBoard;
+	}
+	
+	
+	public void genBoard() {
+
 		
 	}
 	
@@ -266,8 +283,8 @@ public class Game {
 	 */
 	
 	public void activationPhase() {
-		ArrayList<Card> order = new ArrayList<>();
-		ArrayList<Integer> orderNum = new ArrayList<>();
+		ArrayList<CardCommand> order = new ArrayList<>();
+		//ArrayList<Integer> orderNum = new ArrayList<>();
 		
 		//iterates through the programs (5 because 5 cards)
 		activationPhaseLoop:
@@ -275,32 +292,31 @@ public class Game {
 			//creates two arrays, one with all of the cards, one with all of the numbers
 			//the indices of the cards match to the ones of the numbers and also to the players
 			for(int i = 0; i < players.length; i++) {
-				order.add(players[i].getRobot().getProgram().getTopOfProgram());
-				orderNum.add(players[i].getRobot().getProgram().getTopOfProgram().getNum());
+				Robot r = players[i].getRobot();
+				Card topCard = r.getProgram().getTopOfProgram();
+				
+				CardCommand cc = new CardCommand(topCard, r);
+				order.add(cc);
+				//orderNum.add(topCard.getNum());
 			}
 			
-			for(int k = 0; k < order.size(); k++) {
-				//finds the index of the maximum
-				int max = (int) Collections.max(orderNum);
-				int idx = orderNum.indexOf(max);
-				
-				//executes the card that has the max number
-				Card exNow = ((Card) order.get(idx));
-				exNow.executeAction(players[idx].getRobot());
-				
-				//remove the max in the number array and the corresponding car
-				order.remove(idx);
-				orderNum.remove(idx);
-				
+			
+			//Collections.sort(orderNum, Collections.reverseOrder());
+			
+			Collections.sort(order, Collections.reverseOrder());
+			
+			for(CardCommand cc : order) {
+				cc.execute();
 				if (over) {
 					break activationPhaseLoop;
 				}
 			}
-			//activates the register actors
-			activateRegisterActors();
+			order.clear();
+			
+		//activates the register actors
+		activateRegisterActors();
 		}
+	
 	}
-	
-	
-	
 }
+		

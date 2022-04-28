@@ -37,16 +37,18 @@ public class SDGame {
 		
 	}
 	
-	@Given("a game with one player and an empty board")
-	public void a_game_with_one_player_and_an_empty_board() {
+	@Given("a game with two players and an empty board")
+	public void a_game_with_two_players_and_an_empty_board() {
 		PropertyChangeSupport pcs = new PropertyChangeSupport();
 		Game game = new Game(pcs, 1);
-		game.setPlayers(1);
+		game.setPlayers(2);
 		Player p = game.getPlayers()[0];
+		Player p2 = game.getPlayers()[1];
 		Board board = new Board(12, 12, game);
 	    game.setBoard(board);
 		context.game = game;
 		context.player = p;
+		context.player2 = p2;
 	    context.board = board;
 		
 	}
