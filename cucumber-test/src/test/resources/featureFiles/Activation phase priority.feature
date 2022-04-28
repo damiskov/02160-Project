@@ -19,3 +19,14 @@ Feature: Activation phase priority
     Then the first robot is at (9, 7)
     And the robot loses life points
     And the second robot is at (9, 6)
+
+   Scenario: Activation phase terminates because of final chackpoint
+    Given a game with two players and an empty board
+    And a robot for the first player on the board at (4, 7)
+    And a robot for the second player on the board at (4, 6)
+    And a program for the robot full of move1s
+    And a program for the second robot full of move1s
+    And a final checkpoint at (6, 7)
+    When the activation phase happens
+    Then the first robot is at (6, 7)
+    And the second robot is at (5, 6)
