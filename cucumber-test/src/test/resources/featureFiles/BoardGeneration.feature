@@ -53,5 +53,16 @@ Scenario: Checking robot on the board
   When a board is generated
   Then an easy board is generated 
   And the board has 12 rows and 12 columns
+  
+  
+#only for coverage  
+ Scenario: Generate a hard board
+  Given two players
+	And robots for the players
+  And a hard difficulty 
+  When a board is generated
+  Then the board has a game
+  
+  
 
 
