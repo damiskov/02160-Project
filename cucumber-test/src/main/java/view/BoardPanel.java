@@ -54,7 +54,7 @@ public class BoardPanel extends JPanel {
 	private List<Sprite> robotSpriteList = new ArrayList<>();
 	private Map<Integer, Sprite> robotNumToSpriteMap = new HashMap<>();
 
-	public BoardPanel(IBoard board, MasterView masterView) {
+	public BoardPanel(Board board, MasterView masterView) {
 		this.masterView = masterView;
 		
 		this.rows = board.getNumRows();
