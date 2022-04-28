@@ -39,8 +39,7 @@ public class BoardGenerator {
 	public Board getEasyBoard() {
 		Random rand = new Random();
 		int x = rand.nextInt(3);
-		BoardRetriever BR = new BoardRetriever();
-		b = BR.retrieveBoard(easyFiles[x], game);
+		b = BoardRetriever.retrieveBoard(easyFiles[x], game);
 		b.setDifficulty(new Difficulty(1));
 		for (int i = 0; i < robots.length; i++)
 		{
@@ -55,8 +54,7 @@ public class BoardGenerator {
 	public Board getMediumBoard() {
 		Random rand = new Random();
 		int x = rand.nextInt(3);
-		BoardRetriever BR = new BoardRetriever();
-		b = BR.retrieveBoard(mediumFiles[x], game);
+		b = BoardRetriever.retrieveBoard(mediumFiles[x], game);
 		b.setDifficulty(new Difficulty(2));
 		for (int i = 0; i < robots.length; i++)
 		{
@@ -70,8 +68,7 @@ public class BoardGenerator {
 	public Board getHardBoard() {
 		Random rand = new Random();
 		int x = rand.nextInt(3);
-		BoardRetriever BR = new BoardRetriever();
-		b = BR.retrieveBoard(hardFiles[x], game);
+		b = BoardRetriever.retrieveBoard(hardFiles[x], game);
 		b.setDifficulty(new Difficulty(3));
 		for (int i = 0; i < robots.length; i++)
 		{

@@ -50,7 +50,7 @@ public class CardPanel extends JPanel {
 //		assignCardsButton = new AssignCardsButton(mv, Color.BLUE, mc);
 		String emoji = new String(Character.toChars((int)0x1F916));
 		
-		assignCardsButton = new JButton(emoji);
+		assignCardsButton = new JButton("Assign to " + emoji);
 		add(assignCardsButton);
 		assignCardsButton.setEnabled(false);
 		

@@ -59,5 +59,4 @@ public class Context {
 	Hand hand;
 	Program program;
 	Stack<Card> gram;
-
 }
