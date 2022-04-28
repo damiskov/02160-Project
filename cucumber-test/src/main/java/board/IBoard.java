@@ -38,4 +38,6 @@ public interface IBoard {
 	
 	int getNumRows();
 	int getNumColumns();
+	
+	public Game getGame();
 }

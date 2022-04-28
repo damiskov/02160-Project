@@ -14,6 +14,7 @@ public class FinalCheckpoint extends Checkpoint {
 		super.performImmediateAction(r);
 		if (r.getMostRecentCheckpoint() == getNumber()) {
 			getPropertyChangeSupport().firePropertyChange(new GameWinEvent(r.getRobotNumber()));
+			board.getGame().finishGame();
 		}
 	}
 }

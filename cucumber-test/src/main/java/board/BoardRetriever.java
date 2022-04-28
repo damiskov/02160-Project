@@ -58,7 +58,7 @@ public class BoardRetriever
 		this.initialiseHM();
 	}
 	
-	public Board retrieveBoard(String filename, PropertyChangeSupport pcs)  
+	public Board retrieveBoard(String filename, Game game)  
 	{
 		
 		
@@ -90,7 +90,7 @@ public class BoardRetriever
 		
 		// Placing environment elements on the board
 		
-		Board b = new Board(numRows, numCols, pcs);
+		Board b = new Board(numRows, numCols, game);
 		int j = 0;
 		try {
 			obj = new BufferedReader(new FileReader(doc));

@@ -49,7 +49,9 @@ public class Game {
 	int numPlayers;
 	Deck deck;
 	private Robot[] robots;
-	private boolean over;
+	
+	// TODO: Add game finish scenario
+	private boolean over = false;
 	
 	
 	public Game(PropertyChangeSupport pcs, int numPlayers) {
@@ -57,7 +59,7 @@ public class Game {
 		this.numPlayers = numPlayers;
 		
 		// temporary
-		board = new Board(12, 12, pcs);
+		board = new Board(12, 12, this);
 	} 
 	
 	public void setDeck(Deck d) {
@@ -109,6 +111,14 @@ public class Game {
 
 	public Board getBoard() {
 		return board;
+	}
+	
+	public boolean isOver() {
+		return over;
+	}
+	
+	public void finishGame() {
+		over = true;
 	}
 	
 	// temporary
@@ -220,8 +230,8 @@ public class Game {
 	}
 	 
 	//makes the board for the game
-	public void genBoard(Difficulty d, Robot[] r, PropertyChangeSupport pcs) {
-		Board b = BoardFactory.generateBoard(d, r, pcs);
+	public void genBoard(Difficulty d, Robot[] r) {
+		Board b = BoardFactory.generateBoard(d, r, this);
 		this.board = b;
 	}
 	
@@ -237,7 +247,7 @@ public class Game {
 		setPlayers(n);
 		setRobots(n);
 		
-		genBoard(d, getRobots(), pcs);
+		genBoard(d, getRobots());
 	}
 	
 	/*
@@ -245,10 +255,11 @@ public class Game {
 	 */
 	
 	public void activationPhase() {
-		ArrayList<Card> order = new ArrayList<Card>();
-		ArrayList<Integer> orderNum = new ArrayList<Integer>();
+		ArrayList<Card> order = new ArrayList<>();
+		ArrayList<Integer> orderNum = new ArrayList<>();
 		
 		//iterates through the programs (5 because 5 cards)
+		activationPhaseLoop:
 		for(int j = 0; j < 5; j++) {
 			//creates two arrays, one with all of the cards, one with all of the numbers
 			//the indices of the cards match to the ones of the numbers and also to the players
@@ -257,7 +268,7 @@ public class Game {
 				orderNum.add(players[i].getRobot().getProgram().getTopOfProgram().getNum());
 			}
 			
-			for(int k = 0; k < order.size() && !(over); k++) {
+			for(int k = 0; k < order.size(); k++) {
 				//finds the index of the maximum
 				int max = (int) Collections.max(orderNum);
 				int idx = orderNum.indexOf(max);
@@ -269,6 +280,10 @@ public class Game {
 				//remove the max in the number array and the corresponding car
 				order.remove(idx);
 				orderNum.remove(idx);
+				
+				if (over) {
+					break activationPhaseLoop;
+				}
 			}
 			//activates the register actors
 			activateRegisterActors();

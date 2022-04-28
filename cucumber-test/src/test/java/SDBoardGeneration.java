@@ -2,6 +2,7 @@ import static org.junit.Assert.assertEquals;
 
 import board.Board;
 import board.BoardFactory;
+import board.Game;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -46,7 +47,8 @@ public class SDBoardGeneration {
 	{
 		Robot[] r = {context.player.getRobot(),context.player2.getRobot()};
 		PropertyChangeSupport pcs = new PropertyChangeSupport();
-		Board b = BoardFactory.generateBoard(context.d, r, pcs);
+		Game game = new Game(pcs, 2);
+		Board b = BoardFactory.generateBoard(context.d, r, game);
 		context.board = b;
 	}
 	

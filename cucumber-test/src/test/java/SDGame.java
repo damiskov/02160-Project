@@ -20,7 +20,7 @@ public class SDGame {
 	public void a_game_with_an_empty_board() {
 		PropertyChangeSupport pcs = new PropertyChangeSupport();
 		Game game = new Game(pcs, 2);
-	    Board board = new Board(12, 12, pcs);
+	    Board board = new Board(12, 12, game);
 	    game.setBoard(board);
 	    context.game = game;
 	    context.board = board;
@@ -43,7 +43,7 @@ public class SDGame {
 		Game game = new Game(pcs, 1);
 		game.setPlayers(1);
 		Player p = game.getPlayers()[0];
-		Board board = new Board(12, 12, pcs);
+		Board board = new Board(12, 12, game);
 	    game.setBoard(board);
 		context.game = game;
 		context.player = p;
@@ -55,7 +55,7 @@ public class SDGame {
 	public void a_game_with_a_x_board(Integer int1, Integer int2) {
 		PropertyChangeSupport pcs = new PropertyChangeSupport();
 		Game game = new Game(pcs, 2);
-	    Board board = new Board(int1, int2, pcs);
+	    Board board = new Board(int1, int2, game);
 	    game.setBoard(board);
 	    context.game = game;
 	    context.board = board;
