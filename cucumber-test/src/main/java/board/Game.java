@@ -23,6 +23,7 @@ import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
+import property_changes.ProgrammingPhaseBeginEvent;
 import property_changes.PropertyChangeSupport;
 
 public class Game {
@@ -113,15 +114,16 @@ public class Game {
 	// temporary
 	public void testPlacements() {
 		Robot r1 = new Robot();
-		board.initialPlacement(r1, 0, 0);
+		board.initialPlacement(r1, 5, 2);
 		Robot r2 = new Robot();
-		board.initialPlacement(r2, 0, 3);
-		board.initialPlacement(new Robot(), 2, 0);
+		board.initialPlacement(r2, 7, 3);
+		Robot r3 = new Robot();
+		board.initialPlacement(r3, 1, 0);
 		board.initialPlacement(new Robot(), 3, 0);
-		board.initialPlacement(new Robot(), 4, 0);
+		board.initialPlacement(new Robot(), 9, 0);
 		board.initialPlacement(new Robot(), 5, 0);
-		board.initialPlacement(new Robot(), 6, 0);
-		board.initialPlacement(new Robot(), 7, 0);
+		board.initialPlacement(new Robot(), 10, 0);
+		board.initialPlacement(new Robot(), 11, 0);
 		
 		board.initialPlacement(new ConveyorBelt(Orientation.RIGHT), 0, 1);
 		board.initialPlacement(new ConveyorBelt(Orientation.DOWN), 1, 1);
@@ -138,43 +140,47 @@ public class Game {
 		board.initialPlacement(new OilSpill(), 4, 3);
 		board.initialPlacement(new Pit(), 5, 3);
 		RespawnPoint rp = new RespawnPoint();
-		r2.setRespawnPoint(rp);
+		r1.setRespawnPoint(rp);
 		board.initialPlacement(rp, 6, 3);
 		board.initialPlacement(new ReversalPanel(), 7, 3);
-		board.initialPlacement(new Teleporter(), 8, 3);
+		
+		Teleporter t1 = new Teleporter();
+		board.initialPlacement(t1, 8, 3);
+		Teleporter t2 = new Teleporter();
+		board.initialPlacement(t2, 8, 10);
+		t1.setSending(true);
+		t1.setReceiving(t2);
+		
 		board.initialPlacement(new Wall(), 9, 3);
 		
-//		r1.move(1);
+		r1.move(1);
 		
 		r2.turnRight();
-//		r2.move(1);
+		r2.move(1);
+		activateRegisterActors();
 		
-//		r1.move(1);
-//		r1.turnRight();
-//		r1.move(1);
-//		r1.turnRight();
-//		r1.move(1);
-//		r1.turnRight();
-//		r1.move(1);
-//		r1.turnRight();
+		r2.turnLeft();
+		r2.turnLeft();
+		r2.move(2);
+		r2.turnLeft();
+		activateRegisterActors();
+		
+		r1.turnLeft();
+		r1.turnLeft();
+		r1.move(1);
+		r1.turnRight();
+		r1.move(2);
+		r1.turnRight();
+		r1.move(1);
+		activateRegisterActors();
+		
 		
 	
-//		activateRegisterActors();
-//		r2.move(2);
-//		r2.turnLeft();
-//		r2.move(-2);
-//		r2.turnLeft();
-//		r2.move(-1);
-//		r2.turnLeft();
-//		r2.move(-1);
-//		r2.turnLeft();
-//		r2.move(-1);
-//		r2.turnLeft();
-//		r2.move(-1);
-		
-		//r1.move(1);
-		//r1.turnLeft();
-		//r1.move(1);
+
+
+		propertyChangeSupport.firePropertyChange(new ProgrammingPhaseBeginEvent());
+
+
 		
 		
 		

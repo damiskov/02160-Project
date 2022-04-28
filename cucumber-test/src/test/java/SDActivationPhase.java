@@ -7,5 +7,10 @@ public class SDActivationPhase {
 		this.context = context;
 	}
 	
+	@When("the activation phase happens")
+	public void the_activation_phase_happens() {
+	    context.game.activationPhase();
+	}
+	
 	
 }

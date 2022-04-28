@@ -80,3 +80,10 @@ Feature: Chaining Panel
     When the board elements activate
     Then the chaining panel is still inactive 
     And the robot is still not chained
+    
+  #only for coverage
+  Scenario: Chaining panel on the board
+    Given a game with an empty board
+    When a chaining panel on the board at (5, 5)
+    Then the chaining panel is at five, five
+    

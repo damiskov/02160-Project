@@ -1,10 +1,8 @@
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
 
-import board.Board;
 import board.Position;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -35,6 +33,16 @@ public class SDRobot {
 	    context.robot = r;
 	}
 	
+	@Given("a robot for the player on the board at \\({int}, {int})")
+	public void a_robot_for_the_player_on_the_board_at(Integer int1, Integer int2) {
+	    context.game.setRobots(1);
+	    Robot r = context.game.getPlayers()[0].getRobot();
+	    context.board.initialPlacement(r, new Position(4, 5));
+	    context.robot = r;
+	    
+	    
+	}
+	
 	@Given("two robots on the board")
 	public void two_robots_on_the_board() {
 		Robot r = new Robot();
@@ -63,6 +71,15 @@ public class SDRobot {
 	public void a_program_for_the_robot_with_u_turns() {
 		Stack<Card> gram = new Stack<Card>();
 		gram.addAll(Arrays.asList(new UTurn(), new UTurn(), new UTurn(), new UTurn(), new UTurn()));
+		context.robot.setProgram(gram);
+	}
+	
+	@Given("a program for the robot full of move1s")
+	public void a_program_for_the_robot_full_for_move1s() {
+		Stack<Card> gram = new Stack<Card>();
+		Card uno = new Move1();
+		uno.setNum(2);
+		gram.addAll(Arrays.asList(uno, uno, uno, uno, uno));
 		context.robot.setProgram(gram);
 	}
 	
@@ -269,6 +286,13 @@ public class SDRobot {
     		throw new IllegalArgumentException("Invalid orientation");
 	    }
 	    assertEquals(o, context.robot.getOrientation());
+	}
+	
+	@Then("the robot is at five, five")
+	public void the_robot_is_at_five_five() {
+	    assertEquals(context.robot.getX(), 5);
+	    assertEquals(context.robot.getY(), 5);
+
 	}
 
 }

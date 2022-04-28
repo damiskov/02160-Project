@@ -65,6 +65,7 @@ public class Board implements IBoard {
 	public void initialPlacement(Robot r, int x, int y) {
 		addToExecutionLists(r);
 		r.setBoard(this);
+		System.out.println("Placing robot " + r.getRobotNumber() + " at " + x + ", " + y);
 		getCell(x, y).robot = r;
 		getPropertyChangeSupport().firePropertyChange(new PlacementEvent(r, new Position(x, y)));
 	}

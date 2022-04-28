@@ -37,6 +37,20 @@ public class SDGame {
 		
 	}
 	
+	@Given("a game with one player and an empty board")
+	public void a_game_with_one_player_and_an_empty_board() {
+		PropertyChangeSupport pcs = new PropertyChangeSupport();
+		Game game = new Game(pcs, 1);
+		game.setPlayers(1);
+		Player p = game.getPlayers()[0];
+		Board board = new Board(12, 12, pcs);
+	    game.setBoard(board);
+		context.game = game;
+		context.player = p;
+	    context.board = board;
+		
+	}
+	
 	@Given("a game with a {int} x {int} board")
 	public void a_game_with_a_x_board(Integer int1, Integer int2) {
 		PropertyChangeSupport pcs = new PropertyChangeSupport();
