@@ -37,4 +37,13 @@ Scenario: Naming a custom board
   Given a board
   When a name is set
   Then the board has its name set
+  
+ #only for coverage
+ #Scenario: Generate a 12 x 12 easy board
+#	Given two players
+#	And robots for the players
+  #And an easy difficulty 
+  #When a board is generated
+  #Then an easy board is generated 
+  #And the board has 12 rows and 12 columns
 
