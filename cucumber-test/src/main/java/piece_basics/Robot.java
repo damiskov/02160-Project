@@ -395,4 +395,10 @@ public class Robot extends Piece {
 		return robotNumber;
 	}
 
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	
+	
+
 }

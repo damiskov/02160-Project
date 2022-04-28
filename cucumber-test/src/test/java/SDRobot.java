@@ -32,10 +32,27 @@ public class SDRobot {
 		context.board.initialPlacement(r, int1, int2);
 	    context.robot = r;
 	}
+
+	
+	@Given("a robot on the board at \\({int}, {int}) with full health")
+	public void a_robot_on_the_board_at_with_full_health(Integer int1, Integer int2) {
+		Robot r = new Robot();
+		context.board.initialPlacement(r, int1, int2);
+	    context.robot = r;
+	}
+	
+	@Given("a robot on the board at \\({int}, {int}) with {int} HP")
+	public void a_robot_on_the_board_at_with_hp(Integer int1, Integer int2, Integer int3) {
+		Robot r = new Robot();
+		context.board.initialPlacement(r, int1, int2);
+		r.setHealth(int3);
+	    context.robot = r;
+	}
 	
 	@Given("a robot for the first player on the board at \\({int}, {int})")
-	public void a_robot_for_the_first_player_on_the_board_at(Integer int1, Integer int2) {
-		context.game.setRobots(2);
+	public void a_robot_for_the_player_on_the_board_at(Integer int1, Integer int2) {
+		context.game.setPlayers(2);
+	    context.game.setRobots(2);
 	    Robot r = context.game.getPlayers()[0].getRobot();
 	    r.setOrientation(Orientation.RIGHT);
 	    context.board.initialPlacement(r, int1, int2);
@@ -313,6 +330,16 @@ public class SDRobot {
 	    assertEquals(context.robot.getX(), 5);
 	    assertEquals(context.robot.getY(), 5);
 
+	}
+	
+	@Then("the robot has {int} HP")
+	public void the_robot_has_hp(Integer int1) {
+		assertEquals(int1.intValue(), context.robot.getHealth());
+	}
+	
+	@Then("the robot remains at full health")
+	public void the_robot_remains_at_full_health() {
+		assertEquals(Robot.MAX_ROBOT_HEALTH, context.robot.getHealth());
 	}
 
 }
