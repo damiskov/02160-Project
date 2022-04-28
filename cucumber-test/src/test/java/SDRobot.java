@@ -186,23 +186,10 @@ public class SDRobot {
 		context.robot.move(1);
 	}
 	
-	@When("the robot tries to move two steps")
-	public void the_robot_tries_to_move_two_steps(){
-		context.robot.move(1);
-	}
-	
-	@When("the robot tries to move three steps")
-	public void the_robot_tries_to_move_three_steps() {
-		context.robot.move(1);
-	}
-
-	
 	@Then("the robot stays at \\({int}, {int})")
 	public void the_robot_stays_at(Integer int1, Integer int2) {
 		assertEquals(new Position(int1, int2), context.robot.calculatePosition());	
 	}
-
-	
 	
 	@When("one robot moves")
 	public void one_robot_moves() {
@@ -249,6 +236,7 @@ public class SDRobot {
 	    assertEquals(o, context.robot.getOrientation());
 	}
 	
+
 	@Given("a robot on the board")
 	public void a_robot_on_the_board() {
 	    context.robot = new Robot();
