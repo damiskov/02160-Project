@@ -58,7 +58,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		
 		setLayout(new GridBagLayout());
 		
-		boardPanel = new BoardPanel(game.getBoard());
+		boardPanel = new BoardPanel(game.getBoard(), this);
 		cardPanel = new CardPanel(this, controller);
 		statusPanel = new StatusPanel(game.getNumPlayers());
 		
