@@ -1,28 +1,18 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cards.Card;
 import cards.CardFactory;
 import controller.MasterController;
-import utils.GridBagLayoutUtils;
-import utils.ImageUtils;
+
 
 public class CardPanel extends JPanel {
 
@@ -73,7 +63,7 @@ public class CardPanel extends JPanel {
 				
 				for (CardSelectionPanel c : orderedCards)
 				{
-					// cards.add(CardFactory.getCard(c.getCardID()));
+					cards.add(CardFactory.getCard(c.getCardID()));
 				}
 				
 				mc.assignCards(cards);
