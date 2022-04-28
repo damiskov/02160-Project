@@ -2,13 +2,12 @@ package board;
 import java.util.Random;
 
 import piece_basics.Robot;
-import property_changes.PropertyChangeSupport;
 
 public class BoardGenerator {
 	
 	private Board b;
 	private Robot[] robots;
-	private PropertyChangeSupport propertyChangeSupport;
+	private Game game;
 	private String[] easyFiles = {"E1", "E2", "E3"};
 	private String[] mediumFiles = {"M1", "M2", "M3"};
 	private String[] hardFiles = {"H1", "H2", "H3"};
@@ -24,10 +23,10 @@ public class BoardGenerator {
 			
 	};
 	
-	public BoardGenerator(Robot[] robots, PropertyChangeSupport propertyChangeSupport)
+	public BoardGenerator(Robot[] robots, Game game)
 	{
 		this.robots = robots;
-		this.propertyChangeSupport = propertyChangeSupport;
+		this.game = game;
 	}
 	
 //	public Board getBoard()
@@ -41,7 +40,7 @@ public class BoardGenerator {
 		Random rand = new Random();
 		int x = rand.nextInt(3);
 		BoardRetriever BR = new BoardRetriever();
-		b = BR.retrieveBoard(easyFiles[x], propertyChangeSupport);
+		b = BR.retrieveBoard(easyFiles[x], game);
 		b.setDifficulty(new Difficulty(1));
 		for (int i = 0; i < robots.length; i++)
 		{
@@ -57,7 +56,7 @@ public class BoardGenerator {
 		Random rand = new Random();
 		int x = rand.nextInt(3);
 		BoardRetriever BR = new BoardRetriever();
-		b = BR.retrieveBoard(mediumFiles[x], propertyChangeSupport);
+		b = BR.retrieveBoard(mediumFiles[x], game);
 		b.setDifficulty(new Difficulty(2));
 		for (int i = 0; i < robots.length; i++)
 		{
@@ -72,7 +71,7 @@ public class BoardGenerator {
 		Random rand = new Random();
 		int x = rand.nextInt(3);
 		BoardRetriever BR = new BoardRetriever();
-		b = BR.retrieveBoard(hardFiles[x], propertyChangeSupport);
+		b = BR.retrieveBoard(hardFiles[x], game);
 		b.setDifficulty(new Difficulty(3));
 		for (int i = 0; i < robots.length; i++)
 		{

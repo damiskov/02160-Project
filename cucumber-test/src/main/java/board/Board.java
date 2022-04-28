@@ -25,7 +25,7 @@ public class Board implements IBoard {
 	private Difficulty difficulty;
 	private String name;
 	private Map<String, List<Piece>> pieceLists = new HashMap<>();
-	private PropertyChangeSupport propertyChangeSupport;
+	private Game game;
 	
 	// initialise an empty board with a set number of columns and rows
 	public Board(int numColumns, int numRows) {
@@ -39,15 +39,19 @@ public class Board implements IBoard {
 		this.numRows = numRows;
 	}
 	
-	public Board(int numColumns, int numRows, PropertyChangeSupport propertyChangeSupport) {
+	public Board(int numColumns, int numRows, Game game) {
 		this(numColumns, numRows);
-		this.propertyChangeSupport = propertyChangeSupport;
+		this.game = game;
 	}
 	
+	@Override
+	public Game getGame() {
+		return game;
+	}
 	
 	@Override
 	public PropertyChangeSupport getPropertyChangeSupport() {
-		return propertyChangeSupport;
+		return game.getPropertyChangeSupport();
 	}
 
 	private Cell getCell(Position p) {
