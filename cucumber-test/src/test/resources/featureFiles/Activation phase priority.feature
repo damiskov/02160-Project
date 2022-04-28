@@ -10,13 +10,12 @@ Feature: Activation phase priority
   	
   Scenario: Activation phase
     Given a game with two players and an empty board
-    And a laser on the board at (8, 5)
-    And a robot for the first player on the board at (4, 5)
+    And a laser on the board at (8, 7)
+    And a robot for the first player on the board at (4, 7)
     And a robot for the second player on the board at (4, 6)
     And a program for the robot full of move1s
     And a program for the second robot full of move1s
     When the activation phase happens
-    Then the first robot is at (9, 5)
+    Then the first robot is at (9, 7)
     And the robot loses life points
-    And the second robot is at (9, 8)
-#maybe try to put more than one player
+    And the second robot is at (9, 6)

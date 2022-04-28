@@ -37,14 +37,16 @@ public class SDRobot {
 	public void a_robot_for_the_first_player_on_the_board_at(Integer int1, Integer int2) {
 		context.game.setRobots(2);
 	    Robot r = context.game.getPlayers()[0].getRobot();
-	    context.board.initialPlacement(r, new Position(int1, int2));
+	    r.setOrientation(Orientation.RIGHT);
+	    context.board.initialPlacement(r, int1, int2);
 	    context.robot = r;
 	}
 	
 	@Given("a robot for the second player on the board at \\({int}, {int})")
 	public void a_robot_for_the_second_player_on_the_board_at(Integer int1, Integer int2) {
 	    Robot r2 = context.game.getPlayers()[1].getRobot();
-	    context.board.initialPlacement(r2, new Position(int1, int2));
+	    r2.setOrientation(Orientation.RIGHT);
+	    context.board.initialPlacement(r2, int1, int2);
 	    context.robot2 = r2;
 	}
 	
@@ -83,15 +85,15 @@ public class SDRobot {
 	public void a_program_for_the_robot_full_for_move1s() {
 		Stack<Card> gram = new Stack<Card>();
 		Card uno = new Move1();
-		uno.setNum(3);
+		uno.setNum(6);
 		Card dos = new Move1();
-		dos.setNum(3);
+		dos.setNum(7);
 		Card tres = new Move1();
-		tres.setNum(3);
+		tres.setNum(8);
 		Card cuatro = new Move1();
-		cuatro.setNum(3);
+		cuatro.setNum(9);
 		Card cinco = new Move1();
-		cinco.setNum(3);
+		cinco.setNum(10);
 		gram.addAll(Arrays.asList(uno, dos, tres, cuatro, cinco));
 		context.robot.setProgram(gram);
 	}
@@ -100,15 +102,15 @@ public class SDRobot {
 	public void a_program_for_the_second_robot_full_of_move1s() {
 		Stack<Card> gram = new Stack<Card>();
 		Card uno = new Move1();
-		uno.setNum(2);
+		uno.setNum(1);
 		Card dos = new Move1();
 		dos.setNum(2);
 		Card tres = new Move1();
-		tres.setNum(2);
+		tres.setNum(3);
 		Card cuatro = new Move1();
-		cuatro.setNum(2);
+		cuatro.setNum(4);
 		Card cinco = new Move1();
-		cinco.setNum(2);
+		cinco.setNum(5);
 		gram.addAll(Arrays.asList(uno, dos, tres, cuatro, cinco));
 		context.robot2.setProgram(gram);
 	}

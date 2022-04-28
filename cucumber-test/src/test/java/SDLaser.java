@@ -22,6 +22,6 @@ public class SDLaser {
 	
 	@Then("the robot loses life points")
 	public void the_robot_loses_life_points() {
-		assertEquals(context.robot.getHealth(),2);
+		assertEquals(2, context.robot.getHealth());
 	}
 }

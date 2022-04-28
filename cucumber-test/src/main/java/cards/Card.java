@@ -2,10 +2,13 @@ package cards;
 
 import piece_basics.Robot;
 
-public class Card
+public class Card 
 {
     private String action;
     private int num;
+    
+    
+    
     
     public Card(String action)
     {
@@ -31,5 +34,10 @@ public class Card
     public Card getOppositeCard() {
     	return null;
     }
+    
+    public String getAction() {
+    	return this.action;
+    }
+
 
 }
