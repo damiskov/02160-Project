@@ -70,7 +70,7 @@ public class BoardPanel extends JPanel {
 		width = cols*cellWidth;
 		height = rows*cellWidth;
 		
-		setPreferredSize(new Dimension(width, height));
+		setPreferredSize(new Dimension(width, height)); 
 		
 		backgroundTile = ImageUtils.scaledImage("images/tile.png", cellWidth, cellWidth);
 	}

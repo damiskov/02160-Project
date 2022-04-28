@@ -250,6 +250,7 @@ public class Game {
 		
 		//iterates through the programs (5 because 5 cards)
 		for(int j = 0; j < 5; j++) {
+			System.out.println(players[1].getRobot().getProgram().getCardList());
 			//creates two arrays, one with all of the cards, one with all of the numbers
 			//the indices of the cards match to the ones of the numbers and also to the players
 			for(int i = 0; i < players.length; i++) {

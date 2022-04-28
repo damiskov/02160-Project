@@ -33,14 +33,19 @@ public class SDRobot {
 	    context.robot = r;
 	}
 	
-	@Given("a robot for the player on the board at \\({int}, {int})")
-	public void a_robot_for_the_player_on_the_board_at(Integer int1, Integer int2) {
-	    context.game.setRobots(1);
+	@Given("a robot for the first player on the board at \\({int}, {int})")
+	public void a_robot_for_the_first_player_on_the_board_at(Integer int1, Integer int2) {
+		context.game.setRobots(2);
 	    Robot r = context.game.getPlayers()[0].getRobot();
-	    context.board.initialPlacement(r, new Position(4, 5));
+	    context.board.initialPlacement(r, new Position(int1, int2));
 	    context.robot = r;
-	    
-	    
+	}
+	
+	@Given("a robot for the second player on the board at \\({int}, {int})")
+	public void a_robot_for_the_second_player_on_the_board_at(Integer int1, Integer int2) {
+	    Robot r2 = context.game.getPlayers()[1].getRobot();
+	    context.board.initialPlacement(r2, new Position(int1, int2));
+	    context.robot2 = r2;
 	}
 	
 	@Given("two robots on the board")
@@ -78,9 +83,34 @@ public class SDRobot {
 	public void a_program_for_the_robot_full_for_move1s() {
 		Stack<Card> gram = new Stack<Card>();
 		Card uno = new Move1();
-		uno.setNum(2);
-		gram.addAll(Arrays.asList(uno, uno, uno, uno, uno));
+		uno.setNum(3);
+		Card dos = new Move1();
+		dos.setNum(3);
+		Card tres = new Move1();
+		tres.setNum(3);
+		Card cuatro = new Move1();
+		cuatro.setNum(3);
+		Card cinco = new Move1();
+		cinco.setNum(3);
+		gram.addAll(Arrays.asList(uno, dos, tres, cuatro, cinco));
 		context.robot.setProgram(gram);
+	}
+	
+	@Given("a program for the second robot full of move1s")
+	public void a_program_for_the_second_robot_full_of_move1s() {
+		Stack<Card> gram = new Stack<Card>();
+		Card uno = new Move1();
+		uno.setNum(2);
+		Card dos = new Move1();
+		dos.setNum(2);
+		Card tres = new Move1();
+		tres.setNum(2);
+		Card cuatro = new Move1();
+		cuatro.setNum(2);
+		Card cinco = new Move1();
+		cinco.setNum(2);
+		gram.addAll(Arrays.asList(uno, dos, tres, cuatro, cinco));
+		context.robot2.setProgram(gram);
 	}
 	
 	@Given("an already reversed program for the robot")
