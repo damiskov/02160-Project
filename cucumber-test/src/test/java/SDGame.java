@@ -43,7 +43,7 @@ public class SDGame {
 		Game game = new Game(pcs, 1);
 		game.setPlayers(1);
 		Player p = game.getPlayers()[0];
-		Board board = new Board(12, 12, pcs);
+		Board board = new Board(12, 12, game);
 	    game.setBoard(board);
 		context.game = game;
 		context.player = p;
