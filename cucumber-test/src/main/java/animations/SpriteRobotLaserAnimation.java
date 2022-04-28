@@ -36,7 +36,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 		
 		// make them visible
 		for(ImageToggleSprite toggleSprite : robotLaserSpriteList) {
-			toggleSprite.activate();
+			toggleSprite.nextImage();
 		}
 	}
 	
@@ -51,7 +51,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 	public void finalizeAnimation() {
 		// make them invisible
 		for(ImageToggleSprite toggleSprite : robotLaserSpriteList) {
-			toggleSprite.activate();
+			toggleSprite.nextImage();
 		}
 		// clear our list
 		robotLaserSpriteList.clear();

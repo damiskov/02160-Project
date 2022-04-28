@@ -11,7 +11,7 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
-import animations.SpriteActivationAnimation;
+import animations.SpriteImageChangeAnimation;
 import animations.SpriteMovementAnimation;
 import animations.SpritePlacementAnimation;
 import animations.SpriteRemovalAnimation;
@@ -23,7 +23,7 @@ import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
-import property_changes.ActivationEvent;
+import property_changes.ChainingPanelActivationEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.MovementEvent;
 import property_changes.PlacementEvent;
@@ -48,7 +48,6 @@ public class BoardPanel extends JPanel {
 	private int cellWidth;
 	private int width;
 	private int height;
-	private Board board;
 	
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
 	private List<ImageToggleSprite> robotLaserSpriteList = new ArrayList<>();
@@ -154,9 +153,9 @@ public class BoardPanel extends JPanel {
 		} else if (pci instanceof RemovalEvent) {
 			RemovalEvent re = (RemovalEvent) pci;
 			removeEElementSprite(re.getPos());
-		} else if (pci instanceof ActivationEvent) {
-			ActivationEvent ae = (ActivationEvent) pci;
-			activateSprite(ae);
+		} else if (pci instanceof ChainingPanelActivationEvent) {
+			ChainingPanelActivationEvent ae = (ChainingPanelActivationEvent) pci;
+			activateChainingPanelSprite(ae);
 		} else if (pci instanceof MovementEvent) {
 			MovementEvent me = (MovementEvent) pci;
 			moveRobot(me);
@@ -172,8 +171,8 @@ public class BoardPanel extends JPanel {
 		}
 	}
 	
-	private void activateSprite(ActivationEvent ae) {
-		masterView.enqueueAnimation(new SpriteActivationAnimation(getEElementSpriteAtPosition(ae.getPos())));
+	private void activateChainingPanelSprite(ChainingPanelActivationEvent ae) {
+		masterView.enqueueAnimation(new SpriteImageChangeAnimation(getEElementSpriteAtPosition(ae.getPos())));
 		System.out.println("Activation animation enqueued");
 	}
 	

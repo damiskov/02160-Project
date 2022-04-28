@@ -172,6 +172,9 @@ public class Board implements IBoard {
 	
 	@Override
 	public void removeEElement(Position p) {
+		if (!hasEElementAt(p)) throw new NullPointerException("Attempted to remove EElement at " + p + " when no such element exists");
+		EnvironmentElement eElement = getEElementAt(p);
+		pieceLists.get(eElement.getPieceID()).remove(eElement);
 		getCell(p).eElement = null;
 		getPropertyChangeSupport().firePropertyChange(new RemovalEvent(p));
 	}
