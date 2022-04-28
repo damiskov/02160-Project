@@ -79,4 +79,23 @@ public class SDBoardGeneration {
 	public void no_board_is_generated() {
 		assertEquals(context.board, null);
 	}
+	
+
+//	@Given("a board with X rows")
+//	public void a_board_with_x_rows() {
+//		context.board.getNumRows();
+//	    // Write code here that turns the phrase above into concrete actions
+//	    //throw new io.cucumber.java.PendingException();
+//	}
+//	@Given("a board with Y column")
+//	public void a_board_with_y_column() {
+//		context.board.getNumColumns();
+//	    // Write code here that turns the phrase above into concrete actions
+//	   // throw new io.cucumber.java.PendingException();
+//	}
+//	@Then("the board of X rows and Y columns is generated")
+//	public void the_board_of_x_rows_and_y_columns_is_generated() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new io.cucumber.java.PendingException();
+//	}
 }
