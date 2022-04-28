@@ -149,8 +149,7 @@ public class CardPanel extends JPanel {
 		}
 	}
 	
-	
-	
+
 	private void setCardPanel()
 	{
 		ArrayList<Card> cardHand = mc.getGame().getPlayers()[mc.getCurrentPlayer()].getHand().getCardList();
