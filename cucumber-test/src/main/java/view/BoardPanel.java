@@ -23,7 +23,7 @@ import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
-import property_changes.ActivationEvent;
+import property_changes.ChainingPanelActivationEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.MovementEvent;
 import property_changes.PlacementEvent;
@@ -153,9 +153,9 @@ public class BoardPanel extends JPanel {
 		} else if (pci instanceof RemovalEvent) {
 			RemovalEvent re = (RemovalEvent) pci;
 			removeEElementSprite(re.getPos());
-		} else if (pci instanceof ActivationEvent) {
-			ActivationEvent ae = (ActivationEvent) pci;
-			activateSprite(ae);
+		} else if (pci instanceof ChainingPanelActivationEvent) {
+			ChainingPanelActivationEvent ae = (ChainingPanelActivationEvent) pci;
+			activateChainingPanelSprite(ae);
 		} else if (pci instanceof MovementEvent) {
 			MovementEvent me = (MovementEvent) pci;
 			moveRobot(me);
@@ -171,7 +171,7 @@ public class BoardPanel extends JPanel {
 		}
 	}
 	
-	private void activateSprite(ActivationEvent ae) {
+	private void activateChainingPanelSprite(ChainingPanelActivationEvent ae) {
 		masterView.enqueueAnimation(new SpriteImageChangeAnimation(getEElementSpriteAtPosition(ae.getPos())));
 		System.out.println("Activation animation enqueued");
 	}
