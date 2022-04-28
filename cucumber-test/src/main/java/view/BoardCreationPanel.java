@@ -2,16 +2,8 @@ package view;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
 
-import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -32,7 +24,6 @@ import environment_elements.Teleporter;
 import environment_elements.Wall;
 import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
-import piece_basics.Piece;
 import utils.GridBagLayoutUtils;
 import utils.ImageUtils;
 import environment_elements.Pit;

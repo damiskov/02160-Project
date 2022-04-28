@@ -1,15 +1,10 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,15 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 
 import board.Board;
-import board.BoardRetriever;
 
 import board.Position;
 import controller.BoardCreationController;
-import controller.MasterController;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
 import environment_elements.ConveyorBelt;
-import environment_elements.Fire;
 import environment_elements.Gear;
 import environment_elements.HealthStation;
 import environment_elements.Laser;
@@ -43,10 +35,6 @@ import property_changes.PropertyChangeSupport;
 import utils.GridBagLayoutUtils;
 
 public class BoardCreationView extends JFrame{
-	
-	
-	
-		
 	private static final long serialVersionUID = 5L;
 	
 	private BoardCreationController controller;
@@ -67,8 +55,6 @@ public class BoardCreationView extends JFrame{
 	private int columns;
 	private int numberPlayers;
 	
-	private HashMap<EnvironmentElement, Character> EEToascii = new HashMap<>();
-	
 
 	
 	private PropertyChangeSupport brd;
@@ -76,9 +62,6 @@ public class BoardCreationView extends JFrame{
 	// for testing
 	
 	public BoardCreationView(BoardCreationController boardCreationController) {
-		
-		initialiseHM();
-		
 		
 		setController(boardCreationController);
 		initGUI();
@@ -206,41 +189,6 @@ public class BoardCreationView extends JFrame{
 		numPlayersPanel.setLayout(new GridBagLayout());
 		numPlayersPanel.add( new JLabel("No. of players:"), GridBagLayoutUtils.constraint(0, 0, 5) );
 		numPlayersPanel.add( sliderNumPlayers, GridBagLayoutUtils.constraint(0, 1, 5) );
-	}
-	
-	
-	private void initialiseHM()
-	{
-		// Initialising sending and receiving teleporter
-		Teleporter T1 = new Teleporter();
-		T1.setSending(true);
-		Teleporter T2 = new Teleporter();
-		T2.setSending(false);
-		T1.setReceiving(T2);
-		
-		EEToascii.put( new Wall(), 'W');
-		EEToascii.put( new Pit(), 'P');
-		EEToascii.put( new OilSpill(), 'O');
-		EEToascii.put( T1, 'S');
-		EEToascii.put( T2, 'T');
-		EEToascii.put( new RespawnPoint(), 'X');
-		EEToascii.put( new ConveyorBelt(Orientation.UP), '^');
-		EEToascii.put( new ConveyorBelt(Orientation.RIGHT), '>');
-		EEToascii.put( new ConveyorBelt(Orientation.LEFT), '<');
-		EEToascii.put( new ConveyorBelt(Orientation.DOWN), 'v');
-		EEToascii.put( new HealthStation(), 'H');
-		EEToascii.put( new Laser(), 'L');
-		EEToascii.put( new Gear(true), 'A');
-		EEToascii.put( new Gear(false), 'K');
-		EEToascii.put( new ReversalPanel(), 'R');
-		EEToascii.put( new ChainingPanel(), 'C');
-		EEToascii.put( new Checkpoint(1), '1');
-		EEToascii.put( new Checkpoint(2), '2');
-		EEToascii.put( new Checkpoint(3), '3');
-		EEToascii.put(new Checkpoint(4), '4');
-		EEToascii.put( new Checkpoint(5), '5');
-		EEToascii.put(null, ' ');
-		
 	}
 	
 	private void createTextFile() throws IOException {
