@@ -11,7 +11,7 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
-import animations.SpriteActivationAnimation;
+import animations.SpriteImageChangeAnimation;
 import animations.SpriteMovementAnimation;
 import animations.SpritePlacementAnimation;
 import animations.SpriteRemovalAnimation;
@@ -48,7 +48,6 @@ public class BoardPanel extends JPanel {
 	private int cellWidth;
 	private int width;
 	private int height;
-	private Board board;
 	
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
 	private List<ImageToggleSprite> robotLaserSpriteList = new ArrayList<>();
@@ -173,7 +172,7 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void activateSprite(ActivationEvent ae) {
-		masterView.enqueueAnimation(new SpriteActivationAnimation(getEElementSpriteAtPosition(ae.getPos())));
+		masterView.enqueueAnimation(new SpriteImageChangeAnimation(getEElementSpriteAtPosition(ae.getPos())));
 		System.out.println("Activation animation enqueued");
 	}
 	

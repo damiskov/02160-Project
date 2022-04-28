@@ -1,10 +1,7 @@
 package animations;
-import java.util.List;
 
-import animations.Animation;
 import board.Position;
 import view.BoardPanel;
-import view.Sprite;
 
 public class SpriteRemovalAnimation extends Animation {
 	
