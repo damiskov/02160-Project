@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,8 +13,10 @@ import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 
 import board.Board;
 import board.BoardRetriever;
@@ -56,9 +59,13 @@ public class BoardCreationView extends JFrame{
 	private JButton cancelButton;
 	private JButton saveButton;
 	private JButton playButton;
+	private JPanel buttonsContainer;
+	private JPanel numPlayersPanel; 
+	private JSlider sliderNumPlayers;
 	
 	private int rows;
 	private int columns;
+	private int numberPlayers;
 	
 	private HashMap<EnvironmentElement, Character> EEToascii = new HashMap<>();
 	
@@ -88,18 +95,63 @@ public class BoardCreationView extends JFrame{
 		
 		brd = new PropertyChangeSupport();
 		
+		//CREATE SLIDER
+		createSliderPlayers();
+
 		//CREATE BUTTONS
+		createButtonsContainer();
+		
+		rows = 12;
+		columns = 12;
+		
+		newBoard = new Board(rows, columns, brd);
+		
+		boardPanel = new BoardCreationPanel(rows, columns, controller, newBoard, saveButton);
+		elements = new ElementSelectionPanel(controller);
+		
+		
+		
+		addElements();
+		pack();
+		
+		setVisible(true);
+		
+		// maximize the window
+		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+	}
+	
+	private void addElements() {
+		setLayout(new GridBagLayout());
+		add(boardPanel, GridBagLayoutUtils.constraint(0, 1, 10));
+		add(elements, GridBagLayoutUtils.constraint(1, 1, 10));
+		add(numPlayersPanel, GridBagLayoutUtils.constraint(1, 0, 0));
+		add(buttonsContainer, GridBagLayoutUtils.constraint(0, 2, 0));
+		
+		revalidate();
+		repaint();
+	}
+	
+	private void setController(BoardCreationController boardCreationController) {
+		controller = boardCreationController;
+	}
+	
+	private void createButtonsContainer() {
+
 		cancelButton = new JButton("Cancel");
+		cancelButton.setBackground(Color.red);
 		saveButton = new JButton("Save");
 		saveButton.setEnabled(false);
 		
 		playButton = new JButton("Play");
+		playButton.setBackground(Color.blue);
 		
 		playButton.addActionListener(e -> {
+			
+			numberPlayers = sliderNumPlayers.getValue();
 			//TODO check if the board has 5 checkpoints
 			
 			if(enoughCheckpoints()) {
-				controller.startGame(newBoard, 3);
+				controller.startGame(newBoard, numberPlayers);
 			}else {
 				JOptionPane.showMessageDialog(this, "Please ensure there are 4 checkpoints in the board!", "Error starting game", JOptionPane.ERROR_MESSAGE);
 			}
@@ -135,40 +187,25 @@ public class BoardCreationView extends JFrame{
 			
 		}); 
 		
-		rows = 12;
-		columns = 12;
-		
-		newBoard = new Board(rows, columns, brd);
-		
-		boardPanel = new BoardCreationPanel(rows, columns, controller, newBoard, saveButton);
-		elements = new ElementSelectionPanel(controller);
-		
+		//CREATE CONTAINER FOR BUTTONS
+		buttonsContainer = new JPanel();
+		buttonsContainer.setLayout(new GridBagLayout());
+		buttonsContainer.add( saveButton, GridBagLayoutUtils.constraint(0, 1, 5) );
+		buttonsContainer.add( cancelButton, GridBagLayoutUtils.constraint(0, 0, 5) );
+		buttonsContainer.add( playButton, GridBagLayoutUtils.constraint(1, 0, 5) );
 		
 		
-		addElements();
-		pack();
-		
-		setVisible(true);
-		
-		// maximize the window
-		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 	}
 	
-	private void addElements() {
-		setLayout(new GridBagLayout());
-		add(boardPanel, GridBagLayoutUtils.constraint(0, 0, 10));
-		add(elements, GridBagLayoutUtils.constraint(1, 0, 10));
+	private void createSliderPlayers() {
+		sliderNumPlayers = new JSlider(2,8,2);
+		sliderNumPlayers.setMajorTickSpacing(1);
+		sliderNumPlayers.setPaintLabels(true);
 		
-		add(cancelButton, GridBagLayoutUtils.constraint(1, 1, 0));
-		add(saveButton, GridBagLayoutUtils.constraint(1, 2, 0));
-		add(playButton, GridBagLayoutUtils.constraint(2, 2, 0));
-		
-		revalidate();
-		repaint();
-	}
-	
-	private void setController(BoardCreationController boardCreationController) {
-		controller = boardCreationController;
+		numPlayersPanel = new JPanel();
+		numPlayersPanel.setLayout(new GridBagLayout());
+		numPlayersPanel.add( new JLabel("No. of players:"), GridBagLayoutUtils.constraint(0, 0, 5) );
+		numPlayersPanel.add( sliderNumPlayers, GridBagLayoutUtils.constraint(0, 1, 5) );
 	}
 	
 	
