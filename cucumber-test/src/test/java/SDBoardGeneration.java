@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import board.Board;
 import board.BoardFactory;
@@ -83,6 +84,11 @@ public class SDBoardGeneration {
 	@Then("the board has {int} rows and {int} columns")
 	public void the_board_has_rows_and_columns(Integer int1, Integer int2) {
 	    assertEquals(context.board.getNumRows(), context.board.getNumColumns());
+	}
+	
+	@Then("the board has a game")
+	public void the_board_has_a_game() {
+		assertTrue(!(context.board.getGame() == null));
 	}
 
 }
