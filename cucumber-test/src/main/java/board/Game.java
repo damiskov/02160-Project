@@ -119,7 +119,7 @@ public class Game {
 	
 	public void finishGame() {
 		over = true;
-	}
+	} 
 	
 	// temporary
 	public void testPlacements() {
@@ -154,9 +154,10 @@ public class Game {
 		board.initialPlacement(rp, 6, 3);
 		board.initialPlacement(new ReversalPanel(), 7, 3);
 		
-		Teleporter t2 = new Teleporter(false, null);
+		Teleporter t2 = new Teleporter(false);
 		
-		Teleporter t1 = new Teleporter(true, t2);
+		Teleporter t1 = new Teleporter(true);
+		t1.setReceiving(t2);
 		board.initialPlacement(t1, 8, 3);
 		
 		board.initialPlacement(t2, 8, 10);

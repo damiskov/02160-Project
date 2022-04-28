@@ -14,13 +14,13 @@ public class SDTeleporter {
 	
 	@Given("a sending teleporter on the board at \\({int}, {int})")
 	public void a_sending_teleporter_on_the_board_at(Integer int1, Integer int2) {
-		context.sending =  new Teleporter(true, null);
+		context.sending =  new Teleporter(true);
 		context.board.initialPlacement(context.sending, int1, int2); 
 	}
 	
 	@Given("a linked receiving teleporter on the board at \\({int}, {int})")
 	public void a_linked_receiving_teleporter_on_the_board_at(Integer int1, Integer int2) {
-		Teleporter rec = new Teleporter(false, null);
+		Teleporter rec = new Teleporter(false);
 		context.board.initialPlacement(rec, int1, int2);
 	    context.receiving = rec;
 	    context.sending.setReceiving(context.receiving);
