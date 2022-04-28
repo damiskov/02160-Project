@@ -15,10 +15,6 @@ import property_changes.PropertyChangeSupport;
 public class BoardRetriever  
 {  
 	
-	public BoardRetriever()
-	{
-	}
-	
 	public static Board retrieveBoard(String filename, Game game)  
 	{
 		

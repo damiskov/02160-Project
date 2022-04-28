@@ -1,4 +1,9 @@
 package board;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Random;
 
 import piece_basics.Robot;
@@ -39,7 +44,7 @@ public class BoardGenerator {
 	public Board getEasyBoard() {
 		Random rand = new Random();
 		int x = rand.nextInt(3);
-		b = BoardRetriever.retrieveBoard(easyFiles[x], game);
+		b = retrieveBoard(easyFiles[x], game);
 		b.setDifficulty(new Difficulty(1));
 		for (int i = 0; i < robots.length; i++)
 		{
@@ -54,7 +59,7 @@ public class BoardGenerator {
 	public Board getMediumBoard() {
 		Random rand = new Random();
 		int x = rand.nextInt(3);
-		b = BoardRetriever.retrieveBoard(mediumFiles[x], game);
+		b = retrieveBoard(mediumFiles[x], game);
 		b.setDifficulty(new Difficulty(2));
 		for (int i = 0; i < robots.length; i++)
 		{
@@ -68,13 +73,69 @@ public class BoardGenerator {
 	public Board getHardBoard() {
 		Random rand = new Random();
 		int x = rand.nextInt(3);
-		b = BoardRetriever.retrieveBoard(hardFiles[x], game);
+		b = retrieveBoard(hardFiles[x], game);
 		b.setDifficulty(new Difficulty(3));
 		for (int i = 0; i < robots.length; i++)
 		{
 			b.initialPlacement(robots[i], startingPositions[i]);
 		}
 		return b;
+	}
+	
+	private Board retrieveBoard(String filename, Game game)  
+	{
+		
+		
+		String path = "boards/" + filename + ".txt";
+		int numRows=0;
+		int numCols=0;
+		File doc = new File(path);
+		
+		// Finding dimensions of board
+		
+		BufferedReader obj = null;
+		try {
+			obj = new BufferedReader(new FileReader(doc));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		String str;
+		try {
+			while ((str = obj.readLine()) != null) {
+				numRows++;
+				numCols = str.length();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// Placing environment elements on the board
+		
+		Board b = new Board(numRows, numCols, game);
+		int j = 0;
+		try {
+			obj = new BufferedReader(new FileReader(doc));
+			while (obj.readLine() != null) {
+				str = obj.readLine();
+				for (int i = 0; i < str.length(); i++)
+				{
+					if (EEFactory.getEE(str.charAt(i))==null) {
+						b.initialPlacement(EEFactory.getEE(str.charAt(i)), new Position(i,j));
+					}
+				}
+				j++;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return b;
+		
 	}
 
 }
