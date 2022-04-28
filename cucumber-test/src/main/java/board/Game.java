@@ -145,7 +145,7 @@ public class Game {
 		
 		board.initialPlacement(new ChainingPanel(), 0, 3);
 		board.initialPlacement(new FinalCheckpoint(1), 1, 3);
-		board.initialPlacement(new Fire(), 2, 3);
+		board.initialPlacement(new Fire(), 2, 3); 
 		board.initialPlacement(new HealthStation(), 3, 3);
 		board.initialPlacement(new OilSpill(), 4, 3);
 		board.initialPlacement(new Pit(), 5, 3);

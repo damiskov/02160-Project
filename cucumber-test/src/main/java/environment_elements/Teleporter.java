@@ -12,7 +12,9 @@ public class Teleporter extends EnvironmentElement {
 	public Teleporter(boolean sending) {
 		this.sending = sending;
 	}
-	
+
+
+
 	
 
 

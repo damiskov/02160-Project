@@ -70,7 +70,7 @@ public class CardPanel extends JPanel {
 
 			}
 
-		});
+		}); 
 		// given a hand
 		// go through that hand and for each card create a button
 		
@@ -139,6 +139,7 @@ public class CardPanel extends JPanel {
 		}
 	}
 	
+	// Uses master controller to access current player and get program
 
 	private void setCardPanel()
 	{

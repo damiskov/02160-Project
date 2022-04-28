@@ -88,29 +88,28 @@ public class EEFactory {
 		}
 		else if (ID == '1')
 		{
-			new Checkpoint(1);
+			return new Checkpoint(1);
 		}
 		else if (ID == '2') 
 		{
-			new Checkpoint(2);
+			return new Checkpoint(2);
 		}
 		else if (ID == '3')
 		{
-			new Checkpoint(3);
+			return new Checkpoint(3);
 		}
 		else if (ID == '4')
 		{
-			new Checkpoint(4);
+			return new Checkpoint(4);
 		}
 		else if (ID == '5')
 		{
-			new Checkpoint(5);
+			return new Checkpoint(5);
 		}
 		else 
 		{
 			return null;
 		}
-		return null;
 
 	}
 
