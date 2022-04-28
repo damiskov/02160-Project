@@ -64,14 +64,14 @@ Scenario: Checking robot on the board
   Then the board has a game
   
  #only for coverage  
-	Scenario: Checking obstacle position
-	  Given a board 
-	  When a position is calculated for an obstacle
-	  Then it throws an exception error
-	  
+#	Scenario: Checking obstacle position
+#	  Given a board 
+#	  When a position is calculated for an obstacle
+#	  Then it throws an exception error
+#	  
  #only for coverage  
-	Scenario: Checking robot position
-	  Given a board 
-	  When a position is calculated for a robot
-	  Then it throws an exception error if robot not found
+#	Scenario: Checking robot position
+#	  Given a board 
+#	  When a position is calculated for a robot
+#	  Then it throws an exception error if robot not found
 
