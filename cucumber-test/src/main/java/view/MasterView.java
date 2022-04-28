@@ -17,6 +17,7 @@ import animations.Animation;
 import animations.HealthChangeAnimation;
 import board.Game;
 import board.Position;
+import controller.BoardCreationController;
 import controller.MasterController;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
@@ -29,6 +30,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	private static final long serialVersionUID = 3L;
 	
 	private MasterController controller;
+
 	
 	private BoardPanel boardPanel;
 	private JPanel cardPanel;
@@ -47,6 +49,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		this.controller = masterController;
 		initGUI(game);
 	}
+	
 
 	private void initGUI(Game game) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -140,6 +143,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	private void removeBlackScreen() {
 		remove(blackScreen);
 	}
+
 
 	@Override
 	public void propertyChange(IPropertyChangeEvent pce) {
@@ -238,4 +242,5 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			System.out.println("Animations finished");
 		}
 	}
+
 }

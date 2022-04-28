@@ -57,6 +57,7 @@ public class Board {
 		int y = p.getY();
 		return matrix[numColumns - y - 1][x];
 	}
+	
 	private Cell getCell(int x, int y) {
 		return matrix[numColumns - y - 1][x];
 	}
@@ -76,11 +77,17 @@ public class Board {
 	}
 	
 	public void initialPlacement(EnvironmentElement e, int x, int y) {
+
 		if (hasEElementAt(new Position(x, y))) throw new PieceAlreadyPresentException("Attempted to place an EnvironmentElement on a cell where one already exists");
+
+
 		addToExecutionLists(e);
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
+
 		getPropertyChangeSupport().firePropertyChange(new PlacementEvent(e, new Position(x, y)));
+
+
 	}
 	public void initialPlacement(EnvironmentElement e, Position p) {
 		initialPlacement(e, p.getX(), p.getY());
@@ -140,6 +147,7 @@ public class Board {
 	}
 
 	public boolean hasEElementAt(Position p) {
+		System.out.println("checking for eelement at " + p);
 		return getCell(p).eElement != null;
 	}
 
