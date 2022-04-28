@@ -2,11 +2,11 @@ package animations;
 
 import view.Sprite;
 
-public class SpriteActivationAnimation extends Animation {
+public class SpriteImageChangeAnimation extends Animation {
 	
 	private Sprite sprite;
 
-	public SpriteActivationAnimation(Sprite sprite) {
+	public SpriteImageChangeAnimation(Sprite sprite) {
 		super(0);
 		this.sprite = sprite;
 	}
@@ -19,7 +19,7 @@ public class SpriteActivationAnimation extends Animation {
 
 	@Override
 	public void finalizeAnimation() {
-		sprite.activate();
+		sprite.nextImage();
 	}
 	
 

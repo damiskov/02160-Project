@@ -35,13 +35,13 @@ public class Game {
 			ConveyorBelt.ID,
 			Teleporter.ID,
 			Gear.ID,
+			HealthStation.ID,
 			Laser.ID,
 			Robot.ID,
 			Fire.ID,
 			OilSpill.ID,
 			ReversalPanel.ID,
 			RespawnPoint.ID
-			/* Checkpoint.ID */
 	);
 	
 	Board board;
@@ -131,7 +131,7 @@ public class Game {
 		board.initialPlacement(r2, 7, 3);
 		Robot r3 = new Robot();
 		board.initialPlacement(r3, 1, 0);
-		board.initialPlacement(new Robot(), 3, 0);
+		board.initialPlacement(new Robot(), 2, 0);
 		board.initialPlacement(new Robot(), 9, 0);
 		board.initialPlacement(new Robot(), 5, 0);
 		board.initialPlacement(new Robot(), 10, 0);
@@ -157,13 +157,14 @@ public class Game {
 		board.initialPlacement(new ReversalPanel(), 7, 3);
 		
 		Teleporter t1 = new Teleporter();
-		board.initialPlacement(t1, 8, 3);
 		Teleporter t2 = new Teleporter();
-		board.initialPlacement(t2, 8, 10);
 		t1.setSending(true);
 		t1.setReceiving(t2);
+		board.initialPlacement(t1, 8, 3);
+		board.initialPlacement(t2, 8, 10);
 		
 		board.initialPlacement(new Wall(), 9, 3);
+		board.initialPlacement(new Laser(), 6, 7);
 		
 		r1.move(1);
 		
@@ -184,6 +185,11 @@ public class Game {
 		r1.move(2);
 		r1.turnRight();
 		r1.move(1);
+		activateRegisterActors();
+		
+		r1.turnLeft();
+		r1.move(1);
+		r2.move(3);
 		activateRegisterActors();
 		
 		
