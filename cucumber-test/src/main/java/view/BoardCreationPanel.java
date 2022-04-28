@@ -60,15 +60,17 @@ private static final long serialVersionUID = -2140843137512577992L;
 	ImageIcon icon;
 	
 	private JButton [][] cellButtons;
+	private JButton saveBtn;
 	
 	int col = 0;
 	int row = 0;
 	
 
-	public BoardCreationPanel(int rows, int cols, BoardCreationController controller, Board b) {
+	public BoardCreationPanel(int rows, int cols, BoardCreationController controller, Board b, JButton saveButton) {
 		
 		newBoard = b;
 		
+		saveBtn = saveButton;
 		
 		setController(controller);
 		
@@ -151,6 +153,7 @@ private static final long serialVersionUID = -2140843137512577992L;
 					cellButtons[y][x]=cell;
 					
 					cell.addActionListener(e -> {
+						
 
 						JButton selectedCell = (JButton)  e.getSource();
 //						JButton selectedCell = (CellButton)  e.getSource();
@@ -164,30 +167,12 @@ private static final long serialVersionUID = -2140843137512577992L;
 							System.out.println("imageChanged");
 							System.out.println("x " + x + "y " + y);
 							
+							//set save button enabled
+							saveBtn.setEnabled(true);
+							
 							
 							// getSelectedElement() is a element ID
 							ImageIcon env = new ImageIcon(ImageUtils.scaledImage("images/" + controller.getSelectedElement() + ".png", pixelsPerCell, pixelsPerCell));
-							
-//							selectedCell.setIcon(env);
-							
-							// if has EnvElement at this pos
-							// then remove it and add this new element
-							
-//							//DEBUGGING
-//							if (controller.getSelectedElement()==ConveyorBelt.ID) {
-//								System.out.println("GOT CONVEYORBELT ID" );
-//							} else {
-//								System.out.println("DIDNT GET ID" );
-//							}
-//							
-//							EnvironmentElement en = createEElement("conveyor_belt");
-//							boolean chain =  en instanceof ConveyorBelt;
-//							
-//							if(chain ) {
-//								System.out.println("CONVEYORBELT CREATED SUCCESSFULY" +  createEElement(ConveyorBelt.ID) );
-//							} else {
-//								System.out.println("DIDNT CREATE CONVEYORBELT" );
-//							}
 							
 							
 							Position pos = new Position(x , y);
@@ -195,40 +180,10 @@ private static final long serialVersionUID = -2140843137512577992L;
 							
 							EnvironmentElement newElem = createEElement(controller.getSelectedElement());
 							System.out.println(pos );
-							if(newElem instanceof Checkpoint) {
-								//if selected element is a checkpoint
-								//visual
-								selectedCell.setIcon(env);
-								
-								int checkpointNumber;
-								
-								checkpointNumber = getCheckpointNumber(controller.getSelectedElement());
-								
-								
-								//search instance of checkpoint 1, given id of the selected element is from checkpoint 1
-								
-								
-								//delete same checkpoint in case it exists
-								removeCheckpointInBoard(checkpointNumber);
-								newBoard.initialPlacement(newElem, pos);
-								
-							} else {
-								//visual
-								selectedCell.setIcon(env);
-								
-								//if selected element is not a checkpoint
-								if (newBoard.hasEElementAt(pos)) {
-									newBoard.removeEElement(pos);
-									newBoard.initialPlacement(newElem, pos);
-									System.out.println("HAS ELEMENT IN POSITION ALREADY" );
-								} else {
-									newBoard.initialPlacement(newElem, pos);
-									System.out.println(newBoard.hasEElementAt(pos));
-									System.out.println("DOESNT HAVE ELEMENT IN POSITION" );
-								}
-							}
 							
 							
+							
+							checkSelectedCheckpoint(newElem, pos, selectedCell, env);
 							
 							if (newBoard.hasEElementAt(pos)) {
 								System.out.println("Element added to matrix at x = " + x + " and row at y = " + y);
@@ -395,29 +350,75 @@ private static final long serialVersionUID = -2140843137512577992L;
 		
 	}
 	
-//	private boolean checkpointInBoard(int checkpointNumber) {
-//		for (int col = 0; col < cols; col++) {
-//			for (int row = 0; row < rows; row++) {
-//				
-//				if(newBoard.hasEElementAt(new Position (row, col))) {
-//					if(newBoard.getEElementAt(new Position (row, col)) instanceof Checkpoint) {
-//						
-//						Checkpoint cp = (Checkpoint) newBoard.getEElementAt(new Position (row, col));
-//						
-//						if ( cp.getNumber() == checkpointNumber) {
-//							return true;
-//						} 
-//						
-//						
-//						
-//					}
-//				}
-//				
-//			}
-//		}
-//		
-//		return false;
-//	}
-
+	
+	private void checkSelectedCheckpoint(EnvironmentElement newElem, Position pos, JButton selectedCell, ImageIcon env ) {
+		
+		if(newBoard.hasEElementAt(pos)) {
+			
+			EnvironmentElement existingElem = newBoard.getEElementAt(pos);
+			
+			if (existingElem.getPieceID() == newElem.getPieceID()) {
+				
+				System.out.println("ELEMENTS ARE EQUAL!");
+				
+				//remove element from board visually and in the board object
+				selectedCell.setIcon(icon);
+				newBoard.removeEElement(pos);
+				
+				
+			} else {
+				//visual
+				selectedCell.setIcon(env);
+				
+				newBoard.removeEElement(pos);
+				newBoard.initialPlacement(newElem, pos);
+				System.out.println("ELEMENTS ARE NOT EQUAL!");
+			}
+			
+		} else {
+			
+			if(newElem instanceof Checkpoint) {
+				//if selected element is a checkpoint
+				//visual
+				selectedCell.setIcon(env);
+				
+				int checkpointNumber;
+				
+				checkpointNumber = getCheckpointNumber(controller.getSelectedElement());
+				
+				
+				//search instance of checkpoint 1, given id of the selected element is from checkpoint 1
+				
+				
+				//delete same checkpoint in case it exists
+				removeCheckpointInBoard(checkpointNumber);
+				newBoard.initialPlacement(newElem, pos);
+				
+			} else {
+				//visual
+				selectedCell.setIcon(env);
+				
+				newBoard.initialPlacement(newElem, pos);
+				System.out.println(newBoard.hasEElementAt(pos));
+				System.out.println("DOESNT HAVE ELEMENT IN POSITION" );
+			
+			}
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
 	
 }

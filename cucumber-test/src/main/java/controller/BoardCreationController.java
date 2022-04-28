@@ -88,4 +88,11 @@ public class BoardCreationController {
 		return created_board;
 	}
 	
+	
+	public void startGame(Board newBoard, int numPlayers) {
+		view.setVisible(false);
+		application.startCustomGame(numPlayers, newBoard);
+	}
+	
+	
 }

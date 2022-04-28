@@ -53,6 +53,14 @@ public class Game {
 		board = new Board(12, 12, pcs);
 	}
 	
+	public Game(PropertyChangeSupport pcs, int numPlayers, Board definedBoard) {
+		this.propertyChangeSupport = pcs;
+		this.numPlayers = numPlayers;
+		
+		// temporary
+		board = definedBoard;
+	}
+	
 	
 	public void genBoard() {
 		

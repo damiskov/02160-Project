@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import board.Board;
@@ -53,7 +54,11 @@ public class BoardCreationView extends JFrame{
 	private BoardCreationPanel boardPanel;
 	private ElementSelectionPanel elements;
 	private JButton cancelButton;
-	private JButton createButton;
+	private JButton saveButton;
+	private JButton playButton;
+	
+	private int rows;
+	private int columns;
 	
 	private HashMap<EnvironmentElement, Character> EEToascii = new HashMap<>();
 	
@@ -74,6 +79,8 @@ public class BoardCreationView extends JFrame{
 	
 	
 	private void initGUI() {
+
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("RoboRally Board Creator");
 		
@@ -81,28 +88,62 @@ public class BoardCreationView extends JFrame{
 		
 		brd = new PropertyChangeSupport();
 		
-		boardPanel = new BoardCreationPanel(12, 12, controller, new Board(12, 12, brd));
-		elements = new ElementSelectionPanel(controller);
-		
+		//CREATE BUTTONS
 		cancelButton = new JButton("Cancel");
-		createButton = new JButton("Create");
+		saveButton = new JButton("Save");
+		saveButton.setEnabled(false);
+		
+		playButton = new JButton("Play");
+		
+		playButton.addActionListener(e -> {
+			//TODO check if the board has 5 checkpoints
+			
+			if(enoughCheckpoints()) {
+				controller.startGame(newBoard, 3);
+			}else {
+				JOptionPane.showMessageDialog(this, "Please ensure there are 4 checkpoints in the board!", "Error starting game", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			
+		});
 		
 		cancelButton.addActionListener(e -> {
 			controller.initiateSetupMenu();
 		}); 
 		
-		createButton.addActionListener(e -> {
+		saveButton.addActionListener(e -> {
 			//call method in controller that given a board of cells creates a text file
+			JButton selectedSave = (JButton) e.getSource();
+			
 			
 			try {
 				newBoard = controller.getCreatedBoard();
-				createTextFile();
+				if(enoughCheckpoints()) {
+					createTextFile();
+				}else {
+					JOptionPane.showMessageDialog(this, "Please ensure there are 4 checkpoints in the board!", "Error saving board", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
+			
+			selectedSave.setEnabled(false);
+			
 		}); 
+		
+		rows = 12;
+		columns = 12;
+		
+		newBoard = new Board(rows, columns, brd);
+		
+		boardPanel = new BoardCreationPanel(rows, columns, controller, newBoard, saveButton);
+		elements = new ElementSelectionPanel(controller);
+		
+		
 		
 		addElements();
 		pack();
@@ -119,7 +160,9 @@ public class BoardCreationView extends JFrame{
 		add(elements, GridBagLayoutUtils.constraint(1, 0, 10));
 		
 		add(cancelButton, GridBagLayoutUtils.constraint(1, 1, 0));
-		add(createButton, GridBagLayoutUtils.constraint(1, 2, 0));
+		add(saveButton, GridBagLayoutUtils.constraint(1, 2, 0));
+		add(playButton, GridBagLayoutUtils.constraint(2, 2, 0));
+		
 		revalidate();
 		repaint();
 	}
@@ -294,6 +337,34 @@ public class BoardCreationView extends JFrame{
 			throw new RuntimeException("Invalid input. Please enter a valid Environment Element.");
 		}
 
+	}
+	
+	private boolean enoughCheckpoints() {
+		
+		int checkpointCounter = 0;
+		EnvironmentElement curr_element;
+		
+		for(int i = 0; i < newBoard.getNumColumns(); i++) {
+			for(int j = 0; j < newBoard.getNumRows(); j++) {
+				
+				Position p = new Position(j, i);
+				
+				if(newBoard.hasEElementAt(p)) {
+					
+					curr_element = newBoard.getEElementAt(p);
+					
+					if (curr_element instanceof Checkpoint) {
+						checkpointCounter ++;
+					}
+					
+					
+				}
+				
+			}
+		}
+		
+		return checkpointCounter == 4;
+		
 	}
 	
 	

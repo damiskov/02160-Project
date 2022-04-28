@@ -3,6 +3,8 @@ package controller;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import board.Board;
 import board.Game;
 import view.InitiateView;
 
@@ -39,6 +41,11 @@ public class ApplicationController {
 		masterController = new MasterController(this, playerCount, difficulty);
 		masterController.display();
 
+	}
+	
+	public void startCustomGame(int numPlayers, Board newBoard){
+		masterController = new MasterController(this, numPlayers, "Custom Board", newBoard);
+		masterController.display();
 	}
 	
 	public void startBoardCreationUI() {
