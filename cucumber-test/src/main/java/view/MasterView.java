@@ -162,11 +162,10 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	public void displayCardPanelView(CardPanel cp){
 		displayBlackScreen(controller.getCurrentPlayer()+1);
-		remove(cardPanel);
 		cardPanel = cp;
-		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 10));
-		revalidate();
-		repaint();
+//		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 10));
+//		revalidate();
+//		repaint();
 		
 		
 	}
