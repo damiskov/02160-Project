@@ -7,7 +7,6 @@ import java.util.Map;
 import cards.Card;
 import cards.CardCommand;
 import cards.Deck;
-import cards.Move1;
 import environment_elements.ChainingPanel;
 import environment_elements.ConveyorBelt;
 import environment_elements.FinalCheckpoint;
@@ -25,6 +24,7 @@ import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
+import property_changes.IPropertyChangeEvent;
 import property_changes.ProgrammingPhaseBeginEvent;
 import property_changes.PropertyChangeSupport;
 
@@ -124,6 +124,10 @@ public class Game {
 
 	public PropertyChangeSupport getPropertyChangeSupport() {
 		return propertyChangeSupport;
+	}
+	
+	public void firePropertyChange(IPropertyChangeEvent event) {
+		propertyChangeSupport.firePropertyChange(event);
 	}
 
 	public Board getBoard() {
