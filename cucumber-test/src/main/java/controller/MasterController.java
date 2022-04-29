@@ -2,10 +2,9 @@ package controller;
 
 
 
-import board.Difficulty;
 import board.Board;
 import board.Game;
-import player.Player;
+import property_changes.ProgrammingPhaseBeginEvent;
 import property_changes.PropertyChangeSupport;
 import view.MasterView;
 
@@ -29,16 +28,25 @@ public class MasterController {
 		
 		pcs = new PropertyChangeSupport();
 		game = new Game(pcs, playerCount);
+		
+		// temporary
+		game.testPlacements();
+		//
+		
+		
 		this.view = new MasterView(this, game);
 		pcs.addSubscriber(view);
+		game.getPropertyChangeSupport().firePropertyChange(new ProgrammingPhaseBeginEvent());
+
+//		// temporary
+//		game.demo();
+//		//
 		
-		game.testPlacements();
-		
-		Difficulty d = new Difficulty(setDifLevel(difficulty));
-		
-		game.begin(playerCount, d, pcs);
-		
-		runGame();
+//		Difficulty d = new Difficulty(setDifLevel(difficulty));
+//		
+//		game.begin(playerCount, d, pcs);
+//		
+//		runGame();
 	}
 	
 	MasterController(ApplicationController application, int playerCount, String difficulty,  Board customBoard){

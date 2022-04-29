@@ -147,7 +147,6 @@ public class Board {
 	}
 
 	public boolean hasEElementAt(Position p) {
-		System.out.println("checking for eelement at " + p);
 		return getCell(p).eElement != null;
 	}
 

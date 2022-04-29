@@ -61,17 +61,34 @@ public class BoardPanel extends JPanel {
 		this.cols = board.getNumColumns();
 		
 		if (rows >= cols) {
-			cellWidth = maxDimension/rows;
+			this.cellWidth = maxDimension/rows;
 		} else {
-			cellWidth = maxDimension/cols;
+			this.cellWidth = maxDimension/cols;
 		}
 		
-		width = cols*cellWidth;
-		height = rows*cellWidth;
+		this.width = cols*cellWidth;
+		this.height = rows*cellWidth;
 		
 		setPreferredSize(new Dimension(width, height)); 
 		
 		backgroundTile = ImageUtils.scaledImage("images/tile.png", cellWidth, cellWidth);
+		
+		addInitialSprites(board);
+	}
+
+	private void addInitialSprites(Board board) {
+		System.out.println("\tInitial sprite placements");
+		for (int i = 0; i < cols; i++) {
+			for (int j = 0; j < rows; j++) {
+				Position cpos = new Position(i, j);
+				if(board.hasEElementAt(cpos)){
+					addSprite(board.getEElementAt(cpos), cpos);
+				}
+				if(board.hasRobotAt(cpos)){
+					addSprite(board.getRobotAt(cpos), cpos);
+				}
+			}
+		}
 	}
 
 	public void addSprite(Piece piece, Position p) {
