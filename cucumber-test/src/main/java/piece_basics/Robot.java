@@ -10,7 +10,6 @@ import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
 import environment_elements.Wall;
-import property_changes.ChainedMovementEvent;
 import property_changes.ChainingEvent;
 import property_changes.HealthChangeEvent;
 import property_changes.MovementEvent;
