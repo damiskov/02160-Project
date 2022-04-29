@@ -29,10 +29,6 @@ public class SpriteRobotLaserAnimation extends Animation {
 
 	}
 	
-	Triplet<Integer> colour = new Triplet<Integer>(1,1,1);
-
-	
-	
 	@Override
 	public void initializeAnimation() {
 		color2final = new Triplet(195,59,59);
