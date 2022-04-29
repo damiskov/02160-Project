@@ -3,6 +3,7 @@ package view;
 import java.awt.Image;
 import board.Position;
 import environment_elements.ChainingPanel;
+import environment_elements.Checkpoint;
 import environment_elements.ConveyorBelt;
 import environment_elements.Gear;
 import environment_elements.Teleporter;
@@ -35,6 +36,10 @@ public class SpriteFactory {
 				Teleporter teleporter = (Teleporter) eElement;
 				String filepath = "images/teleporter" + (teleporter.isSending() ? "_orange" : "_blue") + ".png";
 				return new SingleImageSprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, 0, canvas);
+			} else if (eElement instanceof Checkpoint) {
+					Checkpoint checkpoint = (Checkpoint) eElement;
+					String filepath = "images/checkpoint" + checkpoint.getNumber() + ".png";
+					return new SingleImageSprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, 0, canvas);
 			} else {
 				String filepath = "images/" + eElement.getPieceID() + ".png";
 				return new SingleImageSprite(ImageUtils.scaledImage(filepath, cellSize, cellSize), x, y, 0, canvas);
@@ -51,24 +56,5 @@ public class SpriteFactory {
 			throw new IllegalArgumentException("Piece must be either a Robot or an EnvironmentElement");
 		}
 	}
-	
-	public static ImageToggleSprite getLaserSprite(Orientation orientation, Position position, int cellSize, BoardPanel canvas, boolean endCap) {
-		int x = position.getX()*cellSize;
-		int y = position.getY()*cellSize;
-		
-		Image defaultImageMid = ImageUtils.scaledImage("images/empty_1.png", cellSize, cellSize);
-		Image activeImageMid = ImageUtils.scaledImage("images/laser_mid.png", cellSize, cellSize);
-		Image defaultImageEnd = ImageUtils.scaledImage("images/empty_2.png", cellSize, cellSize);
-		Image activeImageEnd = ImageUtils.scaledImage("images/laser_end.png", cellSize, cellSize);
-		
-		
-		if(endCap) {
-			return new ImageToggleSprite(defaultImageEnd, activeImageEnd, x, y, orientation.getDegrees(), canvas);
-		} else {
-			return new ImageToggleSprite(defaultImageMid, activeImageMid, x, y, orientation.getDegrees(), canvas);
-		}
-		
-	}
-	
 	
 }
