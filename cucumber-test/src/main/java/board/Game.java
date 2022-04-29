@@ -178,9 +178,9 @@ public class Game {
 		board.initialPlacement(t1, 8, 3);
 		
 		board.initialPlacement(t2, 8, 10);
-		t1.setReceiving(t2);
-		board.initialPlacement(t1, 8, 3);
-		board.initialPlacement(t2, 8, 10);
+//		t1.setReceiving(t2);
+//		board.initialPlacement(t1, 8, 3);
+//		board.initialPlacement(t2, 8, 10);
 		
 		board.initialPlacement(new Wall(), 9, 3);
 		board.initialPlacement(new Laser(), 6, 7);
