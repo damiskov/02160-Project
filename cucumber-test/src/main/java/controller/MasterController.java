@@ -1,4 +1,5 @@
 package controller;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -97,7 +98,12 @@ public class MasterController {
 	public void assignCards(List<Card> cards)
 	{
 		Stack<Card> stack = new Stack<Card>();
+		for (Card c : cards)
+		{
+			System.out.println(c.getAction());
+		}
 		stack.addAll(cards);
+		System.out.println(stack.size());
 		Player p = game.getPlayers()[currentPlayer];
 		p.getRobot().setProgram(stack);
 	}
@@ -175,4 +181,9 @@ public class MasterController {
 		
 	}
 	
+	
+	public ArrayList<Card> getCurrentPlayerHand()
+	{
+		return game.getPlayers()[currentPlayer].getHand().getCardList();
+	}
 }

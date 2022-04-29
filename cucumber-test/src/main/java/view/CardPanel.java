@@ -31,7 +31,6 @@ public class CardPanel extends JPanel {
 
 	private List<CardSelectionPanel> hand = new ArrayList<>();
 	private List<CardSelectionPanel> orderedCards = new ArrayList<>();
-	private boolean buttonPressed;
 	
 	
 	JButton assignCardsButton;
@@ -61,33 +60,36 @@ public class CardPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				List<Card> cards = new ArrayList<>();
+				cards.add(new Card("move1"));
+				cards.add(new Card("move1"));
+				cards.add(new Card("move1"));
+				cards.add(new Card("move1"));
+				cards.add(new Card("move1"));
+				
+//				// Iterating over card selection panels, and mapping to card objects using cardFactory method
+//				CardFactory cf = new CardFactory();
+//				
+//				for (CardSelectionPanel c : orderedCards)
+//				{
+//					cards.add(cf.getCard(c.getCardID()));
+//				}
+//				
+				// Assigns selected cards to robot
+				
+				mc.assignCards(cards);
+				
 				if (mc.getCurrentPlayer()==mc.playerCount-1)
 				{
 					// Execute activation phase
-					System.out.println("Activation phase should be executed");
+					mc.getGame().activationPhase();
 				}
 				else
 				{
 					
 					
-					List<Card> cards = new ArrayList<>();
-					
-					// Iterating over card selection panels, and mapping to card objects using cardFactory method
-					CardFactory cf = new CardFactory();
-					
-					for (CardSelectionPanel c : orderedCards)
-					{
-						cards.add(cf.getCard(c.getCardID()));
-					}
-					
-					// Assigns selected cards to robot
-					
-					mc.assignCards(cards);
-					
 	    			// incrementing current player
-	//				// and setCardPanel (new player's hand shown)
-	//				
-					
+					// and setCardPanel (new player's hand shown)
 	
 					mc.incrementCurrentPlayer();
 					
@@ -151,7 +153,7 @@ public class CardPanel extends JPanel {
 
 	private void setCardPanel()
 	{
-		ArrayList<Card> cardHand = mc.getGame().getPlayers()[mc.getCurrentPlayer()].getHand().getCardList();
+		ArrayList<Card> cardHand = mc.getCurrentPlayerHand();
 		for (Card c : cardHand)
 		{
 			CardSelectionPanel b = new CardSelectionPanel(c.getAction());
