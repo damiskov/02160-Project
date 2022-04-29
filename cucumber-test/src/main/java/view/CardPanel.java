@@ -60,20 +60,22 @@ public class CardPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				List<Card> cards = new ArrayList<>();
-				cards.add(new Card("move1"));
-				cards.add(new Card("move1"));
-				cards.add(new Card("move1"));
-				cards.add(new Card("move1"));
-				cards.add(new Card("move1"));
+				
+//				CardFactory cf = new CardFactory();
+//				List<Card> cards = new ArrayList<>();
+//				cards.add(cf.getCard("move1"));
+//				cards.add(cf.getCard("move1"));
+//				cards.add(cf.getCard("move1"));
+//				cards.add(cf.getCard("move1"));
+//				cards.add(cf.getCard("move1"));
 				
 //				// Iterating over card selection panels, and mapping to card objects using cardFactory method
-//				CardFactory cf = new CardFactory();
-//				
-//				for (CardSelectionPanel c : orderedCards)
-//				{
-//					cards.add(cf.getCard(c.getCardID()));
-//				}
+				CardFactory cf = new CardFactory();
+				List<Card> cards = new ArrayList<>();
+				for (CardSelectionPanel c : orderedCards)
+				{
+					cards.add(cf.getCard(c.getCardID()));
+				}
 //				
 				// Assigns selected cards to robot
 				

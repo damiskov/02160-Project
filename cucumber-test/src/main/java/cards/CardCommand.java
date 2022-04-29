@@ -13,6 +13,8 @@ public class CardCommand implements Comparable<CardCommand>{
 	}
 	
 	public void execute() {
+		System.out.println("Executing: " + card);
+		System.out.println("On robot: " + robot.getRobotNumber());
 		card.executeAction(robot);
 	}
 
