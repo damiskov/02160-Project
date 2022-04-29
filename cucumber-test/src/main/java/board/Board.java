@@ -7,8 +7,8 @@ import java.util.Map;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
+import property_changes.IPropertyChangeEvent;
 import property_changes.PlacementEvent;
-import property_changes.PropertyChangeSupport;
 import property_changes.RemovalEvent;
 
 public class Board {
@@ -48,8 +48,8 @@ public class Board {
 		return game;
 	}
 	
-	public PropertyChangeSupport getPropertyChangeSupport() {
-		return game.getPropertyChangeSupport();
+	public void firePropertyChange(IPropertyChangeEvent event) {
+		if (game != null) game.firePropertyChange(event);
 	}
 
 	private Cell getCell(Position p) {
@@ -70,7 +70,7 @@ public class Board {
 		r.setBoard(this);
 		System.out.println("Placing robot " + r.getRobotNumber() + " at " + x + ", " + y);
 		getCell(x, y).robot = r;
-		getPropertyChangeSupport().firePropertyChange(new PlacementEvent(r, new Position(x, y)));
+		firePropertyChange(new PlacementEvent(r, new Position(x, y)));
 	}
 	public void initialPlacement(Robot r, Position p) {
 		initialPlacement(r, p.getX(), p.getY());
@@ -85,7 +85,7 @@ public class Board {
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
 
-		getPropertyChangeSupport().firePropertyChange(new PlacementEvent(e, new Position(x, y)));
+		firePropertyChange(new PlacementEvent(e, new Position(x, y)));
 
 
 	}
@@ -103,7 +103,7 @@ public class Board {
 		if (r == null) throw new NullPointerException("Attempted to find null Robot");
 		for (int i = 0; i < numColumns; i++) {
 			for (int j = 0; j < numRows; j++) {
-				var pr = getCell(i, j).robot;
+				Robot pr = getCell(i, j).robot;
 				if (r == pr) {
 					return new Position(i, j);
 				}
@@ -116,7 +116,7 @@ public class Board {
 		if (e == null) throw new NullPointerException("Attempted to find null EnvironmentElement");
 		for (int i = 0; i < numColumns; i++) {
 			for (int j = 0; j < numRows; j++) {
-				var pe = getCell(i, j).eElement;
+				EnvironmentElement pe = getCell(i, j).eElement;
 				if (e == pe) {
 					return new Position(i, j);
 				}
@@ -164,7 +164,7 @@ public class Board {
 		EnvironmentElement eElement = getEElementAt(p);
 		pieceLists.get(eElement.getPieceID()).remove(eElement);
 		getCell(p).eElement = null;
-		getPropertyChangeSupport().firePropertyChange(new RemovalEvent(p));
+		firePropertyChange(new RemovalEvent(p));
 	}
 	
 	public boolean coordinateWithinBounds(Position p) {

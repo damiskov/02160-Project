@@ -40,7 +40,7 @@ public class ConveyorBelt extends EnvironmentElement {
 			}
 			
 			if (board.coordinateWithinBounds(newP) && !conveyorBlocking(newP)) {
-				getPropertyChangeSupport().firePropertyChange(new MovementEvent(robot.getRobotNumber(), newP.subtract(p)));
+				firePropertyChange(new MovementEvent(robot.getRobotNumber(), newP.subtract(p)));
 				board.moveRobotFromTo(p, newP);
 			}
 		}
