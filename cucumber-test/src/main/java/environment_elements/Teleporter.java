@@ -9,8 +9,8 @@ public class Teleporter extends EnvironmentElement {
 	private Teleporter receiving;
 	private boolean sending;
 	
-	public Teleporter(boolean sending) {
-		this.sending = sending;
+	public Teleporter() {
+		
 	}
 
 

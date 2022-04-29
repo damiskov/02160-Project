@@ -2,7 +2,7 @@ package cards;
 
 public class CardFactory
 {
-    public static Card getCard(String action)
+    public Card getCard(String action)
     {
         if (action.equals("move1"))
         {

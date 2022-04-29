@@ -17,9 +17,10 @@ import piece_basics.Orientation;
 public class EEFactory {
 	public static EnvironmentElement getEE(Character ID)
 	{
-		Teleporter t2 = new Teleporter(false);
+		Teleporter t2 = new Teleporter();
 		
-		Teleporter t1 = new Teleporter(true);
+		Teleporter t1 = new Teleporter();
+		t1.setSending(true);
 		t1.setReceiving(t2);
 		
 		if (ID == 'W')

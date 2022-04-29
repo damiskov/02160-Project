@@ -31,6 +31,7 @@ public class CardPanel extends JPanel {
 
 	private List<CardSelectionPanel> hand = new ArrayList<>();
 	private List<CardSelectionPanel> orderedCards = new ArrayList<>();
+	private boolean buttonPressed;
 	
 	
 	JButton assignCardsButton;
@@ -57,16 +58,26 @@ public class CardPanel extends JPanel {
 		assignCardsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				List<Card> cards = new ArrayList<Card>();
+				List<Card> cards = new ArrayList<>();
+				
 				
 				// Iterating over card selection panels, and mapping to card objects using cardFactory method
+				CardFactory cf = new CardFactory();
 				
 				for (CardSelectionPanel c : orderedCards)
 				{
-					cards.add(CardFactory.getCard(c.getCardID()));
+					cards.add(cf.getCard(c.getCardID()));
 				}
 				
+				// Assigns selected cards to robot
+				
 				mc.assignCards(cards);
+				
+				// incrementing current player
+				// and setCardPanel (new player's hand shown)
+				
+				mc.incrementCurrentPlayer();
+				setCardPanel();
 
 			}
 

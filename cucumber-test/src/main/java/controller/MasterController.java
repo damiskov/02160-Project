@@ -70,6 +70,11 @@ public class MasterController {
 		return game;
 	}
 
+	public void incrementCurrentPlayer() {
+		currentPlayer++;
+		
+	}
+
 
 
 	

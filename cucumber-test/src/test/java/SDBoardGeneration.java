@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import board.Board;
 import board.BoardFactory;
-import board.ElementNotFoundException;
+import board.NoSuchElementException;
 import board.Game;
 import environment_elements.ReversalPanel;
 import io.cucumber.java.en.Given;
@@ -102,7 +102,7 @@ public class SDBoardGeneration {
 		
 	@Then("it throws an exception error")
 	public void it_throws_an_exception_error() {
-		assertThrowsExactly(ElementNotFoundException.class, () -> context.board.calculatePosition(new ReversalPanel()));
+		assertThrowsExactly(NoSuchElementException.class, () -> context.board.calculatePosition(new ReversalPanel()));
 	}
 	
 	@When("a position is calculated for a robot")
@@ -112,7 +112,7 @@ public class SDBoardGeneration {
 		
 	@Then("it throws an exception error if robot not found")
 	public void it_throws_an_exception_error_if_robot_not_found() {
-		assertThrowsExactly(ElementNotFoundException.class, () -> context.board.calculatePosition(new Robot()));
+		assertThrowsExactly(NoSuchElementException.class, () -> context.board.calculatePosition(new Robot()));
 	}
 
 }

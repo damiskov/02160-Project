@@ -70,10 +70,6 @@ public class BoardRetriever
 		return b;
 		
 	}
-	
-	public HashMap<Character, EnvironmentElement> getASCIItoEE() {
-		return asciiToEE;
-	}
 		
 }  
  

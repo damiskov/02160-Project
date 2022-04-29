@@ -171,9 +171,9 @@ public class Game {
 		board.initialPlacement(rp, 6, 3);
 		board.initialPlacement(new ReversalPanel(), 7, 3);
 		
-		Teleporter t2 = new Teleporter(false);
+		Teleporter t2 = new Teleporter();
 		
-		Teleporter t1 = new Teleporter(true);
+		Teleporter t1 = new Teleporter();
 		t1.setReceiving(t2);
 		board.initialPlacement(t1, 8, 3);
 		
