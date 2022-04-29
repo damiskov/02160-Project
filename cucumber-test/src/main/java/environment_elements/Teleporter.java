@@ -14,9 +14,6 @@ public class Teleporter extends EnvironmentElement {
 		
 	}
 
-	public Teleporter() {
-		
-	}
 
 	
 
