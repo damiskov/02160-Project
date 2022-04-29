@@ -81,8 +81,12 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		winScreenButton.addActionListener(e -> game.getBoard().getRobotAt(new Position(0, 3)).move(1));
 		// Button for assign programs to robots
 		
+		
+		
 		addElements();
 		pack();
+		
+		displayBlackScreen(controller.getCurrentPlayer()+1);
 		
 		setVisible(true);
 		
@@ -154,6 +158,17 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	private void removeBlackScreen() {
 		remove(blackScreen);
+	}
+	
+	public void displayCardPanelView(CardPanel cp){
+		displayBlackScreen(controller.getCurrentPlayer()+1);
+		remove(cardPanel);
+		cardPanel = cp;
+		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 10));
+		revalidate();
+		repaint();
+		
+		
 	}
 
 

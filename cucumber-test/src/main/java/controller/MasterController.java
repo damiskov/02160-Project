@@ -16,6 +16,7 @@ import cards.Card;
 import player.Player;
 import property_changes.ProgrammingPhaseBeginEvent;
 import property_changes.PropertyChangeSupport;
+import view.CardPanel;
 import view.MasterView;
 
 public class MasterController {
@@ -28,8 +29,6 @@ public class MasterController {
 	private MasterView view;
 	private Game game;
 	private PropertyChangeSupport pcs;
-	
-	private int CurrentPlayer = 0;
 	private String[] spriteNames = {"robot1", "robot2", "robot3", "robot4", "robot5", "robot6", "robot7", "robot8"};
 	
 	
@@ -48,14 +47,17 @@ public class MasterController {
 		Difficulty d = new Difficulty(setDifLevel(difficulty));
 		game.begin(playerCount, d, pcs);
 		setRobotNames();
+		game.dealCards();
 		
 		this.view = new MasterView(this, game);
 		pcs.addSubscriber(view);
 		game.getPropertyChangeSupport().firePropertyChange(new ProgrammingPhaseBeginEvent());
 
-//		// temporary
+//		temporary
 //		game.demo();
-//		//
+		
+		
+		
 		
 		//game.testPlacements();
 		
@@ -96,7 +98,7 @@ public class MasterController {
 	{
 		Stack<Card> stack = new Stack<Card>();
 		stack.addAll(cards);
-		Player p = game.getPlayers()[this.currentPlayer];
+		Player p = game.getPlayers()[currentPlayer];
 		p.getRobot().setProgram(stack);
 	}
 	
@@ -112,7 +114,7 @@ public class MasterController {
 	}
 
 	public void incrementCurrentPlayer() {
-		currentPlayer++;
+		this.currentPlayer = this.currentPlayer+1;
 		
 	}
 
@@ -136,11 +138,11 @@ public class MasterController {
 	
 	
     public void setCurrentPlayer(int cp) {
-    	this.CurrentPlayer = cp;
+    	this.currentPlayer = cp;
     }
     
     public int getCurrentPlayer() {
-    	return CurrentPlayer;
+    	return currentPlayer;
     }
     
 	private void runGame() {
@@ -148,7 +150,7 @@ public class MasterController {
 			
 			game.dealCards();
 			
-			while(CurrentPlayer < game.getNumPlayers()) {
+			while(currentPlayer < game.getNumPlayers()) {
 				
 				
 				
@@ -166,5 +168,11 @@ public class MasterController {
 		}
 	}
 
+	public void displayCardPanelControl()
+	{
+		CardPanel cp = new CardPanel(view, this);
+		view.displayCardPanelView(cp);
+		
+	}
 	
 }

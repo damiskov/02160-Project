@@ -284,7 +284,7 @@ public class Game {
 		setRobots(n);
 		
 		genBoard(d, getRobots());
-		
+		deck = new Deck();
 	}
 
 	
