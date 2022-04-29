@@ -236,20 +236,36 @@ public class Robot extends Piece {
 		else {
 			switch(orientation) {
 			case UP:
-				this.getChainedTo().shiftY(spaces);
-				shiftY(spaces);
+				if(isValidMove(spaces)) {
+					shiftY(spaces);
+					if(board.coordinateWithinBounds(this.getChainedTo().getX(), this.getChainedTo().getY() + spaces)) {
+						this.getChainedTo().shiftY(spaces);
+					}
+				}
 				break;
 			case RIGHT:
-				shiftX(spaces);
-				this.getChainedTo().shiftX(spaces);
+				if(isValidMove(spaces)) {
+					shiftX(spaces);
+					if(board.coordinateWithinBounds(this.getChainedTo().getX() + spaces, this.getChainedTo().getY())) {
+						this.getChainedTo().shiftX(spaces);
+					}
+				}
 				break;
 			case DOWN:
-				shiftY(-spaces);
-				this.getChainedTo().shiftY(-spaces);
+				if(isValidMove(-spaces)) {
+					shiftY(-spaces);
+					if(board.coordinateWithinBounds(this.getChainedTo().getX(), this.getChainedTo().getY() - spaces)) {
+						this.getChainedTo().shiftY(-spaces);
+					}
+				}
 				break;
 			case LEFT:
-				shiftX(-spaces);
-				this.getChainedTo().shiftX(-spaces);
+				if(isValidMove(-spaces)) {
+					shiftX(-spaces);
+					if(board.coordinateWithinBounds(this.getChainedTo().getX() - spaces, this.getChainedTo().getY())) {
+						this.getChainedTo().shiftX(-spaces);
+					}
+				}
 				break;
 			}
 		}
