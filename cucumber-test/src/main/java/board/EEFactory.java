@@ -15,6 +15,10 @@ import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
 
 public class EEFactory {
+	
+	public void EEfactory() {
+		
+	}
 	public EnvironmentElement getEE(Character ID)
 	{
 		Teleporter t2 = new Teleporter(false);
