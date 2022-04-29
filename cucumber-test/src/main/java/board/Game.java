@@ -189,6 +189,14 @@ public class Game {
 		board.initialPlacement(new Wall(), 9, 3);
 		board.initialPlacement(new Laser(), 6, 7);
 		
+		
+		
+	}
+
+	public void demo() {
+		Robot r1 = board.getRobotAt(new Position(5, 2));
+		Robot r2 = board.getRobotAt(new Position(7, 3));
+		
 		r1.move(1);
 		
 		r2.turnRight();
@@ -220,11 +228,6 @@ public class Game {
 
 
 		propertyChangeSupport.firePropertyChange(new ProgrammingPhaseBeginEvent());
-
-
-		
-		
-		
 	}
 
 	public int getNumPlayers() {
