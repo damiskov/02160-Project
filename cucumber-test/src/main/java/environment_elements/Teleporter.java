@@ -14,10 +14,9 @@ public class Teleporter extends EnvironmentElement {
 		
 	}
 
+	public Teleporter() {
 
-	
-
-
+	}
 
 	public boolean isSending() {
 		return this.sending;
