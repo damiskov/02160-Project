@@ -109,9 +109,8 @@ public class Game {
 		Map<String, List<Piece>> executionLists = board.getPieceLists();
 		for (String id: registerActorPriorityList) {
 			if (executionLists.containsKey(id)) {
-				int startsize = executionLists.get(id).size();
-				for (int i = 0; i < startsize; i++) {
-					Piece actor = executionLists.get(id).get(i);
+				ArrayList<Piece> toExecute = new ArrayList<>(executionLists.get(id));
+				for (Piece actor : toExecute) {
 					actor.performRegisterAction();
 				}
 			}

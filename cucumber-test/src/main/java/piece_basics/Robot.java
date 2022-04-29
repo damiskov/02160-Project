@@ -139,7 +139,7 @@ public class Robot extends Piece {
 	
 	
 	private void tryMoveRobot(Position posToMoveTo, int spaces) {
-		System.out.println(board.hasRobotAt(posToMoveTo));
+		System.out.println(board.hasRobotAt(posToMoveTo)); 
 		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo).isRobotBlocking()))) || (!(board.hasEElementAt(posToMoveTo))) && !board.hasRobotAt(posToMoveTo)) {
 			firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
