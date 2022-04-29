@@ -1,15 +1,11 @@
 package piece_basics;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 import board.Position;
 import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
-import environment_elements.Wall;
 import property_changes.HealthChangeEvent;
 import property_changes.MovementEvent;
 import property_changes.RobotLaserEvent;
@@ -32,12 +28,16 @@ public class Robot extends Piece {
 	private Robot chainedTo;
 	private String command;	
 	private Program program;
+	/*
+	 *  The number of the most recent checkpoint this robot validly stepped on. 
+	 *  Robots must reach checkpoints in ascending number order, starting from 1
+	 */
 	private int mostRecentCheckpoint = 0;
 	
 	public static final String ID = "robot";
 	
 	public Robot() {
-		health = MAX_ROBOT_HEALTH;
+		health = MAX_ROBOT_HEALTH; // robots start at maximum health
 		robotNumber = nextRobotNumber;
 		nextRobotNumber++;
 	}
@@ -137,11 +137,10 @@ public class Robot extends Piece {
 			firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
 			
-		} else {
-			return;
 		}
 	}
 	
+	// shiftX and shiftY are called by move() for movements in the x-axis and y-axis directions respectively
 	public void shiftX(int spaces) {
 		int absSpaces = Math.abs(spaces);
 		for (int i = 0; i < absSpaces; i++) {
@@ -151,8 +150,6 @@ public class Robot extends Piece {
 			tryMoveRobot(p, spaces);
 		}
 	}
-
-
 	public void shiftY(int spaces) {
 		int absSpaces = Math.abs(spaces);
 		for (int i = 0; i < absSpaces; i++) {
@@ -192,6 +189,11 @@ public class Robot extends Piece {
 			
 	}
 	
+	/*
+	 * Robots can only move forwards and backwards, unless they are pushed by a conveyor belt or pulled by a chained robot. This method
+	 * handles forward movement by a certain number of cells. Backwards movements are accomplished by giving this method a negative int
+	 * parameter. This method is called by the forward and backward movement cards.
+	 */
 	public void move(int spaces) {
 			if(this.getChainedTo() == null) {
 				switch(orientation) {
@@ -264,10 +266,6 @@ public class Robot extends Piece {
 		return this.health;
 	}
 	
-	public int getMaxHealth() {
-		return MAX_ROBOT_HEALTH;
-	}
-	
 	public boolean isChainable() {
 		return this.chainable;
 	}
@@ -282,7 +280,7 @@ public class Robot extends Piece {
 	}
 	
 	public void reboot() {
-		//unchains the robot when it reboots
+		// unchains the robot when it reboots
 		if (getChainedTo() != null) {
 			getChainedTo().setChainedTo(null);
 			getChainedTo().setChainable(false);
@@ -300,10 +298,10 @@ public class Robot extends Piece {
 			firePropertyChange(new TeleportEvent(robotNumber, respawnPointPos));
 			setPosition(respawnPointPos);
 			health = MAX_ROBOT_HEALTH;
-			// TODO: (maybe) also must discard all cards in hand and stop moving
 		} else throw new NullPointerException("Killed a robot with null respawn point");
 	}
 
+	// Shoot a laser at the first robot in line of sight, if there are any
 	@Override
 	public void performRegisterAction() {
 		System.out.println("Looking for robot ahead of robot " + robotNumber);
@@ -315,6 +313,7 @@ public class Robot extends Piece {
 			firePropertyChange(new RobotLaserEvent(calculatePosition(), foundRobot.calculatePosition()));
 		}
 	}
+	// This helper method looks for a robot in line of sight
 	private Robot findRobotAhead() {
 		Position p = calculatePosition();
 		
@@ -355,7 +354,7 @@ public class Robot extends Piece {
 		return foundRobot;
 	}
 	
-	
+	// This helper method returns true if the board has a laser-blocking environment element at the given position, and false otherwise
 	private boolean laserBlocking(Position p) {
 		return board.hasEElementAt(p) && board.getEElementAt(p).isLaserBlocking();
 	}

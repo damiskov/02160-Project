@@ -52,6 +52,6 @@ public class SDRespawnPoint {
 	@Then("the robot is back at max health")
 	public void the_robot_is_back_at_max_health() {
 		Robot robot = context.robot;
-		assertEquals(robot.getHealth(), robot.getMaxHealth());
+		assertEquals(robot.getHealth(), Robot.MAX_ROBOT_HEALTH);
 	}
 }

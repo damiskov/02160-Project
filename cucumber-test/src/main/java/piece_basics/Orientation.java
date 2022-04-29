@@ -7,7 +7,6 @@ public enum Orientation {
 	RIGHT;
 	
 	// Only used in UI
-
 	public int getDegrees() {
 		switch(this) {
 		case UP:
