@@ -14,13 +14,10 @@ public abstract class EnvironmentElement extends Piece {
 		return board.calculatePosition(this).getY();
 	}
 	
-	public boolean isConveyorBlocking() {
-		return false;
-	}
 	public boolean isLaserBlocking() {
 		return false;
 	}
-	public boolean isWallCollsion() {
+	public boolean isRobotBlocking() {
 		return false;
 	}
 	

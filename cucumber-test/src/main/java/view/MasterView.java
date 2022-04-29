@@ -28,7 +28,7 @@ import controller.BoardCreationController;
 import controller.MasterController;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
-import property_changes.ProgrammingPhaseBeginEvent;
+import property_changes.ActivationPhaseEndEvent;
 import property_changes.PropertyChangeListener;
 import utils.GridBagLayoutUtils;
 
@@ -162,7 +162,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		if (pce instanceof HealthChangeEvent) {
 			HealthChangeEvent hce = (HealthChangeEvent) pce;
 			enqueueAnimation(new HealthChangeAnimation(statusPanel, hce.getRobotNum(), hce.getHealth()));
-		} else if (pce instanceof ProgrammingPhaseBeginEvent) {
+		} else if (pce instanceof ActivationPhaseEndEvent) {
 			playAllAnimations();
 		} else if (pce instanceof GameWinEvent) {
 			GameWinEvent gwe = (GameWinEvent) pce;
@@ -198,30 +198,6 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			System.out.println("Playing animation " + animation.getClass());
 			System.out.println("Running for " + frames + " frames");
 			
-//			final Timer timer = new Timer(1000 / Animation.FRAMES_PER_SECOND, null);
-//			ActionListener performer = new ActionListener() {
-//				private int currentFrame = 0;
-//
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					if (currentFrame < frames) {
-//						currentFrame++;
-//						animation.establishNextFrame();
-//						repaint();
-//					} else if (currentFrame == frames) {
-//						System.out.println("finishing thread for " + animation.getClass());
-//						animation.finalize();
-//						System.out.println("Animation " + animation.getClass() + " finalized");
-//						repaint();
-//						timer.stop();
-//						playAllAnimations();
-//					}
-//				}
-//			};
-//			timer.addActionListener(performer);
-//			timer.start();
-				
-			
 			
 			
 			new SwingWorker<Void, Void>() {
@@ -250,6 +226,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			}.execute();
 		} else {
 			System.out.println("Animations finished");
+			controller.beginProgrammingPhase();
 		}
 	}
 

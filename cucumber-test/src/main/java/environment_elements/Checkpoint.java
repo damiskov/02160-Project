@@ -2,7 +2,6 @@ package environment_elements;
 
 import piece_basics.EnvironmentElement;
 import piece_basics.Robot;
-import property_changes.GameWinEvent;
 
 public class Checkpoint extends EnvironmentElement {
 	public static final String ID = "checkpoint";

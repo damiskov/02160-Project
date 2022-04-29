@@ -138,5 +138,11 @@ public class MasterController {
 		
 	}
 
+	public void beginProgrammingPhase() {
+		if (!game.isOver()) {
+			
+		}
+	}
+
 	
 }

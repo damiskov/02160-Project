@@ -118,7 +118,7 @@ public class Robot extends Piece {
 			shiftedNextRobotPos = new Position(posToMove.getX(), posToMove.getY() + increment);
 		}
 		//check to be shifted 2nd robot position
-		if (board.hasEElementAt(shiftedNextRobotPos) && (board.getEElementAt(shiftedNextRobotPos).isWallCollsion())) {
+		if (board.hasEElementAt(shiftedNextRobotPos) && (board.getEElementAt(shiftedNextRobotPos).isRobotBlocking())) {
 			return true;
 		}
 		return false;
@@ -127,7 +127,7 @@ public class Robot extends Piece {
 	
 	private void tryMoveRobot(Position posToMoveTo, int spaces) {
 		System.out.println(board.hasRobotAt(posToMoveTo));
-		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo).isWallCollsion()))) || (!(board.hasEElementAt(posToMoveTo))) && !board.hasRobotAt(posToMoveTo)) {
+		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo).isRobotBlocking()))) || (!(board.hasEElementAt(posToMoveTo))) && !board.hasRobotAt(posToMoveTo)) {
 			firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
 		} else if (board.hasRobotAt(posToMoveTo) && !(hasWallNextRobotShiftPosition(posToMoveTo, spaces))){
