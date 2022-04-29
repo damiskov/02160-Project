@@ -10,6 +10,8 @@ import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
 import environment_elements.Wall;
+import property_changes.ChainedMovementEvent;
+import property_changes.ChainingEvent;
 import property_changes.HealthChangeEvent;
 import property_changes.MovementEvent;
 import property_changes.RobotLaserEvent;
@@ -124,7 +126,8 @@ public class Robot extends Piece {
 	
 	private void tryMoveRobot(Position posToMoveTo, int spaces) {
 		System.out.println(board.hasRobotAt(posToMoveTo));
-		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) || ((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
+		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) ||
+			((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
 			getPropertyChangeSupport().firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
 		} else if (board.hasRobotAt(posToMoveTo) && !(hasWallNextRobotShiftPosition(posToMoveTo, spaces))){
@@ -182,8 +185,8 @@ public class Robot extends Piece {
 		else {
 			switch(orientation) {
 			case UP:
-				shiftY(spaces);
 				this.getChainedTo().shiftY(spaces);
+				shiftY(spaces);
 				break;
 			case RIGHT:
 				shiftX(spaces);
@@ -237,10 +240,12 @@ public class Robot extends Piece {
 	public void reboot() {
 		//unchains the robot when it reboots
 		if (getChainedTo() != null) {
+			int chaintoNum = getChainedTo().robotNumber;
 			getChainedTo().setChainedTo(null);
 			getChainedTo().setChainable(false);
 			setChainable(false);
 			setChainedTo(null);
+			getPropertyChangeSupport().firePropertyChange(new ChainingEvent(robotNumber, chaintoNum, false));
 		}
 		
 		Position respawnPointPos = board.calculatePosition(currentRespawnPoint);

@@ -110,7 +110,7 @@ public class Game {
 		Robot r1 = new Robot();
 		board.initialPlacement(r1, 8, 2);
 		Robot r2 = new Robot();
-		board.initialPlacement(r2, 8, 7);
+		board.initialPlacement(r2, 8, 5);
 		Robot r3 = new Robot();
 		board.initialPlacement(r3, 2, 10);
 		Robot r4 = new Robot();
@@ -129,14 +129,17 @@ public class Game {
 		board.initialPlacement(new Gear(true), 0, 2);
 		board.initialPlacement(new Gear(false), 1, 2);
 		
-		board.initialPlacement(new ChainingPanel(), 0, 3);
+		ChainingPanel chain1 = new ChainingPanel();
+		board.initialPlacement(chain1, 1, 8);
+		ChainingPanel chain2 = new ChainingPanel();
+		board.initialPlacement(chain2, 8, 6);
 		board.initialPlacement(new FinalCheckpoint(1), 1, 3);
 		//board.initialPlacement(new Fire(), 2, 3);
 		board.initialPlacement(new HealthStation(), 3, 3);
 		board.initialPlacement(new OilSpill(), 4, 3);
-		board.initialPlacement(new Pit(), 5, 3);
+		board.initialPlacement(new Pit(), 9, 8);
 		RespawnPoint rp = new RespawnPoint();
-		r1.setRespawnPoint(rp);
+		r2.setRespawnPoint(rp);
 		board.initialPlacement(rp, 6, 3);
 		board.initialPlacement(new ReversalPanel(), 7, 3);
 		
@@ -150,9 +153,9 @@ public class Game {
 		board.initialPlacement(new Wall(), 9, 3);
 		
 		r1.move(1);
-		//r2.move(1);
+		r2.move(1);
 		//r3.move(1);
-		//r4.turnLeft();
+		r4.move(1);
 		activateRegisterActors();
 		
 		r1.turnLeft();
@@ -161,10 +164,17 @@ public class Game {
 		r4.turnRight();
 		activateRegisterActors();
 		
+		r1.turnLeft();
+		r2.turnLeft();
+		r3.turnRight();
+		r4.move(1);
+		activateRegisterActors();
+		
 		r2.turnLeft();
 		r2.turnLeft();
 		r2.move(2);
 		r2.turnLeft();
+		r4.move(-1);
 		activateRegisterActors();
 		
 		
