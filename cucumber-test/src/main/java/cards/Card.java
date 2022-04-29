@@ -35,7 +35,7 @@ public class Card
     	return null;
     }
     
-
+    //needed in the view so no coverage
     public String getAction() {
     	return this.action;
     }

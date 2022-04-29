@@ -14,6 +14,7 @@ public class Teleporter extends EnvironmentElement {
 		
 	}
 
+	//needed for the view so no coverage 
 	public Teleporter() {
 
 	}

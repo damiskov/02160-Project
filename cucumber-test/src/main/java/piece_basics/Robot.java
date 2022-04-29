@@ -1,15 +1,10 @@
 package piece_basics;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 import board.Position;
 import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
-import environment_elements.Wall;
 import property_changes.HealthChangeEvent;
 import property_changes.MovementEvent;
 import property_changes.RobotLaserEvent;
