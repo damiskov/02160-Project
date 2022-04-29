@@ -18,6 +18,7 @@ import animations.Animation;
 import animations.HealthChangeAnimation;
 
 import animations.SpritePlacementAnimation;
+import animations.WinScreenAnimation;
 import board.Game;
 
 import board.Game;
@@ -90,7 +91,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 	}
 	
-	private void displayWinScreen(int winningPlayerNum) {
+	public void displayWinScreen(int winningPlayerNum) {
 		removeElements();
 		addWinScreen(winningPlayerNum);
 	}
@@ -166,7 +167,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			playAllAnimations();
 		} else if (pce instanceof GameWinEvent) {
 			GameWinEvent gwe = (GameWinEvent) pce;
-			displayWinScreen(gwe.getWinningPlayerNum());
+			enqueueAnimation(new WinScreenAnimation(gwe.getWinningPlayerNum(), this));
 		} else {
 			boardPanel.propertyChange(pce);
 		}
