@@ -24,7 +24,7 @@ public class ChainingPanel extends EnvironmentElement {
 	
 	public void setActive(boolean active) {
 		if (this.active != active) {
-			getPropertyChangeSupport().firePropertyChange(new ChainingPanelActivationEvent(calculatePosition()));
+			firePropertyChange(new ChainingPanelActivationEvent(calculatePosition()));
 		}
 		this.active = active;
 	}

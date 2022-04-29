@@ -279,7 +279,7 @@ private static final long serialVersionUID = -2140843137512577992L;
 				return e;
 			} else if (id == ReversalPanel.ID) {
 				ReversalPanel e = new ReversalPanel();
-				return e;
+				return e; 
 			} else if (id == RespawnPoint.ID) {
 				RespawnPoint e = new RespawnPoint();
 				return e;

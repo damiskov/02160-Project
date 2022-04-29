@@ -1,7 +1,7 @@
 package piece_basics;
 
 import board.Board;
-import property_changes.PropertyChangeSupport;
+import property_changes.IPropertyChangeEvent;
 
 public abstract class Piece {
 	protected Board board;
@@ -10,8 +10,8 @@ public abstract class Piece {
 		this.board = board;
 	}
 	
-	protected PropertyChangeSupport getPropertyChangeSupport() {
-		return board.getPropertyChangeSupport();
+	protected final void firePropertyChange(IPropertyChangeEvent event) {
+		board.firePropertyChange(event);
 	}
 	
 	

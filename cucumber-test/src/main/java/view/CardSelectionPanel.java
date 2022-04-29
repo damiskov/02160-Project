@@ -53,7 +53,7 @@ public class CardSelectionPanel extends JPanel {
 	
 	public String getCardID()
 	{
-		return cardID;
+		return cardID; 
 	}
 
 
