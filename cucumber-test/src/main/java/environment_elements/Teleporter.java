@@ -7,14 +7,20 @@ import property_changes.TeleportEvent;
 
 public class Teleporter extends EnvironmentElement {
 	private Teleporter receiving;
-	private boolean Sending;
+	private boolean sending;
 	
-	public void setSending(boolean isSending) {
-		this.Sending = isSending;
+	public Teleporter(boolean sending) {
+		this.sending = sending;
+		
 	}
-	
-	public boolean IsSending() {
-		return this.Sending;
+
+	public Teleporter() {
+
+	}
+
+
+	public boolean isSending() {
+		return this.sending;
 	}
 	
 	public static final String ID = "teleporter";
@@ -28,17 +34,23 @@ public class Teleporter extends EnvironmentElement {
 		return ID;
 	}
 
-
+	
 	@Override
 	public void performRegisterAction() {
 		Position p = calculatePosition();
-		if (board.hasRobotAt(p) && IsSending() == true) {
+		if (board.hasRobotAt(p) && isSending()) { //if a robot is on a sending teleporter
 			Robot r = board.getRobotAt(p);
 			Position receivingP = receiving.calculatePosition();
-			board.moveRobotFromTo(p, receivingP);
-			System.out.println( r + " is being moved to " + receiving.calculatePosition());
-			// TODO: if there is a robot on the receiving teleporter, kill it
-			getPropertyChangeSupport().firePropertyChange(new TeleportEvent(r.getRobotNumber(), receivingP));
+			
+			//if there is a robot on the receiving teleporter, kill it
+			if(board.hasRobotAt(receivingP)) {
+				board.getRobotAt(receivingP).reboot();
+			}
+			
+			board.moveRobotFromTo(p, receivingP); //teleport it to the receiving teleporter
+			System.out.println( r + " is being moved to " + receiving.calculatePosition());			
+			
+			firePropertyChange(new TeleportEvent(r.getRobotNumber(), receivingP));
 		}
 	}
 }

@@ -14,8 +14,10 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import animations.ChainActivationAnimation;
-import animations.SpriteActivationAnimation;
+import animations.SpriteImageChangeAnimation;
 import animations.SpriteMovementAnimation;
+import animations.SpritePlacementAnimation;
+import animations.SpriteRemovalAnimation;
 import animations.SpriteRobotLaserAnimation;
 import animations.SpriteRotationAnimation;
 import animations.SpriteTeleportAnimation;
@@ -24,8 +26,8 @@ import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
-import property_changes.ActivationEvent;
 import property_changes.ChainingEvent;
+import property_changes.ChainingPanelActivationEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.MovementEvent;
 import property_changes.PlacementEvent;
@@ -39,7 +41,7 @@ public class BoardPanel extends JPanel {
 
 	private static final long serialVersionUID = -2140843137512577992L;
 	
-	private static final int maxDimension = 600;
+	private static final int maxDimension = 500;
 	
 	private final MasterView masterView;
 	
@@ -50,7 +52,6 @@ public class BoardPanel extends JPanel {
 	private int cellWidth;
 	private int width;
 	private int height;
-	private Board board;
 	
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
 	private List<ColoredLinePair<Sprite,Color>> chainSpriteList = new ArrayList<>();
@@ -59,43 +60,60 @@ public class BoardPanel extends JPanel {
 	private List<Sprite> robotSpriteList = new ArrayList<>();
 	private Map<Integer, Sprite> robotNumToSpriteMap = new HashMap<>();
 
-	public BoardPanel(IBoard board, MasterView masterView) {
+	public BoardPanel(Board board, MasterView masterView) {
 		this.masterView = masterView;
 		
 		this.rows = board.getNumRows();
 		this.cols = board.getNumColumns();
 		
 		if (rows >= cols) {
-			cellWidth = maxDimension/rows;
+			this.cellWidth = maxDimension/rows;
 		} else {
-			cellWidth = maxDimension/cols;
+			this.cellWidth = maxDimension/cols;
 		}
 		
-		width = cols*cellWidth;
-		height = rows*cellWidth;
+		this.width = cols*cellWidth;
+		this.height = rows*cellWidth;
 		
-		setPreferredSize(new Dimension(width, height));
+		setPreferredSize(new Dimension(width, height)); 
 		
 		backgroundTile = ImageUtils.scaledImage("images/tile.png", cellWidth, cellWidth);
+		
+		addInitialSprites(board);
+	}
+
+	private void addInitialSprites(Board board) {
+		System.out.println("\tInitial sprite placements");
+		for (int i = 0; i < cols; i++) {
+			for (int j = 0; j < rows; j++) {
+				Position cpos = new Position(i, j);
+				if(board.hasEElementAt(cpos)){
+					addSprite(board.getEElementAt(cpos), cpos);
+				}
+				if(board.hasRobotAt(cpos)){
+					addSprite(board.getRobotAt(cpos), cpos);
+				}
+			}
+		}
 	}
 
 	public void addSprite(Piece piece, Position p) {
 		if (piece instanceof EnvironmentElement) {
-			eElementSpriteList.add(SpriteFactory.getFromPiece(piece, cellWidth, this));
+			Sprite eElementSprite = SpriteFactory.getFromPiece(piece, cellWidth, this);
+			masterView.enqueueAnimation(new SpritePlacementAnimation(eElementSprite, eElementSpriteList));
 		} else if (piece instanceof Robot) {
 			Sprite robotSprite = SpriteFactory.getFromPiece(piece, cellWidth, this);
-			robotSpriteList.add(robotSprite);
+			masterView.enqueueAnimation(new SpritePlacementAnimation(robotSprite, robotSpriteList));
 			Robot robot = (Robot) piece;
 			robotNumToSpriteMap.put(robot.getRobotNumber(), robotSprite);
 		} else {
 			throw new IllegalArgumentException("Piece must be either a Robot or an EnvironmentElement");
 		}
-		repaint();
 	}
 	
 	public void removeEElementSprite(Position p) {
-		eElementSpriteList.remove(getEElementSpriteAtPosition(p));
-		repaint();
+		System.out.println("Handling removal event");
+		masterView.enqueueAnimation(new SpriteRemovalAnimation(p, this));
 	}
 	
 	public Sprite getEElementSpriteAtPosition(Position p) {
@@ -179,12 +197,12 @@ public class BoardPanel extends JPanel {
 		} else if (pci instanceof RemovalEvent) {
 			RemovalEvent re = (RemovalEvent) pci;
 			removeEElementSprite(re.getPos());
-		} else if (pci instanceof ActivationEvent) {
-			ActivationEvent ae = (ActivationEvent) pci;
-			activateSprite(ae);
 		} else if (pci instanceof ChainingEvent) {
 			ChainingEvent ce = (ChainingEvent) pci;
 			chainRobots(ce);
+		} else if (pci instanceof ChainingPanelActivationEvent) {
+			ChainingPanelActivationEvent ae = (ChainingPanelActivationEvent) pci;
+			activateChainingPanelSprite(ae);
 		} else if (pci instanceof MovementEvent) {
 			MovementEvent me = (MovementEvent) pci;
 			moveRobot(me);
@@ -201,8 +219,8 @@ public class BoardPanel extends JPanel {
 		
 	}
 	
-	private void activateSprite(ActivationEvent ae) {
-		masterView.enqueueAnimation(new SpriteActivationAnimation(getEElementSpriteAtPosition(ae.getPos())));
+	private void activateChainingPanelSprite(ChainingPanelActivationEvent ae) {
+		masterView.enqueueAnimation(new SpriteImageChangeAnimation(getEElementSpriteAtPosition(ae.getPos())));
 		System.out.println("Activation animation enqueued");
 	}
 	
@@ -251,6 +269,10 @@ public class BoardPanel extends JPanel {
 		System.out.println("Laser rendition" + rle.getShooterRobotNumber() + "->" + rle.getTargetRobotNumber());
 		masterView.enqueueAnimation(new SpriteRobotLaserAnimation(500, laserSpriteList, shooter, target));
 	
+	}
+
+	public List<Sprite> geteElementSpriteList() {
+		return eElementSpriteList;
 	}
 }
 

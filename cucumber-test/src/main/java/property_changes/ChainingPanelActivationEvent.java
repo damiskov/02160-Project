@@ -2,11 +2,11 @@ package property_changes;
 
 import board.Position;
 
-public class ActivationEvent implements IPropertyChangeEvent {
+public class ChainingPanelActivationEvent implements IPropertyChangeEvent {
 
 	private Position pos;
 
-	public ActivationEvent(Position pos) {
+	public ChainingPanelActivationEvent(Position pos) {
 		this.pos = pos;
 	}
 

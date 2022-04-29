@@ -18,6 +18,10 @@ public class Deck
         regenDeck();
     }
     
+    public List<Card> getCards(){
+    	return cards;
+    }
+    
     private void regenDeck()
     {
     	this.cards = new ArrayList<>();
@@ -41,10 +45,10 @@ public class Deck
     // adds a certain "action" "num" amount of times to deck
     public void addToDeck(String action, int num)
     {
-    	CardFactory fact = new CardFactory();
+    	CardFactory cf = new CardFactory();
         for (int i = 0; i < num; i++)
         {   
-            this.cards.add(fact.getCard(action));
+            this.cards.add(cf.getCard(action));
         }
     }
 

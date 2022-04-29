@@ -29,6 +29,7 @@ public class SDProgrammingPhase {
 	@When("the cards are dealt")
 	public void the_cards_are_dealt() {
 	    context.player.setHand(context.deck.genHand());
+		
 	}
 	@When("the player chooses the cards for their robot")
 	public void the_player_chooses_the_cards_for_their_robot() {

@@ -16,4 +16,5 @@ public class Difficulty {
 	{
 		this.level = i;
 	}
+		
 }

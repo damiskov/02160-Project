@@ -1,9 +1,13 @@
 package board;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import cards.Card;
+import cards.CardCommand;
+import cards.Deck;
 import environment_elements.ChainingPanel;
-import environment_elements.Checkpoint;
 import environment_elements.ConveyorBelt;
 import environment_elements.FinalCheckpoint;
 import environment_elements.Fire;
@@ -20,6 +24,7 @@ import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
+import property_changes.IPropertyChangeEvent;
 import property_changes.ProgrammingPhaseBeginEvent;
 import property_changes.PropertyChangeSupport;
 
@@ -30,13 +35,13 @@ public class Game {
 			ConveyorBelt.ID,
 			Teleporter.ID,
 			Gear.ID,
+			HealthStation.ID,
 			Laser.ID,
 			Robot.ID,
 			Fire.ID,
 			OilSpill.ID,
 			ReversalPanel.ID,
 			RespawnPoint.ID
-			/* Checkpoint.ID */
 	);
 	
 	Board board;
@@ -44,6 +49,11 @@ public class Game {
 	private Player[] players;
 	PropertyChangeSupport propertyChangeSupport;
 	int numPlayers;
+	Deck deck;
+	private Robot[] robots;
+	
+	// TODO: Add game finish scenario
+	private boolean over = false;
 	
 	
 	public Game(PropertyChangeSupport pcs, int numPlayers) {
@@ -51,12 +61,34 @@ public class Game {
 		this.numPlayers = numPlayers;
 		
 		// temporary
-		board = new Board(12, 12, pcs);
+		board = new Board(12, 12, this);
+	} 
+	
+	public void setDeck(Deck d) {
+		this.deck = d;
+	}
+
+	public void setDifficulty(Difficulty d) {
+		this.difficulty = d;
+	}
+
+	
+	public Game(PropertyChangeSupport pcs, int numPlayers, Board definedBoard) {
+		this.propertyChangeSupport = pcs;
+		this.numPlayers = numPlayers;
+		
+		// temporary
+		board = definedBoard;
 	}
 	
 	
-	public void setDifficulty(int i) {
-		this.difficulty.setLevel(i);
+	public void genBoard() {
+
+		
+	}
+	
+	public Difficulty getDifficulty() {
+		return this.difficulty;
 		
 	}
 //	public void setCurrentPlayer(int i) {
@@ -64,17 +96,9 @@ public class Game {
 //		
 //	}
 	
-	public void setPlayers(int num_players) {
-		for (int i = 0; i < num_players; i++ ) {
-			
-			players[i] = new Player();
-			
-		}
-	}
+	
 
-	public Player[] getPlayers() {
-		return players;
-	}
+
 	
 	
 	// Observer pattern
@@ -96,30 +120,44 @@ public class Game {
 		this.board = board;
 	}
 
+	
 
 	public PropertyChangeSupport getPropertyChangeSupport() {
 		return propertyChangeSupport;
 	}
+	
+	public void firePropertyChange(IPropertyChangeEvent event) {
+		propertyChangeSupport.firePropertyChange(event);
+	}
 
-	public IBoard getBoard() {
+	public Board getBoard() {
 		return board;
+	}
+	
+	public boolean isOver() {
+		return over;
+	}
+	
+	public void finishGame() {
+		over = true;
 	}
 	
 	// temporary
 	public void testPlacements() {
 		Robot r1 = new Robot();
-		board.initialPlacement(r1, 8, 2);
+		board.initialPlacement(r1, 5, 2);
 		Robot r2 = new Robot();
-		board.initialPlacement(r2, 8, 5);
+		board.initialPlacement(r2, 7, 3);
+		/**
 		Robot r3 = new Robot();
-		board.initialPlacement(r3, 2, 10);
-		Robot r4 = new Robot();
-		board.initialPlacement(r4, 1, 7);
-		//board.initialPlacement(new Robot(), 4, 0);
-		//board.initialPlacement(new Robot(), 5, 0);
-		//board.initialPlacement(new Robot(), 6, 0);
-		//board.initialPlacement(new Robot(), 7, 0);
-
+		board.initialPlacement(r3, 1, 0);
+		
+		board.initialPlacement(new Robot(), 2, 0);
+		board.initialPlacement(new Robot(), 9, 0);
+		board.initialPlacement(new Robot(), 5, 0);
+		board.initialPlacement(new Robot(), 10, 0);
+		board.initialPlacement(new Robot(), 11, 0);
+		**/
 		
 		board.initialPlacement(new ConveyorBelt(Orientation.RIGHT), 0, 1);
 		board.initialPlacement(new ConveyorBelt(Orientation.DOWN), 1, 1);
@@ -134,7 +172,7 @@ public class Game {
 		ChainingPanel chain2 = new ChainingPanel();
 		board.initialPlacement(chain2, 8, 6);
 		board.initialPlacement(new FinalCheckpoint(1), 1, 3);
-		//board.initialPlacement(new Fire(), 2, 3);
+		board.initialPlacement(new Fire(), 2, 3); 
 		board.initialPlacement(new HealthStation(), 3, 3);
 		board.initialPlacement(new OilSpill(), 4, 3);
 		board.initialPlacement(new Pit(), 9, 8);
@@ -143,38 +181,65 @@ public class Game {
 		board.initialPlacement(rp, 6, 3);
 		board.initialPlacement(new ReversalPanel(), 7, 3);
 		
-		Teleporter t1 = new Teleporter();
-		board.initialPlacement(t1, 8, 3);
-		Teleporter t2 = new Teleporter();
-		board.initialPlacement(t2, 8, 10);
-		t1.setSending(true);
+		Teleporter t2 = new Teleporter(false);
+		
+		Teleporter t1 = new Teleporter(true);
 		t1.setReceiving(t2);
+		board.initialPlacement(t1, 8, 3);
+		
+		board.initialPlacement(t2, 8, 10);
+//		t1.setReceiving(t2);
+//		board.initialPlacement(t1, 8, 3);
+//		board.initialPlacement(t2, 8, 10);
 		
 		board.initialPlacement(new Wall(), 9, 3);
+		board.initialPlacement(new Laser(), 6, 7);
+		
+		
+		
+	}
+
+	public void demo() {
+		Robot r1 = board.getRobotAt(new Position(5, 2));
+		Robot r2 = board.getRobotAt(new Position(7, 3));
 		
 		r1.move(1);
 		r2.move(1);
 		//r3.move(1);
-		r4.move(1);
+		//r4.move(1);
+		activateRegisterActors();
+
+		r1.turnLeft();
+		r2.move(1);
+		//r3.turnRight();
+		//r4.turnRight();
 		activateRegisterActors();
 		
 		r1.turnLeft();
 		r2.move(1);
-		r3.turnRight();
-		r4.turnRight();
-		activateRegisterActors();
-		
-		r1.turnLeft();
-		r2.move(1);
-		r3.turnRight();
-		r4.move(1);
+		//r3.turnRight();
+		//r4.move(1);
 		activateRegisterActors();
 		
 		r2.turnLeft();
-		r3.turnLeft();
-		r4.move(2);
+		//r3.turnLeft();
+		//r4.move(2);
 		//r2.turnLeft();
 		//r4.move(-1);
+		activateRegisterActors();
+		
+		r1.turnLeft();
+		r1.turnLeft();
+		r1.move(1);
+		r1.turnRight();
+		r1.move(2);
+		r1.turnRight();
+		r1.move(1);
+		activateRegisterActors();
+		
+		r1.turnLeft();
+		r1.move(1);
+		r2.move(3);
 		activateRegisterActors();
 		
 		
@@ -182,15 +247,103 @@ public class Game {
 
 
 		propertyChangeSupport.firePropertyChange(new ProgrammingPhaseBeginEvent());
-
-
-		
-		
-		
 	}
 
 	public int getNumPlayers() {
 		return numPlayers;
 	}
 	
+	//creates the players and names them and puts them in a list
+	public void setPlayers(int num_players) {
+		 players = new Player[num_players];
+		for (int i = 0; i < num_players; i++ ) {
+			
+			players[i] = new Player();
+			String playerN = String.valueOf(i);
+			players[i].setName("Player " + playerN);
+			
+		}
+	}
+	
+	public Player[] getPlayers() {
+		return players;
+	}
+	
+	//creates the robots and associates them to a player (also puts them in a list)
+	public void setRobots(int num) {
+		robots = new Robot[num];
+		for (int i = 0; i < players.length; i++ ) {
+			players[i].setRobot(new Robot());
+			robots[i] = players[i].getRobot();
+		}
+	}
+	
+	public Robot[] getRobots() {
+		return this.robots;
+	}
+	 
+	//makes the board for the game
+	public void genBoard(Difficulty d, Robot[] r) {
+		BoardFactory bf = new BoardFactory();
+		Board b = bf.generateBoard(d, r, this);
+		this.board = b;
+	}
+	
+	//gives a hand for all of the players
+	public void dealCards() {
+		for(int i = 0; i < players.length; i++) {
+			players[i].setHand(deck.genHand());
+		}
+	}
+	
+	//initial stuff that we need for the game 
+	public void begin(int n, Difficulty d, PropertyChangeSupport pcs) {
+		setPlayers(n);
+		setRobots(n);
+		
+		genBoard(d, getRobots());
+		
+	}
+
+	
+	public void activationPhase() {
+		ArrayList<CardCommand> order = new ArrayList<>();
+		//ArrayList<Integer> orderNum = new ArrayList<>();
+		
+		//iterates through the programs (5 because 5 cards)
+		activationPhaseLoop:
+		for(int j = 0; j < 5; j++) {
+			//creates two arrays, one with all of the cards, one with all of the numbers
+			//the indices of the cards match to the ones of the numbers and also to the players
+			for(int i = 0; i < players.length; i++) {
+				Robot r = players[i].getRobot();
+				Card topCard = r.getProgram().getTopOfProgram();
+				
+				CardCommand cc = new CardCommand(topCard, r);
+				order.add(cc);
+				//orderNum.add(topCard.getNum());
+			}
+			
+			
+			//Collections.sort(orderNum, Collections.reverseOrder());
+			
+			Collections.sort(order, Collections.reverseOrder());
+			
+			for(CardCommand cc : order) {
+				cc.execute();
+				if (over) {
+					break activationPhaseLoop;
+				}
+			}
+			order.clear();
+			
+		//activates the register actors
+		activateRegisterActors();
+		}
+	
+	}
+
+
 }
+
+		

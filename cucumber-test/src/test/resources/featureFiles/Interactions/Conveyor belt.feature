@@ -50,3 +50,10 @@ Feature: Conveyor belt
 		And a robot on the board at (9, 5)
 		When the board elements activate
 		Then the robot is at (9, 5)
+
+		#only for coverage
+  Scenario: Orientation of the conveyer belt
+	 	Given a game with an empty board
+	  And a conveyor belt on the board at (5, 5) facing "right" 
+    Then the environment element at (5, 5) is orientated
+	

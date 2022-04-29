@@ -1,16 +1,11 @@
-
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import board.Board;
-import board.IBoard;
+import board.Position;
 import environment_elements.ConveyorBelt;
-import environment_elements.Wall;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import piece_basics.Orientation;
-import piece_basics.Robot;
 
 public class SDConveyorBelt {
 	private Context context;
@@ -36,5 +31,11 @@ public class SDConveyorBelt {
 	    }
     	context.board.initialPlacement(c, int1, int2);
     	context.conveyorBelt = c;
+	}
+	
+	@Then("the environment element at \\({int}, {int}) is orientated")
+	public void the_environment_element_at_is_orientated(Integer int1, Integer int2) {
+		assertTrue(context.board.getEElementAt(new Position(int1, int2)) instanceof ConveyorBelt);
+		assertEquals(((ConveyorBelt) context.board.getEElementAt(new Position(int1, int2))).getOrientation(), Orientation.RIGHT);
 	}
 }

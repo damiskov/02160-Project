@@ -23,7 +23,9 @@ Feature: Chaining Panel
   Scenario: De-chaining the robots
     Given a game with an empty board
     And two robots chained together
-    When one robot reboots
+    And a respawn point on the board at (1, 1)
+    And the first robot having its respawn point set
+    When the first robot reboots
     Then the robots get unchained
     
   Scenario: Robots pulling on eachother towards right
@@ -78,3 +80,10 @@ Feature: Chaining Panel
     When the board elements activate
     Then the chaining panel is still inactive 
     And the robot is still not chained
+    
+  #only for coverage
+  Scenario: Chaining panel on the board
+    Given a game with an empty board
+    When a chaining panel on the board at (5, 5)
+    Then the chaining panel is at five, five
+    

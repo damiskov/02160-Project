@@ -7,26 +7,25 @@ import java.util.Map;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
+import property_changes.IPropertyChangeEvent;
 import property_changes.PlacementEvent;
-import property_changes.PropertyChangeSupport;
 import property_changes.RemovalEvent;
 
+public class Board {
+	
 // utility class for Board with public attributes. Encapsulation is still respected as this class is fully encapsulated by the Board class
-class Cell {
-	public Robot robot;
-	public EnvironmentElement eElement;
-}
-
-public class Board implements IBoard {
+	private class Cell {
+		public Robot robot;
+		public EnvironmentElement eElement;
+	}
 
 	private Cell[][] matrix;
 	private int numColumns;
 	private int numRows;
-	private int numObstacles;
 	private Difficulty difficulty;
 	private String name;
 	private Map<String, List<Piece>> pieceLists = new HashMap<>();
-	private PropertyChangeSupport propertyChangeSupport;
+	private Game game;
 	
 	// initialise an empty board with a set number of columns and rows
 	public Board(int numColumns, int numRows) {
@@ -40,15 +39,17 @@ public class Board implements IBoard {
 		this.numRows = numRows;
 	}
 	
-	public Board(int numColumns, int numRows, PropertyChangeSupport propertyChangeSupport) {
+	public Board(int numColumns, int numRows, Game game) {
 		this(numColumns, numRows);
-		this.propertyChangeSupport = propertyChangeSupport;
+		this.game = game;
 	}
 	
+	public Game getGame() {
+		return game;
+	}
 	
-	@Override
-	public PropertyChangeSupport getPropertyChangeSupport() {
-		return propertyChangeSupport;
+	public void firePropertyChange(IPropertyChangeEvent event) {
+		if (game != null) game.firePropertyChange(event);
 	}
 
 	private Cell getCell(Position p) {
@@ -56,71 +57,74 @@ public class Board implements IBoard {
 		int y = p.getY();
 		return matrix[numColumns - y - 1][x];
 	}
+	
 	private Cell getCell(int x, int y) {
 		return matrix[numColumns - y - 1][x];
 	}
 	
 	
 	
-	@Override
 	public void initialPlacement(Robot r, int x, int y) {
+		if (hasRobotAt(new Position(x, y))) throw new PieceAlreadyPresentException("Attempted to place a Robot on a cell where one already exists");
 		addToExecutionLists(r);
 		r.setBoard(this);
+		System.out.println("Placing robot " + r.getRobotNumber() + " at " + x + ", " + y);
 		getCell(x, y).robot = r;
-		getPropertyChangeSupport().firePropertyChange(new PlacementEvent(r, new Position(x, y)));
+		firePropertyChange(new PlacementEvent(r, new Position(x, y)));
 	}
-	@Override
 	public void initialPlacement(Robot r, Position p) {
 		initialPlacement(r, p.getX(), p.getY());
 	}
-	@Override
+	
 	public void initialPlacement(EnvironmentElement e, int x, int y) {
+
+		if (hasEElementAt(new Position(x, y))) throw new PieceAlreadyPresentException("Attempted to place an EnvironmentElement on a cell where one already exists");
+
+
 		addToExecutionLists(e);
 		e.setBoard(this);
 		getCell(x, y).eElement = e;
-		getPropertyChangeSupport().firePropertyChange(new PlacementEvent(e, new Position(x, y)));
+
+		firePropertyChange(new PlacementEvent(e, new Position(x, y)));
+
+
 	}
-	@Override
 	public void initialPlacement(EnvironmentElement e, Position p) {
 		initialPlacement(e, p.getX(), p.getY());
 	}
 	
 	private void addToExecutionLists(Piece piece) {
-		if (piece != null)
-		{
-			String id = piece.getPieceID();
-			pieceLists.computeIfAbsent(id, k -> new ArrayList<Piece>());
-			pieceLists.get(id).add(piece);
-		}
+		String id = piece.getPieceID();
+		pieceLists.computeIfAbsent(id, k -> new ArrayList<Piece>());
+		pieceLists.get(id).add(piece);
 	}
 
-	@Override
 	public Position calculatePosition(Robot r) {
+		if (r == null) throw new NullPointerException("Attempted to find null Robot");
 		for (int i = 0; i < numColumns; i++) {
 			for (int j = 0; j < numRows; j++) {
-				var pr = getCell(i, j).robot;
+				Robot pr = getCell(i, j).robot;
 				if (r == pr) {
 					return new Position(i, j);
 				}
 			}
 		}
-		return null;
+		throw new PieceNotFoundException("Could not find Robot");
 	}
 
-	@Override
 	public Position calculatePosition(EnvironmentElement e) {
+		if (e == null) throw new NullPointerException("Attempted to find null EnvironmentElement");
 		for (int i = 0; i < numColumns; i++) {
 			for (int j = 0; j < numRows; j++) {
-				var pe = getCell(i, j).eElement;
+				EnvironmentElement pe = getCell(i, j).eElement;
 				if (e == pe) {
 					return new Position(i, j);
 				}
 			}
 		}
-		return null;
+		throw new PieceNotFoundException("Could not find EnvironmentElement");
 	}
 	
-	@Override
 	public void moveRobotFromTo(Position oldPos, Position newPos) {
 		if (!oldPos.equals(newPos)) {
 			Cell oldCell = getCell(oldPos);
@@ -133,50 +137,44 @@ public class Board implements IBoard {
 		}
 	}
 	
-	@Override
 	public void setPosition(Robot r, Position p) {
 		moveRobotFromTo(calculatePosition(r), p);
 	}
 	
 
-	@Override
 	public boolean hasRobotAt(Position p) {
 		return getCell(p).robot != null;
 	}
 
-	@Override
 	public boolean hasEElementAt(Position p) {
 		return getCell(p).eElement != null;
 	}
 
-	@Override
 	public Robot getRobotAt(Position p) {
-		return getCell(p).robot;
+		Robot ret = getCell(p).robot;
+		if (ret == null) throw new NoSuchPieceException("Attempted to remove Robot at " + p + " when no Robot exists there");
+		return ret;
 	}
 
-	@Override
 	public EnvironmentElement getEElementAt(Position p) {
-		return getCell(p).eElement;
+		EnvironmentElement ret = getCell(p).eElement;
+		if (ret == null) throw new NoSuchPieceException("Attempted to remove EElement at " + p + " when no EElement exists there");
+		return ret;
 	}
 	
-//	@Override
-//	public void removeRobot(Position p) {
-//		getCell(p).robot = null;
-//	}
-	
-	@Override
 	public void removeEElement(Position p) {
+		if (!hasEElementAt(p)) throw new NoSuchPieceException("Attempted to remove EElement at " + p + " when no EElement exists there");
+		EnvironmentElement eElement = getEElementAt(p);
+		pieceLists.get(eElement.getPieceID()).remove(eElement);
 		getCell(p).eElement = null;
-		getPropertyChangeSupport().firePropertyChange(new RemovalEvent(p));
+		firePropertyChange(new RemovalEvent(p));
 	}
 	
-	@Override
 	public boolean coordinateWithinBounds(Position p) {
 		int x = p.getX();
 		int y = p.getY();
 		return coordinateWithinBounds(x, y);
 	}
-	@Override
 	public boolean coordinateWithinBounds(int x, int y) {
 		return
 				0 <= x && x < numColumns
@@ -203,12 +201,10 @@ public class Board implements IBoard {
 		this.name = name;
 	}
 
-	@Override
 	public int getNumRows() {
 		return numRows;
 	}
 
-	@Override
 	public int getNumColumns() {
 		return numColumns;
 	}

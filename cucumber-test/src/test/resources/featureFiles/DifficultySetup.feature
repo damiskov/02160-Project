@@ -1,9 +1,9 @@
-#Feature: Difficulty setup
-#
-  #Scenario: Select from default difficulties
-    #Given an easy difficulty
-    #Then set number of obstacles
-    #Then set obstacles on board
-    #Then Generate board
+Feature: Difficulty setup
+
+	@tag1
+  Scenario: Changinng the level in a difficulty
+    Given an easy difficulty
+    When the difficulty level is changed to hard
+    Then the difficulty level is hard
 
    

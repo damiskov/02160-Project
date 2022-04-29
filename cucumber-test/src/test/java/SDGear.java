@@ -1,13 +1,10 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import board.Board;
-import board.IBoard;
+import board.Position;
 import environment_elements.Gear;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import piece_basics.Orientation;
-import piece_basics.Robot;
 
 public class SDGear {
 private Context context;
@@ -31,37 +28,10 @@ private Context context;
 	    context.gear = g;
 	}
 	
-//	@Given("a gear pointing towards right")
-//	public void a_gear_pointing_towards_right() {
-//		Board board = context.board;
-//		Gear g = new Gear( false);
-//		context.gear = g;
-//		board.initialPlacement(g, 6, 5);
-//	}
-//	
-//	@When("robot steps on a gear")
-//	public void robot_steps_on_a_gear() {
-//		context.robot.shiftX(1);
-//	}
-//	
-//	@Then("gear turns the robot towards right")
-//	public void gear_turns_the_robot_towards_right() {
-//		context.gear.performRegisterAction();
-//		assertEquals(Orientation.RIGHT, context.robot.getOrientation());
-//		
-//	}
-//	
-//	@Given("a gear pointing towards left")
-//	public void a_gear_pointing_towards_left() {
-//		Board board = context.board;
-//		Gear g = new Gear(true);
-//		context.gear = g;
-//		board.initialPlacement(g, 6, 5);
-//	}
-//	@Then("gear turns the robot towards left")
-//	public void gear_turns_the_robot_towards_left() {
-//		context.gear.performRegisterAction();
-//	    assertEquals(Orientation.LEFT,context.robot.getOrientation());
-//	}
+	@Then("the environment element at \\({int}, {int}) is a counterclockwise gear")
+	public void the_environment_element_at_is_a_counterclockwise_gear(Integer int1, Integer int2) {
+	    assertTrue(context.board.getEElementAt(new Position(int1, int2)) instanceof Gear);
+		assertEquals(((Gear) context.board.getEElementAt(new Position(int1, int2))).isCounterClockwise(), true);
+	}
 
 }

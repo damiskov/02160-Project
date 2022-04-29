@@ -1,19 +1,17 @@
 package piece_basics;
 
-import java.io.IOException;
-
-import board.IBoard;
-import property_changes.PropertyChangeSupport;
+import board.Board;
+import property_changes.IPropertyChangeEvent;
 
 public abstract class Piece {
-	protected IBoard board;
+	protected Board board;
 	
-	public void setBoard(IBoard board) {
+	public void setBoard(Board board) {
 		this.board = board;
 	}
 	
-	protected PropertyChangeSupport getPropertyChangeSupport() {
-		return board.getPropertyChangeSupport();
+	protected final void firePropertyChange(IPropertyChangeEvent event) {
+		board.firePropertyChange(event);
 	}
 	
 	

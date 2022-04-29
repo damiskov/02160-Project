@@ -1,5 +1,4 @@
 Feature: Gear
-
 	 
 	Scenario: Gear turns the robot towards right
 	 Given a game with an empty board
@@ -15,5 +14,9 @@ Feature: Gear
    When the board elements activate
    Then the robot moves to (6, 5) and turns "left"
    
-
+   #only for coverage
+   Scenario: Counterclockwise gear
+	  Given a game with an empty board
+	  And a gear on the board at (5, 5) spinning "counterclockwise" 
+    Then the environment element at (5, 5) is a counterclockwise gear
 	

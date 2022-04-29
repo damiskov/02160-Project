@@ -1,5 +1,7 @@
 package view;
 
+import controller.MasterController;
+import property_changes.GameWinEvent;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,21 +16,32 @@ import javax.swing.SwingWorker;
 
 import animations.Animation;
 import animations.HealthChangeAnimation;
+
+import animations.SpritePlacementAnimation;
+import board.Game;
+
 import board.Game;
 import board.Position;
+
+import board.Position;
+import controller.BoardCreationController;
 import controller.MasterController;
-import property_changes.GameWinEvent;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.ProgrammingPhaseBeginEvent;
 import property_changes.PropertyChangeListener;
 import utils.GridBagLayoutUtils;
 
+
+
+
+
 public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	private static final long serialVersionUID = 3L;
 	
 	private MasterController controller;
+
 	
 	private BoardPanel boardPanel;
 	private JPanel cardPanel;
@@ -47,6 +60,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		this.controller = masterController;
 		initGUI(game);
 	}
+	
 
 	private void initGUI(Game game) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +69,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		setLayout(new GridBagLayout());
 		
 		boardPanel = new BoardPanel(game.getBoard(), this);
-		cardPanel = new CardPanel();
+		cardPanel = new CardPanel(this, controller);
 		statusPanel = new StatusPanel(game.getNumPlayers());
 		
 		blackScreen = new BlackScreen(this);
@@ -65,7 +79,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		blackScreenButton.addActionListener(e -> displayBlackScreen(2));
 		winScreenButton = new JButton("Move robot 2 forward");
 		winScreenButton.addActionListener(e -> game.getBoard().getRobotAt(new Position(0, 3)).move(1));
-		//
+		// Button for assign programs to robots
 		
 		addElements();
 		pack();
@@ -105,7 +119,8 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		// temporary
 		add(blackScreenButton, GridBagLayoutUtils.constraint(1, 1, 0));
 		add(winScreenButton, GridBagLayoutUtils.constraint(2, 1, 0));
-		//
+
+		// 
 		
 		revalidate();
 		repaint();
@@ -141,6 +156,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		remove(blackScreen);
 	}
 
+
 	@Override
 	public void propertyChange(IPropertyChangeEvent pce) {
 		if (pce instanceof HealthChangeEvent) {
@@ -154,9 +170,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		} else {
 			boardPanel.propertyChange(pce);
 		}
-		
 	}
-	
 	public void enqueueAnimation(Animation a) {
 		animationQueue.add(a);
 	}
@@ -182,29 +196,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			
 			int frames = animation.getNumFrames();
 			System.out.println("Playing animation " + animation.getClass());
-			
-//			final Timer timer = new Timer(1000 / Animation.FRAMES_PER_SECOND, null);
-//			ActionListener performer = new ActionListener() {
-//				private int currentFrame = 0;
-//
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					if (currentFrame < frames) {
-//						currentFrame++;
-//						animation.establishNextFrame();
-//						repaint();
-//					} else if (currentFrame == frames) {
-//						System.out.println("finishing thread for " + animation.getClass());
-//						animation.finalize();
-//						System.out.println("Animation " + animation.getClass() + " finalized");
-//						repaint();
-//						timer.stop();
-//						playAllAnimations();
-//					}
-//				}
-//			};
-//			timer.addActionListener(performer);
-//			timer.start();
+			System.out.println("Running for " + frames + " frames");
 				
 			
 			
@@ -237,4 +229,5 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			System.out.println("Animations finished");
 		}
 	}
+
 }
