@@ -152,6 +152,8 @@ public class CardPanel extends JPanel {
 
 
 
+
+
 	
 	
 	// Uses master controller to access current player and get program
