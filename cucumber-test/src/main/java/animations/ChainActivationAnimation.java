@@ -5,9 +5,10 @@ import java.util.List;
 
 import view.Sprite;
 
-public class SpriteRobotLaserAnimation extends Animation {
+public class ChainActivationAnimation extends Animation {
 	
-	private List<ColoredLinePair> laserSpriteList;
+	private boolean process;
+	private List<ColoredLinePair> chainSpriteList;
 	private Sprite robot1;
 	private Sprite robot2;
 	Triplet color1start;
@@ -18,22 +19,26 @@ public class SpriteRobotLaserAnimation extends Animation {
 	Triplet color2shift;
 	private Color color1;
 	private Color color2;
+	
 
-	public SpriteRobotLaserAnimation(int durationMs, List<ColoredLinePair> laserSpriteList,Sprite robot1, Sprite robot2) {
+	public ChainActivationAnimation(int durationMs, List<ColoredLinePair> chainSpriteList,Sprite robot1, Sprite robot2, boolean process) {
 		super(durationMs);
-		this.laserSpriteList = laserSpriteList;
+		this.chainSpriteList = chainSpriteList;
+		this.process = process;
 		this.robot1 = robot1;
 		this.robot2 = robot2;
 
-	}
+	}	
 	
+	Triplet colour = new Triplet(1,1,1);
+
 	@Override
 	public void initializeAnimation() {
-		color2final = new Triplet(195,59,59);
-		color1final = new Triplet(152,32,32);
+		color1final = new Triplet(0,0,0);
+		color2final = new Triplet(155,155,155);
 		
-		color2start = new Triplet(255,140,120);
-		color1start = new Triplet(255,140,120);
+		color1start = new Triplet(255,255,255);
+		color2start = new Triplet(255,255,255);
 		
 		color1shift = color1final.subtract(color1start);
 		color1shift.divide(getNumFrames());
@@ -44,20 +49,22 @@ public class SpriteRobotLaserAnimation extends Animation {
 		color1 = new Color(color1start.getRed(),color1start.getBlue(),color1start.getGreen());
 		color2 = new Color(color2start.getRed(),color2start.getBlue(),color2start.getGreen());
 		
-		System.out.println("adding to laser list");
-		laserSpriteList.add(new ColoredLinePair(robot1,robot2,color1,color2));
+		if(process) {
+			System.out.println("adding to chain list");
+			chainSpriteList.add(new ColoredLinePair(robot1,robot2,color1,color2));
+			
+		}
 	}
 
 	@Override
 	public void establishNextFrame() {
-		
 		color1start.increment(color1shift);
 		color2start.increment(color2shift);
 		
 		color1 = new Color(color1start.getRed(),color1start.getBlue(),color1start.getGreen());
 		color2 = new Color(color2start.getRed(),color2start.getBlue(),color2start.getGreen());
 		
-		for(ColoredLinePair spritePair : laserSpriteList) {
+		for(ColoredLinePair spritePair : chainSpriteList) {
 			if(spritePair.getSprite1().equals(robot1) || spritePair.getSprite2().equals(robot1) ||
 			   spritePair.getSprite1().equals(robot2) || spritePair.getSprite2().equals(robot2)) {
 				spritePair.setOuterColor(color1);
@@ -70,22 +77,16 @@ public class SpriteRobotLaserAnimation extends Animation {
 	@Override
 	public void finalizeAnimation() {
 		
-		for(ColoredLinePair spritePair : laserSpriteList) {
-			if(spritePair.getSprite1().equals(robot1) || spritePair.getSprite2().equals(robot1) ||
-			   spritePair.getSprite1().equals(robot2) || spritePair.getSprite2().equals(robot2)) {
-				laserSpriteList.remove(spritePair);
-				System.out.println("match found! removing from laser list");
-				break;
-			} 
-		}
-		
-		for(ColoredLinePair spritePair2 : laserSpriteList) {
-			if(laserSpriteList!=null) {
-				System.out.println(spritePair2.getSprite1());
-				System.out.println(spritePair2.getSprite2());
-			} else {
-				System.out.println("laser list was empty");
+		if(!process) {
+			System.out.println("removing from list...");
+			for(ColoredLinePair spritePair : chainSpriteList) {
+				if(spritePair.getSprite1().equals(robot1) || spritePair.getSprite2().equals(robot1) ||
+				   spritePair.getSprite1().equals(robot2) || spritePair.getSprite2().equals(robot2)) {
+					chainSpriteList.remove(spritePair);
+					System.out.println("match found! removing from chain list");
+					break;
+				} 
 			}
-		}
+		}		
 	}
 }

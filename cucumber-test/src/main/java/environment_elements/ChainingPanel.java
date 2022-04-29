@@ -5,6 +5,7 @@ import java.util.List;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
+import property_changes.ChainingEvent;
 import property_changes.ChainingPanelActivationEvent;
 
 public class ChainingPanel extends EnvironmentElement {
@@ -48,12 +49,13 @@ public class ChainingPanel extends EnvironmentElement {
 	
 	//chains two robots together
 	public void chainRobots(Robot r1, Robot r2) {
-		if(r1.isChainable() && r2.isChainable()) {
+		if(r1.isChainable() && r2.isChainable() && r1.getChainedTo()!=r2) {
 			System.out.println(r1 + " is chained to " + r2);
 			r1.setChainedTo(r2);
 			r2.setChainedTo(r1);
 			r1.setChainable(false);
 			r2.setChainable(false);
+			firePropertyChange(new ChainingEvent(r1.getRobotNumber(), r2.getRobotNumber(), true));
 		}
 	}
 	

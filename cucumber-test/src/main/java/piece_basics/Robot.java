@@ -5,6 +5,9 @@ import board.Position;
 import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
+
+import environment_elements.Wall;
+import property_changes.ChainingEvent;
 import property_changes.HealthChangeEvent;
 import property_changes.MovementEvent;
 import property_changes.RobotLaserEvent;
@@ -122,7 +125,8 @@ public class Robot extends Piece {
 	
 	private void tryMoveRobot(Position posToMoveTo, int spaces) {
 		System.out.println(board.hasRobotAt(posToMoveTo));
-		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo).isWallCollsion()))) || (!(board.hasEElementAt(posToMoveTo))) && !board.hasRobotAt(posToMoveTo)) {
+		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) ||
+			((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
 			firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
 		} else if (board.hasRobotAt(posToMoveTo) && !(hasWallNextRobotShiftPosition(posToMoveTo, spaces))){
@@ -212,36 +216,30 @@ public class Robot extends Piece {
 					break;
 				}
 			}
-			else {
-				switch(orientation) {
-				case UP:
-					if(isValidMove(spaces)) {
-					shiftY(spaces);
-					this.getChainedTo().shiftY(spaces);
-					}
-					break;
-				case RIGHT:
-					if(isValidMove(spaces)) {
-					shiftX(spaces);
-					this.getChainedTo().shiftX(spaces);
-					}
-					break;
-				case DOWN:
-					if(isValidMove(-spaces)) {
-					shiftY(-spaces);
-					this.getChainedTo().shiftY(-spaces);
-					}
-					break;
-				case LEFT:
-					if(isValidMove(-spaces)) {
-					shiftX(-spaces);
-					this.getChainedTo().shiftX(-spaces);
-					}
-					break;
-				}
+		
+		else {
+			switch(orientation) {
+			case UP:
+				this.getChainedTo().shiftY(spaces);
+				shiftY(spaces);
+				break;
+			case RIGHT:
+				shiftX(spaces);
+				this.getChainedTo().shiftX(spaces);
+				break;
+			case DOWN:
+				shiftY(-spaces);
+				this.getChainedTo().shiftY(-spaces);
+				break;
+			case LEFT:
+				shiftX(-spaces);
+				this.getChainedTo().shiftX(-spaces);
+				break;
 			}
+		}
 		
 	}
+			
 
 	public void heal() {
 		if (health < MAX_ROBOT_HEALTH) {
@@ -279,10 +277,12 @@ public class Robot extends Piece {
 	public void reboot() {
 		//unchains the robot when it reboots
 		if (getChainedTo() != null) {
+			int chaintoNum = getChainedTo().robotNumber;
 			getChainedTo().setChainedTo(null);
 			getChainedTo().setChainable(false);
 			setChainable(false);
 			setChainedTo(null);
+			firePropertyChange(new ChainingEvent(robotNumber, chaintoNum, false));
 		}
 		
 		if (currentRespawnPoint != null) {
@@ -306,8 +306,8 @@ public class Robot extends Piece {
 		
 		if (foundRobot != null) {
 			System.out.println("Robot " + getRobotNumber() + " firing at robot " + foundRobot.getRobotNumber());
+			firePropertyChange(new RobotLaserEvent(getRobotNumber(), foundRobot.getRobotNumber()));
 			foundRobot.takeDamage();
-			firePropertyChange(new RobotLaserEvent(calculatePosition(), foundRobot.calculatePosition()));
 		}
 	}
 	private Robot findRobotAhead() {
