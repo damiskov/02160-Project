@@ -1,136 +1,143 @@
 package animations;
 
+import java.awt.Color;
+//import java.util.ArrayList;
 import java.util.List;
 
-import board.Position;
-import piece_basics.Orientation;
-import view.BoardPanel;
-import view.ImageToggleSprite;
-import view.SpriteFactory;
+import view.ChainPair;
+import view.Sprite;
+import view.Triplet;
 
 public class SpriteRobotLaserAnimation extends Animation {
 	
-	private List<ImageToggleSprite> robotLaserSpriteList;
-	private int cellWidth;
-	private BoardPanel canvasBP;
-	private Position startingPosition;
-	private Position finishPosition;
-	private Position rollingPosition;
+	private List<ChainPair<Sprite,Sprite,Color,Color>> laserSpriteList;
+	private Sprite robot1;
+	private Sprite robot2;
+	//private BoardPanel boardPanel;
+	Triplet<Integer> color1start;
+	Triplet<Integer> color2start;
+	Triplet<Integer> color1final;
+	Triplet<Integer> color2final;
+	Triplet<Integer> color1shift;
+	Triplet<Integer> color2shift;
+	private Color color1;
+	private Color color2;
 	
 
-	public SpriteRobotLaserAnimation(int durationMs, Position startingPosition, Position finishPosition, BoardPanel canvasBP, List<ImageToggleSprite> robotLaserSpriteList, int cellWidth) {
+	public SpriteRobotLaserAnimation(int durationMs, List<ChainPair<Sprite,Sprite,Color,Color>> laserSpriteList,Sprite robot1, Sprite robot2) {
 		super(durationMs);
-		this.cellWidth = cellWidth;
-		this.startingPosition = startingPosition;
-		this.finishPosition = finishPosition;
-		this.canvasBP = canvasBP;
-		this.rollingPosition = startingPosition;
-		this.robotLaserSpriteList = robotLaserSpriteList;
-	}
+		this.laserSpriteList = laserSpriteList;
+		//this.boardPanel = boardPanel;
+		this.robot1 = robot1;
+		this.robot2 = robot2;
 
+	}
+	
+	// Might be needed for use with colors that have range, but for now its not used
+			/**
+			public void incR(int i) { setRed(this.getRed()+i); }
+			public void incG(int i) { setGreen(this.getGreen()+i); }
+			public void incB(int i) { setBlue(this.getBlue()+i); }
+			
+			public void increment(int i) {
+				setRed(this.getRed()+i);
+				setBlue(this.getBlue()+i);
+				setGreen(this.getGreen()+i);
+			}
+			
+			public boolean regionCheck(int i) {
+				if(i<0 || i>255) {
+					System.out.println("Triplets for color only use range [0,255]");
+					return false;
+				} else {
+					return true;
+				}
+			}
+			**/
+	
+	
+	
+	Triplet<Integer> colour = new Triplet<Integer>(1,1,1);
+
+	
+	
 	@Override
 	public void initializeAnimation() {
+		color2final = new Triplet(195,59,59);
+		color1final = new Triplet(152,32,32);
 		
-		// make list of sprites for the laser
-		constructLaserSpriteList(); 
+		color2start = new Triplet(255,140,120);
+		color1start = new Triplet(255,140,120);
 		
-		// make them visible
-		for(ImageToggleSprite toggleSprite : robotLaserSpriteList) {
-			toggleSprite.activate();
-		}
+		color1shift = color1final.subtract(color1start);
+		color1shift.divide(getNumFrames());
+		
+		color2shift = color2final.subtract(color2start);
+		color2shift.divide(getNumFrames());
+		
+		color1 = new Color(color1start.getRed(),color1start.getBlue(),color1start.getGreen());
+		color2 = new Color(color2start.getRed(),color2start.getBlue(),color2start.getGreen());
+		
+		System.out.println("adding to laser list");
+		laserSpriteList.add(new ChainPair<Sprite,Sprite,Color,Color>(robot1,robot2,color1,color2));
+		
 	}
-	
+
 	@Override
 	public void establishNextFrame() {
 		
-		// display the laser on screen for a while
+		color1start.increment(color1shift);
+		color2start.increment(color2shift);
 		
+		color1 = new Color(color1start.getRed(),color1start.getBlue(),color1start.getGreen());
+		color2 = new Color(color2start.getRed(),color2start.getBlue(),color2start.getGreen());
+		
+		for(ChainPair<Sprite,Sprite,Color,Color> spritePair : laserSpriteList) {
+			if(spritePair.getL().equals(robot1) || spritePair.getR().equals(robot1) ||
+			   spritePair.getL().equals(robot2) || spritePair.getR().equals(robot2)) {
+				spritePair.setC1(color1);
+				spritePair.setC2(color2);
+				break;
+			} 
+		}
+		
+		/**
+ 		int incRed = (int) Math.floor((0-255)/getNumFrames());
+		color1start.incR((int) Math.floor((color1final.getRed()-color1start.getRed())/getNumFrames()));
+		color1start.incG((int) Math.floor((color1final.getGreen()-color1start.getGreen())/getNumFrames()));
+		color1start.incB((int) Math.floor((color1final.getBlue()-color1start.getBlue())/getNumFrames()));
+		
+		color2start.incR((int) Math.floor((color2final.getRed()-color2start.getRed())/getNumFrames()));
+		color2start.incG((int) Math.floor((color2final.getGreen()-color2start.getGreen())/getNumFrames()));
+		color2start.incB((int) Math.floor((color2final.getBlue()-color2start.getBlue())/getNumFrames()));
+		
+		color2RGB.increment((int) Math.floor((0-255)/getNumFrames()));
+		**/
 	}
 
 	@Override
 	public void finalizeAnimation() {
-		// make them invisible
-		for(ImageToggleSprite toggleSprite : robotLaserSpriteList) {
-			toggleSprite.activate();
-		}
-		// clear our list
-		robotLaserSpriteList.clear();
-	}
-
-	private void constructLaserSpriteList() {
-		// This method gets fed two positions [Pos1] -> [Pos2] and makes a laser beam between them
-		//
-		// [laser end at Pos1] [laser mid-section] ... [laser mid-section] [laser end at Pos2]
-		//  make laser start          while loop makes mid sections           make laser end
-		//
-		// There is also a fair bit of logic needed to figure out how to rotate each image so they line up 
 		
-		//horizontal laser
-		if(startingPosition.getY()==finishPosition.getY()) {	
-			
-			//going right
-			if(startingPosition.getX()<finishPosition.getX()) {
-				addLaser(Orientation.RIGHT, startingPosition, cellWidth, canvasBP, true);
-				canvasBP.repaint();
-				
-				while (rollingPosition.getX()<finishPosition.getX()-1){
-					rollingPosition.incrX(1);
-					addLaser(Orientation.RIGHT, rollingPosition, cellWidth, canvasBP, false);
-					canvasBP.repaint();
-				}
-				addLaser(Orientation.LEFT, finishPosition, cellWidth, canvasBP, true);
-				canvasBP.repaint();
-				
-			//going left
+		for(ChainPair<Sprite,Sprite,Color,Color> spritePair : laserSpriteList) {
+			if(spritePair.getL().equals(robot1) || spritePair.getR().equals(robot1) ||
+			   spritePair.getL().equals(robot2) || spritePair.getR().equals(robot2)) {
+				laserSpriteList.remove(spritePair);
+				System.out.println("match found! removing from laser list");
+				break;
+			} 
+		}
+		
+		for(ChainPair<Sprite,Sprite,Color,Color> spritePair2 : laserSpriteList) {
+			if(laserSpriteList!=null) {
+				System.out.println(spritePair2.getL());
+				System.out.println(spritePair2.getR());
 			} else {
-				addLaser(Orientation.LEFT, startingPosition, cellWidth, canvasBP, true);
-				canvasBP.repaint();
-				
-				while (rollingPosition.getX()>finishPosition.getX()+1){
-					rollingPosition.incrX(-1);
-					addLaser(Orientation.LEFT, rollingPosition, cellWidth, canvasBP, false);
-					canvasBP.repaint();
-				}
-				addLaser(Orientation.RIGHT, finishPosition, cellWidth, canvasBP, true);
-				canvasBP.repaint();
-			}
-			
-		//vertical laser
-		} else if(startingPosition.getX()==finishPosition.getX()) {
-			
-			//going up
-			if(startingPosition.getY()-finishPosition.getY()<0) {
-				addLaser(Orientation.UP, startingPosition, cellWidth, canvasBP, true);
-				canvasBP.repaint();
-				
-				while (rollingPosition.getY()<finishPosition.getY()-1){
-					rollingPosition.incrY(1);
-					addLaser(Orientation.UP, rollingPosition, cellWidth, canvasBP, false);
-					canvasBP.repaint();
-				}
-				addLaser(Orientation.DOWN, finishPosition, cellWidth, canvasBP, true);
-				canvasBP.repaint();
-				
-			//going down
-			} else {
-				addLaser(Orientation.DOWN, startingPosition, cellWidth, canvasBP, true);
-				canvasBP.repaint();
-				
-				while (rollingPosition.getY()>finishPosition.getY()+1){
-					rollingPosition.incrY(-1);
-					addLaser(Orientation.DOWN, rollingPosition, cellWidth, canvasBP, false);
-					canvasBP.repaint();
-				}
-				addLaser(Orientation.UP, finishPosition, cellWidth, canvasBP, true);
-				canvasBP.repaint();
+				System.out.println("laser list was empty");
 			}
 		}
 	}
 	
-	private void addLaser(Orientation orientation, Position position, int cellWidth, BoardPanel canvasBP, boolean horizontal) {
-		robotLaserSpriteList.add(SpriteFactory.getLaserSprite(orientation, position, cellWidth, canvasBP, horizontal));
-	}
-
 }
+
 
 

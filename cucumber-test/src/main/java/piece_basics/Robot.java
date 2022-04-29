@@ -264,8 +264,8 @@ public class Robot extends Piece {
 		
 		if (foundRobot != null) {
 			System.out.println("Robot " + getRobotNumber() + " firing at robot " + foundRobot.getRobotNumber());
+			getPropertyChangeSupport().firePropertyChange(new RobotLaserEvent(getRobotNumber(), foundRobot.getRobotNumber()));
 			foundRobot.takeDamage();
-			getPropertyChangeSupport().firePropertyChange(new RobotLaserEvent(calculatePosition(), foundRobot.calculatePosition()));
 		}
 	}
 	private Robot findRobotAhead() {

@@ -1,23 +1,21 @@
 package property_changes;
 
-import board.Position;
-
 public class RobotLaserEvent implements IPropertyChangeEvent {
 	
-	private Position posStart;
-	private Position posFinish;
+	private int shooterRobotNumber;
+	private int targetRobotNumber;
 	
-	public RobotLaserEvent(Position posStart, Position posFinish) {
-		this.posStart = posStart;
-		this.posFinish = posFinish;
+	public RobotLaserEvent(int shooterRobotNumber, int targetRobotNumber) {
+		this.shooterRobotNumber = shooterRobotNumber;
+		this.targetRobotNumber = targetRobotNumber;
 	}
 	
-	public Position getPosStart() {
-		return posStart;
+	public int getShooterRobotNumber() {
+		return shooterRobotNumber;
 	}
 	
-	public Position getPosFinish() {
-		return posFinish;
+	public int getTargetRobotNumber() {
+		return targetRobotNumber;
 	}
 	
 	

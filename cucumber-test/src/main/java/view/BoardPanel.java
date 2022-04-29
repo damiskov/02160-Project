@@ -17,6 +17,7 @@ import animations.ChainActivationAnimation;
 import animations.SpriteActivationAnimation;
 import animations.SpriteMovementAnimation;
 import animations.SpriteRobotLaserAnimation;
+import animations.SpriteRobotLaserAnimation2;
 import animations.SpriteRotationAnimation;
 import animations.SpriteTeleportAnimation;
 import board.*;
@@ -34,7 +35,7 @@ import property_changes.RobotLaserEvent;
 import property_changes.RotationEvent;
 import property_changes.TeleportEvent;
 import utils.ImageUtils;
-import view.BoardPanel.chainPair;
+import view.ChainPair;
 
 public class BoardPanel extends JPanel {
 
@@ -54,7 +55,8 @@ public class BoardPanel extends JPanel {
 	private Board board;
 	
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
-	private List<chainPair<Sprite,Sprite,Color,Color>> chainSpriteList = new ArrayList<>();
+	private List<ChainPair<Sprite,Sprite,Color,Color>> chainSpriteList = new ArrayList<>();
+	private List<ChainPair<Sprite,Sprite,Color,Color>> laserSpriteList = new ArrayList<>();
 	private List<ImageToggleSprite> robotLaserSpriteList = new ArrayList<>();
 	private List<Sprite> robotSpriteList = new ArrayList<>();
 	private Map<Integer, Sprite> robotNumToSpriteMap = new HashMap<>();
@@ -77,29 +79,6 @@ public class BoardPanel extends JPanel {
 		setPreferredSize(new Dimension(width, height));
 		
 		backgroundTile = ImageUtils.scaledImage("images/tile.png", cellWidth, cellWidth);
-	}
-	
-	//Used as pair of sprites and inner+outer colour
-	public static class chainPair<L,R,C1,C2> {
-	    private L l;
-	    private R r;
-	    private C1 c1;
-	    private C2 c2;
-	    public chainPair(L l, R r, C1 c1, C2 c2){
-	        this.l = l;
-	        this.r = r;
-	        this.c1 = c1;
-	        this.c2 = c2;
-	    }
-	    public L getL(){ return l; }
-	    public R getR(){ return r; }
-	    public C1 getC1(){ return c1; }
-	    public C2 getC2(){ return c2; }
-	    public void setL(L l){ this.l = l; }
-	    public void setR(R r){ this.r = r; }
-	    public void setC1(C1 c1){ this.c1 = c1; }
-	    public void setC2(C2 c2){ this.c2 = c2; }
-	    
 	}
 
 	public void addSprite(Piece piece, Position p) {
@@ -163,7 +142,7 @@ public class BoardPanel extends JPanel {
 		for (Sprite sprite: eElementSpriteList) {
 			sprite.drawUsing(g2);
 		}
-		for (chainPair<Sprite,Sprite,Color,Color> spritePair: chainSpriteList) {
+		for (ChainPair<Sprite,Sprite,Color,Color> spritePair: chainSpriteList) {
 			g2.setStroke(new BasicStroke(4));
 			g2.setColor(spritePair.getC1());
 			g2.drawLine(spritePair.getL().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getL().getY()-cellWidth/2, 
@@ -174,9 +153,22 @@ public class BoardPanel extends JPanel {
 				        spritePair.getR().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getR().getY()-cellWidth/2);
 			
 		}
+		for (ChainPair<Sprite,Sprite,Color,Color> spritePair: laserSpriteList) {
+			g2.setStroke(new BasicStroke(4));
+			g2.setColor(spritePair.getC1());
+			g2.drawLine(spritePair.getL().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getL().getY()-cellWidth/2, 
+					    spritePair.getR().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getR().getY()-cellWidth/2);
+			g2.setStroke(new BasicStroke(2));
+			g2.setColor(spritePair.getC2());
+			g2.drawLine(spritePair.getL().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getL().getY()-cellWidth/2, 
+				        spritePair.getR().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getR().getY()-cellWidth/2);
+			
+		}
+		/**
 		for (Sprite sprite: robotLaserSpriteList) {
 			sprite.drawUsing(g2);
 		}
+		**/
 		for (Sprite sprite: robotSpriteList) {
 			sprite.drawUsing(g2);
 		}
@@ -233,7 +225,7 @@ public class BoardPanel extends JPanel {
 		Sprite robot1 = robotNumToSpriteMap.get(ce.getRobotNumber1());
 		Sprite robot2 = robotNumToSpriteMap.get(ce.getRobotNumber2());
 		boolean process = ce.getProcess();
-		masterView.enqueueAnimation(new ChainActivationAnimation(500, chainSpriteList, robot1, robot2, process, this));	
+		masterView.enqueueAnimation(new ChainActivationAnimation(500, chainSpriteList, robot1, robot2, process));	
 		/**
 		for(chainPair<Sprite,Sprite,Color,Color> spritePair2 : chainSpriteList) {
 			if(chainSpriteList!=null) {
@@ -271,12 +263,15 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void displayRobotLaser(RobotLaserEvent rle) {
-		Position startingPosition = rle.getPosStart();
-		Position finishPosition = rle.getPosFinish();	
-		//System.out.println("rle sequence started");
-		//System.out.println("Drawing laser: " + startingPosition + "->" + finishPosition);
-		
-		masterView.enqueueAnimation(new SpriteRobotLaserAnimation(500, startingPosition, finishPosition, this, robotLaserSpriteList, cellWidth));
+		Sprite shooter = robotNumToSpriteMap.get(rle.getShooterRobotNumber());
+		Sprite target = robotNumToSpriteMap.get(rle.getTargetRobotNumber());		
+		System.out.println("Laser rendition" + rle.getShooterRobotNumber() + "->" + rle.getTargetRobotNumber());
+		masterView.enqueueAnimation(new SpriteRobotLaserAnimation(500, laserSpriteList, shooter, target));
 	
 	}
 }
+
+
+
+
+

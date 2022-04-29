@@ -159,22 +159,22 @@ public class Game {
 		activateRegisterActors();
 		
 		r1.turnLeft();
-		r2.turnLeft();
+		r2.move(1);
 		r3.turnRight();
 		r4.turnRight();
 		activateRegisterActors();
 		
 		r1.turnLeft();
-		r2.turnLeft();
+		r2.move(1);
 		r3.turnRight();
 		r4.move(1);
 		activateRegisterActors();
 		
 		r2.turnLeft();
-		r2.turnLeft();
-		r2.move(2);
-		r2.turnLeft();
-		r4.move(-1);
+		r3.turnLeft();
+		r4.move(2);
+		//r2.turnLeft();
+		//r4.move(-1);
 		activateRegisterActors();
 		
 		
