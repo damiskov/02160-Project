@@ -55,6 +55,9 @@ public class BoardCreationView extends JFrame{
 	private int columns;
 	private int numberPlayers;
 	
+
+
+	
 	// for testing
 	
 	public BoardCreationView(BoardCreationController boardCreationController) {
@@ -71,6 +74,7 @@ public class BoardCreationView extends JFrame{
 		setTitle("RoboRally Board Creator");
 		
 		setLayout(new GridBagLayout());
+		
 		
 		//CREATE SLIDER
 		createSliderPlayers();
