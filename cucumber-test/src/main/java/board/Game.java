@@ -24,8 +24,9 @@ import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
+import property_changes.GameWinEvent;
 import property_changes.IPropertyChangeEvent;
-import property_changes.ProgrammingPhaseBeginEvent;
+import property_changes.ActivationPhaseEndEvent;
 import property_changes.PropertyChangeSupport;
 
 public class Game {
@@ -55,6 +56,7 @@ public class Game {
 	
 	// TODO: Add game finish scenario
 	private boolean over = false;
+	private int winningPlayerNumber;
 	
 	
 	public Game(PropertyChangeSupport pcs, int numPlayers) {
@@ -139,8 +141,9 @@ public class Game {
 		return over;
 	}
 	
-	public void finishGame() {
+	public void finishGame(int winningPlayerNumber) {
 		over = true;
+		this.winningPlayerNumber = winningPlayerNumber;
 	}
 	
 	// temporary
@@ -149,13 +152,16 @@ public class Game {
 		board.initialPlacement(r1, 5, 2);
 		Robot r2 = new Robot();
 		board.initialPlacement(r2, 7, 3);
+		/**
 		Robot r3 = new Robot();
 		board.initialPlacement(r3, 1, 0);
+		
 		board.initialPlacement(new Robot(), 2, 0);
 		board.initialPlacement(new Robot(), 9, 0);
 		board.initialPlacement(new Robot(), 5, 0);
 		board.initialPlacement(new Robot(), 10, 0);
 		board.initialPlacement(new Robot(), 11, 0);
+		**/
 		
 		board.initialPlacement(new ConveyorBelt(Orientation.RIGHT), 0, 1);
 		board.initialPlacement(new ConveyorBelt(Orientation.DOWN), 1, 1);
@@ -165,14 +171,17 @@ public class Game {
 		board.initialPlacement(new Gear(true), 0, 2);
 		board.initialPlacement(new Gear(false), 1, 2);
 		
-		board.initialPlacement(new ChainingPanel(), 0, 3);
+		ChainingPanel chain1 = new ChainingPanel();
+		board.initialPlacement(chain1, 1, 8);
+		ChainingPanel chain2 = new ChainingPanel();
+		board.initialPlacement(chain2, 8, 6);
 		board.initialPlacement(new FinalCheckpoint(1), 1, 3);
 		board.initialPlacement(new Fire(), 2, 3); 
 		board.initialPlacement(new HealthStation(), 3, 3);
 		board.initialPlacement(new OilSpill(), 4, 3);
-		board.initialPlacement(new Pit(), 5, 3);
+		board.initialPlacement(new Pit(), 9, 8);
 		RespawnPoint rp = new RespawnPoint();
-		r1.setRespawnPoint(rp);
+		r2.setRespawnPoint(rp);
 		board.initialPlacement(rp, 6, 3);
 		board.initialPlacement(new ReversalPanel(), 7, 3);
 		
@@ -199,15 +208,28 @@ public class Game {
 		Robot r2 = board.getRobotAt(new Position(7, 3));
 		
 		r1.move(1);
-		
-		r2.turnRight();
 		r2.move(1);
+		//r3.move(1);
+		//r4.move(1);
+		activateRegisterActors();
+
+		r1.turnLeft();
+		r2.move(1);
+		//r3.turnRight();
+		//r4.turnRight();
+		activateRegisterActors();
+		
+		r1.turnLeft();
+		r2.move(1);
+		//r3.turnRight();
+		//r4.move(1);
 		activateRegisterActors();
 		
 		r2.turnLeft();
-		r2.turnLeft();
-		r2.move(2);
-		r2.turnLeft();
+		//r3.turnLeft();
+		//r4.move(2);
+		//r2.turnLeft();
+		//r4.move(-1);
 		activateRegisterActors();
 		
 		r1.turnLeft();
@@ -228,7 +250,7 @@ public class Game {
 	
 
 
-		propertyChangeSupport.firePropertyChange(new ProgrammingPhaseBeginEvent());
+		propertyChangeSupport.firePropertyChange(new ActivationPhaseEndEvent());
 	}
 
 	public int getNumPlayers() {
@@ -320,11 +342,18 @@ public class Game {
 			}
 			order.clear();
 			
-		//activates the register actors
-		activateRegisterActors();
+			//activates the register actors
+			activateRegisterActors();
 		}
+		
+		if (over) {
+			firePropertyChange(new GameWinEvent(winningPlayerNumber));
+		}
+		firePropertyChange(new ActivationPhaseEndEvent());
 	
 	}
+	
+
 
 
 }

@@ -1,5 +1,6 @@
 package controller;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -14,10 +15,13 @@ import board.Game;
 
 import cards.Card;
 
+
 import player.Player;
-import property_changes.ProgrammingPhaseBeginEvent;
+import property_changes.ActivationPhaseEndEvent;
 import property_changes.PropertyChangeSupport;
 import view.CardPanel;
+import player.Player;
+import property_changes.PropertyChangeSupport;
 import view.MasterView;
 
 public class MasterController {
@@ -52,7 +56,7 @@ public class MasterController {
 		
 		this.view = new MasterView(this, game);
 		pcs.addSubscriber(view);
-		game.getPropertyChangeSupport().firePropertyChange(new ProgrammingPhaseBeginEvent());
+		game.getPropertyChangeSupport().firePropertyChange(new ActivationPhaseEndEvent());
 
 //		temporary
 //		game.demo();
@@ -174,6 +178,8 @@ public class MasterController {
 		}
 	}
 
+
+
 	public void displayCardPanelControl()
 	{
 		CardPanel cp = new CardPanel(view, this);
@@ -189,12 +195,17 @@ public class MasterController {
 	
 	public void checkIfEndOfProgrammingPhase(List<Card> cards)
 	{
+		Collections.reverse(cards);
 		assignCards(cards);
 		
 		if (getCurrentPlayer()==playerCount-1)
 		{
 			// Execute activation phase
+			view.removeCardPanel();
+			
 			game.activationPhase();
+			
+			
 		}
 		else
 		{
@@ -209,4 +220,17 @@ public class MasterController {
 			displayCardPanelControl();
 		}
 	}
+	
+	
+	public void beginProgrammingPhase() {
+		if (!game.isOver())
+		{
+			currentPlayer = 0;
+			game.dealCards();
+			displayCardPanelControl();
+		}
+		
+	}
+	
+	
 }

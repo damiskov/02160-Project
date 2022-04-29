@@ -17,7 +17,10 @@ public class ConveyorBelt extends EnvironmentElement {
 
 	@Override
 	public void performRegisterAction() {
-		// if a robot is on top of the conveyor, push the robot in the conveyor's direction unless there is a robot or wall in the way
+		/* 
+		 * If a robot is on top of the conveyor, push the robot in the conveyor's direction unless there is something blocking it (explained in
+		 * the conveyorBlocking method)
+		 */
 		Position p = calculatePosition();
 		
 		if (board.hasRobotAt(p)) {
@@ -46,8 +49,13 @@ public class ConveyorBelt extends EnvironmentElement {
 		}
 	}
 	
+	/*
+	 *  Conveyor belts should only move the robot on them if the position the robot would be pushed to does not have a robot-blocking
+	 *  environment element (like a wall) or another robot. This helper method returns true if the position has one of these things, and
+	 *  false otherwise.
+	 */
 	private boolean conveyorBlocking(Position p) {
-		return board.hasRobotAt(p) || (board.hasEElementAt(p) && board.getEElementAt(p).isConveyorBlocking());
+		return board.hasRobotAt(p) || (board.hasEElementAt(p) && board.getEElementAt(p).isRobotBlocking());
 	}
 
 	@Override

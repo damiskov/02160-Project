@@ -1,6 +1,5 @@
 package environment_elements;
 
-import board.Position;
 import piece_basics.EnvironmentElement;
 
 public class Wall extends EnvironmentElement {
@@ -8,17 +7,12 @@ public class Wall extends EnvironmentElement {
 	public static final String ID = "wall";
 	
 	@Override
-	public boolean isConveyorBlocking() {
-		return true;
-	}
-	
-	@Override
 	public boolean isLaserBlocking() {
 		return true;
 	}
 	
 	@Override
-	public boolean isWallCollsion() {
+	public boolean isRobotBlocking() {
 		return true;
 	}
 	

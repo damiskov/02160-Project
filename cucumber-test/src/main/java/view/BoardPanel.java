@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,6 +13,8 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
+import animations.ChainActivationAnimation;
+import animations.ColoredLinePair;
 import animations.SpriteImageChangeAnimation;
 import animations.SpriteMovementAnimation;
 import animations.SpritePlacementAnimation;
@@ -23,6 +27,7 @@ import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
+import property_changes.ChainingEvent;
 import property_changes.ChainingPanelActivationEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.MovementEvent;
@@ -50,6 +55,8 @@ public class BoardPanel extends JPanel {
 	private int height;
 	
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
+	private List<ColoredLinePair> chainSpriteList = new ArrayList<>();
+	private List<ColoredLinePair> laserSpriteList = new ArrayList<>();
 	private List<ImageToggleSprite> robotLaserSpriteList = new ArrayList<>();
 	private List<Sprite> robotSpriteList = new ArrayList<>();
 	private Map<Integer, Sprite> robotNumToSpriteMap = new HashMap<>();
@@ -141,6 +148,8 @@ public class BoardPanel extends JPanel {
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
+		
+		
 		for (int col = 0; col < cols; col++) {
 			for (int row = 0; row < rows; row++) {
 				g2.drawImage(backgroundTile, col*cellWidth, row*cellWidth, null);
@@ -150,8 +159,27 @@ public class BoardPanel extends JPanel {
 		for (Sprite sprite: eElementSpriteList) {
 			sprite.drawUsing(g2);
 		}
-		for (Sprite sprite: robotLaserSpriteList) {
-			sprite.drawUsing(g2);
+		for (ColoredLinePair chainPair: chainSpriteList) {
+			g2.setStroke(new BasicStroke(4));
+			g2.setColor(chainPair.getOuterColor());
+			g2.drawLine(chainPair.getSprite1().getX()+cellWidth/2, (cols*cellWidth)-chainPair.getSprite1().getY()-cellWidth/2, 
+					    chainPair.getSprite2().getX()+cellWidth/2, (cols*cellWidth)-chainPair.getSprite2().getY()-cellWidth/2);
+			g2.setStroke(new BasicStroke(2));
+			g2.setColor(chainPair.getInnerColor());
+			g2.drawLine(chainPair.getSprite1().getX()+cellWidth/2, (cols*cellWidth)-chainPair.getSprite1().getY()-cellWidth/2, 
+				        chainPair.getSprite2().getX()+cellWidth/2, (cols*cellWidth)-chainPair.getSprite2().getY()-cellWidth/2);
+			
+		}
+		for (ColoredLinePair laserPair: laserSpriteList) {
+			g2.setStroke(new BasicStroke(4));
+			g2.setColor(laserPair.getOuterColor());
+			g2.drawLine(laserPair.getSprite1().getX()+cellWidth/2, (cols*cellWidth)-laserPair.getSprite1().getY()-cellWidth/2, 
+					    laserPair.getSprite2().getX()+cellWidth/2, (cols*cellWidth)-laserPair.getSprite2().getY()-cellWidth/2);
+			g2.setStroke(new BasicStroke(2));
+			g2.setColor(laserPair.getInnerColor());
+			g2.drawLine(laserPair.getSprite1().getX()+cellWidth/2, (cols*cellWidth)-laserPair.getSprite1().getY()-cellWidth/2, 
+				        laserPair.getSprite2().getX()+cellWidth/2, (cols*cellWidth)-laserPair.getSprite2().getY()-cellWidth/2);
+			
 		}
 		for (Sprite sprite: robotSpriteList) {
 			sprite.drawUsing(g2);
@@ -170,6 +198,9 @@ public class BoardPanel extends JPanel {
 		} else if (pci instanceof RemovalEvent) {
 			RemovalEvent re = (RemovalEvent) pci;
 			removeEElementSprite(re.getPos());
+		} else if (pci instanceof ChainingEvent) {
+			ChainingEvent ce = (ChainingEvent) pci;
+			chainRobots(ce);
 		} else if (pci instanceof ChainingPanelActivationEvent) {
 			ChainingPanelActivationEvent ae = (ChainingPanelActivationEvent) pci;
 			activateChainingPanelSprite(ae);
@@ -186,6 +217,7 @@ public class BoardPanel extends JPanel {
 			RobotLaserEvent rle = (RobotLaserEvent) pci;
 			displayRobotLaser(rle);
 		}
+		
 	}
 	
 	private void activateChainingPanelSprite(ChainingPanelActivationEvent ae) {
@@ -199,6 +231,14 @@ public class BoardPanel extends JPanel {
 		int screenDiffY = me.getPosChange().getY() * cellWidth;
 		masterView.enqueueAnimation(new SpriteMovementAnimation(500, spriteToMove, screenDiffX, screenDiffY));
 		System.out.println("Movement animation enqueued");
+	}
+	
+	private void chainRobots(ChainingEvent ce) {
+		Sprite robot1 = robotNumToSpriteMap.get(ce.getRobotNumber1());
+		Sprite robot2 = robotNumToSpriteMap.get(ce.getRobotNumber2());
+		boolean process = ce.getProcess();
+		masterView.enqueueAnimation(new ChainActivationAnimation(500, chainSpriteList, robot1, robot2, process));	
+		System.out.println("Chaining animation enqueued");
 	}
 	
 	private void teleportRobot(TeleportEvent te) {
@@ -225,12 +265,10 @@ public class BoardPanel extends JPanel {
 	}
 	
 	private void displayRobotLaser(RobotLaserEvent rle) {
-		Position startingPosition = rle.getPosStart();
-		Position finishPosition = rle.getPosFinish();	
-		//System.out.println("rle sequence started");
-		//System.out.println("Drawing laser: " + startingPosition + "->" + finishPosition);
-		
-		masterView.enqueueAnimation(new SpriteRobotLaserAnimation(500, startingPosition, finishPosition, this, robotLaserSpriteList, cellWidth));
+		Sprite shooter = robotNumToSpriteMap.get(rle.getShooterRobotNumber());
+		Sprite target = robotNumToSpriteMap.get(rle.getTargetRobotNumber());		
+		System.out.println("Laser rendition" + rle.getShooterRobotNumber() + "->" + rle.getTargetRobotNumber());
+		masterView.enqueueAnimation(new SpriteRobotLaserAnimation(500, laserSpriteList, shooter, target));
 	
 	}
 
@@ -238,3 +276,8 @@ public class BoardPanel extends JPanel {
 		return eElementSpriteList;
 	}
 }
+
+
+
+
+

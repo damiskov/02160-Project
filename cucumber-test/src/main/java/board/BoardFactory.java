@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
+import environment_elements.RespawnPoint;
 import piece_basics.Robot;
 
 public class BoardFactory {
@@ -42,6 +43,9 @@ public class BoardFactory {
 			{
 				System.out.println(robots[i]);
 				b.initialPlacement(robots[i], startingPositions[i]);
+				RespawnPoint r = new RespawnPoint();
+				b.initialPlacement(r, startingPositions[i]);
+				robots[i].setRespawnPoint(r);
 			}
 			return b;
 			
@@ -54,7 +58,11 @@ public class BoardFactory {
 			b.setDifficulty(new Difficulty(2));
 			for (int i = 0; i < robots.length; i++)
 			{
+				System.out.println(robots[i]);
 				b.initialPlacement(robots[i], startingPositions[i]);
+				RespawnPoint r = new RespawnPoint();
+				b.initialPlacement(r, startingPositions[i]);
+				robots[i].setRespawnPoint(r);
 			}
 			return b;
 			
@@ -67,7 +75,11 @@ public class BoardFactory {
 			b.setDifficulty(new Difficulty(3));
 			for (int i = 0; i < robots.length; i++)
 			{
+				System.out.println(robots[i]);
 				b.initialPlacement(robots[i], startingPositions[i]);
+				RespawnPoint r = new RespawnPoint();
+				b.initialPlacement(r, startingPositions[i]);
+				robots[i].setRespawnPoint(r);
 			}
 			return b;
 		}
