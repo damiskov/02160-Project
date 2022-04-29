@@ -17,7 +17,6 @@ import animations.ChainActivationAnimation;
 import animations.SpriteActivationAnimation;
 import animations.SpriteMovementAnimation;
 import animations.SpriteRobotLaserAnimation;
-import animations.SpriteRobotLaserAnimation2;
 import animations.SpriteRotationAnimation;
 import animations.SpriteTeleportAnimation;
 import board.*;
@@ -35,7 +34,6 @@ import property_changes.RobotLaserEvent;
 import property_changes.RotationEvent;
 import property_changes.TeleportEvent;
 import utils.ImageUtils;
-import view.ChainPair;
 
 public class BoardPanel extends JPanel {
 
@@ -55,8 +53,8 @@ public class BoardPanel extends JPanel {
 	private Board board;
 	
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
-	private List<ChainPair<Sprite,Sprite,Color,Color>> chainSpriteList = new ArrayList<>();
-	private List<ChainPair<Sprite,Sprite,Color,Color>> laserSpriteList = new ArrayList<>();
+	private List<ColoredLinePair<Sprite,Color>> chainSpriteList = new ArrayList<>();
+	private List<ColoredLinePair<Sprite,Color>> laserSpriteList = new ArrayList<>();
 	private List<ImageToggleSprite> robotLaserSpriteList = new ArrayList<>();
 	private List<Sprite> robotSpriteList = new ArrayList<>();
 	private Map<Integer, Sprite> robotNumToSpriteMap = new HashMap<>();
@@ -142,33 +140,28 @@ public class BoardPanel extends JPanel {
 		for (Sprite sprite: eElementSpriteList) {
 			sprite.drawUsing(g2);
 		}
-		for (ChainPair<Sprite,Sprite,Color,Color> spritePair: chainSpriteList) {
+		for (ColoredLinePair<Sprite,Color> chainPair: chainSpriteList) {
 			g2.setStroke(new BasicStroke(4));
-			g2.setColor(spritePair.getC1());
-			g2.drawLine(spritePair.getL().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getL().getY()-cellWidth/2, 
-					    spritePair.getR().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getR().getY()-cellWidth/2);
+			g2.setColor(chainPair.getOuterColor());
+			g2.drawLine(chainPair.getSprite1().getX()+cellWidth/2, (cols*cellWidth)-chainPair.getSprite1().getY()-cellWidth/2, 
+					    chainPair.getSprite2().getX()+cellWidth/2, (cols*cellWidth)-chainPair.getSprite2().getY()-cellWidth/2);
 			g2.setStroke(new BasicStroke(2));
-			g2.setColor(spritePair.getC2());
-			g2.drawLine(spritePair.getL().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getL().getY()-cellWidth/2, 
-				        spritePair.getR().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getR().getY()-cellWidth/2);
+			g2.setColor(chainPair.getInnerColor());
+			g2.drawLine(chainPair.getSprite1().getX()+cellWidth/2, (cols*cellWidth)-chainPair.getSprite1().getY()-cellWidth/2, 
+				        chainPair.getSprite2().getX()+cellWidth/2, (cols*cellWidth)-chainPair.getSprite2().getY()-cellWidth/2);
 			
 		}
-		for (ChainPair<Sprite,Sprite,Color,Color> spritePair: laserSpriteList) {
+		for (ColoredLinePair<Sprite,Color> laserPair: laserSpriteList) {
 			g2.setStroke(new BasicStroke(4));
-			g2.setColor(spritePair.getC1());
-			g2.drawLine(spritePair.getL().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getL().getY()-cellWidth/2, 
-					    spritePair.getR().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getR().getY()-cellWidth/2);
+			g2.setColor(laserPair.getOuterColor());
+			g2.drawLine(laserPair.getSprite1().getX()+cellWidth/2, (cols*cellWidth)-laserPair.getSprite1().getY()-cellWidth/2, 
+					    laserPair.getSprite2().getX()+cellWidth/2, (cols*cellWidth)-laserPair.getSprite2().getY()-cellWidth/2);
 			g2.setStroke(new BasicStroke(2));
-			g2.setColor(spritePair.getC2());
-			g2.drawLine(spritePair.getL().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getL().getY()-cellWidth/2, 
-				        spritePair.getR().getX()+cellWidth/2, (cols*cellWidth)-spritePair.getR().getY()-cellWidth/2);
+			g2.setColor(laserPair.getInnerColor());
+			g2.drawLine(laserPair.getSprite1().getX()+cellWidth/2, (cols*cellWidth)-laserPair.getSprite1().getY()-cellWidth/2, 
+				        laserPair.getSprite2().getX()+cellWidth/2, (cols*cellWidth)-laserPair.getSprite2().getY()-cellWidth/2);
 			
 		}
-		/**
-		for (Sprite sprite: robotLaserSpriteList) {
-			sprite.drawUsing(g2);
-		}
-		**/
 		for (Sprite sprite: robotSpriteList) {
 			sprite.drawUsing(g2);
 		}
@@ -226,16 +219,6 @@ public class BoardPanel extends JPanel {
 		Sprite robot2 = robotNumToSpriteMap.get(ce.getRobotNumber2());
 		boolean process = ce.getProcess();
 		masterView.enqueueAnimation(new ChainActivationAnimation(500, chainSpriteList, robot1, robot2, process));	
-		/**
-		for(chainPair<Sprite,Sprite,Color,Color> spritePair2 : chainSpriteList) {
-			if(chainSpriteList!=null) {
-				System.out.println(spritePair2.getL());
-				System.out.println(spritePair2.getR());
-			} else {
-				System.out.println("list was empty");
-			}
-		}
-		**/
 		System.out.println("Chaining animation enqueued");
 	}
 	
