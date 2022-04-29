@@ -151,15 +151,19 @@ public class Board {
 	}
 
 	public Robot getRobotAt(Position p) {
-		return getCell(p).robot;
+		Robot ret = getCell(p).robot;
+		if (ret == null) throw new NoSuchPieceException("Attempted to remove Robot at " + p + " when no Robot exists there");
+		return ret;
 	}
 
 	public EnvironmentElement getEElementAt(Position p) {
-		return getCell(p).eElement;
+		EnvironmentElement ret = getCell(p).eElement;
+		if (ret == null) throw new NoSuchPieceException("Attempted to remove EElement at " + p + " when no EElement exists there");
+		return ret;
 	}
 	
 	public void removeEElement(Position p) {
-		if (!hasEElementAt(p)) throw new NoSuchElementException("Attempted to remove EElement at " + p + " when no such element exists");
+		if (!hasEElementAt(p)) throw new NoSuchPieceException("Attempted to remove EElement at " + p + " when no EElement exists there");
 		EnvironmentElement eElement = getEElementAt(p);
 		pieceLists.get(eElement.getPieceID()).remove(eElement);
 		getCell(p).eElement = null;
