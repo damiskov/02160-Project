@@ -53,7 +53,7 @@ public class Teleporter extends EnvironmentElement {
 			board.moveRobotFromTo(p, receivingP); //teleport it to the receiving teleporter
 			System.out.println( r + " is being moved to " + receiving.calculatePosition());			
 			
-			getPropertyChangeSupport().firePropertyChange(new TeleportEvent(r.getRobotNumber(), receivingP));
+			firePropertyChange(new TeleportEvent(r.getRobotNumber(), receivingP));
 		}
 	}
 }

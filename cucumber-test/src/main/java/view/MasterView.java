@@ -1,5 +1,6 @@
 package view;
 
+import controller.MasterController;
 import property_changes.GameWinEvent;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -15,8 +16,13 @@ import javax.swing.SwingWorker;
 
 import animations.Animation;
 import animations.HealthChangeAnimation;
+
 import animations.SpritePlacementAnimation;
 import board.Game;
+
+import board.Game;
+import board.Position;
+
 import board.Position;
 import controller.BoardCreationController;
 import controller.MasterController;
