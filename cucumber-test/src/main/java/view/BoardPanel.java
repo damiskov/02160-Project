@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import animations.ChainActivationAnimation;
+import animations.ColoredLinePair;
 import animations.SpriteImageChangeAnimation;
 import animations.SpriteMovementAnimation;
 import animations.SpritePlacementAnimation;
@@ -54,8 +55,8 @@ public class BoardPanel extends JPanel {
 	private int height;
 	
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
-	private List<ColoredLinePair<Sprite,Color>> chainSpriteList = new ArrayList<>();
-	private List<ColoredLinePair<Sprite,Color>> laserSpriteList = new ArrayList<>();
+	private List<ColoredLinePair> chainSpriteList = new ArrayList<>();
+	private List<ColoredLinePair> laserSpriteList = new ArrayList<>();
 	private List<ImageToggleSprite> robotLaserSpriteList = new ArrayList<>();
 	private List<Sprite> robotSpriteList = new ArrayList<>();
 	private Map<Integer, Sprite> robotNumToSpriteMap = new HashMap<>();
@@ -158,7 +159,7 @@ public class BoardPanel extends JPanel {
 		for (Sprite sprite: eElementSpriteList) {
 			sprite.drawUsing(g2);
 		}
-		for (ColoredLinePair<Sprite,Color> chainPair: chainSpriteList) {
+		for (ColoredLinePair chainPair: chainSpriteList) {
 			g2.setStroke(new BasicStroke(4));
 			g2.setColor(chainPair.getOuterColor());
 			g2.drawLine(chainPair.getSprite1().getX()+cellWidth/2, (cols*cellWidth)-chainPair.getSprite1().getY()-cellWidth/2, 
@@ -169,7 +170,7 @@ public class BoardPanel extends JPanel {
 				        chainPair.getSprite2().getX()+cellWidth/2, (cols*cellWidth)-chainPair.getSprite2().getY()-cellWidth/2);
 			
 		}
-		for (ColoredLinePair<Sprite,Color> laserPair: laserSpriteList) {
+		for (ColoredLinePair laserPair: laserSpriteList) {
 			g2.setStroke(new BasicStroke(4));
 			g2.setColor(laserPair.getOuterColor());
 			g2.drawLine(laserPair.getSprite1().getX()+cellWidth/2, (cols*cellWidth)-laserPair.getSprite1().getY()-cellWidth/2, 

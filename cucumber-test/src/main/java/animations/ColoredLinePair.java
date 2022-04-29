@@ -1,9 +1,11 @@
-package view;
+package animations;
 
 import java.awt.Color;
 
+import view.Sprite;
+
 //Used as pair of sprites and inner+outer colour
-public class ColoredLinePair<Sprite, Color> {
+public class ColoredLinePair {
 	    private Sprite sprite1;
 		private Sprite sprite2;
 	    private Color innerColor;

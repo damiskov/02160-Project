@@ -1,6 +1,6 @@
-package view;
+package animations;
 
-public class Triplet<Integer>{
+public class Triplet{
 	private int red;
 	private int blue;
 	private int green;
@@ -17,7 +17,7 @@ public class Triplet<Integer>{
 	public void setBlue(int blue)  { this.blue = blue; }
 	public void setGreen(int green) { this.green = green; }
 	
-	public void increment(Triplet<Integer> incrementor) {
+	public void increment(Triplet incrementor) {
 		setRed(this.getRed()+incrementor.getRed());
 		setBlue(this.getBlue()+incrementor.getGreen());
 		setGreen(this.getGreen()+incrementor.getBlue());
@@ -29,8 +29,8 @@ public class Triplet<Integer>{
 		setBlue((int) Math.round(this.getBlue()/divisor));
 	}
 	
-	public Triplet<Integer> subtract(Triplet<Integer> subtractant){
-		return new Triplet<Integer>((this.getRed()-subtractant.getRed()),
+	public Triplet subtract(Triplet subtractant){
+		return new Triplet((this.getRed()-subtractant.getRed()),
 									(this.getGreen()-subtractant.getGreen()),
 									(this.getBlue()-subtractant.getBlue()));
 	}

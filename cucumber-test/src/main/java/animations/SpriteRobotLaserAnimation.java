@@ -3,25 +3,23 @@ package animations;
 import java.awt.Color;
 import java.util.List;
 
-import view.ColoredLinePair;
 import view.Sprite;
-import view.Triplet;
 
 public class SpriteRobotLaserAnimation extends Animation {
 	
-	private List<ColoredLinePair<Sprite,Color>> laserSpriteList;
+	private List<ColoredLinePair> laserSpriteList;
 	private Sprite robot1;
 	private Sprite robot2;
-	Triplet<Integer> color1start;
-	Triplet<Integer> color2start;
-	Triplet<Integer> color1final;
-	Triplet<Integer> color2final;
-	Triplet<Integer> color1shift;
-	Triplet<Integer> color2shift;
+	Triplet color1start;
+	Triplet color2start;
+	Triplet color1final;
+	Triplet color2final;
+	Triplet color1shift;
+	Triplet color2shift;
 	private Color color1;
 	private Color color2;
 
-	public SpriteRobotLaserAnimation(int durationMs, List<ColoredLinePair<Sprite,Color>> laserSpriteList,Sprite robot1, Sprite robot2) {
+	public SpriteRobotLaserAnimation(int durationMs, List<ColoredLinePair> laserSpriteList,Sprite robot1, Sprite robot2) {
 		super(durationMs);
 		this.laserSpriteList = laserSpriteList;
 		this.robot1 = robot1;
@@ -29,7 +27,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 
 	}
 	
-	Triplet<Integer> colour = new Triplet<Integer>(1,1,1);
+	Triplet colour = new Triplet(1,1,1);
 
 	
 	
@@ -51,7 +49,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 		color2 = new Color(color2start.getRed(),color2start.getBlue(),color2start.getGreen());
 		
 		System.out.println("adding to laser list");
-		laserSpriteList.add(new ColoredLinePair<Sprite,Color>(robot1,robot2,color1,color2));
+		laserSpriteList.add(new ColoredLinePair(robot1,robot2,color1,color2));
 	}
 
 	@Override
@@ -63,7 +61,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 		color1 = new Color(color1start.getRed(),color1start.getBlue(),color1start.getGreen());
 		color2 = new Color(color2start.getRed(),color2start.getBlue(),color2start.getGreen());
 		
-		for(ColoredLinePair<Sprite,Color> spritePair : laserSpriteList) {
+		for(ColoredLinePair spritePair : laserSpriteList) {
 			if(spritePair.getSprite1().equals(robot1) || spritePair.getSprite2().equals(robot1) ||
 			   spritePair.getSprite1().equals(robot2) || spritePair.getSprite2().equals(robot2)) {
 				spritePair.setOuterColor(color1);
@@ -76,7 +74,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 	@Override
 	public void finalizeAnimation() {
 		
-		for(ColoredLinePair<Sprite,Color> spritePair : laserSpriteList) {
+		for(ColoredLinePair spritePair : laserSpriteList) {
 			if(spritePair.getSprite1().equals(robot1) || spritePair.getSprite2().equals(robot1) ||
 			   spritePair.getSprite1().equals(robot2) || spritePair.getSprite2().equals(robot2)) {
 				laserSpriteList.remove(spritePair);
@@ -85,7 +83,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 			} 
 		}
 		
-		for(ColoredLinePair<Sprite,Color> spritePair2 : laserSpriteList) {
+		for(ColoredLinePair spritePair2 : laserSpriteList) {
 			if(laserSpriteList!=null) {
 				System.out.println(spritePair2.getSprite1());
 				System.out.println(spritePair2.getSprite2());
