@@ -24,8 +24,9 @@ import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
+import property_changes.GameWinEvent;
 import property_changes.IPropertyChangeEvent;
-import property_changes.ProgrammingPhaseBeginEvent;
+import property_changes.ActivationPhaseEndEvent;
 import property_changes.PropertyChangeSupport;
 
 public class Game {
@@ -54,6 +55,7 @@ public class Game {
 	
 	// TODO: Add game finish scenario
 	private boolean over = false;
+	private int winningPlayerNumber;
 	
 	
 	public Game(PropertyChangeSupport pcs, int numPlayers) {
@@ -138,8 +140,9 @@ public class Game {
 		return over;
 	}
 	
-	public void finishGame() {
+	public void finishGame(int winningPlayerNumber) {
 		over = true;
+		this.winningPlayerNumber = winningPlayerNumber;
 	}
 	
 	// temporary
@@ -246,7 +249,7 @@ public class Game {
 	
 
 
-		propertyChangeSupport.firePropertyChange(new ProgrammingPhaseBeginEvent());
+		propertyChangeSupport.firePropertyChange(new ActivationPhaseEndEvent());
 	}
 
 	public int getNumPlayers() {
@@ -337,9 +340,14 @@ public class Game {
 			}
 			order.clear();
 			
-		//activates the register actors
-		activateRegisterActors();
+			//activates the register actors
+			activateRegisterActors();
 		}
+		
+		if (over) {
+			firePropertyChange(new GameWinEvent(winningPlayerNumber));
+		}
+		firePropertyChange(new ActivationPhaseEndEvent());
 	
 	}
 

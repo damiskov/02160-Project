@@ -15,9 +15,8 @@ public abstract class Piece {
 	}
 	
 	
-	
+	// This method is called by Game at the end of every register
 	public void performRegisterAction() {}
-	public void performImmediateAction(Robot r) {}
 	
 	public abstract String getPieceID();
 

@@ -1,4 +1,5 @@
 package piece_basics;
+
 import java.util.Stack;
 
 import board.Position;
@@ -30,12 +31,16 @@ public class Robot extends Piece {
 	private Robot chainedTo;
 	private String command;	
 	private Program program;
+	/*
+	 *  The number of the most recent checkpoint this robot validly stepped on. 
+	 *  Robots must reach checkpoints in ascending number order, starting from 1
+	 */
 	private int mostRecentCheckpoint = 0;
 	
 	public static final String ID = "robot";
 	
 	public Robot() {
-		health = MAX_ROBOT_HEALTH;
+		health = MAX_ROBOT_HEALTH; // robots start at maximum health
 		robotNumber = nextRobotNumber;
 		nextRobotNumber++;
 	}
@@ -116,7 +121,7 @@ public class Robot extends Piece {
 			shiftedNextRobotPos = new Position(posToMove.getX(), posToMove.getY() + increment);
 		}
 		//check to be shifted 2nd robot position
-		if (board.hasEElementAt(shiftedNextRobotPos) && (board.getEElementAt(shiftedNextRobotPos).isWallCollsion())) {
+		if (board.hasEElementAt(shiftedNextRobotPos) && (board.getEElementAt(shiftedNextRobotPos).isRobotBlocking())) {
 			return true;
 		}
 		return false;
@@ -125,8 +130,7 @@ public class Robot extends Piece {
 	
 	private void tryMoveRobot(Position posToMoveTo, int spaces) {
 		System.out.println(board.hasRobotAt(posToMoveTo));
-		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo) instanceof Wall))) ||
-			((board.hasEElementAt(posToMoveTo)== false)) && board.hasRobotAt(posToMoveTo) == false) {
+		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo).isRobotBlocking()))) || (!(board.hasEElementAt(posToMoveTo))) && !board.hasRobotAt(posToMoveTo)) {
 			firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
 		} else if (board.hasRobotAt(posToMoveTo) && !(hasWallNextRobotShiftPosition(posToMoveTo, spaces))){
@@ -136,11 +140,10 @@ public class Robot extends Piece {
 			firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
 			
-		} else {
-			return;
 		}
 	}
 	
+	// shiftX and shiftY are called by move() for movements in the x-axis and y-axis directions respectively
 	public void shiftX(int spaces) {
 		int absSpaces = Math.abs(spaces);
 		for (int i = 0; i < absSpaces; i++) {
@@ -150,8 +153,6 @@ public class Robot extends Piece {
 			tryMoveRobot(p, spaces);
 		}
 	}
-
-
 	public void shiftY(int spaces) {
 		int absSpaces = Math.abs(spaces);
 		for (int i = 0; i < absSpaces; i++) {
@@ -191,6 +192,11 @@ public class Robot extends Piece {
 			
 	}
 	
+	/*
+	 * Robots can only move forwards and backwards, unless they are pushed by a conveyor belt or pulled by a chained robot. This method
+	 * handles forward movement by a certain number of cells. Backwards movements are accomplished by giving this method a negative int
+	 * parameter. This method is called by the forward and backward movement cards.
+	 */
 	public void move(int spaces) {
 			if(this.getChainedTo() == null) {
 				switch(orientation) {
@@ -257,10 +263,6 @@ public class Robot extends Piece {
 		return this.health;
 	}
 	
-	public int getMaxHealth() {
-		return MAX_ROBOT_HEALTH;
-	}
-	
 	public boolean isChainable() {
 		return this.chainable;
 	}
@@ -275,7 +277,7 @@ public class Robot extends Piece {
 	}
 	
 	public void reboot() {
-		//unchains the robot when it reboots
+		// unchains the robot when it reboots
 		if (getChainedTo() != null) {
 			int chaintoNum = getChainedTo().robotNumber;
 			getChainedTo().setChainedTo(null);
@@ -295,10 +297,10 @@ public class Robot extends Piece {
 			firePropertyChange(new TeleportEvent(robotNumber, respawnPointPos));
 			setPosition(respawnPointPos);
 			health = MAX_ROBOT_HEALTH;
-			// TODO: (maybe) also must discard all cards in hand and stop moving
 		} else throw new NullPointerException("Killed a robot with null respawn point");
 	}
 
+	// Shoot a laser at the first robot in line of sight, if there are any
 	@Override
 	public void performRegisterAction() {
 		System.out.println("Looking for robot ahead of robot " + robotNumber);
@@ -310,6 +312,7 @@ public class Robot extends Piece {
 			foundRobot.takeDamage();
 		}
 	}
+	// This helper method looks for a robot in line of sight
 	private Robot findRobotAhead() {
 		Position p = calculatePosition();
 		
@@ -350,7 +353,7 @@ public class Robot extends Piece {
 		return foundRobot;
 	}
 	
-	
+	// This helper method returns true if the board has a laser-blocking environment element at the given position, and false otherwise
 	private boolean laserBlocking(Position p) {
 		return board.hasEElementAt(p) && board.getEElementAt(p).isLaserBlocking();
 	}

@@ -28,7 +28,7 @@ import controller.BoardCreationController;
 import controller.MasterController;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
-import property_changes.ProgrammingPhaseBeginEvent;
+import property_changes.ActivationPhaseEndEvent;
 import property_changes.PropertyChangeListener;
 import utils.GridBagLayoutUtils;
 
@@ -162,7 +162,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		if (pce instanceof HealthChangeEvent) {
 			HealthChangeEvent hce = (HealthChangeEvent) pce;
 			enqueueAnimation(new HealthChangeAnimation(statusPanel, hce.getRobotNum(), hce.getHealth()));
-		} else if (pce instanceof ProgrammingPhaseBeginEvent) {
+		} else if (pce instanceof ActivationPhaseEndEvent) {
 			playAllAnimations();
 		} else if (pce instanceof GameWinEvent) {
 			GameWinEvent gwe = (GameWinEvent) pce;
@@ -197,7 +197,6 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			int frames = animation.getNumFrames();
 			System.out.println("Playing animation " + animation.getClass());
 			System.out.println("Running for " + frames + " frames");
-				
 			
 			
 			
@@ -227,6 +226,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			}.execute();
 		} else {
 			System.out.println("Animations finished");
+			controller.beginProgrammingPhase();
 		}
 	}
 

@@ -14,7 +14,7 @@ import board.Game;
 import cards.Card;
 
 import player.Player;
-import property_changes.ProgrammingPhaseBeginEvent;
+import property_changes.ActivationPhaseEndEvent;
 import property_changes.PropertyChangeSupport;
 import view.MasterView;
 
@@ -48,7 +48,7 @@ public class MasterController {
 		
 		this.view = new MasterView(this, game);
 		pcs.addSubscriber(view);
-		game.getPropertyChangeSupport().firePropertyChange(new ProgrammingPhaseBeginEvent());
+		game.getPropertyChangeSupport().firePropertyChange(new ActivationPhaseEndEvent());
 
 //		// temporary
 //		game.demo();
@@ -155,6 +155,12 @@ public class MasterController {
 				
 		}
 		
+	}
+
+	public void beginProgrammingPhase() {
+		if (!game.isOver()) {
+			
+		}
 	}
 
 	
