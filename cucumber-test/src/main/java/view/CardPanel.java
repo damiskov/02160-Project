@@ -62,22 +62,22 @@ public class CardPanel extends JPanel {
 				
 				
 				// Iterating over card selection panels, and mapping to card objects using cardFactory method
-				CardFactory cf = new CardFactory();
-				
-				for (CardSelectionPanel c : orderedCards)
-				{
-					cards.add(cf.getCard(c.getCardID()));
-				}
-				
+//				CardFactory cf = new CardFactory();
+//				
+//				for (CardSelectionPanel c : orderedCards)
+//				{
+//					cards.add(cf.getCard(c.getCardID()));
+//				}
+//				
 				// Assigns selected cards to robot
 				
-				mc.assignCards(cards);
-				
-				// incrementing current player
-				// and setCardPanel (new player's hand shown)
-				
-				mc.incrementCurrentPlayer();
-				setCardPanel();
+//				mc.assignCards(cards);
+//				
+//				// incrementing current player
+//				// and setCardPanel (new player's hand shown)
+//				
+//				mc.incrementCurrentPlayer();
+//				setCardPanel();
 
 			}
 
@@ -153,15 +153,15 @@ public class CardPanel extends JPanel {
 	// Uses master controller to access current player and get program
 
 
-	private void setCardPanel()
-	{
-		ArrayList<Card> cardHand = mc.getGame().getPlayers()[mc.getCurrentPlayer()].getHand().getCardList();
-		for (Card c : cardHand)
-		{
-			CardSelectionPanel b = new CardSelectionPanel(c.getAction());
-			hand.add(b);
-		} 
-	}
+//	private void setCardPanel()
+//	{
+//		ArrayList<Card> cardHand = mc.getGame().getPlayers()[mc.getCurrentPlayer()].getHand().getCardList();
+//		for (Card c : cardHand)
+//		{
+//			CardSelectionPanel b = new CardSelectionPanel(c.getAction());
+//			hand.add(b);
+//		} 
+//	}
 	
 
 
