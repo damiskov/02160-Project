@@ -36,6 +36,16 @@ public class Robot extends Piece {
 	
 	public static final String ID = "robot";
 	
+	private String spriteName;
+	
+	public void setSpriteName(String spriteName) {
+		this.spriteName = spriteName;
+	}
+	
+	public String getSpriteName() {
+		return spriteName;
+	}
+	
 	public Robot() {
 		health = MAX_ROBOT_HEALTH;
 		robotNumber = nextRobotNumber;

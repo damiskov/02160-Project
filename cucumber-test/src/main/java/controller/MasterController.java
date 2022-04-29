@@ -30,6 +30,7 @@ public class MasterController {
 	private PropertyChangeSupport pcs;
 	
 	private int CurrentPlayer = 0;
+	private String[] spriteNames = {"robot1", "robot2", "robot3", "robot4", "robot5", "robot6", "robot7", "robot8"};
 	
 	
 	MasterController(ApplicationController application, int playerCount, String difficulty, int currentPlayer){
@@ -44,7 +45,9 @@ public class MasterController {
 		// temporary
 		//game.testPlacements();
 		//
-		
+		Difficulty d = new Difficulty(setDifLevel(difficulty));
+		game.begin(playerCount, d, pcs);
+		setRobotNames();
 		
 		this.view = new MasterView(this, game);
 		pcs.addSubscriber(view);
@@ -56,9 +59,9 @@ public class MasterController {
 		
 		//game.testPlacements();
 		
-		Difficulty d = new Difficulty(setDifLevel(difficulty));
 		
-		game.begin(playerCount, d, pcs);
+		
+		
 		
 		//runGame();
 		
@@ -155,6 +158,12 @@ public class MasterController {
 				
 		}
 		
+	}
+	
+	public void setRobotNames() {
+		for(int i = 0; i<playerCount; i++) {
+			game.getRobots()[i].setSpriteName(spriteNames[i]);
+		}
 	}
 
 	

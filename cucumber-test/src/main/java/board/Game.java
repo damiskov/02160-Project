@@ -51,6 +51,7 @@ public class Game {
 	int numPlayers;
 	Deck deck;
 	private Robot[] robots;
+
 	
 	// TODO: Add game finish scenario
 	private boolean over = false;

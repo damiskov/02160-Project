@@ -16,14 +16,14 @@ public class BoardFactory {
 	private String[] mediumFiles = {"M1", "M2", "M3"};
 	private String[] hardFiles = {"H1", "H2", "H3"};
 	private String[] customFiles = {};
-	private Position[] startingPositions = {new Position(6,11),
-			new Position(7,11),
-			new Position(5,11),
-			new Position(8,11),
-			new Position(4,11),
-			new Position(9,11),
-			new Position(3,11),
-			new Position(10,11)
+	private Position[] startingPositions = {new Position(6,0),
+			new Position(7,0),
+			new Position(5, 0),
+			new Position(8,0),
+			new Position(4,0),
+			new Position(9,0),
+			new Position(3,0),
+			new Position(10,0)
 
 	};
 	private Board b;
@@ -89,45 +89,47 @@ public class BoardFactory {
 		
 		
 		String path = "boards/" + filename + ".txt";
-		int numRows=0;
-		int numCols=0;
+//		int numRows=0;
+//		int numCols=0;
 		File doc = new File(path);
 		
 		// Finding dimensions of board
-		
-		BufferedReader obj = null;
-		try {
-			obj = new BufferedReader(new FileReader(doc));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		String str;
-		try {
-			while ((str = obj.readLine()) != null) {
-				numRows++;
-				numCols = str.length();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		
+//		BufferedReader obj = null;
+//		try {
+//			obj = new BufferedReader(new FileReader(doc));
+//		} catch (FileNotFoundException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		
+//		String str;
+//		try {
+//			while ((str = obj.readLine()) != null) {
+//				numRows++;
+//				numCols = str.length();
+//			}
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		// Placing environment elements on the board
 		
-		Board b = new Board(numRows, numCols, game);
+		Board b = new Board(12, 12, game);
 		int j = 0;
+		String str;
 		EEFactory EEFact = new EEFactory();
+		BufferedReader obj = null;
 		try {
 			obj = new BufferedReader(new FileReader(doc));
-			while (obj.readLine() != null) {
-				str = obj.readLine();
+			while ((str = obj.readLine())!= null) {
 				for (int i = 0; i < str.length(); i++)
 				{
 					if (EEFact.getEE(str.charAt(i))!=null) {
-						b.initialPlacement(EEFact.getEE(str.charAt(i)), new Position(i,j));
+						b.initialPlacement(EEFact.getEE(str.charAt(i)), new Position(i,11-j));
 					}
+					
 				}
 				j++;
 			}
