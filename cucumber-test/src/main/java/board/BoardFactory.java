@@ -23,7 +23,7 @@ public class BoardFactory {
 			new Position(4,0),
 			new Position(9,0),
 			new Position(3,0),
-			new Position(10,0)
+			new Position(2,0)
 
 	};
 	private Board b;
