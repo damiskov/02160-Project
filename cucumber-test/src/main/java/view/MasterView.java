@@ -1,6 +1,7 @@
 package view;
 
 import controller.MasterController;
+import property_changes.ActivationPhaseEndEvent;
 import property_changes.GameWinEvent;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -29,7 +30,6 @@ import controller.BoardCreationController;
 import controller.MasterController;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
-import property_changes.ActivationPhaseEndEvent;
 import property_changes.PropertyChangeListener;
 import utils.GridBagLayoutUtils;
 
