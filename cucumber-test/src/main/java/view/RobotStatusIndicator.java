@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -14,11 +15,16 @@ public class RobotStatusIndicator extends JPanel {
 	
 	private static final long serialVersionUID = 7744319983490682363L;
 	
+	private JLabel playerNumberLabel;
 	private JLabel robotIcon;
 	private HeartIndicator heartIndicator;
 
 	public RobotStatusIndicator(int playerNumber) {
 		setLayout(new FlowLayout());
+		
+		playerNumberLabel = new JLabel("Player " + playerNumber);
+		playerNumberLabel.setFont(new Font(playerNumberLabel.getFont().getName(), Font.BOLD, 18));
+		add(playerNumberLabel);
 		
 		String imageFilepath = "images/robot" + playerNumber + ".png";
 		robotIcon = new JLabel(new ImageIcon(ImageUtils.scaledImage(imageFilepath, 50, 50)));
