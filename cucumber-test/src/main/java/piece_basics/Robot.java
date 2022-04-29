@@ -171,21 +171,22 @@ public class Robot extends Piece {
 			if(!(board.coordinateWithinBounds(calculatePosition().getX(), newY))) {
 				return false;
 			}
-
+			break;
 		case RIGHT:
 			if(!(board.coordinateWithinBounds(newX, calculatePosition().getY()))) {
 				return false;
 			}
-
+			break;
 		case DOWN:
 			if(!(board.coordinateWithinBounds(calculatePosition().getX(), newY))) {
 				return false;
 			}
-
+			break;
 		case LEFT:
 			if(!(board.coordinateWithinBounds(newX, calculatePosition().getY()))) {
 				return false;
 			}
+			break;
 		}
 		return true;
 			
