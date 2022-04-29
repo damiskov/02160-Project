@@ -9,7 +9,6 @@ import java.util.Random;
 
 import piece_basics.Robot;
 
-
 public class BoardFactory {
 	
 	

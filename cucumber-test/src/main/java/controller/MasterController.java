@@ -44,11 +44,11 @@ public class MasterController {
 		
 		game.testPlacements();
 		
-		Difficulty d = new Difficulty(setDifLevel(difficulty));
-		
-		game.begin(playerCount, d, pcs);
-		
-		runGame();
+//		Difficulty d = new Difficulty(setDifLevel(difficulty));
+//		
+//		game.begin(playerCount, d, pcs);
+//		
+//		runGame();
 	}
 	
 	MasterController(ApplicationController application, int playerCount, String difficulty,  Board customBoard){

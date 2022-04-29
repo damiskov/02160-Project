@@ -60,7 +60,6 @@ public class CardPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				List<Card> cards = new ArrayList<>();
 				
-				
 				// Iterating over card selection panels, and mapping to card objects using cardFactory method
 //				CardFactory cf = new CardFactory();
 //				
