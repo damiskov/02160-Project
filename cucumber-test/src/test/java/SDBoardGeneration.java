@@ -1,15 +1,19 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import board.Board;
 import board.BoardFactory;
 import board.Game;
+import board.PieceNotFoundException;
+import environment_elements.ReversalPanel;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import piece_basics.Robot;
 import player.Player;
 import property_changes.PropertyChangeSupport;
+
+
 
 public class SDBoardGeneration {
 	
@@ -86,9 +90,28 @@ public class SDBoardGeneration {
 	    assertEquals(context.board.getNumRows(), context.board.getNumColumns());
 	}
 	
+	
 	@Then("the board has a game")
 	public void the_board_has_a_game() {
 		assertTrue(!(context.board.getGame() == null));
 	}
-
+	
+	@When("a position is calculated for an obstacle")
+	public void a_position_is_calculated_for_an_obstacle() {
+	}
+		
+		
+	@Then("it throws an exception error")
+	public void it_throws_an_exception_error() {
+		assertThrowsExactly(PieceNotFoundException.class, () -> context.board.calculatePosition(new ReversalPanel()));
+	}
+	
+	@When("a position is calculated for a robot")
+	public void a_position_is_calculated_for_a_robot() {
+	}
+		
+	@Then("it throws an exception error if robot not found")
+	public void it_throws_an_exception_error_if_robot_not_found() {
+		assertThrowsExactly(PieceNotFoundException.class, () -> context.board.calculatePosition(new Robot()));
+	}
 }

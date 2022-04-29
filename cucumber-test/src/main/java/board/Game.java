@@ -67,8 +67,23 @@ public class Game {
 	public void setDeck(Deck d) {
 		this.deck = d;
 	}
+
 	public void setDifficulty(Difficulty d) {
 		this.difficulty = d;
+	}
+
+	
+	public Game(PropertyChangeSupport pcs, int numPlayers, Board definedBoard) {
+		this.propertyChangeSupport = pcs;
+		this.numPlayers = numPlayers;
+		
+		// temporary
+		board = definedBoard;
+	}
+	
+	
+	public void genBoard() {
+
 		
 	}
 	

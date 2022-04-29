@@ -105,6 +105,7 @@ public class Robot extends Piece {
 		getPropertyChangeSupport().firePropertyChange(new RotationEvent(robotNumber, oldOrientation, orientation));
 	}	
 	
+//<<<<<<< HEAD
 	
 	private boolean hasWallNextRobotShiftPosition(Position posToMove, int spaces) {
 		Position shiftedNextRobotPos;

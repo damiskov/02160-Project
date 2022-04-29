@@ -1,5 +1,6 @@
 Feature: Robot Bound
 
+
 Scenario: Robot going out of bounds facing right
 	Given a game with an empty board
 	And a robot on the board at (11, 5) facing "right" 

@@ -1,7 +1,9 @@
 package controller;
 
 
+
 import board.Difficulty;
+import board.Board;
 import board.Game;
 import player.Player;
 import property_changes.PropertyChangeSupport;
@@ -37,6 +39,19 @@ public class MasterController {
 		game.begin(playerCount, d, pcs);
 		
 		runGame();
+	}
+	
+	MasterController(ApplicationController application, int playerCount, String difficulty,  Board customBoard){
+		this.application = application;
+		this.playerCount = playerCount; 
+		this.difficulty = difficulty;
+		
+//		pcs = new PropertyChangeSupport();
+		game = new Game(pcs, playerCount, customBoard);
+		this.view = new MasterView(this, game);
+//		pcs.addSubscriber(view);
+		
+//		game.testPlacements();
 	}
 
 	public void display() {
