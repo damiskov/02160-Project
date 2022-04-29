@@ -77,25 +77,7 @@ public class CardPanel extends JPanel {
 //				
 				// Assigns selected cards to robot
 				
-				mc.assignCards(cards);
-				
-				if (mc.getCurrentPlayer()==mc.playerCount-1)
-				{
-					// Execute activation phase
-					mc.getGame().activationPhase();
-				}
-				else
-				{
-					
-					
-	    			// incrementing current player
-					// and setCardPanel (new player's hand shown)
-	
-					mc.incrementCurrentPlayer();
-					
-				
-					mc.displayCardPanelControl();
-				}
+				mc.checkIfEndOfProgrammingPhase(cards);
 
 			}
 

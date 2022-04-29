@@ -186,4 +186,27 @@ public class MasterController {
 	{
 		return game.getPlayers()[currentPlayer].getHand().getCardList();
 	}
+	
+	public void checkIfEndOfProgrammingPhase(List<Card> cards)
+	{
+		assignCards(cards);
+		
+		if (getCurrentPlayer()==playerCount-1)
+		{
+			// Execute activation phase
+			game.activationPhase();
+		}
+		else
+		{
+			
+			
+			// incrementing current player
+			// and setCardPanel (new player's hand shown)
+
+			incrementCurrentPlayer();
+			
+		
+			displayCardPanelControl();
+		}
+	}
 }
