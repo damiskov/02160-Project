@@ -53,7 +53,8 @@ public class SDBoardGeneration {
 		Robot[] r = {context.player.getRobot(),context.player2.getRobot()};
 		PropertyChangeSupport pcs = new PropertyChangeSupport();
 		Game game = new Game(pcs, 2);
-		Board b = BoardFactory.generateBoard(context.d, r, game);
+		BoardFactory bf = new BoardFactory();
+		Board b = bf.generateBoard(context.d, r, game);
 		context.board = b;
 	}
 	

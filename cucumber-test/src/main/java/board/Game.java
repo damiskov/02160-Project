@@ -171,14 +171,13 @@ public class Game {
 		board.initialPlacement(rp, 6, 3);
 		board.initialPlacement(new ReversalPanel(), 7, 3);
 		
-		Teleporter t2 = new Teleporter();
+		Teleporter t2 = new Teleporter(false);
 		
-		Teleporter t1 = new Teleporter();
+		Teleporter t1 = new Teleporter(true);
 		t1.setReceiving(t2);
 		board.initialPlacement(t1, 8, 3);
 		
 		board.initialPlacement(t2, 8, 10);
-		t1.setSending(true);
 		t1.setReceiving(t2);
 		board.initialPlacement(t1, 8, 3);
 		board.initialPlacement(t2, 8, 10);
@@ -259,7 +258,8 @@ public class Game {
 	 
 	//makes the board for the game
 	public void genBoard(Difficulty d, Robot[] r) {
-		Board b = BoardFactory.generateBoard(d, r, this);
+		BoardFactory bf = new BoardFactory();
+		Board b = bf.generateBoard(d, r, this);
 		this.board = b;
 	}
 	
@@ -277,7 +277,7 @@ public class Game {
 		
 		genBoard(d, getRobots());
 	}
-	
+	 
 	/*
 	 * ADD PLAYERS CHOOSING THE CARDS METHODS
 	 */
