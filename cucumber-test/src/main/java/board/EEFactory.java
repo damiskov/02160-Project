@@ -16,7 +16,7 @@ import piece_basics.Orientation;
 
 public class EEFactory {
 	
-	public void EEfactory() {
+	public EEFactory() {
 		
 	}
 	public EnvironmentElement getEE(Character ID)
