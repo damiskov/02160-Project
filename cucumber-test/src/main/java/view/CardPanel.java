@@ -81,7 +81,7 @@ public class CardPanel extends JPanel {
 //				
 				// Assigns selected cards to robot
 				
-				mc.checkIfEndOfProgrammingPhase(cards);
+				mc.continueProgrammingPhase(cards);
 
 			}
 

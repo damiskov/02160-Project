@@ -193,7 +193,17 @@ public class MasterController {
 		return game.getPlayers()[currentPlayer].getHand().getCardList();
 	}
 	
-	public void checkIfEndOfProgrammingPhase(List<Card> cards)
+	public void beginProgrammingPhase() {
+		if (!game.isOver())
+		{
+			currentPlayer = 0;
+			game.dealCards();
+			displayCardPanelControl();
+		}
+		
+	}
+	
+	public void continueProgrammingPhase(List<Card> cards)
 	{
 		Collections.reverse(cards);
 		assignCards(cards);
@@ -221,16 +231,6 @@ public class MasterController {
 		}
 	}
 	
-	
-	public void beginProgrammingPhase() {
-		if (!game.isOver())
-		{
-			currentPlayer = 0;
-			game.dealCards();
-			displayCardPanelControl();
-		}
-		
-	}
 	
 	
 }
