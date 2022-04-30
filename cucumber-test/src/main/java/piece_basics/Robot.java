@@ -39,6 +39,16 @@ public class Robot extends Piece {
 	
 	public static final String ID = "robot";
 	
+	private String spriteName;
+	
+	public void setSpriteName(String spriteName) {
+		this.spriteName = spriteName;
+	}
+	
+	public String getSpriteName() {
+		return spriteName;
+	}
+	
 	public Robot() {
 		health = MAX_ROBOT_HEALTH; // robots start at maximum health
 		robotNumber = nextRobotNumber;
@@ -116,20 +126,26 @@ public class Robot extends Piece {
 		if (orientation == Orientation.LEFT || orientation == Orientation.RIGHT) {
 			// move on X axis
 			shiftedNextRobotPos = new Position(posToMove.getX() + increment, posToMove.getY());
-		} else {
+		} 
+		else {
 			// move on Y axis
 			shiftedNextRobotPos = new Position(posToMove.getX(), posToMove.getY() + increment);
+		}
+		
+		if(!(board.coordinateWithinBounds(shiftedNextRobotPos))) {
+			return true;
 		}
 		//check to be shifted 2nd robot position
 		if (board.hasEElementAt(shiftedNextRobotPos) && (board.getEElementAt(shiftedNextRobotPos).isRobotBlocking())) {
 			return true;
 		}
+		
 		return false;
 	}
 	
 	
 	private void tryMoveRobot(Position posToMoveTo, int spaces) {
-		System.out.println(board.hasRobotAt(posToMoveTo));
+		System.out.println(board.hasRobotAt(posToMoveTo)); 
 		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo).isRobotBlocking()))) || (!(board.hasEElementAt(posToMoveTo))) && !board.hasRobotAt(posToMoveTo)) {
 			firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
@@ -226,20 +242,36 @@ public class Robot extends Piece {
 		else {
 			switch(orientation) {
 			case UP:
-				this.getChainedTo().shiftY(spaces);
-				shiftY(spaces);
+				if(isValidMove(spaces)) {			
+					if(board.coordinateWithinBounds(this.getChainedTo().getX(), this.getChainedTo().getY() + spaces)) {
+						this.getChainedTo().shiftY(spaces);
+					}
+					shiftY(spaces);
+				}
 				break;
 			case RIGHT:
-				shiftX(spaces);
-				this.getChainedTo().shiftX(spaces);
+				if(isValidMove(spaces)) {
+					if(board.coordinateWithinBounds(this.getChainedTo().getX() + spaces, this.getChainedTo().getY())) {
+						this.getChainedTo().shiftX(spaces);
+					}
+					shiftX(spaces);
+				}
 				break;
 			case DOWN:
-				shiftY(-spaces);
-				this.getChainedTo().shiftY(-spaces);
+				if(isValidMove(-spaces)) {
+					if(board.coordinateWithinBounds(this.getChainedTo().getX(), this.getChainedTo().getY() - spaces)) {
+						this.getChainedTo().shiftY(-spaces);
+					}
+					shiftY(-spaces);
+				}
 				break;
 			case LEFT:
-				shiftX(-spaces);
-				this.getChainedTo().shiftX(-spaces);
+				if(isValidMove(-spaces)) {
+					if(board.coordinateWithinBounds(this.getChainedTo().getX() - spaces, this.getChainedTo().getY())) {
+						this.getChainedTo().shiftX(-spaces);
+					}
+					shiftX(-spaces);
+				}
 				break;
 			}
 		}

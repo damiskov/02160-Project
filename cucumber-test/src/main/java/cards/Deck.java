@@ -69,7 +69,8 @@ public class Deck
             
             // adding card to hand
             Card c = cards.get(x);
-            c.setNum(y);
+            c.setNum(numbers.get(y));
+            
             hand.add(c);
             // removing taken card from deck
             cards.remove(x);

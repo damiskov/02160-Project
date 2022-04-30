@@ -14,12 +14,12 @@ public class Checkpoint extends EnvironmentElement {
 
 	@Override
 	public void performImmediateAction(Robot r) {
-		System.out.println("checkpoint activated");
 		/*
 		 * If this checkpoint's number is one greater than the robot's most recent checkpoint, this is indeed the next checkpoint it had to go to,
 		 * so its most recent checkpoint number can be incremented
 		 */
 		if (r.getMostRecentCheckpoint() + 1 == number) {
+			System.out.println("checkpoint " + number + " activated by robot " + r.getRobotNumber());
 			r.setMostRecentCheckpoint(number);
 		}
 	}

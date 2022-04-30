@@ -1,4 +1,6 @@
 package controller;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -13,8 +15,12 @@ import board.Game;
 
 import cards.Card;
 
+
 import player.Player;
 import property_changes.ActivationPhaseEndEvent;
+import property_changes.PropertyChangeSupport;
+import view.CardPanel;
+import player.Player;
 import property_changes.PropertyChangeSupport;
 import view.MasterView;
 
@@ -28,8 +34,7 @@ public class MasterController {
 	private MasterView view;
 	private Game game;
 	private PropertyChangeSupport pcs;
-	
-	private int CurrentPlayer = 0;
+	private String[] spriteNames = {"robot1", "robot2", "robot3", "robot4", "robot5", "robot6", "robot7", "robot8"};
 	
 	
 	MasterController(ApplicationController application, int playerCount, String difficulty, int currentPlayer){
@@ -44,21 +49,26 @@ public class MasterController {
 		// temporary
 		//game.testPlacements();
 		//
-		
+		Difficulty d = new Difficulty(setDifLevel(difficulty));
+		game.begin(playerCount, d, pcs);
+		setRobotNames();
+		game.dealCards();
 		
 		this.view = new MasterView(this, game);
 		pcs.addSubscriber(view);
 		game.getPropertyChangeSupport().firePropertyChange(new ActivationPhaseEndEvent());
 
-//		// temporary
+//		temporary
 //		game.demo();
-//		//
+		
+		
+		
 		
 		//game.testPlacements();
 		
-		Difficulty d = new Difficulty(setDifLevel(difficulty));
 		
-		game.begin(playerCount, d, pcs);
+		
+		
 		
 		//runGame();
 		
@@ -92,8 +102,13 @@ public class MasterController {
 	public void assignCards(List<Card> cards)
 	{
 		Stack<Card> stack = new Stack<Card>();
+		for (Card c : cards)
+		{
+			System.out.println(c.getAction());
+		}
 		stack.addAll(cards);
-		Player p = game.getPlayers()[this.currentPlayer];
+		System.out.println(stack.size());
+		Player p = game.getPlayers()[currentPlayer];
 		p.getRobot().setProgram(stack);
 	}
 	
@@ -109,7 +124,7 @@ public class MasterController {
 	}
 
 	public void incrementCurrentPlayer() {
-		currentPlayer++;
+		this.currentPlayer = this.currentPlayer+1;
 		
 	}
 
@@ -133,11 +148,11 @@ public class MasterController {
 	
 	
     public void setCurrentPlayer(int cp) {
-    	this.CurrentPlayer = cp;
+    	this.currentPlayer = cp;
     }
     
     public int getCurrentPlayer() {
-    	return CurrentPlayer;
+    	return currentPlayer;
     }
     
 	private void runGame() {
@@ -145,7 +160,7 @@ public class MasterController {
 			
 			game.dealCards();
 			
-			while(CurrentPlayer < game.getNumPlayers()) {
+			while(currentPlayer < game.getNumPlayers()) {
 				
 				
 				
@@ -156,12 +171,66 @@ public class MasterController {
 		}
 		
 	}
-
-	public void beginProgrammingPhase() {
-		if (!game.isOver()) {
-			
+	
+	public void setRobotNames() {
+		for(int i = 0; i<playerCount; i++) {
+			game.getRobots()[i].setSpriteName(spriteNames[i]);
 		}
 	}
 
+
+
+	public void displayCardPanelControl()
+	{
+		CardPanel cp = new CardPanel(view, this);
+		view.displayCardPanelView(cp);
+		
+	}
+	
+	
+	public ArrayList<Card> getCurrentPlayerHand()
+	{
+		return game.getPlayers()[currentPlayer].getHand().getCardList();
+	}
+	
+	public void checkIfEndOfProgrammingPhase(List<Card> cards)
+	{
+		Collections.reverse(cards);
+		assignCards(cards);
+		
+		if (getCurrentPlayer()==playerCount-1)
+		{
+			// Execute activation phase
+			view.removeCardPanel();
+			
+			game.activationPhase();
+			
+			
+		}
+		else
+		{
+			
+			
+			// incrementing current player
+			// and setCardPanel (new player's hand shown)
+
+			incrementCurrentPlayer();
+			
+		
+			displayCardPanelControl();
+		}
+	}
+	
+	
+	public void beginProgrammingPhase() {
+		if (!game.isOver())
+		{
+			currentPlayer = 0;
+			game.dealCards();
+			displayCardPanelControl();
+		}
+		
+	}
+	
 	
 }

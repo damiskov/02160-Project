@@ -31,13 +31,14 @@ public class CardPanel extends JPanel {
 
 	private List<CardSelectionPanel> hand = new ArrayList<>();
 	private List<CardSelectionPanel> orderedCards = new ArrayList<>();
-	private boolean buttonPressed;
 	
 	
 	JButton assignCardsButton;
 	JButton button_b;
 
 	public CardPanel(MasterView mv, MasterController mc) {
+		System.out.println("Current Player: " + mc.getCurrentPlayer());
+		System.out.println("Next Player: " + (mc.getCurrentPlayer()+1));
 		
 		// Gets cards from player hand and creates card panel list with becomes card panel 
 		
@@ -58,54 +59,37 @@ public class CardPanel extends JPanel {
 		assignCardsButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				List<Card> cards = new ArrayList<>();
 				
-				// Iterating over card selection panels, and mapping to card objects using cardFactory method
+				
 //				CardFactory cf = new CardFactory();
-//				
-//				for (CardSelectionPanel c : orderedCards)
-//				{
-//					cards.add(cf.getCard(c.getCardID()));
-//				}
+//				List<Card> cards = new ArrayList<>();
+//				cards.add(cf.getCard("move1"));
+//				cards.add(cf.getCard("move1"));
+//				cards.add(cf.getCard("move1"));
+//				cards.add(cf.getCard("move1"));
+//				cards.add(cf.getCard("move1"));
+				
+//				// Iterating over card selection panels, and mapping to card objects using cardFactory method
+				CardFactory cf = new CardFactory();
+				List<Card> cards = new ArrayList<>();
+				for (CardSelectionPanel c : orderedCards)
+				{
+					Card card = cf.getCard(c.getCardID());
+					card.setNum(c.getCardNum());
+					cards.add(card);
+				}
 //				
 				// Assigns selected cards to robot
 				
-//				mc.assignCards(cards);
-//				
-//				// incrementing current player
-//				// and setCardPanel (new player's hand shown)
-//				
-//				mc.incrementCurrentPlayer();
-//				setCardPanel();
+				mc.checkIfEndOfProgrammingPhase(cards);
 
 			}
 
 		}); 
-		// given a hand
-		// go through that hand and for each card create a button
-		
-//		number_cards = 7;
-		// card width and height are now specified as static final variables in CardSelectionPanel
-//		card_width = 96;
-//		card_height = 133;
-//		space_between_cards = 10;
-//
-//		canvas_width = (card_width + space_between_cards) * 9;
-//		canvas_height = card_height + 2 * space_between_cards;
-//
-//		setPreferredSize(new Dimension(canvas_width, canvas_height));
-
-		// create buttons with images according to move
 
 		setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
-
-		// temporary
-		for (String id: List.of("move1", "turnLeft", "backUp", "move3", "move2", "turnRight", "uTurn")) {
-			CardSelectionPanel b = new CardSelectionPanel(id);
-			hand.add(b); 
-			add(b);
-		}
-		//
+		
+		setCardPanel();
 		
 		for (CardSelectionPanel csp : hand) {
 			SelectionIcon selectionIcon = csp.getSelectionIcon();
@@ -150,39 +134,18 @@ public class CardPanel extends JPanel {
 	}
 
 
-
-
-
-
-	
-	
 	// Uses master controller to access current player and get program
 
 
-//	private void setCardPanel()
-//	{
-//		ArrayList<Card> cardHand = mc.getGame().getPlayers()[mc.getCurrentPlayer()].getHand().getCardList();
-//		for (Card c : cardHand)
-//		{
-//			CardSelectionPanel b = new CardSelectionPanel(c.getAction());
-//			hand.add(b);
-//		} 
-//	}
+	private void setCardPanel()
+	{
+		ArrayList<Card> cardHand = mc.getCurrentPlayerHand();
+		for (Card c : cardHand)
+		{
+			CardSelectionPanel b = new CardSelectionPanel(c.getAction(), c.getNum());
+			hand.add(b);
+			add(b);
+		} 
+	}
 	
-
-
-//	private Image createImage(String path, int card_width, int card_height) {
-//
-//		ImageIcon image1 = new ImageIcon(path);
-//		Image image2 = image1.getImage().getScaledInstance(card_width, card_height, 0);
-//
-//		return image2;
-//	}
-//
-////	
-//	@Override
-//	public void paintComponent(Graphics g) {
-//		super.paintComponent(g);
-//
-//	}
 }

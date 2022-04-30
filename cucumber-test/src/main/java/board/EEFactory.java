@@ -2,6 +2,7 @@ package board;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
 import environment_elements.ConveyorBelt;
+import environment_elements.FinalCheckpoint;
 import environment_elements.Gear;
 import environment_elements.HealthStation;
 import environment_elements.Laser;
@@ -16,16 +17,20 @@ import piece_basics.Orientation;
 
 public class EEFactory {
 	
+	private Teleporter t1;
+	private Teleporter t2;
+	
 	public EEFactory() {
 		
+		t2 = new Teleporter(false);
+		
+		t1 = new Teleporter(true);
+		
+		t1.setReceiving(t2);
 	}
 	public EnvironmentElement getEE(Character ID)
 	{
-		Teleporter t2 = new Teleporter(false);
-		
-		Teleporter t1 = new Teleporter(true);
-		
-		t1.setReceiving(t2);
+
 		
 		if (ID == 'W')
 		{
@@ -73,7 +78,7 @@ public class EEFactory {
 		}
 		else if (ID == 'L')
 		{
-			return new Laser();
+			return new Laser(); 
 		}
 		else if (ID == 'A')
 		{
@@ -109,7 +114,7 @@ public class EEFactory {
 		}
 		else if (ID == '5')
 		{
-			return new Checkpoint(5);
+			return new FinalCheckpoint(5);
 		}
 		else 
 		{

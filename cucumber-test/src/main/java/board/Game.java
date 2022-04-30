@@ -52,6 +52,7 @@ public class Game {
 	int numPlayers;
 	Deck deck;
 	private Robot[] robots;
+
 	
 	// TODO: Add game finish scenario
 	private boolean over = false;
@@ -108,9 +109,8 @@ public class Game {
 		Map<String, List<Piece>> executionLists = board.getPieceLists();
 		for (String id: registerActorPriorityList) {
 			if (executionLists.containsKey(id)) {
-				int startsize = executionLists.get(id).size();
-				for (int i = 0; i < startsize; i++) {
-					Piece actor = executionLists.get(id).get(i);
+				ArrayList<Piece> toExecute = new ArrayList<>(executionLists.get(id));
+				for (Piece actor : toExecute) {
 					actor.performRegisterAction();
 				}
 			}
@@ -305,17 +305,17 @@ public class Game {
 		setRobots(n);
 		
 		genBoard(d, getRobots());
-		
+		deck = new Deck();
 	}
 
 	
 	public void activationPhase() {
-		ArrayList<CardCommand> order = new ArrayList<>();
-		//ArrayList<Integer> orderNum = new ArrayList<>();
+		ArrayList<CardCommand> order = new ArrayList<CardCommand>();
 		
 		//iterates through the programs (5 because 5 cards)
 		activationPhaseLoop:
 		for(int j = 0; j < 5; j++) {
+			
 			//creates two arrays, one with all of the cards, one with all of the numbers
 			//the indices of the cards match to the ones of the numbers and also to the players
 			for(int i = 0; i < players.length; i++) {
@@ -324,13 +324,12 @@ public class Game {
 				
 				CardCommand cc = new CardCommand(topCard, r);
 				order.add(cc);
-				//orderNum.add(topCard.getNum());
 			}
 			
 			
-			//Collections.sort(orderNum, Collections.reverseOrder());
 			
-			Collections.sort(order, Collections.reverseOrder());
+			Collections.sort(order);
+			
 			
 			for(CardCommand cc : order) {
 				cc.execute();
@@ -350,6 +349,8 @@ public class Game {
 		firePropertyChange(new ActivationPhaseEndEvent());
 	
 	}
+	
+
 
 
 }

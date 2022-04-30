@@ -1,6 +1,7 @@
 package view;
 
 import controller.MasterController;
+import property_changes.ActivationPhaseEndEvent;
 import property_changes.GameWinEvent;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -29,7 +30,6 @@ import controller.BoardCreationController;
 import controller.MasterController;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
-import property_changes.ActivationPhaseEndEvent;
 import property_changes.PropertyChangeListener;
 import utils.GridBagLayoutUtils;
 
@@ -82,8 +82,12 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		winScreenButton.addActionListener(e -> game.getBoard().getRobotAt(new Position(0, 3)).move(1));
 		// Button for assign programs to robots
 		
+		
+		
 		addElements();
 		pack();
+		
+		displayBlackScreen(controller.getCurrentPlayer()+1);
 		
 		setVisible(true);
 		
@@ -155,6 +159,23 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	private void removeBlackScreen() {
 		remove(blackScreen);
+	}
+	
+	public void displayCardPanelView(CardPanel cp){
+		displayBlackScreen(controller.getCurrentPlayer()+1);
+		cardPanel = cp;
+//		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 10));
+//		revalidate();
+//		repaint();
+		
+		
+	}
+	
+	public void removeCardPanel()
+	{
+		remove(cardPanel);
+		revalidate();
+		repaint();
 	}
 
 
