@@ -13,12 +13,13 @@ import javax.swing.JPanel;
 
 import utils.ImageUtils;
 
+// This is a panel containing a single card image, its priority, and its selection status (SelectionIcon). CardPanel has nine of these
 public class CardSelectionPanel extends JPanel {
 
 	private static final long serialVersionUID = -2862362827324913955L;
 	
-	private static final int cardWidth = (int) (96*0.8);
-	private static final int cardHeight = (int) (133*0.8);;
+	private static final int cardWidth = (int) (191*0.4);
+	private static final int cardHeight = (int) (266*0.4);;
 
 	private JButton cardButton;
 	private JLabel priorityLabel;
@@ -27,17 +28,15 @@ public class CardSelectionPanel extends JPanel {
 	private int cardNum;
 	
 	public CardSelectionPanel(String cardID, int cardNum) {
-		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		this.cardNum = cardNum;
 		this.cardID = cardID; 
+		this.cardNum = cardNum;
+		
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
 		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/" + cardID + ".png", cardWidth, cardHeight));
 		cardButton = new JButton(icon);
 		cardButton.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 		cardButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		// temporary?
-		cardButton.setName(cardID);
-		//
 		add(cardButton);
 		
 		add(Box.createRigidArea(new Dimension(0, 5)));

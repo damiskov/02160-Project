@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 
 import utils.ImageUtils;
 
+// A single heart in the StatusPanel section of the UI. HeartIndicator is composed of three of these
 public class HeartLabel extends JLabel {
 
 	private static final long serialVersionUID = -7229470799707830165L;

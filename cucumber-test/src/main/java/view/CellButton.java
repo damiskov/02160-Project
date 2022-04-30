@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import board.Position;
 
+// FIXME
 public class CellButton extends JButton {
 
 	private Position position;

@@ -13,28 +13,29 @@ import cards.Card;
 import cards.CardFactory;
 import controller.MasterController;
 
-
+// This is the part of the main UI that displays the cards, their priorities, their selection status, and the assign button
 public class CardPanel extends JPanel {
 
 	private static final long serialVersionUID = 4888662845263342484L;
 	
-	MasterView mv;
-	MasterController mc;
+	// FIXME
+	private MasterView mv;
+	private MasterController mc;
 	
-	int card_width;
-	int card_height;
-	int number_cards;
-	int space_between_cards;
+	private int card_width;
+	private int card_height;
+	private int number_cards;
+	private int space_between_cards;
 
-	int canvas_width;
-	int canvas_height;
+	private int canvas_width;
+	private int canvas_height;
 
 	private List<CardSelectionPanel> hand = new ArrayList<>();
 	private List<CardSelectionPanel> orderedCards = new ArrayList<>();
 	
 	
-	JButton assignCardsButton;
-	JButton button_b;
+	private JButton assignCardsButton;
+	private JButton button_b;
 
 	public CardPanel(MasterView mv, MasterController mc) {
 		System.out.println("Current Player: " + mc.getCurrentPlayer());

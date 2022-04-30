@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 import piece_basics.Robot;
 import utils.ImageUtils;
 
+/* 
+ * This is a panel containing a single player number label, robot icon, and row of hearts (HeartIndicators) corresponding to the robot.
+ * StatusPanel is composed of these, and the number depends on the number of players in the game
+ */
 public class RobotStatusIndicator extends JPanel {
 	
 	private static final long serialVersionUID = 7744319983490682363L;

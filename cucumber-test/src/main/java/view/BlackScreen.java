@@ -3,7 +3,6 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.Box;
@@ -12,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+// This is the panel that shows up between turns in the programming phase, with the text "Player _'s turn, click anywhere to continue"
 public class BlackScreen extends PlainColorButton {
 
 	private static final long serialVersionUID = -2388904970660794174L;
@@ -29,6 +29,7 @@ public class BlackScreen extends PlainColorButton {
 		
 		setLayout(new BorderLayout());
 		
+		// middlePanel is centered in the middle of the BlackScreen and contains the two text boxes (JLabels)
 		middlePanel = new JPanel();
 		middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.PAGE_AXIS));
 		middlePanel.setBackground(new Color(0, 0, 0, 0));
