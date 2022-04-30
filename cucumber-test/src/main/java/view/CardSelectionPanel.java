@@ -2,11 +2,13 @@ package view;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import utils.ImageUtils;
@@ -19,13 +21,14 @@ public class CardSelectionPanel extends JPanel {
 	private static final int cardHeight = (int) (133*0.8);;
 
 	private JButton cardButton;
+	private JLabel priorityLabel;
 	private SelectionIcon selectionIcon;
 	private String cardID;
-	private int CardNum;
+	private int cardNum;
 	
-	public CardSelectionPanel(String cardID, int CardNum) {
+	public CardSelectionPanel(String cardID, int cardNum) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		this.CardNum = CardNum;
+		this.cardNum = cardNum;
 		this.cardID = cardID; 
 		
 		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/" + cardID + ".png", cardWidth, cardHeight));
@@ -36,6 +39,13 @@ public class CardSelectionPanel extends JPanel {
 		cardButton.setName(cardID);
 		//
 		add(cardButton);
+		
+		add(Box.createRigidArea(new Dimension(0, 5)));
+		
+		priorityLabel = new JLabel(String.valueOf(cardNum));
+		priorityLabel.setFont(new Font(priorityLabel.getFont().getName(), Font.BOLD | Font.ITALIC, 14));
+		priorityLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(priorityLabel);
 		
 		add(Box.createRigidArea(new Dimension(0, 5)));
 		
@@ -58,11 +68,11 @@ public class CardSelectionPanel extends JPanel {
 	}
 
 	public int getCardNum() {
-		return CardNum;
+		return cardNum;
 	}
 
 	public void setCardNum(int cardNum) {
-		CardNum = cardNum;
+		this.cardNum = cardNum;
 	}
 
 
