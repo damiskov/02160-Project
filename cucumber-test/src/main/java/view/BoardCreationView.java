@@ -130,7 +130,7 @@ public class BoardCreationView extends JFrame{
 			if(enoughCheckpoints()) {
 				controller.startGame(newBoard, numberPlayers);
 			}else {
-				JOptionPane.showMessageDialog(this, "Please ensure there are 4 checkpoints in the board!", "Error starting game", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Please ensure there are 5 checkpoints in the board!", "Error starting game", JOptionPane.ERROR_MESSAGE);
 			}
 			
 			
@@ -150,7 +150,7 @@ public class BoardCreationView extends JFrame{
 				if(enoughCheckpoints()) {
 					createTextFile();
 				}else {
-					JOptionPane.showMessageDialog(this, "Please ensure there are 4 checkpoints in the board!", "Error saving board", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Please ensure there are 5 checkpoints in the board!", "Error saving board", JOptionPane.ERROR_MESSAGE);
 				}
 				
 				
@@ -290,6 +290,8 @@ public class BoardCreationView extends JFrame{
 				return '3';
 			} else if (cp.getNumber()==4)  {
 				return '4';
+			} else if (cp.getNumber()==5)  {
+				return '5';
 			} else {
 				throw new RuntimeException("Error generating character for Checkpoint provided.");
 			}
@@ -342,7 +344,7 @@ public class BoardCreationView extends JFrame{
 			}
 		}
 		
-		return checkpointCounter == 4;
+		return checkpointCounter == 5;
 		
 	}
 	

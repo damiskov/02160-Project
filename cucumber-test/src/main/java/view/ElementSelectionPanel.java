@@ -104,9 +104,11 @@ public class ElementSelectionPanel extends JPanel {
 		elementIDs.add("checkpoint2");
 		elementIDs.add("checkpoint3");
 		elementIDs.add("checkpoint4");
+		elementIDs.add("checkpoint5");
 		
-		
-		/* Checkpoint.ID */
+		//add teleporters
+		elementIDs.add("TeleporterBlue");
+		elementIDs.add("TeleporterOrange");
 		
 	}
 	
