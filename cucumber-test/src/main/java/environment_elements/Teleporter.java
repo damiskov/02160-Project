@@ -19,7 +19,6 @@ public class Teleporter extends EnvironmentElement {
 
 	}
 
-
 	public boolean isSending() {
 		return this.sending;
 	}
@@ -34,7 +33,6 @@ public class Teleporter extends EnvironmentElement {
 	public String getPieceID() {
 		return ID;
 	}
-
 	
 	@Override
 	public void performRegisterAction() {

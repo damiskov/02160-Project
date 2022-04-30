@@ -12,6 +12,7 @@ public class Gear extends EnvironmentElement {
 		this.counterClockwise = counterClockwise;
 	}
 	
+	//Turns the robot left or right depending on the orientation of the gear
 	@Override
 	public void performRegisterAction() {
 		Position p = calculatePosition();

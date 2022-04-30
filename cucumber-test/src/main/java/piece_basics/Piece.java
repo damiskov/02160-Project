@@ -14,11 +14,9 @@ public abstract class Piece {
 		board.firePropertyChange(event);
 	}
 	
-	
 	// This method is called by Game at the end of every register
 	public void performRegisterAction() {}
 	
 	public abstract String getPieceID();
-
 
 }

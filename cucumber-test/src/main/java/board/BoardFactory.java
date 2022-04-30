@@ -2,7 +2,6 @@ package board;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
@@ -11,8 +10,7 @@ import environment_elements.RespawnPoint;
 import piece_basics.Robot;
 
 public class BoardFactory {
-	
-	
+
 	private String[] easyFiles = {"E1", "E2", "E3"};
 	private String[] mediumFiles = {"M1", "M2", "M3"};
 	private String[] hardFiles = {"H1", "H2", "H3"};
@@ -27,9 +25,9 @@ public class BoardFactory {
 			new Position(2,0)
 
 	};
+	
 	private Board b;
-	
-	
+		
 	public Board generateBoard(Difficulty d, Robot[] robots, Game game)
 	{
 		if (d.getLevel()==0)
@@ -44,12 +42,10 @@ public class BoardFactory {
 				b.initialPlacement(r, startingPositions[i]);
 				robots[i].setRespawnPoint(r);
 			}
-			return b;
-			
-			
-		} else if (d.getLevel()==1)
+			return b;		
+		} 
+		else if (d.getLevel()==1)
 		{
-			
 			Random rand = new Random();
 			int x = rand.nextInt(3);
 			b = retrieveBoard(easyFiles[x], game);
@@ -62,10 +58,9 @@ public class BoardFactory {
 				b.initialPlacement(r, startingPositions[i]);
 				robots[i].setRespawnPoint(r);
 			}
-			return b;
-			
-			
-		} else if (d.getLevel()==2)
+			return b;			
+		} 
+		else if (d.getLevel()==2)
 		{
 			Random rand = new Random();
 			int x = rand.nextInt(3);
@@ -79,11 +74,10 @@ public class BoardFactory {
 				b.initialPlacement(r, startingPositions[i]);
 				robots[i].setRespawnPoint(r);
 			}
-			return b;
-			
-		} else if (d.getLevel()==3)
-		{
-			
+			return b;		
+		} 
+		else if (d.getLevel()==3)
+		{		
 			Random rand = new Random();
 			int x = rand.nextInt(3);
 			b = retrieveBoard(hardFiles[x], game);
@@ -97,12 +91,9 @@ public class BoardFactory {
 				robots[i].setRespawnPoint(r);
 			}
 			return b;
-		}
-			
-		
+		}		
 		return null;
 	}
-
 	
 	/*
 	 * retrieveBoard
@@ -112,34 +103,10 @@ public class BoardFactory {
 	 */
 	
 	private Board retrieveBoard(String filename, Game game)  
-	{
-		
-		
+	{	
 		String path = "boards/" + filename + ".txt";
-//		int numRows=0;
-//		int numCols=0;
+
 		File doc = new File(path);
-		
-		// Finding dimensions of board
-//		
-//		BufferedReader obj = null;
-//		try {
-//			obj = new BufferedReader(new FileReader(doc));
-//		} catch (FileNotFoundException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		
-//		String str;
-//		try {
-//			while ((str = obj.readLine()) != null) {
-//				numRows++;
-//				numCols = str.length();
-//			}
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
 		// Placing environment elements on the board
 		
@@ -161,7 +128,6 @@ public class BoardFactory {
 				j++;
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

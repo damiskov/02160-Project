@@ -29,9 +29,7 @@ public class EEFactory {
 		t1.setReceiving(t2);
 	}
 	public EnvironmentElement getEE(Character ID)
-	{
-
-		
+	{		
 		if (ID == 'W')
 		{
 			return new Wall();
@@ -120,7 +118,5 @@ public class EEFactory {
 		{
 			return null;
 		}
-
 	}
-
 }

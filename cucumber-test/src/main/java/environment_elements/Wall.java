@@ -22,7 +22,4 @@ public class Wall extends EnvironmentElement {
 		return ID;
 	}
 
-
-
-
 }

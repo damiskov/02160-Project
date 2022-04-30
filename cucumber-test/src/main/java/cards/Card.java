@@ -6,14 +6,10 @@ public class Card
 {
     private String action;
     private int num;
-    
-    
-    
-    
+       
     public Card(String action)
     {
-        this.action = action;
-        
+        this.action = action;  
     }
 
     public void setNum(int num)
@@ -25,10 +21,8 @@ public class Card
     {
         return num;
     }
-
-    
-    public void executeAction(Robot r) {
-    
+   
+    public void executeAction(Robot r) {   
     }
     
     public Card getOppositeCard() {
@@ -39,6 +33,5 @@ public class Card
     public String getAction() {
     	return this.action;
     }
-
 
 }

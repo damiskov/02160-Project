@@ -16,7 +16,4 @@ public class Pit extends EnvironmentElement {
 	public void performImmediateAction(Robot r) {
 		r.reboot();
 	}
-	
-	
-
 }

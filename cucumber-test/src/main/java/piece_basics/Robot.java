@@ -118,7 +118,6 @@ public class Robot extends Piece {
 		firePropertyChange(new RotationEvent(robotNumber, oldOrientation, orientation));
 	}	
 	
-//<<<<<<< HEAD
 	
 	private boolean hasWallNextRobotShiftPosition(Position posToMove, int spaces) {
 		Position shiftedNextRobotPos;
