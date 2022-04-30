@@ -227,9 +227,7 @@ public class BoardPanel extends JPanel {
 	
 	private void moveRobot(MovementEvent me) {
 		Sprite spriteToMove = robotNumToSpriteMap.get(me.getRobotNum());
-		int screenDiffX = me.getPosChange().getX() * cellWidth;
-		int screenDiffY = me.getPosChange().getY() * cellWidth;
-		masterView.enqueueAnimation(new SpriteMovementAnimation(500, spriteToMove, screenDiffX, screenDiffY));
+		masterView.enqueueAnimation(new SpriteMovementAnimation(500, spriteToMove, me.getOldPos(), me.getNewPos(), cellWidth));
 		System.out.println("Movement animation enqueued");
 	}
 	
