@@ -336,7 +336,7 @@ public class Robot extends Piece {
 		} else throw new NullPointerException("Killed a robot with null respawn point");
 	}
 
-	// Shoot a laser at the first robot in line of sight, if there are any
+	//Shoot a laser at the first robot in line of sight, if there are any
 	@Override
 	public void performRegisterAction() {
 		System.out.println("Looking for robot ahead of robot " + robotNumber);
