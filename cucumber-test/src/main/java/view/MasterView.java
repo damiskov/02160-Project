@@ -32,6 +32,7 @@ import property_changes.IPropertyChangeEvent;
 import property_changes.PropertyChangeListener;
 import utils.GridBagLayoutUtils;
 
+// This is the main game window
 public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	private static final long serialVersionUID = 3L;
