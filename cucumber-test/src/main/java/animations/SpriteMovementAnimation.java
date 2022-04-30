@@ -1,10 +1,14 @@
 package animations;
 
+import board.Position;
 import view.Sprite;
 
 public class SpriteMovementAnimation extends Animation {
 	
 	private Sprite sprite;
+	private int cellWidth;
+	private Position oldPos;
+	private Position newPos;
 	
 	private int screenDiffX;
 	private int screenDiffY;
@@ -13,29 +17,25 @@ public class SpriteMovementAnimation extends Animation {
 	private double screenSmoothY;
 	private double screenShiftX;
 	private double screenShiftY;
-	private int screenFinalX;
-	private int screenFinalY;
 
-	public SpriteMovementAnimation(int durationMs, Sprite sprite, int screenDiffX, int screenDiffY) {
+	public SpriteMovementAnimation(int durationMs, Sprite sprite, Position oldPos, Position newPos, int cellWidth) {
 		super(durationMs);
 		this.sprite = sprite;
-		
-		this.screenDiffX = screenDiffX;
-		this.screenDiffY = screenDiffY;
-		this.screenShiftX = (double) screenDiffX / getNumFrames();
-		this.screenShiftY = (double) screenDiffY / getNumFrames();
+		this.oldPos = oldPos;
+		this.newPos = newPos;
+		this.cellWidth = cellWidth;
 	}
 
 	@Override
 	public void initializeAnimation() {
-		int screenX = sprite.getX();
-		int screenY = sprite.getY();
+		screenDiffX = (newPos.getX()-oldPos.getX())*cellWidth;
+		screenDiffY = (newPos.getY()-oldPos.getY())*cellWidth;
 		
-		screenSmoothX = (double) screenX;
-		screenSmoothY = (double) screenY;
+		screenShiftX = (double) screenDiffX / getNumFrames();
+		screenShiftY = (double) screenDiffY / getNumFrames();
 		
-		screenFinalX = screenX + screenDiffX;
-		screenFinalY = screenY + screenDiffY;
+		screenSmoothX = sprite.getX();
+		screenSmoothY = sprite.getY();
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class SpriteMovementAnimation extends Animation {
 
 	@Override
 	public void finalizeAnimation() {
-		sprite.setX(screenFinalX);
-		sprite.setY(screenFinalY);
+		sprite.setX(newPos.getX()*cellWidth);
+		sprite.setY(newPos.getY()*cellWidth);
 	}
 
 }

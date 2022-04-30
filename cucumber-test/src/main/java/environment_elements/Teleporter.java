@@ -2,7 +2,6 @@ package environment_elements;
 
 import board.Position;
 import piece_basics.EnvironmentElement;
-import piece_basics.Orientation;
 import piece_basics.Robot;
 import property_changes.TeleportEvent;
 
@@ -55,10 +54,7 @@ public class Teleporter extends EnvironmentElement {
 			firePropertyChange(new TeleportEvent(r.getRobotNumber(), receivingP, r.getOrientation()));
 		}
 	}
-	@Override
-	public void performImmediateAction(Robot robot) {
-		robot.setOrientation(Orientation.UP);
-	}
+	
 	
 }
 

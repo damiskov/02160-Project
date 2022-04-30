@@ -2,6 +2,8 @@ package board;
 
 import java.util.Objects;
 
+import piece_basics.Orientation;
+
 public class Position {
 	private int x;
 	private int y;
@@ -29,6 +31,26 @@ public class Position {
 	}
 	public void incrY(int delta) {
 		this.y += delta;
+	}
+	
+	public Position nextX(int distance) {
+		return new Position(this.getX()+distance, this.getY());
+	}
+	public Position nextY(int distance) {
+		return new Position(this.getX(), this.getY()+distance);
+	}
+	public Position next(Orientation direction, int distance) {
+		switch(direction) {
+		case UP:
+			return this.nextY(distance);
+		case DOWN:
+			return this.nextY(-distance);
+		case RIGHT:
+			return this.nextX(distance);
+		case LEFT:
+			return this.nextX(-distance);
+		}
+		return(this);
 	}
 	
 	public Position subtract(Position other) {

@@ -118,7 +118,24 @@ public class Robot extends Piece {
 		firePropertyChange(new RotationEvent(robotNumber, oldOrientation, orientation));
 	}	
 	
-//<<<<<<< HEAD
+	private boolean pushOtherRobot(Robot other, int step) {
+		Position newOtherPos = other.calculatePosition().next(this.getOrientation(), step);
+		
+		if(board.coordinateWithinBounds(newOtherPos) &&
+		   !board.hasRobotAt(newOtherPos) &&
+		   !eElementBlocking(newOtherPos)) {
+			
+			firePropertyChange(new MovementEvent(other.getRobotNumber(), other.calculatePosition(), newOtherPos));
+			board.moveRobotFromTo(other.calculatePosition(), newOtherPos);
+			System.out.println(other.calculatePosition()+ ""+ newOtherPos);
+			System.out.println("Other robot pushed");
+			
+			return true;
+		} else {
+			System.out.println("Other robot cannot be pushed");
+			return false;
+		}
+	}
 	
 	private boolean hasWallNextRobotShiftPosition(Position posToMove, int spaces) {
 		Position shiftedNextRobotPos;
@@ -143,44 +160,37 @@ public class Robot extends Piece {
 	}
 	
 	
-	private void tryMoveRobot(Position posToMoveTo, int spaces) {
-		System.out.println(board.hasRobotAt(posToMoveTo)); 
+	private void tryMoveRobot(Position posToMoveTo, int step) {
+		System.out.println("Moving to" + posToMoveTo);
+		//System.out.println("Robot in the way?" + board.hasRobotAt(posToMoveTo)); 
 		
-		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo).isRobotBlocking()))) ||
-				(!(board.hasEElementAt(posToMoveTo))) && !board.hasRobotAt(posToMoveTo)) {
-			
-			firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
-			board.setPosition(this, posToMoveTo);
-		} else if (board.hasRobotAt(posToMoveTo) && !(hasWallNextRobotShiftPosition(posToMoveTo, spaces))){
-			
-			Robot toBePushedRobot = board.getRobotAt(posToMoveTo);
-			toBePushedRobot.setOrientation(this.orientation);		
-			toBePushedRobot.move(1);
-			
-			firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
-			board.setPosition(this, posToMoveTo);
-			
+		if(board.coordinateWithinBounds(posToMoveTo)) {
+			if (!eElementBlocking(posToMoveTo) &&
+					!board.hasRobotAt(posToMoveTo)) {
+					
+					firePropertyChange(new MovementEvent(robotNumber, calculatePosition(), posToMoveTo));
+					board.setPosition(this, posToMoveTo);
+					
+					System.out.println("Moved robot with clear path");
+				} else if (board.hasRobotAt(posToMoveTo) &&
+						   pushOtherRobot(board.getRobotAt(posToMoveTo),step)){
+					
+					//Robot toBePushedRobot = board.getRobotAt(posToMoveTo);
+					//toBePushedRobot.setOrientation(this.orientation);		
+					//toBePushedRobot.move(1);
+					firePropertyChange(new MovementEvent(robotNumber, calculatePosition(), posToMoveTo));
+					board.setPosition(this, posToMoveTo);
+					System.out.println("Moved own robot with push");
+				}
+			System.out.println("Cant move, stuff's in the way");
+		}
+		 else{
+			System.out.println("Cannot move, Coordinate out of bounds");
 		}
 	}
-	
-	// shiftX and shiftY are called by move() for movements in the x-axis and y-axis directions respectively
-	public void shiftX(int spaces) {
-		int absSpaces = Math.abs(spaces);
-		for (int i = 0; i < absSpaces; i++) {
-			Position p = calculatePosition();
-			int increment = spaces < 0 ? -1 : 1;
-			p.incrX(increment);
-			tryMoveRobot(p, spaces);
-		}
-	}
-	public void shiftY(int spaces) {
-		int absSpaces = Math.abs(spaces);
-		for (int i = 0; i < absSpaces; i++) {
-			Position p = calculatePosition();
-			int increment = spaces < 0 ? -1 : 1;
-			p.incrY(increment);
-			tryMoveRobot(p, spaces);
-		}
+
+	private boolean eElementBlocking(Position posToMoveTo) {
+		return (board.hasEElementAt(posToMoveTo) && board.getEElementAt(posToMoveTo).isRobotBlocking());
 	}
 	
 	public boolean isValidMove(int moves) {
@@ -218,70 +228,16 @@ public class Robot extends Piece {
 	 * parameter. This method is called by the forward and backward movement cards.
 	 */
 	public void move(int spaces) {
-			if(this.getChainedTo() == null) {
-				switch(orientation) {
-				case UP:
-					if(isValidMove(spaces)) {
-					shiftY(spaces);
-					}
-					break;
-				case RIGHT:
-					if(isValidMove(spaces)) {
-					shiftX(spaces);
-					}
-					break;
-				case DOWN:
-					if(isValidMove(-spaces)) {
-					shiftY(-spaces);
-					}
-					break;
-				case LEFT:
-					if(isValidMove(-spaces)) {
-					shiftX(-spaces);
-					}
-					break;
-				}
-			}
-		
-		else {
-			switch(orientation) {
-			case UP:
-				if(isValidMove(spaces)) {			
-					if(board.coordinateWithinBounds(this.getChainedTo().getX(), this.getChainedTo().getY() + spaces)) {
-						this.getChainedTo().shiftY(spaces);
-					}
-					shiftY(spaces);
-				}
-				break;
-			case RIGHT:
-				if(isValidMove(spaces)) {
-					if(board.coordinateWithinBounds(this.getChainedTo().getX() + spaces, this.getChainedTo().getY())) {
-						this.getChainedTo().shiftX(spaces);
-					}
-					shiftX(spaces);
-				}
-				break;
-			case DOWN:
-				if(isValidMove(-spaces)) {
-					if(board.coordinateWithinBounds(this.getChainedTo().getX(), this.getChainedTo().getY() - spaces)) {
-						this.getChainedTo().shiftY(-spaces);
-					}
-					shiftY(-spaces);
-				}
-				break;
-			case LEFT:
-				if(isValidMove(-spaces)) {
-					if(board.coordinateWithinBounds(this.getChainedTo().getX() - spaces, this.getChainedTo().getY())) {
-						this.getChainedTo().shiftX(-spaces);
-					}
-					shiftX(-spaces);
-				}
-				break;
-			}
-		}
-		
-	}
-			
+		 	while(spaces!=0) {
+		 		if(this.getChainedTo() == null) {
+					this.tryMoveRobot(calculatePosition().next(getOrientation(), spaces < 0 ? -1 : 1),spaces < 0 ? -1 : 1);
+		 		} else {
+					this.getChainedTo().tryMoveRobot(calculatePosition().next(getOrientation(), spaces < 0 ? -1 : 1),spaces < 0 ? -1 : 1);
+					this.tryMoveRobot(calculatePosition().next(getOrientation(), spaces < 0 ? -1 : 1),spaces < 0 ? -1 : 1);
+		 		}
+		 		spaces += spaces < 0 ? 1 : -1;
+		 	}
+	}		
 
 	public void heal() {
 		if (health < MAX_ROBOT_HEALTH) {
