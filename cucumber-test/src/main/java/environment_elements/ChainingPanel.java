@@ -69,7 +69,8 @@ public class ChainingPanel extends EnvironmentElement {
 				toChain.getChainedFrom().setActive(true);			
 			}
 			//if a not chainable robot steps on an active chaining panel
-			else if (isActive() == true && board.getRobotAt(calculatePosition()).isChainable() == false){
+			else if (isActive() && !board.getRobotAt(calculatePosition()).isChainable()
+					&& board.getRobotAt(calculatePosition()).getChainedTo() == null){
 				board.getRobotAt(calculatePosition()).setChainable(true); //make the robot chainable
 				board.getRobotAt(calculatePosition()).setChainedFrom(this); //make the robot remember which panel it stepped on
 				setActive(false); //inactivate the panel
