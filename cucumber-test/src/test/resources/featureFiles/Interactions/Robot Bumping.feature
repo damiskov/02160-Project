@@ -46,9 +46,9 @@ Scenario: Third Robot as an obstacle in the way of second robot in the right dir
 	 And a second robot on the board at (6, 5) facing "right"
 	 And a third robot on the board at (7, 5) facing "right"
 	 When one robot moves 
-	 Then the first robot is at (6, 5)
-	 Then the second robot is at (7, 5)
-	 Then the third robot is at (8, 5)
+	 Then the first robot is at (5, 5)
+	 Then the second robot is at (6, 5)
+	 Then the third robot is at (7, 5)
 	 
 Scenario: Wall as an obstacle in the way of second robot in the right direction
 	 Given a game with an empty board

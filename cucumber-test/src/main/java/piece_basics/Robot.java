@@ -205,7 +205,7 @@ public class Robot extends Piece {
 		 		if(this.getChainedTo() == null) {
 					this.tryMoveRobot(calculatePosition().next(getOrientation(), spaces < 0 ? -1 : 1),spaces < 0 ? -1 : 1);
 		 		} else {
-					this.getChainedTo().tryMoveRobot(calculatePosition().next(getOrientation(), spaces < 0 ? -1 : 1),spaces < 0 ? -1 : 1);
+					this.getChainedTo().tryMoveRobot(this.getChainedTo().calculatePosition().next(getOrientation(), spaces < 0 ? -1 : 1),spaces < 0 ? -1 : 1);
 					this.tryMoveRobot(calculatePosition().next(getOrientation(), spaces < 0 ? -1 : 1),spaces < 0 ? -1 : 1);
 		 		}
 		 		spaces += spaces < 0 ? 1 : -1;
