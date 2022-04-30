@@ -310,8 +310,7 @@ public class Game {
 
 	
 	public void activationPhase() {
-		ArrayList<CardCommand> order = new ArrayList<>();
-		//ArrayList<Integer> orderNum = new ArrayList<>();
+		ArrayList<CardCommand> order = new ArrayList<CardCommand>();
 		
 		//iterates through the programs (5 because 5 cards)
 		activationPhaseLoop:
@@ -325,13 +324,12 @@ public class Game {
 				
 				CardCommand cc = new CardCommand(topCard, r);
 				order.add(cc);
-				//orderNum.add(topCard.getNum());
 			}
 			
 			
-			//Collections.sort(orderNum, Collections.reverseOrder());
 			
-			Collections.sort(order, Collections.reverseOrder());
+			Collections.sort(order);
+			
 			
 			for(CardCommand cc : order) {
 				cc.execute();

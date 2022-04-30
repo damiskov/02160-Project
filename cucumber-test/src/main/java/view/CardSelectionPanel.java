@@ -21,10 +21,11 @@ public class CardSelectionPanel extends JPanel {
 	private JButton cardButton;
 	private SelectionIcon selectionIcon;
 	private String cardID;
+	private int CardNum;
 	
-	public CardSelectionPanel(String cardID) {
+	public CardSelectionPanel(String cardID, int CardNum) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		
+		this.CardNum = CardNum;
 		this.cardID = cardID; 
 		
 		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/" + cardID + ".png", cardWidth, cardHeight));
@@ -54,6 +55,14 @@ public class CardSelectionPanel extends JPanel {
 	public String getCardID()
 	{
 		return cardID; 
+	}
+
+	public int getCardNum() {
+		return CardNum;
+	}
+
+	public void setCardNum(int cardNum) {
+		CardNum = cardNum;
 	}
 
 

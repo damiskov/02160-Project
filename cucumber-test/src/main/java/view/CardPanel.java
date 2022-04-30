@@ -74,7 +74,9 @@ public class CardPanel extends JPanel {
 				List<Card> cards = new ArrayList<>();
 				for (CardSelectionPanel c : orderedCards)
 				{
-					cards.add(cf.getCard(c.getCardID()));
+					Card card = cf.getCard(c.getCardID());
+					card.setNum(c.getCardNum());
+					cards.add(card);
 				}
 //				
 				// Assigns selected cards to robot
@@ -140,7 +142,7 @@ public class CardPanel extends JPanel {
 		ArrayList<Card> cardHand = mc.getCurrentPlayerHand();
 		for (Card c : cardHand)
 		{
-			CardSelectionPanel b = new CardSelectionPanel(c.getAction());
+			CardSelectionPanel b = new CardSelectionPanel(c.getAction(), c.getNum());
 			hand.add(b);
 			add(b);
 		} 

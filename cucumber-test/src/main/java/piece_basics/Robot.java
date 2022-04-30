@@ -131,10 +131,11 @@ public class Robot extends Piece {
 			// move on Y axis
 			shiftedNextRobotPos = new Position(posToMove.getX(), posToMove.getY() + increment);
 		}
-		//check to be shifted 2nd robot position
+		
 		if(!(board.coordinateWithinBounds(shiftedNextRobotPos))) {
 			return true;
 		}
+		//check to be shifted 2nd robot position
 		if (board.hasEElementAt(shiftedNextRobotPos) && (board.getEElementAt(shiftedNextRobotPos).isRobotBlocking())) {
 			return true;
 		}
