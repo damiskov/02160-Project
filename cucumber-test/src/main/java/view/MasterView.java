@@ -25,17 +25,12 @@ import board.Game;
 import board.Game;
 import board.Position;
 
-import board.Position;
 import controller.BoardCreationController;
 import controller.MasterController;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.PropertyChangeListener;
 import utils.GridBagLayoutUtils;
-
-
-
-
 
 public class MasterView extends JFrame implements PropertyChangeListener {
 	
@@ -49,11 +44,6 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	private StatusPanel statusPanel;
 	
 	private Queue<Animation> animationQueue = new ArrayDeque<>();
-	
-	// for testing
-	private JButton blackScreenButton;
-	private JButton winScreenButton;
-	//
 	
 	private BlackScreen blackScreen;
 	
@@ -75,11 +65,6 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		
 		blackScreen = new BlackScreen(this);
 		
-		// temporary
-		blackScreenButton = new JButton("Black screen");
-		blackScreenButton.addActionListener(e -> displayBlackScreen(2));
-		winScreenButton = new JButton("Move robot 2 forward");
-		winScreenButton.addActionListener(e -> game.getBoard().getRobotAt(new Position(0, 3)).move(1));
 		// Button for assign programs to robots
 		
 		
@@ -121,12 +106,6 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		spConstraint.fill = GridBagConstraints.VERTICAL;
 		add(statusPanel, spConstraint);
 		
-		// temporary
-		add(blackScreenButton, GridBagLayoutUtils.constraint(1, 1, 0));
-		add(winScreenButton, GridBagLayoutUtils.constraint(2, 1, 0));
-
-		// 
-		
 		revalidate();
 		repaint();
 	}
@@ -135,11 +114,6 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		remove(boardPanel);
 		remove(cardPanel);
 		remove(statusPanel);
-		
-		// temporary
-		remove(blackScreenButton);
-		remove(winScreenButton);
-		//
 	}
 	
 	private void addBlackScreen(int playerTurn) {
