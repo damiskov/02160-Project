@@ -137,29 +137,6 @@ public class Robot extends Piece {
 		}
 	}
 	
-	private boolean hasWallNextRobotShiftPosition(Position posToMove, int spaces) {
-		Position shiftedNextRobotPos;
-		int increment = spaces / Math.abs(spaces);
-		if (orientation == Orientation.LEFT || orientation == Orientation.RIGHT) {
-			// move on X axis
-			shiftedNextRobotPos = new Position(posToMove.getX() + increment, posToMove.getY());
-		} 
-		else {
-			// move on Y axis
-			shiftedNextRobotPos = new Position(posToMove.getX(), posToMove.getY() + increment);
-		}
-		//check to be shifted 2nd robot position
-		if(!(board.coordinateWithinBounds(shiftedNextRobotPos))) {
-			return true;
-		}
-		if (board.hasEElementAt(shiftedNextRobotPos) && (board.getEElementAt(shiftedNextRobotPos).isRobotBlocking())) {
-			return true;
-		}
-		
-		return false;
-	}
-	
-	
 	private void tryMoveRobot(Position posToMoveTo, int step) {
 		System.out.println("Moving to" + posToMoveTo);
 		//System.out.println("Robot in the way?" + board.hasRobotAt(posToMoveTo)); 
