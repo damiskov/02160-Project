@@ -1,14 +1,13 @@
 package cards;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Hand 
 {
     private ArrayList<Card> cardList;
 
-    public Hand()
-    {}
+    public Hand(){
+    }
 
     public ArrayList<Card> getCardList()
     {
@@ -18,9 +17,6 @@ public class Hand
     public void setCardList(ArrayList<Card> cardList)
     {
     	this.cardList = cardList;
-    }
-
-
-    
+    } 
     
 }

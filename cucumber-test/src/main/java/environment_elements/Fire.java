@@ -36,15 +36,10 @@ public class Fire extends EnvironmentElement{
 				newFire.setSpreadCounter(5); 
 				board.initialPlacement(newFire, getP()); 
 				incrementSpreadCounter(); 
-			}
-
-			
+			}			
 		}
-		
-
 	}
 
-	
 	public void setP(Position pos) {
 		this.p = pos;
 	}
@@ -52,12 +47,10 @@ public class Fire extends EnvironmentElement{
 	public Position getP() {
 		return this.p;
 	}
-	
-	
+
 	public void incrementSpreadCounter() {
 		spreadCounter ++;
 	}
-
 	
 	public void setSpreadCounter(int spreadCounter) {
 		this.spreadCounter = spreadCounter;
@@ -66,11 +59,9 @@ public class Fire extends EnvironmentElement{
 	public int getSpreadCounter() {
 		return this.spreadCounter;
 	}
-
 	
 	@Override
 	public String getPieceID() {
 		return ID;
 	}
-
 }

@@ -33,8 +33,6 @@ public class Context {
 	Wall wall;
 	Game game;
 	
-	
-
 	RespawnPoint respawnPoint;
 	RespawnPoint respawnPoint2;
 	Laser laser;

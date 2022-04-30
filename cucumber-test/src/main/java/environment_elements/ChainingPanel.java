@@ -1,7 +1,6 @@
 package environment_elements;
 
 import java.util.List;
-
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;
@@ -15,9 +14,7 @@ public class ChainingPanel extends EnvironmentElement {
 	private boolean chainableOnBoard; 
 	public Robot toChain;
 
-	
 	public static final String ID = "chaining_panel";
-
 	
 	public boolean isActive() {
 		return this.active;
@@ -59,7 +56,6 @@ public class ChainingPanel extends EnvironmentElement {
 		}
 	}
 	
-	
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) { 
@@ -69,9 +65,7 @@ public class ChainingPanel extends EnvironmentElement {
 				//makes the robot chainable, chain the two robots, reactivate first chaining panel
 				board.getRobotAt(calculatePosition()).setChainable(true);
 				chainRobots(board.getRobotAt(calculatePosition()), toChain);
-				toChain.getChainedFrom().setActive(true);
-				
-				
+				toChain.getChainedFrom().setActive(true);			
 			}
 			//if a not chainable robot steps on an active chaining panel
 			else if (isActive() == true && board.getRobotAt(calculatePosition()).isChainable() == false){

@@ -30,8 +30,7 @@ public class CardFactory
         }
         else if (action.equals("uTurn"))
         {
-            return new UTurn();
-            
+            return new UTurn();       
         }
 		return null;
     }

@@ -228,9 +228,7 @@ public class BoardPanel extends JPanel {
 	
 	private void moveRobot(MovementEvent me) {
 		Sprite spriteToMove = robotNumToSpriteMap.get(me.getRobotNum());
-		int screenDiffX = me.getPosChange().getX() * cellWidth;
-		int screenDiffY = me.getPosChange().getY() * cellWidth;
-		masterView.enqueueAnimation(new SpriteMovementAnimation(500, spriteToMove, screenDiffX, screenDiffY));
+		masterView.enqueueAnimation(new SpriteMovementAnimation(500, spriteToMove, me.getOldPos(), me.getNewPos(), cellWidth));
 		System.out.println("Movement animation enqueued");
 	}
 	
@@ -246,23 +244,14 @@ public class BoardPanel extends JPanel {
 		Sprite spriteToTeleport = robotNumToSpriteMap.get(te.getRobotNum());
 		int screenNewX = te.getPosNew().getX() * cellWidth;
 		int screenNewY = te.getPosNew().getY() * cellWidth;
-		masterView.enqueueAnimation(new SpriteTeleportAnimation(spriteToTeleport, screenNewX, screenNewY));
+		int orientationDeg = te.getOrientation().getDegrees();
+		masterView.enqueueAnimation(new SpriteTeleportAnimation(spriteToTeleport, screenNewX, screenNewY, orientationDeg));
 	}
 	
-	private void rotateRobot(RotationEvent re) {
-		
+	private void rotateRobot(RotationEvent re) {	
 		Sprite spriteToRotate = robotNumToSpriteMap.get(re.getRobotNum());
-		int diffAngle;
-		int degCurr = re.getOrientationOld().getDegrees();
-		int degNew = re.getOrientationNew().getDegrees();
-		if(((degCurr < degNew) || ((degNew==0) && (degCurr==270))) && !(degCurr == 0 && degNew == 270)) {
-			diffAngle = 90;
-		} else {
-			diffAngle = -90;
-		}
-		masterView.enqueueAnimation(new SpriteRotationAnimation(500, spriteToRotate, diffAngle));
+		masterView.enqueueAnimation(new SpriteRotationAnimation(500, spriteToRotate, re.getOrientationOld(),re.getOrientationNew()));
 		System.out.println("Rotation animation enqueued");
-		
 	}
 	
 	private void displayRobotLaser(RobotLaserEvent rle) {

@@ -24,7 +24,7 @@ public class SDFire {
 	
 	@When("the robot steps into the fire")
 	public void the_robot_steps_into_the_fire() {
-		context.robot.shiftX(1);
+		context.robot.move(1);
 		context.fire.performRegisterAction();
 	}
 	

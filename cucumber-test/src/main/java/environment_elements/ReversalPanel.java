@@ -1,8 +1,5 @@
 package environment_elements;
 
-import java.util.ArrayList;
-
-import cards.Card;
 import cards.Program;
 import piece_basics.EnvironmentElement;
 
@@ -15,8 +12,7 @@ public class ReversalPanel extends EnvironmentElement {
 	public String getPieceID() {
 		return ID;
 	}
-	
-	
+		
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) { 

@@ -19,8 +19,7 @@ public class OilSpill extends EnvironmentElement {
 			board.getRobotAt(getP()).takeDamage(); 
 		}
 	}
-
-
+	
 	public void setP(Position pos) {
 		this.p = pos;
 	}

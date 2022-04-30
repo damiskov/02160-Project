@@ -1,8 +1,6 @@
-
 package cards;
 
 import piece_basics.Robot;
-
 
 public class Move1 extends Card 
 {

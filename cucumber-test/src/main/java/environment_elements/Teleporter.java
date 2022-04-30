@@ -19,8 +19,6 @@ public class Teleporter extends EnvironmentElement {
 
 	}
 
-
-
 	public boolean isSending() {
 		return this.sending;
 	}
@@ -35,7 +33,6 @@ public class Teleporter extends EnvironmentElement {
 	public String getPieceID() {
 		return ID;
 	}
-
 	
 	@Override
 	public void performRegisterAction() {
@@ -52,8 +49,10 @@ public class Teleporter extends EnvironmentElement {
 			board.moveRobotFromTo(p, receivingP); //teleport it to the receiving teleporter
 			System.out.println( r + " is being moved to " + receiving.calculatePosition());			
 			
-			firePropertyChange(new TeleportEvent(r.getRobotNumber(), receivingP));
+			firePropertyChange(new TeleportEvent(r.getRobotNumber(), receivingP, r.getOrientation()));
 		}
 	}
+	
+	
 }
 

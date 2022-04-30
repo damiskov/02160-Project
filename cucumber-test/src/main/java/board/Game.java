@@ -52,12 +52,8 @@ public class Game {
 	int numPlayers;
 	Deck deck;
 	private Robot[] robots;
-
-	
-	// TODO: Add game finish scenario
 	private boolean over = false;
 	private int winningPlayerNumber;
-	
 	
 	public Game(PropertyChangeSupport pcs, int numPlayers) {
 		this.propertyChangeSupport = pcs;
@@ -78,31 +74,18 @@ public class Game {
 	
 	public Game(PropertyChangeSupport pcs, int numPlayers, Board definedBoard) {
 		this.propertyChangeSupport = pcs;
-		this.numPlayers = numPlayers;
-		
+		this.numPlayers = numPlayers;	
 		// temporary
 		board = definedBoard;
 	}
 	
 	
 	public void genBoard() {
-
-		
 	}
 	
 	public Difficulty getDifficulty() {
-		return this.difficulty;
-		
+		return this.difficulty;		
 	}
-//	public void setCurrentPlayer(int i) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-	
-	
-
-
-	
 	
 	// Observer pattern
 	public void activateRegisterActors() {
@@ -117,12 +100,9 @@ public class Game {
 		}
 	}
 	
-	
 	public void setBoard(Board board) {
 		this.board = board;
 	}
-
-	
 
 	public PropertyChangeSupport getPropertyChangeSupport() {
 		return propertyChangeSupport;
@@ -150,18 +130,7 @@ public class Game {
 		Robot r1 = new Robot();
 		board.initialPlacement(r1, 5, 2);
 		Robot r2 = new Robot();
-		board.initialPlacement(r2, 7, 3);
-		/**
-		Robot r3 = new Robot();
-		board.initialPlacement(r3, 1, 0);
-		
-		board.initialPlacement(new Robot(), 2, 0);
-		board.initialPlacement(new Robot(), 9, 0);
-		board.initialPlacement(new Robot(), 5, 0);
-		board.initialPlacement(new Robot(), 10, 0);
-		board.initialPlacement(new Robot(), 11, 0);
-		**/
-		
+		board.initialPlacement(r2, 7, 3);		
 		board.initialPlacement(new ConveyorBelt(Orientation.RIGHT), 0, 1);
 		board.initialPlacement(new ConveyorBelt(Orientation.DOWN), 1, 1);
 		board.initialPlacement(new ConveyorBelt(Orientation.LEFT), 2, 1);
@@ -191,14 +160,8 @@ public class Game {
 		board.initialPlacement(t1, 8, 3);
 		
 		board.initialPlacement(t2, 8, 10);
-//		t1.setReceiving(t2);
-//		board.initialPlacement(t1, 8, 3);
-//		board.initialPlacement(t2, 8, 10);
-		
 		board.initialPlacement(new Wall(), 9, 3);
 		board.initialPlacement(new Laser(), 6, 7);
-		
-		
 		
 	}
 
@@ -208,27 +171,17 @@ public class Game {
 		
 		r1.move(1);
 		r2.move(1);
-		//r3.move(1);
-		//r4.move(1);
 		activateRegisterActors();
 
 		r1.turnLeft();
 		r2.move(1);
-		//r3.turnRight();
-		//r4.turnRight();
 		activateRegisterActors();
 		
 		r1.turnLeft();
 		r2.move(1);
-		//r3.turnRight();
-		//r4.move(1);
 		activateRegisterActors();
 		
 		r2.turnLeft();
-		//r3.turnLeft();
-		//r4.move(2);
-		//r2.turnLeft();
-		//r4.move(-1);
 		activateRegisterActors();
 		
 		r1.turnLeft();
@@ -244,10 +197,6 @@ public class Game {
 		r1.move(1);
 		r2.move(3);
 		activateRegisterActors();
-		
-		
-	
-
 
 		propertyChangeSupport.firePropertyChange(new ActivationPhaseEndEvent());
 	}
@@ -325,11 +274,8 @@ public class Game {
 				CardCommand cc = new CardCommand(topCard, r);
 				order.add(cc);
 			}
-			
-			
-			
+	
 			Collections.sort(order);
-			
 			
 			for(CardCommand cc : order) {
 				cc.execute();
