@@ -24,6 +24,9 @@ public class ConveyorBelt extends EnvironmentElement {
 		Position p = calculatePosition();
 		
 		if (board.hasRobotAt(p)) {
+			
+			
+			
 			Robot robot = board.getRobotAt(p);
 			Position newP = calculatePosition();
 			
@@ -43,7 +46,7 @@ public class ConveyorBelt extends EnvironmentElement {
 			}
 			
 			if (board.coordinateWithinBounds(newP) && !conveyorBlocking(newP)) {
-				firePropertyChange(new MovementEvent(robot.getRobotNumber(), newP.subtract(p)));
+				firePropertyChange(new MovementEvent(robot.getRobotNumber(), p, newP));
 				board.moveRobotFromTo(p, newP);
 			}
 		}

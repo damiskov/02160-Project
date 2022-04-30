@@ -1,5 +1,6 @@
 package animations;
 
+import piece_basics.Orientation;
 import view.Sprite;
 
 public class SpriteRotationAnimation extends Animation {
@@ -7,27 +8,35 @@ public class SpriteRotationAnimation extends Animation {
 	private Sprite sprite;
 	
 	private int diffAngle;
-	
+	private Orientation oldOrientation;
+	private Orientation newOrientation;
 	private double angleShift;
 	private double smoothAngle;
-	private int finalAngle;
+	private int degOld;
+	private int degNew;
 
-	public SpriteRotationAnimation(int durationMs, Sprite sprite, int diffAngle) {
+	public SpriteRotationAnimation(int durationMs, Sprite sprite, Orientation oldOrientation, Orientation newOrientation) {
 		super(durationMs);
 		this.sprite = sprite;
+		this.oldOrientation = oldOrientation;
+		this.newOrientation = newOrientation;
 		
-		this.diffAngle = diffAngle;
-		this.angleShift = (double) diffAngle / getNumFrames();
 		
 	}
 
 	@Override
 	public void initializeAnimation() {
-		int startingAngle = sprite.getRotation();
+		degOld = oldOrientation.getDegrees();
+		degNew = newOrientation.getDegrees();
 		
-		smoothAngle = (double) startingAngle;
+		if(((degOld < degNew) || ((degNew==0) && (degOld==270))) && !(degOld == 0 && degNew == 270)) {
+			diffAngle = 90;
+		} else {
+			diffAngle = -90;
+		}
 		
-		finalAngle = startingAngle + diffAngle;
+		angleShift = diffAngle / getNumFrames();
+		smoothAngle = degOld;
 
 	}
 
@@ -39,7 +48,7 @@ public class SpriteRotationAnimation extends Animation {
 
 	@Override
 	public void finalizeAnimation() {
-		sprite.setRotation(finalAngle);
+		sprite.setRotation(degNew);
 	}
 
 }

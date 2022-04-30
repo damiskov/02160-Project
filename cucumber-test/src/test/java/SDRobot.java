@@ -312,7 +312,7 @@ public class SDRobot {
 	
 	@Then("the robot moves to \\({int}, {int}) and turns {string}")
 	public void the_robot_moves_to_and_turns(Integer int1, Integer int2, String string) {
-	    context.robot.shiftX(1);
+	    context.robot.move(1);
 	    Orientation o = null;
 	    switch (string.toLowerCase()) {
 	    case "right":
