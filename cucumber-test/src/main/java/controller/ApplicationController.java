@@ -42,7 +42,7 @@ public class ApplicationController {
 	}
 	
 	public void startCustomGame(int numPlayers, Board newBoard){
-		masterController = new MasterController(this, numPlayers, "Custom Board", newBoard);
+		masterController = new MasterController(this, numPlayers, "customgame", 0);
 		masterController.display();
 	}
 	

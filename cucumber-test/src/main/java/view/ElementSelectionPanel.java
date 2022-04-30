@@ -78,12 +78,10 @@ public class ElementSelectionPanel extends JPanel {
 		elementIDs =  new ArrayList<String>() ;
 		
 		elementIDs.add(ChainingPanel.ID);
-		
-		elementIDs.add(Teleporter.ID);
 		elementIDs.add(Laser.ID);
 		elementIDs.add(OilSpill.ID);
 		elementIDs.add(ReversalPanel.ID);
-		elementIDs.add(RespawnPoint.ID);
+//		elementIDs.add(RespawnPoint.ID);
 		
 		elementIDs.add(Wall.ID);
 		elementIDs.add(Pit.ID);

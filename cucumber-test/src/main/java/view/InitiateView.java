@@ -24,6 +24,7 @@ public class InitiateView extends JFrame{
 	private JSlider sliderPlayers;
 	private JButton btnStart;
 	private JButton btnCreateBoard;
+	private JButton btnCustom;
 	JPanel difContainer;
 	JRadioButton easyDifficulty;
 	JRadioButton mediumDifficulty;
@@ -99,12 +100,25 @@ public class InitiateView extends JFrame{
 			}
 		});
 		
+		btnCustom = new JButton("Play saved custom board");
+		btnCustom.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int num_players = sliderPlayers.getValue();
+				controller.setGameParameters(num_players, "customgame");
+
+
+			}
+		});
+		
 		add(new JLabel("No. of players:"), GridBagLayoutUtils.constraint(0, 0, 5));
 		add(sliderPlayers, GridBagLayoutUtils.constraint(1, 0, 5));
 		add(new JLabel("Choose a difficulty:"), GridBagLayoutUtils.constraint(0, 1, 5));
 		add(difContainer, GridBagLayoutUtils.constraint(1, 1, 5));
 		add(btnStart, GridBagLayoutUtils.constraint(1, 2, 5));
 		add(btnCreateBoard, GridBagLayoutUtils.constraint(3, 0, 5));
+		add(btnCustom, GridBagLayoutUtils.constraint(3, 1, 5));
 		
 		
 		pack();

@@ -31,7 +31,6 @@ import environment_elements.Teleporter;
 import environment_elements.Wall;
 import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
-import property_changes.PropertyChangeSupport;
 import utils.GridBagLayoutUtils;
 
 public class BoardCreationView extends JFrame{
