@@ -126,8 +126,10 @@ public class Board {
 	
 	public void moveRobotFromTo(Position oldPos, Position newPos) {
 		if (!oldPos.equals(newPos)) {
+			if (hasRobotAt(newPos)) throw new PieceAlreadyPresentException("Attempting to move a robot where another is already present");
 			Cell oldCell = getCell(oldPos);
 			Robot r = oldCell.robot;
+			System.out.println("Moving robot " + r.getRobotNumber() + " from " + oldPos + " to " + newPos);
 			getCell(newPos).robot = r;
 			oldCell.robot = null;
 			if (hasEElementAt(newPos)) {
