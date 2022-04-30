@@ -140,13 +140,18 @@ public class Robot extends Piece {
 	
 	private void tryMoveRobot(Position posToMoveTo, int spaces) {
 		System.out.println(board.hasRobotAt(posToMoveTo)); 
-		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo).isRobotBlocking()))) || (!(board.hasEElementAt(posToMoveTo))) && !board.hasRobotAt(posToMoveTo)) {
+		
+		if (((board.hasEElementAt(posToMoveTo) && !(board.getEElementAt(posToMoveTo).isRobotBlocking()))) ||
+				(!(board.hasEElementAt(posToMoveTo))) && !board.hasRobotAt(posToMoveTo)) {
+			
 			firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
 		} else if (board.hasRobotAt(posToMoveTo) && !(hasWallNextRobotShiftPosition(posToMoveTo, spaces))){
+			
 			Robot toBePushedRobot = board.getRobotAt(posToMoveTo);
-			toBePushedRobot.setOrientation(this.orientation);
+			toBePushedRobot.setOrientation(this.orientation);		
 			toBePushedRobot.move(1);
+			
 			firePropertyChange(new MovementEvent(robotNumber, posToMoveTo.subtract(calculatePosition())));
 			board.setPosition(this, posToMoveTo);
 			
@@ -320,8 +325,8 @@ public class Robot extends Piece {
 				board.getRobotAt(respawnPointPos).reboot();
 			}
 			System.out.println(calculatePosition());
-			firePropertyChange(new TeleportEvent(robotNumber, respawnPointPos));
 			setPosition(respawnPointPos);
+			firePropertyChange(new TeleportEvent(robotNumber, respawnPointPos, this.getOrientation()));
 			health = MAX_ROBOT_HEALTH;
 		} else throw new NullPointerException("Killed a robot with null respawn point");
 	}
