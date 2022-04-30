@@ -29,4 +29,4 @@ Feature: Activation phase priority
     And a final checkpoint at (6, 7)
     When the activation phase happens
     Then the first robot is at (6, 7)
-    And the second robot is at (5, 6)
+    And the second robot is at (6, 6)
