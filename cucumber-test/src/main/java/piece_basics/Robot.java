@@ -126,14 +126,19 @@ public class Robot extends Piece {
 		if (orientation == Orientation.LEFT || orientation == Orientation.RIGHT) {
 			// move on X axis
 			shiftedNextRobotPos = new Position(posToMove.getX() + increment, posToMove.getY());
-		} else {
+		} 
+		else {
 			// move on Y axis
 			shiftedNextRobotPos = new Position(posToMove.getX(), posToMove.getY() + increment);
 		}
 		//check to be shifted 2nd robot position
+		if(!(board.coordinateWithinBounds(shiftedNextRobotPos))) {
+			return true;
+		}
 		if (board.hasEElementAt(shiftedNextRobotPos) && (board.getEElementAt(shiftedNextRobotPos).isRobotBlocking())) {
 			return true;
 		}
+		
 		return false;
 	}
 	
