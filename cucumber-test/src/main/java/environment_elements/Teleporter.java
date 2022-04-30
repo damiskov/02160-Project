@@ -20,6 +20,7 @@ public class Teleporter extends EnvironmentElement {
 	}
 
 
+
 	public boolean isSending() {
 		return this.sending;
 	}
