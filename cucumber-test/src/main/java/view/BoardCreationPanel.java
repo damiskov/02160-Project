@@ -231,7 +231,7 @@ private static final long serialVersionUID = -2140843137512577992L;
 				}
 				return e;
 				
-			} else if (id == "checkpoint1" || id == "checkpoint2" || id == "checkpoint3" || id == "checkpoint4") {
+			} else if (id == "checkpoint1" || id == "checkpoint2" || id == "checkpoint3" || id == "checkpoint4" || id == "checkpoint5") {
 				
 				Checkpoint cp = null;
 				
@@ -244,6 +244,8 @@ private static final long serialVersionUID = -2140843137512577992L;
 					cp = new Checkpoint(3);
 				} else if (id == "checkpoint4") {
 					cp = new Checkpoint(4);
+				} else if (id == "checkpoint5") {
+					cp = new Checkpoint(5);
 				}
 				return cp;
 				
@@ -265,9 +267,19 @@ private static final long serialVersionUID = -2140843137512577992L;
 				ConveyorBelt e = new ConveyorBelt(Orientation.RIGHT);
 				return e;
 				
-			} else if (id == Teleporter.ID) {
-				Teleporter e = new Teleporter();
-				return e;
+			} else if (id == "TeleporterBlue" || id == "TeleporterOrange") {
+				
+				Teleporter tp = null;
+				
+				System.out.println("Added Teleporter");
+				
+				if (id == "TeleporterBlue") {
+					tp = new Teleporter(false);
+				} else if (id == "TeleporterOrange") {
+					tp = new Teleporter(true);
+				} 
+				return tp;
+				
 			} else if (id == Laser.ID) {
 				Laser e = new Laser();
 				return e;
@@ -311,8 +323,22 @@ private static final long serialVersionUID = -2140843137512577992L;
 			return 3;
 		} else if(id == "checkpoint4") {
 			return 4;
+		} else if(id == "checkpoint5") {
+			return 5;
 		} else {
 			throw new RuntimeException("ID from Checkpoint doesn't match any case.");
+		}
+		
+	}
+	
+	private boolean getTeleporterIsSending(String id) {
+		
+		if (id == "TeleporterOrange") {
+			return true;
+		} else if(id == "TeleporterBlue") {
+			return false;
+		} else {
+			throw new RuntimeException("ID from Teleporter doesn't match any case.");
 		}
 		
 	}
@@ -327,6 +353,30 @@ private static final long serialVersionUID = -2140843137512577992L;
 						
 						Checkpoint cp = (Checkpoint) newBoard.getEElementAt(new Position (row, col));
 						if ( cp.getNumber() == checkpointNumber) {
+							newBoard.removeEElement(new Position (row, col));
+							cellButtons[col][row].setIcon(icon);
+						}
+						
+						
+						
+					}
+				}
+				
+			}
+		}
+		
+	}
+	
+	private void removeTeleporterInBoard(boolean sending) {
+		
+		for (int col = 0; col < cols; col++) {
+			for (int row = 0; row < rows; row++) {
+				
+				if(newBoard.hasEElementAt(new Position (row, col))) {
+					if(newBoard.getEElementAt(new Position (row, col)) instanceof Teleporter) {
+						
+						Teleporter cp = (Teleporter) newBoard.getEElementAt(new Position (row, col));
+						if ( cp.isSending() == sending) {
 							newBoard.removeEElement(new Position (row, col));
 							cellButtons[col][row].setIcon(icon);
 						}
@@ -383,6 +433,23 @@ private static final long serialVersionUID = -2140843137512577992L;
 				
 				//delete same checkpoint in case it exists
 				removeCheckpointInBoard(checkpointNumber);
+				newBoard.initialPlacement(newElem, pos);
+				
+			} else if(newElem instanceof Teleporter) {
+				//if selected element is a teleporter
+				//visual
+				selectedCell.setIcon(env);
+				
+				boolean sending;
+				
+				sending = getTeleporterIsSending(controller.getSelectedElement());
+				
+				
+				//search instance of checkpoint 1, given id of the selected element is from checkpoint 1
+				
+				
+				//delete same checkpoint in case it exists
+				removeTeleporterInBoard(sending);
 				newBoard.initialPlacement(newElem, pos);
 				
 			} else {

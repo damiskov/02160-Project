@@ -32,7 +32,22 @@ public class BoardFactory {
 	
 	public Board generateBoard(Difficulty d, Robot[] robots, Game game)
 	{
-		if (d.getLevel()==1)
+		if (d.getLevel()==0)
+		{
+			b = retrieveBoard("bb2", game);
+			b.setDifficulty(new Difficulty(0));
+			for (int i = 0; i < robots.length; i++)
+			{
+				System.out.println(robots[i]);
+				b.initialPlacement(robots[i], startingPositions[i]);
+				RespawnPoint r = new RespawnPoint();
+				b.initialPlacement(r, startingPositions[i]);
+				robots[i].setRespawnPoint(r);
+			}
+			return b;
+			
+			
+		} else if (d.getLevel()==1)
 		{
 			
 			Random rand = new Random();
