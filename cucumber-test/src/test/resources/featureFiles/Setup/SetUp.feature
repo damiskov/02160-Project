@@ -1,7 +1,5 @@
-@tag
 Feature: Setting up game
 
-  @tag1
   Scenario: Beginning an easy game
   Given an easy game with 5 players
   When the game begins

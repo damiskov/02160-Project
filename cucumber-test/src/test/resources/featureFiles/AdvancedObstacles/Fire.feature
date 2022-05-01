@@ -1,6 +1,5 @@
 Feature: Fire
-  
-  @tag1
+
   Scenario: Fire damages robot
     Given a game with an empty board
     And a fire on the board at (5, 5)

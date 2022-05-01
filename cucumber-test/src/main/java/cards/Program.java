@@ -10,8 +10,7 @@ public class Program {
 	{}
 	
 	// getter and setter for program
-	
-	public void setCardList(Stack<Card> cardList)
+		public void setCardList(Stack<Card> cardList)
 	{
 		this.cardList=cardList;
 	}
@@ -21,8 +20,7 @@ public class Program {
 		return this.cardList;
 	}
 	
-	// Simulates process of taking a card from the top of a program
-	
+	// Simulates process of taking a card from the top of a program	
 	public Card getTopOfProgram()
 	{
 		return cardList.pop();

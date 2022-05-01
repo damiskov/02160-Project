@@ -1,11 +1,8 @@
 import static org.junit.Assert.assertEquals;
 
-import board.Board;
-import board.Position;
 import environment_elements.RespawnPoint;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import piece_basics.Robot;
 
 public class SDRespawnPoint {

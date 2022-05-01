@@ -1,7 +1,5 @@
 Feature: Chaining Panel
   
-
-  @tag1
   Scenario: Robot becomes chainable with no other chainable robots
     Given a game with an empty board
     And a chaining panel on the board at (5, 5)

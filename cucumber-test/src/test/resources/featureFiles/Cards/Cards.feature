@@ -1,6 +1,5 @@
 Feature: Programming Cards
 
-
 	Scenario: Accept the programming card
   	Given a player
   	And a Deck
