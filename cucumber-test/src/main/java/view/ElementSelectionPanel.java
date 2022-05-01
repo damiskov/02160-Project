@@ -1,20 +1,14 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -22,19 +16,12 @@ import javax.swing.border.Border;
 
 import controller.BoardCreationController;
 import environment_elements.ChainingPanel;
-import environment_elements.ConveyorBelt;
-import environment_elements.Fire;
-import environment_elements.Gear;
 import environment_elements.HealthStation;
 import environment_elements.Laser;
 import environment_elements.OilSpill;
 import environment_elements.Pit;
-import environment_elements.RespawnPoint;
 import environment_elements.ReversalPanel;
-import environment_elements.Teleporter;
 import environment_elements.Wall;
-import piece_basics.Orientation;
-import piece_basics.Robot;
 import utils.ImageUtils;
 
 public class ElementSelectionPanel extends JPanel {
@@ -58,6 +45,7 @@ public class ElementSelectionPanel extends JPanel {
 	//to track all the selected elements
 	List<JButton> elemButtonsList = new ArrayList<>();
 
+	
 	public ElementSelectionPanel(BoardCreationController controller) {
 		
 		setController(controller);
@@ -69,10 +57,16 @@ public class ElementSelectionPanel extends JPanel {
 		createElementsButtons();
 	}
 	
+	/**This method sets the controller attribute to a given controller of type BoardCreationController.   */
 	private void setController(BoardCreationController c) {
 		controller = c;
 	}
 	
+	
+	/**This method initializes the elementIDs attribute as an ArrayList and adds all the strings
+	 * that correspond to the images of all the EnvironmentElements, and in some cases to the 
+	 * id of an Environment Element (in Environment Elements without variations, i.e, Checkpoint, Teleporter
+	 * , ConveyorBelt and Gear */
 	private void createElementsIDList() {
 		
 		elementIDs =  new ArrayList<String>() ;
@@ -116,49 +110,47 @@ public class ElementSelectionPanel extends JPanel {
 	}
 	
 	private void createLayout() {
-//		GridBagLayout TEMPelementsLayout = new GridBagLayout();
-		GridLayout TEMPelementsLayout = new GridLayout(0, 5, 1, 1);
-//		elementsLayout = new FlowLayout(FlowLayout.CENTER, 10, 0);
-		setLayout(TEMPelementsLayout);
-		
-//		setMaximumSize(new Dimension(Integer.MAX_VALUE, this.getMinimumSize().height));
+		GridLayout elementsLayout = new GridLayout(0, 5, 1, 1);
+		setLayout(elementsLayout);
 	}
 	
+	/**This method goes through each element in the ArrayList elementIDs and creates a button with the
+	 * correct image (whose name in the path is the same as the element in the ArrayList elementIDs) for its icon and sets its name to the element. */
 	private void createElementsButtons() {
 		
 		for ( String id : elementIDs) {
-			
-			//check if conveyor belt to rotate the icon
-			
-			
-			
+
 			ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/" + id + ".png", elemWidth, elemHeight));
 			element = new JButton(icon);
-			element.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
+			
+			element.setPreferredSize(new Dimension(icon.getIconWidth()*4/3, icon.getIconHeight()*4/3));
+			
 			element.setAlignmentX(Component.CENTER_ALIGNMENT);
 			element.setName(id);
 			
 			element.addActionListener(e -> {
 				System.out.println("Element clicked");
 				
+				//set the element_is_selected attribute in the controller to true and the
+				//selected_element attribute to the id/name of the button that is clicked
 				controller.setElementIsActive( id ) ;
 				
 				JButton selected = (JButton) e.getSource();
 				selected.setBorder(blackBorder);
-				selected.setPreferredSize(new Dimension(icon.getIconWidth()*4/3, icon.getIconHeight()*4/3));
 				
+				//remove the border for all the buttons (in elemButtonsList) that are not the one clicked
 				for (JButton elem : elemButtonsList) {
 
 					if (elem != e.getSource()) {
 						elem.setBorder(emptyBorder);
-						elem.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 					}
 				}
 			});
 			
+			//add the created button to elemButtonsList
 			elemButtonsList.add(element);
+			//add the created button to the ElementSelectionPanel
 			add(element);
-//			add(Box.createRigidArea(new Dimension(0, 5)));
 			
 		}
 		

@@ -18,25 +18,13 @@ public class CardPanel extends JPanel {
 
 	private static final long serialVersionUID = 4888662845263342484L;
 	
-	// FIXME
-	private MasterView mv;
 	private MasterController mc;
 	
-	private int card_width;
-	private int card_height;
-	private int number_cards;
-	private int space_between_cards;
-
-	private int canvas_width;
-	private int canvas_height;
-
 	private List<CardSelectionPanel> hand = new ArrayList<>();
 	private List<CardSelectionPanel> orderedCards = new ArrayList<>();
 	
 	
 	private JButton assignCardsButton;
-	private JButton button_b;
-
 	public CardPanel(MasterView mv, MasterController mc) {
 		System.out.println("Current Player: " + mc.getCurrentPlayer());
 		System.out.println("Next Player: " + (mc.getCurrentPlayer()+1));
@@ -48,9 +36,7 @@ public class CardPanel extends JPanel {
 		// Asssigning attributes
 		
 		this.mc = mc;
-		this.mv = mv;
-		
-//		assignCardsButton = new AssignCardsButton(mv, Color.BLUE, mc);
+		//		assignCardsButton = new AssignCardsButton(mv, Color.BLUE, mc);
 		String emoji = new String(Character.toChars((int)0x1F916));
 		
 		assignCardsButton = new JButton("Assign to " + emoji);

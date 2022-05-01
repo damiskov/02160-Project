@@ -56,7 +56,6 @@ public class BoardPanel extends JPanel {
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
 	private List<ColoredLinePair> chainSpriteList = new ArrayList<>();
 	private List<ColoredLinePair> laserSpriteList = new ArrayList<>();
-	private List<ImageToggleSprite> robotLaserSpriteList = new ArrayList<>();
 	private List<Sprite> robotSpriteList = new ArrayList<>();
 	private Map<Integer, Sprite> robotNumToSpriteMap = new HashMap<>();
 

@@ -111,6 +111,7 @@ public class BoardCreationView extends JFrame{
 		controller = boardCreationController;
 	}
 	
+	/**This method creates a cancel, save and play buttons that are then added to buttonsContainer. */
 	private void createButtonsContainer() {
 
 		cancelButton = new JButton("Cancel");
@@ -124,7 +125,6 @@ public class BoardCreationView extends JFrame{
 		playButton.addActionListener(e -> {
 			
 			numberPlayers = sliderNumPlayers.getValue();
-			//TODO check if the board has 5 checkpoints
 			
 			if(enoughCheckpoints()) {
 				controller.startGame(newBoard, numberPlayers);
@@ -140,10 +140,8 @@ public class BoardCreationView extends JFrame{
 		}); 
 		
 		saveButton.addActionListener(e -> {
-			//call method in controller that given a board of cells creates a text file
 			JButton selectedSave = (JButton) e.getSource();
-			
-			
+
 			try {
 				newBoard = controller.getCreatedBoard();
 				if(enoughCheckpoints()) {
@@ -154,10 +152,8 @@ public class BoardCreationView extends JFrame{
 				
 				
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
 			
 			selectedSave.setEnabled(false);
 			
@@ -173,6 +169,7 @@ public class BoardCreationView extends JFrame{
 		
 	}
 	
+	/**This method creates a slider of players and a label for it and adds them to the JPanel numPlayersPanel. */
 	private void createSliderPlayers() {
 		sliderNumPlayers = new JSlider(2,8,2);
 		sliderNumPlayers.setMajorTickSpacing(1);
@@ -184,10 +181,10 @@ public class BoardCreationView extends JFrame{
 		numPlayersPanel.add( sliderNumPlayers, GridBagLayoutUtils.constraint(0, 1, 5) );
 	}
 	
+	/**This method creates a file and saves the custom board to the text file by going through each cell in the board
+	 * and mapping it to a character, which is written in the correct position of the text file. */
 	private void createTextFile() throws IOException {
-		
- 
-		
+
 		//create new file
 		final File dir = new File("boards" + File.separatorChar);
 		final String name = "bb2";
@@ -199,11 +196,6 @@ public class BoardCreationView extends JFrame{
 		
 		
 		PrintWriter writer = new PrintWriter("boards/bb2.txt", "UTF-8");
-//		writer.println("The first line");
-//		writer.println("The second line");
-//		writer.close();
-		
-		
 		
 		for(int i = 0; i < newBoard.getNumRows(); i++) {
 			for(int j = 0; j < newBoard.getNumColumns(); j++) {
@@ -215,18 +207,13 @@ public class BoardCreationView extends JFrame{
 				
 				if (newBoard.hasEElementAt(currentPos)) {
 					
-					System.out.println("EE FOUND!");
-					
 					env = newBoard.getEElementAt(currentPos);	
-					
 					mappedEE = assignChar(env);
-//					mappedEE = 'O';
-					System.out.println("MAPPED TO " + mappedEE);
+					
 				} else {
 					mappedEE = ' ';
 				}
 				
-//				mappedEE = EEToascii.get(env);
 				writer.print(mappedEE);
 			}
 			writer.print("\n");
@@ -236,6 +223,7 @@ public class BoardCreationView extends JFrame{
 		
 	}
 	
+	/**This method returns a character that corresponds to the provided Environment Element as an argument. */
 	private char assignChar(EnvironmentElement e) {
 		
 		if (e instanceof ChainingPanel) {
@@ -319,6 +307,8 @@ public class BoardCreationView extends JFrame{
 
 	}
 	
+	/**This method iterates over the board newBoard and counts the number of checkpoints that were added to it.
+	 * If the number of checkpoints in the board are equal to 5 it returns true, else it returns false*/
 	private boolean enoughCheckpoints() {
 		
 		int checkpointCounter = 0;

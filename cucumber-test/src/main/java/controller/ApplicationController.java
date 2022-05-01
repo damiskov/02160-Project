@@ -5,17 +5,12 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import board.Board;
-import board.Game;
-import view.InitiateView;
 
 //import application.controller.ApplicationController;
 //import application.controller.LoginController;
 
 public class ApplicationController {
 	private InitiateController initiateController;
-
-
-	private Game game;
 
 	private MasterController masterController;
 	

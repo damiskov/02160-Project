@@ -7,16 +7,13 @@ import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
 
-import environment_elements.Wall;
 import property_changes.ChainingEvent;
 import property_changes.HealthChangeEvent;
 import property_changes.MovementEvent;
 import property_changes.RobotLaserEvent;
 import property_changes.RotationEvent;
 import property_changes.TeleportEvent;
-import cards.Program;
-
-import java.lang.Math;  
+import cards.Program;  
 
 public class Robot extends Piece {
 	private static int nextRobotNumber = 1;
@@ -29,7 +26,6 @@ public class Robot extends Piece {
 	private ChainingPanel ChainedFrom;
 	private boolean chainable = false;
 	private Robot chainedTo;
-	private String command;	
 	private Program program;
 	/*
 	 *  The number of the most recent checkpoint this robot validly stepped on. 

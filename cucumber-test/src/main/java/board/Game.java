@@ -70,7 +70,7 @@ public class Game {
 	public void setDifficulty(Difficulty d) {
 		this.difficulty = d;
 	}
-
+	
 	
 	public Game(PropertyChangeSupport pcs, int numPlayers, Board definedBoard) {
 		this.propertyChangeSupport = pcs;

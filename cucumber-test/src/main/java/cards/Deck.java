@@ -1,13 +1,11 @@
 package cards;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class Deck
 {  
-    private List<String> actions = Arrays.asList("move1", "move2", "move3", "turnRight", "turnLeft", "backUp", "uTurn");
     private List<Card> cards = new ArrayList<>();
     private List<Integer> numbers = new ArrayList<>();
     
