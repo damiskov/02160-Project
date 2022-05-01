@@ -12,7 +12,8 @@ public class Card
         this.action = action;  
     }
 
-    public void setNum(int num)
+
+	public void setNum(int num)
     {
         this.num = num;
     }
