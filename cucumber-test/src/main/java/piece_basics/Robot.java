@@ -7,7 +7,6 @@ import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
 
-import environment_elements.Wall;
 import property_changes.ChainingEvent;
 import property_changes.HealthChangeEvent;
 import property_changes.MovementEvent;
@@ -16,10 +15,7 @@ import property_changes.RotationEvent;
 import property_changes.TeleportEvent;
 import cards.Program;
 
-import java.lang.Math;  
-
 public class Robot extends Piece {
-	private static int nextRobotNumber = 1;
 	private int robotNumber;
 	
 	private Orientation orientation = Orientation.UP;
@@ -49,10 +45,15 @@ public class Robot extends Piece {
 		return spriteName;
 	}
 	
+	// Instantiate a robot without a number identity, used in tests
 	public Robot() {
 		health = MAX_ROBOT_HEALTH; // robots start at maximum health
-		robotNumber = nextRobotNumber;
-		nextRobotNumber++;
+	}
+	
+	// Instantiate a robot with a number identity for communicating with the view, mostly used in actual gameplay
+	public Robot(int robotNumber) {
+		this();
+		this.robotNumber = robotNumber;
 	}
 	
 	public void setPosition(Position p) {
@@ -137,8 +138,7 @@ public class Robot extends Piece {
 			return false;
 		}
 	}
-	
-	
+
 	private void tryMoveRobot(Position posToMoveTo, int step) {
 		
 		if(board.coordinateWithinBounds(posToMoveTo)) {
