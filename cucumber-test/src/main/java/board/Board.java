@@ -52,7 +52,8 @@ public class Board {
 	}
 	
 	public void firePropertyChange(IPropertyChangeEvent event) {
-		game.firePropertyChange(event);
+		// Can only fire a property change event if this Board was constructed using the second constructor, where it is given a Game
+		if (game != null) game.firePropertyChange(event);
 	}
 
 	// Utility method for indexing the matrix field using standard cartesian-style coordinate axes instead of matrix-style axes

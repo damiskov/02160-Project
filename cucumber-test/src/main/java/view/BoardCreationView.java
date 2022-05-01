@@ -121,7 +121,7 @@ public class BoardCreationView extends JFrame{
 		saveButton.setEnabled(false);
 		
 		playButton = new JButton("Play");
-		playButton.setBackground(Color.blue);
+		playButton.setBackground(Color.CYAN);
 		
 		playButton.addActionListener(e -> {
 			
@@ -191,7 +191,7 @@ public class BoardCreationView extends JFrame{
 		try {
 			path = getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			System.out.println("Temporary path: " + path);
-			path = path.substring(0, path.lastIndexOf('/')) + "/bb2.txt";
+			path = path.substring(0, path.lastIndexOf('/')) + "/custom_board.txt";
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

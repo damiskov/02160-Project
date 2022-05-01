@@ -35,7 +35,7 @@ public class BoardFactory {
 	{
 		if (d.getLevel()==0)
 		{
-			b = retrieveBoard("bb2", game);
+			b = retrieveBoard("custom_board", game);
 			b.setDifficulty(new Difficulty(0));
 			for (int i = 0; i < robots.length; i++)
 			{
@@ -109,10 +109,10 @@ public class BoardFactory {
 	{	
 		BufferedReader obj = null;
 		
-		if (filename.equals("bb2")) {
+		if (filename.equals("custom_board")) {
 			try {
 				String path = getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-				path = path.substring(0, path.lastIndexOf('/')) + "/bb2.txt";
+				path = path.substring(0, path.lastIndexOf('/')) + "/custom_board.txt";
 				obj = new BufferedReader(new FileReader(new File(path)));
 			} catch (URISyntaxException | FileNotFoundException e1) {
 				e1.printStackTrace();
