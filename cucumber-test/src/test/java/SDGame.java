@@ -136,4 +136,9 @@ public class SDGame {
 			context.game.dealCards();
 	}
 	
+	@Then("the game is marked as over")
+	public void the_game_is_marked_as_over() {
+	    assertEquals(true, context.game.isOver());
+	}
+	
 }

@@ -236,11 +236,14 @@ public class SDRobot {
 	public void the_robot_moves_step(Integer int1) {
 		context.robot.move(int1);
 	}
+	@When("the robot moves {int} steps")
+	public void the_robot_moves_steps(Integer int1) {
+		context.robot.move(int1);
+	}
 	@When("the robot tries to move {int} steps")
 	public void the_robot_tries_to_move_steps(Integer int1) {
 		context.robot.move(int1);
 	}
-	
 	@When("the first robot moves {int} step")
 	public void the_first_robot_moves_step(Integer int1) {
 		context.robot.move(int1);
