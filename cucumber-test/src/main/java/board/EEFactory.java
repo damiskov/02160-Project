@@ -15,7 +15,23 @@ import environment_elements.Wall;
 import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
 
+/*
+ * Factory Method Pattern 
+ * Client: BoardFactory
+ * Product: EnvironmentElement
+ * 
+ * maps Characters -> EnvironmentElements for generating a board class from a text file.
+ *  
+ */
+
 public class EEFactory {
+	
+	/*
+	 * Teleporters have to be instantiated
+	 * -  we restricted the number of possible teleporters to two 
+	 * - (one receiving and one sending)
+	 * 
+	 */
 	
 	private Teleporter t1;
 	private Teleporter t2;
@@ -49,10 +65,6 @@ public class EEFactory {
 		else if (ID == 'T')
 		{
 			return t2;
-		}
-		else if (ID == 'X')
-		{
-			return new RespawnPoint();
 		}
 		else if (ID == '^')
 		{
