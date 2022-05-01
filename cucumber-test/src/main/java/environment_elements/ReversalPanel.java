@@ -11,13 +11,19 @@ import piece_basics.EnvironmentElement;
 public class ReversalPanel extends EnvironmentElement {
 
 	public static final String ID = "reversal_panel";
-	public Program newProg = new Program();
+	private Program newProgram = new Program();
 
 	@Override
 	public String getPieceID() {
 		return ID;
 	}
 		
+	public Program getNewProgram() {
+		return newProgram;
+	}
+	
+	
+	
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) { 
@@ -44,7 +50,6 @@ public class ReversalPanel extends EnvironmentElement {
 			}
 			
 			System.out.println("-------------ASSIGNING NEW PROGRAM TO ROBOT ----------------");
-			Program newProgram = new Program();
 			Collections.reverse(newCards);
 			newProgram.getCardList().addAll(newCards);
 			for (Card i : newProgram.getCardList())
