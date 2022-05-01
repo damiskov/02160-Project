@@ -3,6 +3,7 @@ package animations;
 import piece_basics.Orientation;
 import view.Sprite;
 
+// An animation for smooth sprite rotation
 public class SpriteRotationAnimation extends Animation {
 	
 	private Sprite sprite;

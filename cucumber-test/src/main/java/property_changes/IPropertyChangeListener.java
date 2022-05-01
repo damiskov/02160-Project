@@ -1,6 +1,6 @@
 package property_changes;
 
-public interface PropertyChangeListener {
+public interface IPropertyChangeListener {
 
 	void propertyChange(IPropertyChangeEvent pci);
 }
