@@ -30,7 +30,7 @@ public class RobotStatusIndicator extends JPanel {
 		playerNumberLabel.setFont(new Font(playerNumberLabel.getFont().getName(), Font.BOLD, 18));
 		add(playerNumberLabel);
 		
-		String imageFilepath = "images/robot" + playerNumber + ".png";
+		String imageFilepath = "/robot" + playerNumber + ".png";
 		robotIcon = new JLabel(new ImageIcon(ImageUtils.scaledImage(imageFilepath, 50, 50)));
 		add(robotIcon);
 		

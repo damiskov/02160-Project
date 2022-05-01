@@ -119,8 +119,12 @@ public class ElementSelectionPanel extends JPanel {
 	private void createElementsButtons() {
 		
 		for ( String id : elementIDs) {
-
-			ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/" + id + ".png", elemWidth, elemHeight));
+			
+			//check if conveyor belt to rotate the icon
+			
+			
+			
+			ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("/" + id + ".png", elemWidth, elemHeight));
 			element = new JButton(icon);
 			
 			element.setPreferredSize(new Dimension(icon.getIconWidth()*4/3, icon.getIconHeight()*4/3));

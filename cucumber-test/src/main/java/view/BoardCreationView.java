@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -184,18 +185,34 @@ public class BoardCreationView extends JFrame{
 	/**This method creates a file and saves the custom board to the text file by going through each cell in the board
 	 * and mapping it to a character, which is written in the correct position of the text file. */
 	private void createTextFile() throws IOException {
-
+		
+ 
+		String path = null;
+		try {
+			path = getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+			System.out.println("Temporary path: " + path);
+			path = path.substring(0, path.lastIndexOf('/')) + "/bb2.txt";
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//create new file
-		final File dir = new File("boards" + File.separatorChar);
-		final String name = "bb2";
-		final String fileName = name + ".txt";
-		final File file = new File(dir+fileName);
+//		final File dir = new File("/" + File.separatorChar);
+//		final String name = "bb2";
+//		final String fileName = name + ".txt";
+		System.out.println(path);
+		final File file = new File(path);
 		file.createNewFile();
 		
 		System.out.println("BOARD CREATED AND ADDED TO DIRECTORY BOARDS");
 		
+		PrintWriter writer = new PrintWriter(file, "UTF-8");
+//		writer.println("The first line");
+//		writer.println("The second line");
+//		writer.close();
 		
-		PrintWriter writer = new PrintWriter("boards/bb2.txt", "UTF-8");
+		
 		
 		for(int i = 0; i < newBoard.getNumRows(); i++) {
 			for(int j = 0; j < newBoard.getNumColumns(); j++) {

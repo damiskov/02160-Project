@@ -33,7 +33,7 @@ public class CardSelectionPanel extends JPanel {
 		
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/" + cardID + ".png", cardWidth, cardHeight));
+		ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("/" + cardID + ".png", cardWidth, cardHeight));
 		cardButton = new JButton(icon);
 		cardButton.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 		cardButton.setAlignmentX(Component.CENTER_ALIGNMENT);
