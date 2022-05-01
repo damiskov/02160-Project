@@ -91,12 +91,6 @@ private static final long serialVersionUID = -2140843137512577992L;
 		return height;
 	}
 	
-	public void addElement(String e, int x, int y) {
-		
-//		spriteList.add(SpriteFactory.getFromPieceID(e, pixelsPerCell, pixelsPerCell * x, pixelsPerCell * y, 0, this));
-//		repaint();
-		
-	}
 	
 	private void setController(BoardCreationController c) {
 		controller = c;
@@ -108,6 +102,8 @@ private static final long serialVersionUID = -2140843137512577992L;
 		
 	}
 	
+	/** This method sets the size (length of each side) of each cell based on the number of rows and columns of
+	 *  the board */
 	private void setPixelsPerCell() {
 		if (rows >= cols) {
 			pixelsPerCell = maxDimension/(rows);
@@ -115,12 +111,15 @@ private static final long serialVersionUID = -2140843137512577992L;
 			pixelsPerCell = maxDimension/(cols);
 		}
 	}
-	
+	/** This method sets the width and height of the board creation panel from
+	 * the given columns, rows and the number of pixels per cell, which are attributes of the panel */
 	private void setWidthHeight() {
 		width = cols*pixelsPerCell;
 		height = rows*pixelsPerCell;
 	}
 	
+	/** This method goes through all positions of columns and rows and creates a cell
+	 *  of type JButton in the panel. */
 	private void createCellButtons() {
 		
 		icon = new ImageIcon(ImageUtils.scaledImage("/tile.png", pixelsPerCell, pixelsPerCell));
@@ -131,71 +130,57 @@ private static final long serialVersionUID = -2140843137512577992L;
 					
 					int x = col;
 					int y = row;
-//					JButton cell = new JButton(icon);
+
 					
 					JButton cell = new JButton();
-//					JButton cell = new CellButton(new Position(row, col));
+					
+					//The icon with the image of an empty cell is assigned to a cell
 					cell.setIcon(icon);
+					//Set the size of the cell equal to the icon (which are the dimensions pixesPerCell)
 					cell.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 					cell.setAlignmentX(Component.CENTER_ALIGNMENT);
 					cell.setName("tile");
 					
-					//ADD CELL BUTTON TO cellButtons matrix
+					//Add a cell button to cellButtons matrix
+					//This is done to know the position of each cell button, for effects of removing certain buttons 
+					//for Environment Elements that cannot appear twice, i.e, Checkpoints and Teleporters
 					cellButtons[y][x]=cell;
 					
-					cell.addActionListener(e -> {
-						
-
-						JButton selectedCell = (JButton)  e.getSource();
-//						JButton selectedCell = (CellButton)  e.getSource();
-						
-
-						
-						System.out.println("Element clicked" );
-						
-						if (controller.elementIsActive()) {
+					if (row!=11) {
+						cell.addActionListener(e -> {
 							
-							System.out.println("imageChanged");
-							System.out.println("x " + x + "y " + y);
+	
+							JButton selectedCell = (JButton)  e.getSource();
+	
 							
-							//set save button enabled
-							saveBtn.setEnabled(true);
-							
-							
-							// getSelectedElement() is a element ID
-							ImageIcon env = new ImageIcon(ImageUtils.scaledImage("/" + controller.getSelectedElement() + ".png", pixelsPerCell, pixelsPerCell));
-							
-							
-							Position pos = new Position(x , y);
-
-							
-							EnvironmentElement newElem = createEElement(controller.getSelectedElement());
-							System.out.println(pos );
-							
-							
-							
-							checkSelectedCheckpoint(newElem, pos, selectedCell, env);
-							
-							if (newBoard.hasEElementAt(pos)) {
-								System.out.println("Element added to matrix at x = " + x + " and row at y = " + y);
-							} else {
-								System.out.println("No element was added to matrix" );
+							if (controller.elementIsActive()) {
+								
+								//set save button enabled
+								saveBtn.setEnabled(true);
+								
+								
+								// getSelectedElement() is a element ID
+								ImageIcon env = new ImageIcon(ImageUtils.scaledImage("/" + controller.getSelectedElement() + ".png", pixelsPerCell, pixelsPerCell));
+								
+								
+								Position pos = new Position(x , y);
+	
+								
+								EnvironmentElement newElem = createEElement(controller.getSelectedElement());
+	
+								actionsOnBoardAndUI(newElem, pos, selectedCell, env);
+								
+	
 							}
 							
+							repaint();
 							
-//							System.out.println("removed element at col " + x + " and row at " + y);
-						}
-						
-						repaint();
-						
-						controller.setCreatedBoard(newBoard);
-						
-					});
+							controller.setCreatedBoard(newBoard);
+							
+						});
+					}
+					
 					add(cell, GridBagLayoutUtils.constraint(col, row, 0));
-					
-					
-					
-//					add(Box.createRigidArea(new Dimension(0, 5)));
 				
 					col++;
 				
@@ -207,6 +192,7 @@ private static final long serialVersionUID = -2140843137512577992L;
 		}
 	}
 	
+	/** Returns an instance of an Environment Element according to the ID of the element selected */
 	private EnvironmentElement createEElement (String id){
 			
 			if (id == ChainingPanel.ID) {
@@ -312,7 +298,8 @@ private static final long serialVersionUID = -2140843137512577992L;
 		
 	}
 	
-	
+	/** This method returns the number that corresponds to the name of a Checkpoint
+	 *  button from the ElementSelectionPanel. */
 	private int getCheckpointNumber (String id) {
 		
 		if (id == "checkpoint1") {
@@ -331,6 +318,8 @@ private static final long serialVersionUID = -2140843137512577992L;
 		
 	}
 	
+	/** This method returns the boolean that corresponds to the name of a Teleporter
+	 *  button from the ElementSelectionPanel. */
 	private boolean getTeleporterIsSending(String id) {
 		
 		if (id == "TeleporterOrange") {
@@ -343,6 +332,8 @@ private static final long serialVersionUID = -2140843137512577992L;
 		
 	}
 	
+	/**This method removes a Checkpoint in the board newBoard that has its number
+	 * attribute equal to the argument of this method*/
 	private void removeCheckpointInBoard(int checkpointNumber) {
 		
 		for (int col = 0; col < cols; col++) {
@@ -367,6 +358,8 @@ private static final long serialVersionUID = -2140843137512577992L;
 		
 	}
 	
+	/**This method removes a Teleporter in the board newBoard that has the isSending 
+     * attribute equal to the argument of this method*/
 	private void removeTeleporterInBoard(boolean sending) {
 		
 		for (int col = 0; col < cols; col++) {
@@ -392,15 +385,28 @@ private static final long serialVersionUID = -2140843137512577992L;
 	}
 	
 	
-	private void checkSelectedCheckpoint(EnvironmentElement newElem, Position pos, JButton selectedCell, ImageIcon env ) {
+	/**This method receives a newElem, which is the newElement that is to be attributed to a specific cell, a position p
+     *which represents the position of the cell , a selectedCell which is the cell button that is clicked and an
+     *icon which is the icon to be attributed to the selected cell button.
+     *This method acts on all the changes that should be done both visually and on the board newBoard, essentially
+     *by receiving an instance of a new Environment Element that is to be added and a selected cell and its position.
+     *The env argument that is received is used for changing the icon of the selected cell button to the image corresponding 
+     *to the selected element to add (obtained from the name of the selected element button).
+     *   */
+	private void actionsOnBoardAndUI(EnvironmentElement newElem, Position pos, JButton selectedCell, ImageIcon env ) {
 		
+		//If there is an Environment Element in the position pos, of the cell clicked
 		if(newBoard.hasEElementAt(pos)) {
 			
 			EnvironmentElement existingElem = newBoard.getEElementAt(pos);
 			
+			//If the ID's of the Environment Elements  are the same (meaning that the Environment Element 
+            //to be added is the same as the one in the position selected) then set the icon of the cell button
+            //to an image of an empty cell and remove the Environment Element at this position
+            //Else we just remove the element in the newBoard, place the newElem in the board and 
+            // change the icon of the button selected to the image of the
 			if (existingElem.getPieceID() == newElem.getPieceID()) {
-				
-				System.out.println("ELEMENTS ARE EQUAL!");
+
 				
 				//remove element from board visually and in the board object
 				selectedCell.setIcon(icon);
@@ -413,25 +419,26 @@ private static final long serialVersionUID = -2140843137512577992L;
 				
 				newBoard.removeEElement(pos);
 				newBoard.initialPlacement(newElem, pos);
-				System.out.println("ELEMENTS ARE NOT EQUAL!");
 			}
 			
 		} else {
+			//If there isn't an EnvironmentElement at the position of the selected button
+
+            //if the newElem to be added is a Checkpoint
 			
 			if(newElem instanceof Checkpoint) {
-				//if selected element is a checkpoint
+
+				
 				//visual
 				selectedCell.setIcon(env);
 				
+				//get the checkpoint number of the element selected
 				int checkpointNumber;
-				
 				checkpointNumber = getCheckpointNumber(controller.getSelectedElement());
 				
 				
-				//search instance of checkpoint 1, given id of the selected element is from checkpoint 1
 				
-				
-				//delete same checkpoint in case it exists
+				//remove same checkpoint in case it exists
 				removeCheckpointInBoard(checkpointNumber);
 				newBoard.initialPlacement(newElem, pos);
 				
@@ -440,25 +447,22 @@ private static final long serialVersionUID = -2140843137512577992L;
 				//visual
 				selectedCell.setIcon(env);
 				
+				//get if the teleporter is sending or not
 				boolean sending;
-				
 				sending = getTeleporterIsSending(controller.getSelectedElement());
+
 				
 				
-				//search instance of checkpoint 1, given id of the selected element is from checkpoint 1
-				
-				
-				//delete same checkpoint in case it exists
+				//remove same Teleporter in case it exists
 				removeTeleporterInBoard(sending);
 				newBoard.initialPlacement(newElem, pos);
 				
 			} else {
+				//Else we can simply add a new Environment Element to the board
 				//visual
 				selectedCell.setIcon(env);
 				
 				newBoard.initialPlacement(newElem, pos);
-				System.out.println(newBoard.hasEElementAt(pos));
-				System.out.println("DOESNT HAVE ELEMENT IN POSITION" );
 			
 			}
 			

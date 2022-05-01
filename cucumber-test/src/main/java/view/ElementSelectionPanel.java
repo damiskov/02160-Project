@@ -133,7 +133,6 @@ public class ElementSelectionPanel extends JPanel {
 			element.setName(id);
 			
 			element.addActionListener(e -> {
-				System.out.println("Element clicked");
 				
 				//set the element_is_selected attribute in the controller to true and the
 				//selected_element attribute to the id/name of the button that is clicked

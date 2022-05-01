@@ -197,10 +197,6 @@ public class BoardCreationView extends JFrame{
 			e.printStackTrace();
 		}
 		
-		//create new file
-//		final File dir = new File("/" + File.separatorChar);
-//		final String name = "bb2";
-//		final String fileName = name + ".txt";
 		System.out.println(path);
 		final File file = new File(path);
 		file.createNewFile();
@@ -208,12 +204,7 @@ public class BoardCreationView extends JFrame{
 		System.out.println("BOARD CREATED AND ADDED TO DIRECTORY BOARDS");
 		
 		PrintWriter writer = new PrintWriter(file, "UTF-8");
-//		writer.println("The first line");
-//		writer.println("The second line");
-//		writer.close();
-		
-		
-		
+			
 		for(int i = 0; i < newBoard.getNumRows(); i++) {
 			for(int j = 0; j < newBoard.getNumColumns(); j++) {
 				
