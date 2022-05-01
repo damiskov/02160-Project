@@ -36,9 +36,8 @@ public class ReversalPanel extends EnvironmentElement {
 				if(program.getCardList().size()==0)
 				{
 					System.out.println("End of program");
-					System.out.println("------------------END OF REVERSAL PANEL REGISTER ACTION-----");
 					break outer;
-				}
+				} 
 			}
 			
 			System.out.println("-------------ASSIGNING NEW PROGRAM TO ROBOT ----------------");
@@ -50,8 +49,9 @@ public class ReversalPanel extends EnvironmentElement {
 				System.out.println("Program contains: " + i.getAction());
 			}
 			
-			board.getRobotAt(calculatePosition()).setProgram(newProg.getCardList()); //set the robot's program to be the reversed program
+			board.getRobotAt(calculatePosition()).setProgram(newProgram.getCardList()); //set the robot's program to be the reversed program
 			System.out.println("------------- SUCCESSFULLY ADDED CARDS TO PROGRAM ------------");
+			System.out.println("------------------END OF REVERSAL PANEL REGISTER ACTION-----");
 		}
 
 	}
