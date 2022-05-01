@@ -6,6 +6,7 @@ public class Laser extends EnvironmentElement {
 	
 	public static final String ID = "laser";
 
+	//if it has a robot on it, damage it
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) {

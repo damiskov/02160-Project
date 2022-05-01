@@ -37,7 +37,7 @@ public class Teleporter extends EnvironmentElement {
 	@Override
 	public void performRegisterAction() {
 		Position p = calculatePosition();
-		if (board.hasRobotAt(p) && isSending()) { //if a robot is on a sending teleporter
+		if (board.hasRobotAt(p) && isSending()) { 
 			Robot r = board.getRobotAt(p);
 			Position receivingP = receiving.calculatePosition();
 			
