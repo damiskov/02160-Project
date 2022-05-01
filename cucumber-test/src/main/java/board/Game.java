@@ -225,7 +225,7 @@ public class Game {
 	public void setRobots(int num) {
 		robots = new Robot[num];
 		for (int i = 0; i < players.length; i++ ) {
-			players[i].setRobot(new Robot());
+			players[i].setRobot(new Robot(i+1));
 			robots[i] = players[i].getRobot();
 		}
 	}
