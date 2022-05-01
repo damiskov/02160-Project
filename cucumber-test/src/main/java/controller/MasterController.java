@@ -46,9 +46,7 @@ public class MasterController {
 		pcs = new PropertyChangeSupport();
 		game = new Game(pcs, playerCount);
 		
-		// temporary
-		//game.testPlacements();
-		//
+
 		Difficulty d = new Difficulty(setDifLevel(difficulty));
 		game.begin(playerCount, d, pcs);
 		setRobotNames();
@@ -57,30 +55,8 @@ public class MasterController {
 		this.view = new MasterView(this, game);
 		pcs.addSubscriber(view);
 		game.getPropertyChangeSupport().firePropertyChange(new ActivationPhaseEndEvent());
-
-//		temporary
-//		game.demo();
-		
-		
-		
-		
-		//game.testPlacements();
-		
-		
-		
-		
-		
-		//runGame();
-		
-		
-//		Difficulty d = new Difficulty(setDifLevel(difficulty));
-//		
-//		game.begin(playerCount, d, pcs);
-//		
-//		runGame();
 	}
 	
-
 	public void display() {
 		view.setVisible(true);
 	}
@@ -96,13 +72,7 @@ public class MasterController {
 		System.out.println(stack.size());
 		Player p = game.getPlayers()[currentPlayer];
 		p.getRobot().setProgram(stack);
-	}
-	
-//	public int getCurrentPlayer()
-//	{
-//		return currentPlayer;
-//	}
-	
+	}	
 	
 	public Game getGame()
 	{
@@ -205,10 +175,6 @@ public class MasterController {
 		}
 		else
 		{
-			
-			
-			// incrementing current player
-			// and setCardPanel (new player's hand shown)
 
 			incrementCurrentPlayer();
 			
