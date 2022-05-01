@@ -31,11 +31,6 @@ Scenario: Generate a super hard board and creating an instance of BoardFactory (
   When a board is generated
   Then no board is generated
   
-#only for coverage
-Scenario: Naming a custom board
-  Given a board
-  When a name is set
-  Then the board has its name set
   
 
 #only for coverage
@@ -64,14 +59,14 @@ Scenario: Checking robot on the board
   
  #only for coverage  
 	Scenario: Checking obstacle position
-	  Given a board 
+	  Given a game with an empty board
 	  When a position is calculated for an obstacle
 	  Then it throws an exception error
  
 
  #only for coverage  
 	Scenario: Checking robot position
-	  Given a board 
+	  Given a game with an empty board
 	  When a position is calculated for a robot
 	  Then it throws an exception error if robot not found
 
