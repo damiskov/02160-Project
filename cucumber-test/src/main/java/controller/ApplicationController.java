@@ -6,9 +6,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import game_basics.Board;
 
-//import application.controller.ApplicationController;
-//import application.controller.LoginController;
-
 public class ApplicationController {
 	private InitiateController initiateController;
 
@@ -24,13 +21,6 @@ public class ApplicationController {
 	}
 	
 	public void startGame(int playerCount, String difficulty) {
-
-		
-//		game.getPlayers().length
-
-//		System.out.println("Game started with " + playerCount + " players and difficulty " + difficulty);
-
-		//System.out.println("Game started with " + playerCount + " players.");
 		masterController = new MasterController(this, playerCount, difficulty, 0);
 		masterController.display();
 
