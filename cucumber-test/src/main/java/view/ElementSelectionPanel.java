@@ -132,7 +132,7 @@ public class ElementSelectionPanel extends JPanel {
 			
 			
 			
-			ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("images/" + id + ".png", elemWidth, elemHeight));
+			ImageIcon icon = new ImageIcon(ImageUtils.scaledImage("/" + id + ".png", elemWidth, elemHeight));
 			element = new JButton(icon);
 			element.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
 			element.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -17,8 +17,8 @@ public class SelectionIcon extends JLayeredPane {
 	
 	private static final int iconSize = 40;
 	
-	private static final ImageIcon emptyCircle = new ImageIcon(ImageUtils.scaledImage("images/empty_circle.png", iconSize, iconSize));
-	private static final ImageIcon fullCircle = new ImageIcon(ImageUtils.scaledImage("images/green_circle.png", iconSize, iconSize));
+	private static final ImageIcon emptyCircle = new ImageIcon(ImageUtils.scaledImage("/empty_circle.png", iconSize, iconSize));
+	private static final ImageIcon fullCircle = new ImageIcon(ImageUtils.scaledImage("/green_circle.png", iconSize, iconSize));
 	
 	private JLabel circleLabel;
 	private JLabel numberLabel;

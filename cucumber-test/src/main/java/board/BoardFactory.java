@@ -2,8 +2,12 @@ package board;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.util.Random;
 
 import environment_elements.RespawnPoint;
@@ -104,9 +108,21 @@ public class BoardFactory {
 	
 	private Board retrieveBoard(String filename, Game game)  
 	{	
-		String path = "boards/" + filename + ".txt";
-
-		File doc = new File(path);
+		BufferedReader obj = null;
+		
+		if (filename.equals("bb2")) {
+			try {
+				String path = getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+				path = path.substring(0, path.lastIndexOf('/')) + "/bb2.txt";
+				obj = new BufferedReader(new FileReader(new File(path)));
+			} catch (URISyntaxException | FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			String path = "/" + filename + ".txt";
+			InputStream doc = BoardFactory.class.getResourceAsStream(path);
+			obj = new BufferedReader(new InputStreamReader(doc));
+		}
 		
 		// Placing environment elements on the board
 		
@@ -114,9 +130,7 @@ public class BoardFactory {
 		int j = 0;
 		String str;
 		EEFactory EEFact = new EEFactory();
-		BufferedReader obj = null;
 		try {
-			obj = new BufferedReader(new FileReader(doc));
 			while ((str = obj.readLine())!= null) {
 				for (int i = 0; i < str.length(); i++)
 				{

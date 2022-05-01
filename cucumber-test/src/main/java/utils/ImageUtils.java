@@ -12,7 +12,7 @@ public class ImageUtils {
 	public static Image scaledImage(String filepath, int x, int y) {
 		BufferedImage img = null;
 		try {
-		    img = ImageIO.read(new File(filepath));
+		    img = ImageIO.read(ImageUtils.class.getResourceAsStream(filepath));
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}

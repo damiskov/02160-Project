@@ -123,7 +123,7 @@ private static final long serialVersionUID = -2140843137512577992L;
 	
 	private void createCellButtons() {
 		
-		icon = new ImageIcon(ImageUtils.scaledImage("images/tile.png", pixelsPerCell, pixelsPerCell));
+		icon = new ImageIcon(ImageUtils.scaledImage("/tile.png", pixelsPerCell, pixelsPerCell));
 		
 		
 		while(row < rows) {
@@ -163,7 +163,7 @@ private static final long serialVersionUID = -2140843137512577992L;
 							
 							
 							// getSelectedElement() is a element ID
-							ImageIcon env = new ImageIcon(ImageUtils.scaledImage("images/" + controller.getSelectedElement() + ".png", pixelsPerCell, pixelsPerCell));
+							ImageIcon env = new ImageIcon(ImageUtils.scaledImage("/" + controller.getSelectedElement() + ".png", pixelsPerCell, pixelsPerCell));
 							
 							
 							Position pos = new Position(x , y);
