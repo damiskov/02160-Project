@@ -270,7 +270,6 @@ public class Game {
 			for(int i = 0; i < players.length; i++) {
 				Robot r = players[i].getRobot();
 				Card topCard = r.getProgram().getTopOfProgram();
-				
 				CardCommand cc = new CardCommand(topCard, r);
 				order.add(cc);
 			}

@@ -202,7 +202,7 @@ public class MasterController {
 		{
 			// Execute activation phase
 			view.removeCardPanel();
-			
+			 
 			game.activationPhase();
 			
 			
