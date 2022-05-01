@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Image;
 
+// A Sprite implementation for sprites that need to toggle between two images. Used for ChainingPanel visualization
 public class ImageToggleSprite extends Sprite {
 	
 	private Image imageDefault;

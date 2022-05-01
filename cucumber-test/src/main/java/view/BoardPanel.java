@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -24,7 +23,6 @@ import animations.SpriteRotationAnimation;
 import animations.SpriteTeleportAnimation;
 import board.*;
 import piece_basics.EnvironmentElement;
-import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import property_changes.ChainingEvent;
@@ -38,6 +36,7 @@ import property_changes.RotationEvent;
 import property_changes.TeleportEvent;
 import utils.ImageUtils;
 
+// This is the part of the main UI that displays the board and everything on it
 public class BoardPanel extends JPanel {
 
 	private static final long serialVersionUID = -2140843137512577992L;
@@ -76,14 +75,15 @@ public class BoardPanel extends JPanel {
 		this.width = cols*cellWidth;
 		this.height = rows*cellWidth;
 		
-		setPreferredSize(new Dimension(width, height)); 
 		setMinimumSize(new Dimension(width, height));
+		setPreferredSize(new Dimension(width, height)); 
 		
 		backgroundTile = ImageUtils.scaledImage("images/tile.png", cellWidth, cellWidth);
 		
 		addInitialSprites(board);
 	}
 
+	// This method creates sprites for all the pieces initially on the board
 	private void addInitialSprites(Board board) {
 		System.out.println("\tInitial sprite placements");
 		for (int i = 0; i < cols; i++) {
@@ -99,6 +99,10 @@ public class BoardPanel extends JPanel {
 		}
 	}
 
+	/* 
+	 * Everything to do with sprites in the BoardPanel is done using animations, including the initial placement
+	 * of the sprites
+	 */
 	public void addSprite(Piece piece, Position p) {
 		if (piece instanceof EnvironmentElement) {
 			Sprite eElementSprite = SpriteFactory.getFromPiece(piece, cellWidth, this);
@@ -113,15 +117,14 @@ public class BoardPanel extends JPanel {
 		}
 	}
 	
-	public void removeEElementSprite(Position p) {
-		System.out.println("Handling removal event");
-		masterView.enqueueAnimation(new SpriteRemovalAnimation(p, this));
-	}
-	
 	public Sprite getEElementSpriteAtPosition(Position p) {
 		int x = p.getX();
 		int y = p.getY();
 		
+		/* 
+		 * The position p uses board cell coordinates, where (0, 0) is the bottom-left cell. Here, we must
+		 * convert to pixel coordinates, where (0, 0) is the bottom left pixel, by multiplying by cellWidth
+		 */
 		for (Sprite sprite: eElementSpriteList) {
 			if(sprite.getX()==cellWidth*x && sprite.getY()==cellWidth*y) {
 				 return sprite;
@@ -130,18 +133,17 @@ public class BoardPanel extends JPanel {
 		throw new SpriteNotFoundException("Could not find EElement sprite at " + p);
 	}
 	
-	public Sprite getRobotSpriteAtPosition(Position p) {
-		int x = p.getX();
-		int y = p.getY();
-		
-		for (Sprite sprite: robotSpriteList) {
-			if(sprite.getX()==cellWidth*x && sprite.getY()==cellWidth*y) {
-				 return sprite;
-			}
-		}
-		throw new SpriteNotFoundException("Could not find robot sprite at " + p);
-	}
-	
+//	public Sprite getRobotSpriteAtPosition(Position p) {
+//		int x = p.getX();
+//		int y = p.getY();
+//		
+//		for (Sprite sprite: robotSpriteList) {
+//			if(sprite.getX()==cellWidth*x && sprite.getY()==cellWidth*y) {
+//				 return sprite;
+//			}
+//		}
+//		throw new SpriteNotFoundException("Could not find robot sprite at " + p);
+//	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
@@ -149,17 +151,18 @@ public class BoardPanel extends JPanel {
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
-		
-		
+		// draw the background tiles
 		for (int col = 0; col < cols; col++) {
 			for (int row = 0; row < rows; row++) {
 				g2.drawImage(backgroundTile, col*cellWidth, row*cellWidth, null);
 			}
 		}
 		
+		// draw environment elements
 		for (Sprite sprite: eElementSpriteList) {
 			sprite.drawUsing(g2);
 		}
+		// draw chains between robots created by ChainingPanels
 		for (ColoredLinePair chainPair: chainSpriteList) {
 			g2.setStroke(new BasicStroke(4));
 			g2.setColor(chainPair.getOuterColor());
@@ -171,6 +174,7 @@ public class BoardPanel extends JPanel {
 				        chainPair.getSprite2().getX()+cellWidth/2, (cols*cellWidth)-chainPair.getSprite2().getY()-cellWidth/2);
 			
 		}
+		// draw robot lasers
 		for (ColoredLinePair laserPair: laserSpriteList) {
 			g2.setStroke(new BasicStroke(4));
 			g2.setColor(laserPair.getOuterColor());
@@ -182,6 +186,7 @@ public class BoardPanel extends JPanel {
 				        laserPair.getSprite2().getX()+cellWidth/2, (cols*cellWidth)-laserPair.getSprite2().getY()-cellWidth/2);
 			
 		}
+		// draw robots
 		for (Sprite sprite: robotSpriteList) {
 			sprite.drawUsing(g2);
 		}
@@ -193,18 +198,22 @@ public class BoardPanel extends JPanel {
 	}
 
 	public void propertyChange(IPropertyChangeEvent pci) {
+		/* 
+		 * dispatch property change events to private methods based on the event type. The addSprite
+		 * method is above, and the rest are below this method
+		 */
 		if (pci instanceof PlacementEvent) {
 			PlacementEvent pe = (PlacementEvent) pci;
 			addSprite(pe.getPiece(), pe.getPos());
 		} else if (pci instanceof RemovalEvent) {
 			RemovalEvent re = (RemovalEvent) pci;
-			removeEElementSprite(re.getPos());
+			removeEElementSprite(re);
 		} else if (pci instanceof ChainingEvent) {
 			ChainingEvent ce = (ChainingEvent) pci;
 			chainRobots(ce);
 		} else if (pci instanceof ChainingPanelActivationEvent) {
 			ChainingPanelActivationEvent ae = (ChainingPanelActivationEvent) pci;
-			activateChainingPanelSprite(ae);
+			toggleChainingPanelSprite(ae);
 		} else if (pci instanceof MovementEvent) {
 			MovementEvent me = (MovementEvent) pci;
 			moveRobot(me);
@@ -221,9 +230,15 @@ public class BoardPanel extends JPanel {
 		
 	}
 	
-	private void activateChainingPanelSprite(ChainingPanelActivationEvent ae) {
+	public void removeEElementSprite(RemovalEvent re) {
+		System.out.println("Handling removal event");
+		Position p = re.getPos();
+		masterView.enqueueAnimation(new SpriteRemovalAnimation(p, this));
+	}
+	
+	private void toggleChainingPanelSprite(ChainingPanelActivationEvent ae) {
 		masterView.enqueueAnimation(new SpriteImageChangeAnimation(getEElementSpriteAtPosition(ae.getPos())));
-		System.out.println("Activation animation enqueued");
+		System.out.println("Chaining panel toggle animation enqueued");
 	}
 	
 	private void moveRobot(MovementEvent me) {

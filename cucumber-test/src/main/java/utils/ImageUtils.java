@@ -19,14 +19,5 @@ public class ImageUtils {
 		
 		return img.getScaledInstance(x, y, Image.SCALE_DEFAULT);
 	}
-	
-	public static Image rawImage(String filepath) {
-		try {
-		    return ImageIO.read(new File(filepath));
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-		return null;
-	}
 
 }

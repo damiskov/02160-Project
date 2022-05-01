@@ -9,7 +9,6 @@ import java.awt.GridBagLayout;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -18,20 +17,15 @@ import javax.swing.SwingWorker;
 import animations.Animation;
 import animations.HealthChangeAnimation;
 
-import animations.SpritePlacementAnimation;
 import animations.WinScreenAnimation;
 import board.Game;
 
-import board.Game;
-import board.Position;
-
-import controller.BoardCreationController;
-import controller.MasterController;
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.PropertyChangeListener;
 import utils.GridBagLayoutUtils;
 
+// This is the main game window
 public class MasterView extends JFrame implements PropertyChangeListener {
 	
 	private static final long serialVersionUID = 3L;
@@ -62,12 +56,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		boardPanel = new BoardPanel(game.getBoard(), this);
 		cardPanel = new CardPanel(this, controller);
 		statusPanel = new StatusPanel(game.getNumPlayers());
-		
 		blackScreen = new BlackScreen(this);
-		
-		// Button for assign programs to robots
-		
-		
 		
 		addElements();
 		pack();
@@ -80,11 +69,6 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 	}
 	
-	public void displayWinScreen(int winningPlayerNum) {
-		removeElements();
-		addWinScreen(winningPlayerNum);
-	}
-	
 	public void displayBlackScreen(int playerTurn) {
 		removeElements();
 		addBlackScreen(playerTurn);
@@ -94,12 +78,18 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 		removeBlackScreen();
 		addElements();
 	}
+	
+	public void displayWinScreen(int winningPlayerNum) {
+		removeElements();
+		addWinScreen(winningPlayerNum);
+	}
 
 	private void addElements() {
 		setLayout(new GridBagLayout());
 		add(boardPanel, GridBagLayoutUtils.constraint(0, 0, 10));
 		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 10));
 		
+		// The status panel uses a custom constraint
 		GridBagConstraints spConstraint = new GridBagConstraints();
 		spConstraint.gridx = 1;
 		spConstraint.gridy = 0;
@@ -117,7 +107,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	}
 	
 	private void addBlackScreen(int playerTurn) {
-		setLayout(new BorderLayout());
+		setLayout(new BorderLayout()); // So that the black screen can take up the whole window
 		add(blackScreen, BorderLayout.CENTER);
 		blackScreen.setPlayerTurnText(playerTurn);
 		revalidate();
@@ -125,7 +115,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	}
 	
 	private void addWinScreen(int winningPlayerNum) {
-		setLayout(new BorderLayout());
+		setLayout(new BorderLayout()); // So that the win screen can take up the whole window
 		add(new WinScreen(this, winningPlayerNum), BorderLayout.CENTER);
 		revalidate();
 		repaint();
@@ -167,6 +157,7 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 			boardPanel.propertyChange(pce);
 		}
 	}
+	
 	public void enqueueAnimation(Animation a) {
 		animationQueue.add(a);
 	}

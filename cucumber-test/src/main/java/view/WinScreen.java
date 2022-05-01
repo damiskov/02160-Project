@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+// This is the green panel that shows up when a player wins the game
 public class WinScreen extends PlainColorButton {
 
 	private static final long serialVersionUID = -7740278418036061227L;
