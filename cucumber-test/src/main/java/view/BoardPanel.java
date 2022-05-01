@@ -56,7 +56,6 @@ public class BoardPanel extends JPanel {
 	private List<Sprite> eElementSpriteList = new ArrayList<>();
 	private List<ColoredLinePair> chainSpriteList = new ArrayList<>();
 	private List<ColoredLinePair> laserSpriteList = new ArrayList<>();
-	private List<ImageToggleSprite> robotLaserSpriteList = new ArrayList<>();
 	private List<Sprite> robotSpriteList = new ArrayList<>();
 	private Map<Integer, Sprite> robotNumToSpriteMap = new HashMap<>();
 
@@ -132,18 +131,6 @@ public class BoardPanel extends JPanel {
 		}
 		throw new SpriteNotFoundException("Could not find EElement sprite at " + p);
 	}
-	
-//	public Sprite getRobotSpriteAtPosition(Position p) {
-//		int x = p.getX();
-//		int y = p.getY();
-//		
-//		for (Sprite sprite: robotSpriteList) {
-//			if(sprite.getX()==cellWidth*x && sprite.getY()==cellWidth*y) {
-//				 return sprite;
-//			}
-//		}
-//		throw new SpriteNotFoundException("Could not find robot sprite at " + p);
-//	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
