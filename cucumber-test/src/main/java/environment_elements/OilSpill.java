@@ -11,6 +11,8 @@ public class OilSpill extends EnvironmentElement {
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) { 
+			
+			//removes the oil spill and adds the fire
 			setP(calculatePosition());
 			board.removeEElement(getP()); 
 			board.initialPlacement(new Fire(), getP()); 

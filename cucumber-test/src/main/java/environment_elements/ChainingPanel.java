@@ -59,9 +59,13 @@ public class ChainingPanel extends EnvironmentElement {
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) { 
-			if(chainableRobots(board.getPieceLists().get(Robot.ID)) && isActive() && //if there are chainable robots on the board
-				!(board.getRobotAt(calculatePosition()).isChainable()) //and the robot is not chainable, and is on an active panel
-				&& board.getRobotAt(calculatePosition()).getChainedTo() == null) { // and the robot is not already chained
+			/* if there are chainable robots on the board
+			 * and the robot is not chainable, and is on an active panel
+			 * and the robot is not already chained
+			 */ 
+			if(chainableRobots(board.getPieceLists().get(Robot.ID)) && isActive() && 
+				!(board.getRobotAt(calculatePosition()).isChainable()) 
+				&& board.getRobotAt(calculatePosition()).getChainedTo() == null) { 
 				
 				//makes the robot chainable, chain the two robots, reactivate first chaining panel
 				board.getRobotAt(calculatePosition()).setChainable(true);
@@ -71,7 +75,7 @@ public class ChainingPanel extends EnvironmentElement {
 			//if a not chainable robot steps on an active chaining panel
 			else if (isActive() && !board.getRobotAt(calculatePosition()).isChainable()
 					&& board.getRobotAt(calculatePosition()).getChainedTo() == null){
-				board.getRobotAt(calculatePosition()).setChainable(true); //make the robot chainable
+				board.getRobotAt(calculatePosition()).setChainable(true); 
 				board.getRobotAt(calculatePosition()).setChainedFrom(this); //make the robot remember which panel it stepped on
 				setActive(false); //inactivate the panel
 			} 

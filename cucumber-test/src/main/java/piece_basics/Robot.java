@@ -119,6 +119,7 @@ public class Robot extends Piece {
 		firePropertyChange(new RotationEvent(robotNumber, oldOrientation, orientation));
 	}	
 	
+
 	//This method tries to push another robot and return true if it was successful
 	private boolean pushOtherRobot(Robot other, int step) {
 		Position newOtherPos = other.calculatePosition().next(this.getOrientation(), step);
@@ -138,7 +139,10 @@ public class Robot extends Piece {
 		}
 	}
 
-	//This method tries to move our robot
+	/*
+	 * This method checks if the robot can move and moves it if it can
+	 * If it can not move, then the robot stays at its position
+	 */
 	private void tryMoveRobot(Position posToMoveTo, int step) {
 		
 		if(board.coordinateWithinBounds(posToMoveTo)) {

@@ -27,39 +27,28 @@ public class ReversalPanel extends EnvironmentElement {
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) { 
-			//System.out.println("THIS IS WHERE IT GOES WRONG");
-			Program program = board.getRobotAt(calculatePosition()).getProgram(); //get the robot's program
-			
+			Program program = board.getRobotAt(calculatePosition()).getProgram(); 
 			ArrayList<Card> newCards = new ArrayList<>();
+			
 			/*iterate through the program and create a new program 
 			with the opposite card of each card in the program*/
-			System.out.println("-----------------------STEPPED ON REVERSAL PANEL---------------");
 			Card c = new Card("");
-
 			outer:
 			while (program.getCardList().size()!=0)
 			{
 				c = program.getTopOfProgram();
 				newCards.add(c.getOppositeCard());
-				System.out.println("Adding card"+c.getAction()+" to Program");
 				if(program.getCardList().size()==0)
 				{
-					System.out.println("End of program");
 					break outer;
 				} 
 			}
 			
-			System.out.println("-------------ASSIGNING NEW PROGRAM TO ROBOT ----------------");
+			//sets the program and assigns it to the robot
 			Collections.reverse(newCards);
 			newProgram.getCardList().addAll(newCards);
-			for (Card i : newProgram.getCardList())
-			{
-				System.out.println("Program contains: " + i.getAction());
-			}
-			
-			board.getRobotAt(calculatePosition()).setProgram(newProgram.getCardList()); //set the robot's program to be the reversed program
-			System.out.println("------------- SUCCESSFULLY ADDED CARDS TO PROGRAM ------------");
-			System.out.println("------------------END OF REVERSAL PANEL REGISTER ACTION-----");
+			board.getRobotAt(calculatePosition()).setProgram(newProgram.getCardList()); 
+			System.out.println(board.getRobotAt(calculatePosition()) + "got its moves reversed");
 		}
 
 	}
