@@ -4,6 +4,21 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 
+/*
+ * Sprites are the visual representations of the pieces (Piece subclasses) in the model. BoardPanel has two lists of these,
+ * one for sprites representing Robots and one for sprites representing EnvironmentElements. When BoardPanel is repainted,
+ * it iterates through these lists and calls the paintUsing method on each Sprite to tell them to paint themselves on the
+ * canvas "using" the graphics object.
+ * 
+ * Each Sprite contains all the information it needs to display itself graphically on the BoardPanel canvas, i.e. image,
+ * x and y coordinates, orientation in degrees, width, and height. It uses an AffineTransform object to perform all the linear
+ * algebra transformations needed for this rendering. AffineTransforms were not needed for displaying the sprite at a certain
+ * position, but they were needed for rotating it.
+ * 
+ * This is an abstract class with a single abstract method called nextImage. In connection with this, it has two implementing
+ * subclasses: SingleImageSprite for sprites that keep the same image for their entire lifetime, and ImageToggleSprite,
+ * which can toggle between two images
+ */
 public abstract class Sprite {
 
 	private int x;
@@ -28,10 +43,10 @@ public abstract class Sprite {
 		setRotation(degrees);
 	}
 
+	// This method updates the affine transform matrix after a change in position or orientation
 	private void updateAffineTransform() {
 		affineTransform.setToTranslation(x, canvas.getHeight() - y - height);
 		affineTransform.rotate((Math.PI/180)*degrees, width/2, height/2);
-	
 	}
 
 	public int getX() {
@@ -65,11 +80,11 @@ public abstract class Sprite {
 		g2.drawImage(imageDisplayed, affineTransform, null);
 	}
 
-	public Image getImage() {
+	protected Image getImage() {
 		return imageDisplayed;
 	}
 
-	public void setImage(Image image) {
+	protected void setImage(Image image) {
 		this.imageDisplayed = image;
 	}
 	

@@ -166,35 +166,6 @@ public class Robot extends Piece {
 		return (board.hasEElementAt(posToMoveTo) && board.getEElementAt(posToMoveTo).isRobotBlocking());
 	}
 	
-	public boolean isValidMove(int moves) {
-		int newX = calculatePosition().getX() + moves;
-		int newY = calculatePosition().getY() + moves;
-		switch(orientation) {
-		case UP:
-			if(!(board.coordinateWithinBounds(calculatePosition().getX(), newY))) {
-				return false;
-			}
-			break;
-		case RIGHT:
-			if(!(board.coordinateWithinBounds(newX, calculatePosition().getY()))) {
-				return false;
-			}
-			break;
-		case DOWN:
-			if(!(board.coordinateWithinBounds(calculatePosition().getX(), newY))) {
-				return false;
-			}
-			break;
-		case LEFT:
-			if(!(board.coordinateWithinBounds(newX, calculatePosition().getY()))) {
-				return false;
-			}
-			break;
-		}
-		return true;
-			
-	}
-	
 	/*
 	 * Robots can only move forwards and backwards, unless they are pushed by a conveyor belt or pulled by a chained robot. This method
 	 * handles forward movement by a certain number of cells. Backwards movements are accomplished by giving this method a negative int

@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -8,10 +7,10 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 
 import utils.ImageUtils;
 
+// This is the circle beneath every card and its priority indicating its selection status
 public class SelectionIcon extends JLayeredPane {
 
 	private static final long serialVersionUID = 7083580741010664302L;
@@ -40,11 +39,13 @@ public class SelectionIcon extends JLayeredPane {
 		moveToFront(numberLabel);
 	}
 	
+	// make the circle white and remove the number, used when deselecting a card
 	public void empty() {
 		circleLabel.setIcon(emptyCircle);
 		numberLabel.setText("");
 	}
 	
+	// make the circle green and add a number, used when selecting a card
 	public void setNumber(int number) {
 		circleLabel.setIcon(fullCircle);
 		numberLabel.setText(String.valueOf(number));

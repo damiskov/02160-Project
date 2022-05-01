@@ -7,6 +7,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+/*
+ *  This is the part of the main UI that displays the player numbers, robot icons, and robot hearts showing the health of
+ *  each player's robot. It is composed of RobotStatusIndicators, and the number of these depends on the number of players in the game
+ */
 public class StatusPanel extends JPanel {
 	
 	private static final long serialVersionUID = 7879846621866023722L;
@@ -28,9 +32,6 @@ public class StatusPanel extends JPanel {
 		}
 		
 		add(Box.createVerticalGlue());
-//		
-//		setPreferredSize(new Dimension(500, 800));
-		
 	}
 	
 	public void setHealth(int robotNum, int health) {

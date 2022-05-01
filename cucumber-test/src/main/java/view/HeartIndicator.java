@@ -4,19 +4,21 @@ import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 
+/* 
+ * This is the row of hearts displayed for each robot. It is composed of three HeartLabels, and it is itself contained
+ * within RobotStatusIndicator
+ */
 public class HeartIndicator extends JPanel {
 
 	private static final long serialVersionUID = 8951516382973753055L;
 	
 	private int maxHealth;
-	private int currentHealth;
 	private HeartLabel[] hearts;
 	
 	public HeartIndicator(int maxHealth) {
-		setLayout(new FlowLayout(FlowLayout.LEFT, 4, 4));
-		
-		this.currentHealth = maxHealth;
 		this.maxHealth = maxHealth;
+		
+		setLayout(new FlowLayout(FlowLayout.LEFT, 4, 4));
 		
 		hearts = new HeartLabel[maxHealth];
 		
@@ -34,6 +36,5 @@ public class HeartIndicator extends JPanel {
 		for (int i = health; i < maxHealth; i++) {
 			hearts[i].empty();
 		}
-		currentHealth = health;
 	}
 }

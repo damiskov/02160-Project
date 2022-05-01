@@ -61,6 +61,12 @@ public class SDChainingPanel {
 	}
 
 	
+	@Given("the robots are chained together")
+	public void the_robots_are_chained_together() {
+	    context.robot.setChainedTo(context.robot2);
+	    context.robot2.setChainedTo(context.robot);
+	}
+	
 	@Given("two robots chained together")
 	public void two_robots_chained_together() {
 		Robot r = new Robot();
@@ -153,5 +159,10 @@ public class SDChainingPanel {
 	public void the_chaining_panel_is_at_five_five() {
 	    assertEquals(context.chainpan.getX(), 5);
 	    assertEquals(context.chainpan.getY(), 5);
+	}
+	
+	@Then("the second robot is not chainable")
+	public void the_second_robot_is_not_chainable() {
+	    assertEquals(false, context.robot2.isChainable());
 	}
 }

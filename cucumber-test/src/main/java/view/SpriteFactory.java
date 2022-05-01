@@ -1,19 +1,25 @@
 package view;
 
 import java.awt.Image;
-import board.Position;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
 import environment_elements.ConveyorBelt;
 import environment_elements.Gear;
 import environment_elements.Teleporter;
 import piece_basics.EnvironmentElement;
-import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import utils.ImageUtils;
 
+/*
+ * A simple factory class defining a single static method getFromPiece. This method is used by BoardPanel to convert from Pieces
+ * from the model into Sprites visually representing those Pieces. The method uses instanceof and downcasting to extract
+ * subclass-specific information from Pieces given to it and return corresponding Sprites. ImageToggleSprites are used for
+ * ChainingPanels, and SingleImageSprites are used for all other Pieces
+ */
 public class SpriteFactory {
+	
+	private SpriteFactory() {}
 
 	public static Sprite getFromPiece(Piece piece, int cellSize, BoardPanel canvas) {
 		if (piece instanceof EnvironmentElement) {

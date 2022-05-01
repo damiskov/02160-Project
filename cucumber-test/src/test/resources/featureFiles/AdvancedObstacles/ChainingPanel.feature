@@ -86,4 +86,13 @@ Feature: Chaining Panel
     Given a game with an empty board
     When a chaining panel on the board at (5, 5)
     Then the chaining panel is at five, five
+  
+  Scenario: A robot that is already chained steps on a chaining panel, and does not become chainable
+  	Given a game with an empty board
+  	And a robot on the board at (2, 2)
+  	And a second robot on the board at (5, 5)
+  	And the robots are chained together
+  	And a chaining panel on the board at (5, 5)
+  	When the board elements activate
+  	Then the second robot is not chainable
     

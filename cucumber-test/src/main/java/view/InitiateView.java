@@ -3,9 +3,7 @@ package view;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Enumeration;
 
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,7 +15,8 @@ import javax.swing.JSlider;
 import controller.InitiateController;
 import utils.GridBagLayoutUtils;
 
-public class InitiateView extends JFrame{
+// This is the initial dialog window asking for the number of players and difficulty, and showing board creation options
+public class InitiateView extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -122,7 +121,7 @@ public class InitiateView extends JFrame{
 		
 		
 		pack();
-		setLocationRelativeTo(null);
+		setLocationRelativeTo(null); // center the window
 	}
 	
 
