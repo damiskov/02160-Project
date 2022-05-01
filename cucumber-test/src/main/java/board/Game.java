@@ -9,18 +9,14 @@ import cards.CardCommand;
 import cards.Deck;
 import environment_elements.ChainingPanel;
 import environment_elements.ConveyorBelt;
-import environment_elements.FinalCheckpoint;
 import environment_elements.Fire;
 import environment_elements.Gear;
 import environment_elements.HealthStation;
 import environment_elements.Laser;
 import environment_elements.OilSpill;
-import environment_elements.Pit;
 import environment_elements.RespawnPoint;
 import environment_elements.ReversalPanel;
 import environment_elements.Teleporter;
-import environment_elements.Wall;
-import piece_basics.Orientation;
 import piece_basics.Piece;
 import piece_basics.Robot;
 import player.Player;
@@ -45,12 +41,12 @@ public class Game {
 			RespawnPoint.ID
 	);
 	
-	Board board;
+	private Board board;
 	private Difficulty difficulty;
 	private Player[] players;
-	PropertyChangeSupport propertyChangeSupport;
-	int numPlayers;
-	Deck deck;
+	private PropertyChangeSupport propertyChangeSupport;
+	private int numPlayers;
+	private Deck deck;
 	private Robot[] robots;
 	private boolean over = false;
 	private int winningPlayerNumber;
