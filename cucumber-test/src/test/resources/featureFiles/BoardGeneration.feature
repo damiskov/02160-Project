@@ -1,4 +1,3 @@
-
 Feature: Board Generation
 
 Scenario: Generate an easy Board

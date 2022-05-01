@@ -1,13 +1,12 @@
 package cards;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class Deck
 {  
-    private List<String> actions = Arrays.asList("move1", "move2", "move3", "turnRight", "turnLeft", "backUp", "uTurn");
+	
     private List<Card> cards = new ArrayList<>();
     private List<Integer> numbers = new ArrayList<>();
     
@@ -23,7 +22,7 @@ public class Deck
     private void regenDeck()
     {
     	this.cards = new ArrayList<>();
-    	// Generating base deck 
+    	// Generating base deck having different probabilities
         addToDeck("move1", 48);
         addToDeck("move2", 24);
         addToDeck("move3", 8);
@@ -75,11 +74,12 @@ public class Deck
             // Making sure we don't get duplicate numbers
             numbers.remove(y);
         }
+        //creates hand from randomly taken cards
         Hand h = new Hand();
         h.setCardList(hand);
         return h;
     }
-        
+    
     public List<Card> getDeck()
     {
     	return cards;
