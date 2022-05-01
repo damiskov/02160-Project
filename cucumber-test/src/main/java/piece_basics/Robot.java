@@ -137,8 +137,7 @@ public class Robot extends Piece {
 			return false;
 		}
 	}
-	
-	
+
 	private void tryMoveRobot(Position posToMoveTo, int step) {
 		
 		if(board.coordinateWithinBounds(posToMoveTo)) {
