@@ -1,11 +1,8 @@
-import board.Board;
-import board.Game;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
 
 import java.util.Stack;
 
-import board.*;
 import environment_elements.ConveyorBelt;
 import environment_elements.Fire;
 import environment_elements.Gear;
@@ -17,9 +14,9 @@ import environment_elements.RespawnPoint;
 import environment_elements.ReversalPanel;
 import environment_elements.Teleporter;
 import environment_elements.Wall;
+import game_basics.*;
 import piece_basics.*;
 import cards.*;
-import player.Player;
 
 public class Context {
 	Board board;

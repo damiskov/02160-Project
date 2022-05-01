@@ -1,4 +1,4 @@
-package board;
+package game_basics;
 
 import java.io.BufferedReader;
 import java.io.File;

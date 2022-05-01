@@ -1,16 +1,17 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
-import board.Board;
-import board.BoardFactory;
-import board.Game;
-import board.PieceNotFoundException;
+
 import environment_elements.ReversalPanel;
+import game_basics.Board;
+import game_basics.BoardFactory;
+import game_basics.Game;
+import game_basics.PieceNotFoundException;
+import game_basics.Player;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import piece_basics.Robot;
-import player.Player;
 import property_changes.PropertyChangeSupport;
 
 public class SDBoardGeneration {

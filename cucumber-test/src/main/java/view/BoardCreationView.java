@@ -14,9 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
-import board.Board;
-
-import board.Position;
 import controller.BoardCreationController;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
@@ -30,6 +27,8 @@ import environment_elements.RespawnPoint;
 import environment_elements.ReversalPanel;
 import environment_elements.Teleporter;
 import environment_elements.Wall;
+import game_basics.Board;
+import game_basics.Position;
 import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
 import utils.GridBagLayoutUtils;
@@ -193,7 +192,6 @@ public class BoardCreationView extends JFrame{
 			System.out.println("Temporary path: " + path);
 			path = path.substring(0, path.lastIndexOf('/')) + "/custom_board.txt";
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

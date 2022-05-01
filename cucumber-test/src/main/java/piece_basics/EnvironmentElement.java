@@ -1,5 +1,5 @@
 package piece_basics;
-import board.Position;
+import game_basics.Position;
 
 /*  Environment elements are elements placed on the board
  *  The class EnvironmentElement inherits from piece

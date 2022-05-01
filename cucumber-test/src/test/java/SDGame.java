@@ -1,13 +1,12 @@
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import player.Player;
 import property_changes.PropertyChangeSupport;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import board.*;
+import game_basics.*;
 
 public class SDGame {
 	private Context context;

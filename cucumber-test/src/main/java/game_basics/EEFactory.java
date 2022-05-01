@@ -1,4 +1,4 @@
-package board;
+package game_basics;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
 import environment_elements.ConveyorBelt;

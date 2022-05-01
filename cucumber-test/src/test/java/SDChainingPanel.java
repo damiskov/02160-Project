@@ -1,7 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
-import board.Position;
 import environment_elements.ChainingPanel;
+import game_basics.Position;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import piece_basics.Orientation;

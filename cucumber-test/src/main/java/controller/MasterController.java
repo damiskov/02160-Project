@@ -4,19 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-
-
-
-
-import board.Difficulty;
-
-import board.Board;
-import board.Game;
-
 import cards.Card;
-
-
-import player.Player;
+import game_basics.Board;
+import game_basics.Difficulty;
+import game_basics.Game;
+import game_basics.Player;
 import property_changes.ActivationPhaseEndEvent;
 import property_changes.PropertyChangeSupport;
 import view.CardPanel;

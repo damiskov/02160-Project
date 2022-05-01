@@ -1,6 +1,6 @@
 package environment_elements;
 
-import board.Position;
+import game_basics.Position;
 import piece_basics.EnvironmentElement;
 
 public class Gear extends EnvironmentElement {

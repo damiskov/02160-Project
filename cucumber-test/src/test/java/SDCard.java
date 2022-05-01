@@ -7,9 +7,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.Stack;
 
-import board.Position;
 import cards.*;
-import player.*;
+import game_basics.Player;
+import game_basics.Position;
 
 public class SDCard {
 	private Context context;

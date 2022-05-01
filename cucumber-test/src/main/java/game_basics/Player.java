@@ -1,4 +1,4 @@
-package player;
+package game_basics;
 import java.util.Stack;
 
 import cards.*;

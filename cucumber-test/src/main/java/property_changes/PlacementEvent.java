@@ -1,6 +1,6 @@
 package property_changes;
 
-import board.Position;
+import game_basics.Position;
 import piece_basics.Piece;
 
 public class PlacementEvent implements IPropertyChangeEvent {

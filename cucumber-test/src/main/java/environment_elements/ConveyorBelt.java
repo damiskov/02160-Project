@@ -1,5 +1,5 @@
 package environment_elements;
-import board.Position;
+import game_basics.Position;
 import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
 import piece_basics.Robot;

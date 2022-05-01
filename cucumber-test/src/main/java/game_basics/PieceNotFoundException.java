@@ -1,4 +1,4 @@
-package board;
+package game_basics;
 
 public class PieceNotFoundException extends RuntimeException {
 

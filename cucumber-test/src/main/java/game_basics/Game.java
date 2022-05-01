@@ -1,4 +1,4 @@
-package board;
+package game_basics;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +19,6 @@ import environment_elements.ReversalPanel;
 import environment_elements.Teleporter;
 import piece_basics.Piece;
 import piece_basics.Robot;
-import player.Player;
 import property_changes.GameWinEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.ActivationPhaseEndEvent;

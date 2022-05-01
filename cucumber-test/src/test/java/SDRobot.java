@@ -3,7 +3,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.Stack;
 
-import board.Position;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,6 +17,7 @@ import cards.Move3;
 import cards.TurnLeft;
 import cards.TurnRight;
 import cards.UTurn;
+import game_basics.Position;
 
 public class SDRobot {
 	private Context context;

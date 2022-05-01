@@ -1,7 +1,7 @@
 package controller;
 
 
-import board.Board;
+import game_basics.Board;
 import view.BoardCreationView;
 
 public class BoardCreationController {

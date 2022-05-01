@@ -21,7 +21,7 @@ import animations.SpriteRemovalAnimation;
 import animations.SpriteRobotLaserAnimation;
 import animations.SpriteRotationAnimation;
 import animations.SpriteTeleportAnimation;
-import board.*;
+import game_basics.*;
 import piece_basics.EnvironmentElement;
 import piece_basics.Piece;
 import piece_basics.Robot;

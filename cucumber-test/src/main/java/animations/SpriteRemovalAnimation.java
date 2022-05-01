@@ -1,6 +1,6 @@
 package animations;
 
-import board.Position;
+import game_basics.Position;
 import view.BoardPanel;
 
 public class SpriteRemovalAnimation extends Animation {

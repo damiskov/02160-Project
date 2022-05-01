@@ -1,5 +1,5 @@
+import game_basics.Player;
 import io.cucumber.java.en.Given;
-import player.Player;
 
 public class SDPlayer {
 

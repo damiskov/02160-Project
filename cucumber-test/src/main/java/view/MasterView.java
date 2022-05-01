@@ -1,6 +1,7 @@
 package view;
 
 import controller.MasterController;
+import game_basics.Game;
 import property_changes.ActivationPhaseEndEvent;
 import property_changes.GameWinEvent;
 import java.awt.BorderLayout;
@@ -19,8 +20,6 @@ import animations.Animation;
 import animations.HealthChangeAnimation;
 
 import animations.WinScreenAnimation;
-import board.Game;
-
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
 import property_changes.IPropertyChangeListener;

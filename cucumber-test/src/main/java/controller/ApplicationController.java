@@ -4,7 +4,7 @@ package controller;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import board.Board;
+import game_basics.Board;
 
 //import application.controller.ApplicationController;
 //import application.controller.LoginController;

@@ -1,4 +1,4 @@
-package board;
+package game_basics;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

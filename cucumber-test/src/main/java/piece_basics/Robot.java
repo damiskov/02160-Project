@@ -2,11 +2,10 @@ package piece_basics;
 
 import java.util.Stack;
 
-import board.Position;
 import cards.Card;
 import environment_elements.ChainingPanel;
 import environment_elements.RespawnPoint;
-
+import game_basics.Position;
 import property_changes.ChainingEvent;
 import property_changes.HealthChangeEvent;
 import property_changes.MovementEvent;

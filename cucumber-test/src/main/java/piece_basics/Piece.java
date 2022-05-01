@@ -1,6 +1,6 @@
 package piece_basics;
 
-import board.Board;
+import game_basics.Board;
 import property_changes.IPropertyChangeEvent;
 
 public abstract class Piece {

@@ -8,8 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import board.Board;
-import board.Position;
 import controller.BoardCreationController;
 import environment_elements.ChainingPanel;
 import environment_elements.Checkpoint;
@@ -22,6 +20,8 @@ import environment_elements.RespawnPoint;
 import environment_elements.ReversalPanel;
 import environment_elements.Teleporter;
 import environment_elements.Wall;
+import game_basics.Board;
+import game_basics.Position;
 import piece_basics.EnvironmentElement;
 import piece_basics.Orientation;
 import utils.GridBagLayoutUtils;
