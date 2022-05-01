@@ -22,11 +22,11 @@ import board.Game;
 
 import property_changes.HealthChangeEvent;
 import property_changes.IPropertyChangeEvent;
-import property_changes.PropertyChangeListener;
+import property_changes.IPropertyChangeListener;
 import utils.GridBagLayoutUtils;
 
 // This is the main game window
-public class MasterView extends JFrame implements PropertyChangeListener {
+public class MasterView extends JFrame implements IPropertyChangeListener {
 	
 	private static final long serialVersionUID = 3L;
 	
@@ -167,9 +167,9 @@ public class MasterView extends JFrame implements PropertyChangeListener {
 	 * is finished, this method is called again, and the process repeats until the queue is empty.
 	 * 
 	 * The method first initializes the animation. Then, it creates a worker thread, which uses SwingUtilities.invokeLater to tell the Event
-	 * Dispatch Thread (the main thread, in which this method is called) to call establishNextFrame on the Animation. Then, it sleeps long
+	 * Dispatch Thread (the main thread, in which this method is called) to call establishNextFrame on the Animation. It then sleeps long
 	 * enough to maintain 60 frames per second, and repeats this as many times as the animation requires, given by the getNumFrames method.
-	 * Finally, it repaints the MasterView and calls the method recursively, both in the Event Dispatch Thread.
+	 * Finally, it finalizes the animation, repaints the MasterView, and calls the method recursively, all in the Event Dispatch Thread.
 	 * 
 	 * All of this is done because recommendations state that sleeps should never be done on the Event Dispatch Thread, but also that
 	 * GUI updates should always be done on this thread. Moreover, we tried making the Event Dispatch Thread sleep, and ran into

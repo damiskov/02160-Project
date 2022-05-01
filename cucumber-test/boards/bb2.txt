@@ -1,4 +1,9 @@
+<<<<<<< HEAD
        54321
+=======
+>>>>>>> refs/heads/main
+            
+<<<<<<< HEAD
             
             
             
@@ -8,5 +13,16 @@
             
             
             
-            
+=======
+       5    
+      4     
+     3      
+    2       
+   1        
+    WWWWW   
+    W   W   
+    W L W   
+      L     
+     SL T   
+>>>>>>> refs/heads/main
             

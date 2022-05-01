@@ -1,7 +1,7 @@
 package cards;
 
 public class CardFactory
-{
+{	//to match the card action and return it according to the string 
     public Card getCard(String action)
     {
         if (action.equals("move1"))

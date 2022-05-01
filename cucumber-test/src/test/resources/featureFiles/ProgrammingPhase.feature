@@ -1,6 +1,5 @@
 Feature: Programming phase
 
-  @tag1
   Scenario: Programming phase
     Given a game with an empty board
     And a player

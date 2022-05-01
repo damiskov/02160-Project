@@ -119,21 +119,19 @@ public class Robot extends Piece {
 		firePropertyChange(new RotationEvent(robotNumber, oldOrientation, orientation));
 	}	
 	
-	/*
-	 * Handles robots bumping into each other and pushing each other
-	 */
+
+	//This method tries to push another robot and return true if it was successful
 	private boolean pushOtherRobot(Robot other, int step) {
 		Position newOtherPos = other.calculatePosition().next(this.getOrientation(), step);
 		
+		//Check if the robot can be pushed to the proposed new position
 		if(board.coordinateWithinBounds(newOtherPos) &&
 		   !board.hasRobotAt(newOtherPos) &&
 		   !eElementBlocking(newOtherPos)) {
 			
 			firePropertyChange(new MovementEvent(other.getRobotNumber(), other.calculatePosition(), newOtherPos));
 			board.moveRobotFromTo(other.calculatePosition(), newOtherPos);
-			System.out.println(other.calculatePosition()+ ""+ newOtherPos);
-			System.out.println("Other robot pushed");
-			
+			System.out.println("Other robot pushed to" + newOtherPos);		
 			return true;
 		} else {
 			System.out.println("Other robot cannot be pushed");
@@ -148,6 +146,8 @@ public class Robot extends Piece {
 	private void tryMoveRobot(Position posToMoveTo, int step) {
 		
 		if(board.coordinateWithinBounds(posToMoveTo)) {
+			
+			//there is nothing in the way
 			if (!eElementBlocking(posToMoveTo) &&
 					!board.hasRobotAt(posToMoveTo)) {
 					
@@ -155,19 +155,20 @@ public class Robot extends Piece {
 					board.setPosition(this, posToMoveTo);
 					
 					System.out.println("Moved robot with clear path");
+					
+				//There is another robot in the way, skipped if other robot cannot be moved
 				} else if (board.hasRobotAt(posToMoveTo) &&
 						   pushOtherRobot(board.getRobotAt(posToMoveTo),step)){
 					firePropertyChange(new MovementEvent(robotNumber, calculatePosition(), posToMoveTo));
 					board.setPosition(this, posToMoveTo);
 					System.out.println("Moved own robot with push");
 				}
-			System.out.println("Cant move, stuff's in the way");
-		}
-		 else{
-			System.out.println("Cannot move, Coordinate out of bounds");
+		} else {
+			System.out.println("Cannot move, coordinate out of bounds");
 		}
 	}
 
+	//needed to de-clutter if() statements for ease of reading
 	private boolean eElementBlocking(Position posToMoveTo) {
 		return (board.hasEElementAt(posToMoveTo) && board.getEElementAt(posToMoveTo).isRobotBlocking());
 	}
@@ -178,13 +179,18 @@ public class Robot extends Piece {
 	 * parameter. This method is called by the forward and backward movement cards.
 	 */
 	public void move(int spaces) {
+			
 		 	while(spaces!=0) {
+		 		//robot is not chained
 		 		if(this.getChainedTo() == null) {
 					this.tryMoveRobot(calculatePosition().next(getOrientation(), spaces < 0 ? -1 : 1),spaces < 0 ? -1 : 1);
+				//robot is chained to something, moved the chained robot first, then ourselves
 		 		} else {
 					this.getChainedTo().tryMoveRobot(this.getChainedTo().calculatePosition().next(getOrientation(), spaces < 0 ? -1 : 1),spaces < 0 ? -1 : 1);
 					this.tryMoveRobot(calculatePosition().next(getOrientation(), spaces < 0 ? -1 : 1),spaces < 0 ? -1 : 1);
 		 		}
+		 		//its important that the above similar looking statement just gives -1 if spaces is negative +1 othervise
+		 		//this one increments spaces itself towards 0 in steps of 1
 		 		spaces += spaces < 0 ? 1 : -1;
 		 	}
 	}		
@@ -237,7 +243,7 @@ public class Robot extends Piece {
 			}
 			System.out.println(calculatePosition());
 			setPosition(respawnPointPos);
-			firePropertyChange(new TeleportEvent(robotNumber, respawnPointPos, this.getOrientation()));
+			firePropertyChange(new TeleportEvent(robotNumber, respawnPointPos));
 			health = MAX_ROBOT_HEALTH;
 		} else throw new NullPointerException("Killed a robot with null respawn point");
 	}

@@ -2,6 +2,7 @@ package animations;
 
 import view.MasterView;
 
+// An animation for displaying the win screen when a robot wins during the activation phase
 public class WinScreenAnimation extends Animation {
 	
 	private final int winningPlayerNum;

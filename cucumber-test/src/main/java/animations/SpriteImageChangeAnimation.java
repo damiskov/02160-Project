@@ -2,6 +2,7 @@ package animations;
 
 import view.Sprite;
 
+// An animation for calling nextImage on an ImageToggleSprite. Used for visualizing ChainingPanel activation
 public class SpriteImageChangeAnimation extends Animation {
 	
 	private Sprite sprite;

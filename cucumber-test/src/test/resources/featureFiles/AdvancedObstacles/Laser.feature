@@ -1,5 +1,5 @@
 Feature: Laser
-  @tag1
+
   Scenario: Laser damages
     Given a game with an empty board
   	And a laser on the board at (5, 5)

@@ -259,8 +259,7 @@ public class BoardPanel extends JPanel {
 		Sprite spriteToTeleport = robotNumToSpriteMap.get(te.getRobotNum());
 		int screenNewX = te.getPosNew().getX() * cellWidth;
 		int screenNewY = te.getPosNew().getY() * cellWidth;
-		int orientationDeg = te.getOrientation().getDegrees();
-		masterView.enqueueAnimation(new SpriteTeleportAnimation(spriteToTeleport, screenNewX, screenNewY, orientationDeg));
+		masterView.enqueueAnimation(new SpriteTeleportAnimation(spriteToTeleport, screenNewX, screenNewY));
 	}
 	
 	private void rotateRobot(RotationEvent re) {	

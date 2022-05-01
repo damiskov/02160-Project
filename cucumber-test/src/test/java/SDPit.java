@@ -1,7 +1,5 @@
 import environment_elements.Pit;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 public class SDPit {
 	private Context context;

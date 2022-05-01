@@ -4,7 +4,6 @@ import environment_elements.Fire;
 import environment_elements.OilSpill;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 
 public class SDOilSpill{

@@ -1,5 +1,5 @@
 Feature: Teleporter
-  @tag1
+
   Scenario: Deterministic teleporting panel
     Given a game with an empty board
     And a sending teleporter on the board at (5, 5)

@@ -2,6 +2,7 @@ package animations;
 
 import view.StatusPanel;
 
+// An animation for changing the health displayed for a single robot in the StatusPanel
 public class HealthChangeAnimation extends Animation {
 	
 	private StatusPanel statusPanel;
