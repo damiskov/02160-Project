@@ -58,9 +58,7 @@ public class Game {
 	public Game(PropertyChangeSupport pcs, int numPlayers) {
 		this.propertyChangeSupport = pcs;
 		this.numPlayers = numPlayers;
-		
-		// temporary
-		board = new Board(12, 12, this);
+
 	} 
 	
 	public void setDeck(Deck d) {
@@ -70,24 +68,15 @@ public class Game {
 	public void setDifficulty(Difficulty d) {
 		this.difficulty = d;
 	}
-
-	
-	public Game(PropertyChangeSupport pcs, int numPlayers, Board definedBoard) {
-		this.propertyChangeSupport = pcs;
-		this.numPlayers = numPlayers;	
-		// temporary
-		board = definedBoard;
-	}
-	
-	
-	public void genBoard() {
-	}
 	
 	public Difficulty getDifficulty() {
 		return this.difficulty;		
 	}
 	
-	// Observer pattern
+	/*  Observer pattern
+	 *  Executes the perforRegistorAction of all 
+	 *  the register actors on the board with the correct priority
+	 */
 	public void activateRegisterActors() {
 		Map<String, List<Piece>> executionLists = board.getPieceLists();
 		for (String id: registerActorPriorityList) {
@@ -123,82 +112,6 @@ public class Game {
 	public void finishGame(int winningPlayerNumber) {
 		over = true;
 		this.winningPlayerNumber = winningPlayerNumber;
-	}
-	
-	// temporary
-	public void testPlacements() {
-		Robot r1 = new Robot();
-		board.initialPlacement(r1, 5, 2);
-		Robot r2 = new Robot();
-		board.initialPlacement(r2, 7, 3);		
-		board.initialPlacement(new ConveyorBelt(Orientation.RIGHT), 0, 1);
-		board.initialPlacement(new ConveyorBelt(Orientation.DOWN), 1, 1);
-		board.initialPlacement(new ConveyorBelt(Orientation.LEFT), 2, 1);
-		board.initialPlacement(new ConveyorBelt(Orientation.UP), 3, 1);
-		
-		board.initialPlacement(new Gear(true), 0, 2);
-		board.initialPlacement(new Gear(false), 1, 2);
-		
-		ChainingPanel chain1 = new ChainingPanel();
-		board.initialPlacement(chain1, 1, 8);
-		ChainingPanel chain2 = new ChainingPanel();
-		board.initialPlacement(chain2, 8, 6);
-		board.initialPlacement(new FinalCheckpoint(1), 1, 3);
-		board.initialPlacement(new Fire(), 2, 3); 
-		board.initialPlacement(new HealthStation(), 3, 3);
-		board.initialPlacement(new OilSpill(), 4, 3);
-		board.initialPlacement(new Pit(), 9, 8);
-		RespawnPoint rp = new RespawnPoint();
-		r2.setRespawnPoint(rp);
-		board.initialPlacement(rp, 6, 3);
-		board.initialPlacement(new ReversalPanel(), 7, 3);
-		
-		Teleporter t2 = new Teleporter(false);
-		
-		Teleporter t1 = new Teleporter(true);
-		t1.setReceiving(t2);
-		board.initialPlacement(t1, 8, 3);
-		
-		board.initialPlacement(t2, 8, 10);
-		board.initialPlacement(new Wall(), 9, 3);
-		board.initialPlacement(new Laser(), 6, 7);
-		
-	}
-
-	public void demo() {
-		Robot r1 = board.getRobotAt(new Position(5, 2));
-		Robot r2 = board.getRobotAt(new Position(7, 3));
-		
-		r1.move(1);
-		r2.move(1);
-		activateRegisterActors();
-
-		r1.turnLeft();
-		r2.move(1);
-		activateRegisterActors();
-		
-		r1.turnLeft();
-		r2.move(1);
-		activateRegisterActors();
-		
-		r2.turnLeft();
-		activateRegisterActors();
-		
-		r1.turnLeft();
-		r1.turnLeft();
-		r1.move(1);
-		r1.turnRight();
-		r1.move(2);
-		r1.turnRight();
-		r1.move(1);
-		activateRegisterActors();
-		
-		r1.turnLeft();
-		r1.move(1);
-		r2.move(3);
-		activateRegisterActors();
-
-		propertyChangeSupport.firePropertyChange(new ActivationPhaseEndEvent());
 	}
 
 	public int getNumPlayers() {
@@ -248,7 +161,7 @@ public class Game {
 		}
 	}
 	
-	//initial stuff that we need for the game 
+	//Sets up the game
 	public void begin(int n, Difficulty d, PropertyChangeSupport pcs) {
 		setPlayers(n);
 		setRobots(n);
@@ -265,8 +178,7 @@ public class Game {
 		activationPhaseLoop:
 		for(int j = 0; j < 5; j++) {
 			
-			//creates two arrays, one with all of the cards, one with all of the numbers
-			//the indices of the cards match to the ones of the numbers and also to the players
+			//creates an array of CardCommands to execute the cards in the right order
 			for(int i = 0; i < players.length; i++) {
 				Robot r = players[i].getRobot();
 				Card topCard = r.getProgram().getTopOfProgram();
@@ -276,21 +188,24 @@ public class Game {
 	
 			Collections.sort(order);
 			
+			//executes the moves
 			for(CardCommand cc : order) {
 				cc.execute();
 				if (over) {
 					break activationPhaseLoop;
 				}
 			}
-			order.clear();
 			
-			//activates the register actors
+			order.clear();
 			activateRegisterActors();
 		}
+		
 		
 		if (over) {
 			firePropertyChange(new GameWinEvent(winningPlayerNumber));
 		}
+		
+		
 		firePropertyChange(new ActivationPhaseEndEvent());
 	
 	}

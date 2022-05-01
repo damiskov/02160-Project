@@ -80,20 +80,6 @@ public class MasterController {
 //		runGame();
 	}
 	
-	MasterController(ApplicationController application, int playerCount, String difficulty,  Board b){
-		this.application = application;
-		this.playerCount = playerCount; 
-		this.difficulty = difficulty;
-		
-//		pcs = new PropertyChangeSupport();
-		game = new Game(pcs, playerCount, b);
-		this.view = new MasterView(this, game);
-//		pcs.addSubscriber(view);
-		
-//		game.testPlacements();
-		
-		//game.begin(playerCount, new Difficulty(setDifLevel(difficulty)), pcs);
-	}
 
 	public void display() {
 		view.setVisible(true);
