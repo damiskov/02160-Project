@@ -10,6 +10,9 @@ public class ColoredLinePair {
 		private Sprite sprite2;
 	    private Color innerColor;
 	    private Color outerColor;
+	    
+	    //This is used to make managing a line with a contour
+	    //This is done by drawing two lines with different colours and thickness
 	    public ColoredLinePair(Sprite sprite1, Sprite sprite2, Color outerColor, Color innerColor){
 	        this.sprite1 = sprite1;
 	        this.sprite2 = sprite2;

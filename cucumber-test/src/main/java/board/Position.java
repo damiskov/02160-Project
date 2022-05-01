@@ -33,12 +33,16 @@ public class Position {
 		this.y += delta;
 	}
 	
+	//helper methods for next()
+	//returns position of a given distance from self in x direction (negative direction works too)
 	public Position nextX(int distance) {
 		return new Position(this.getX()+distance, this.getY());
 	}
+	//same but in y direction
 	public Position nextY(int distance) {
 		return new Position(this.getX(), this.getY()+distance);
 	}
+	//Return position in a given orientation and distance from self
 	public Position next(Orientation direction, int distance) {
 		switch(direction) {
 		case UP:
