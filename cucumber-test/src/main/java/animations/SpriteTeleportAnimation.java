@@ -2,6 +2,7 @@ package animations;
 
 import view.Sprite;
 
+// An animation for sprites teleporting from one position to another
 public class SpriteTeleportAnimation extends Animation {
 	
 	private Sprite sprite;

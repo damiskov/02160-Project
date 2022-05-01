@@ -3,6 +3,7 @@ package animations;
 import board.Position;
 import view.Sprite;
 
+// An animation for smooth sprite movement
 public class SpriteMovementAnimation extends Animation {
 	
 	private Sprite sprite;
