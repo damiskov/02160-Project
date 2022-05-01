@@ -267,10 +267,14 @@ public class Robot extends Piece {
 		case LEFT:
 			p.incrX(-1);
 			break;
+		default :
+			throw new NullPointerException("Orientation is null");
 		}
+		
 		
 		Robot foundRobot = null;
 		while (board.coordinateWithinBounds(p) && !laserBlocking(p)) {
+			System.out.println("Searchin at " + p);
 			if (board.hasRobotAt(p)) {
 				foundRobot = board.getRobotAt(p);
 				break;

@@ -1,5 +1,6 @@
 package environment_elements;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -10,16 +11,23 @@ import piece_basics.EnvironmentElement;
 public class ReversalPanel extends EnvironmentElement {
 
 	public static final String ID = "reversal_panel";
-	public Program newProg = new Program();
+	private Program newProgram = new Program();
 
 	@Override
 	public String getPieceID() {
 		return ID;
 	}
 		
+	public Program getNewProgram() {
+		return newProgram;
+	}
+	
+	
+	
 	@Override
 	public void performRegisterAction() {
 		if (board.hasRobotAt(calculatePosition())) { 
+			//System.out.println("THIS IS WHERE IT GOES WRONG");
 			Program program = board.getRobotAt(calculatePosition()).getProgram(); //get the robot's program
 			
 			ArrayList<Card> newCards = new ArrayList<>();
@@ -27,6 +35,7 @@ public class ReversalPanel extends EnvironmentElement {
 			with the opposite card of each card in the program*/
 			System.out.println("-----------------------STEPPED ON REVERSAL PANEL---------------");
 			Card c = new Card("");
+
 			outer:
 			while (program.getCardList().size()!=0)
 			{
@@ -41,7 +50,6 @@ public class ReversalPanel extends EnvironmentElement {
 			}
 			
 			System.out.println("-------------ASSIGNING NEW PROGRAM TO ROBOT ----------------");
-			Program newProgram = new Program();
 			Collections.reverse(newCards);
 			newProgram.getCardList().addAll(newCards);
 			for (Card i : newProgram.getCardList())
@@ -55,5 +63,6 @@ public class ReversalPanel extends EnvironmentElement {
 		}
 
 	}
+
 
 }

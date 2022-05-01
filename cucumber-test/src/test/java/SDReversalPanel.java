@@ -20,6 +20,6 @@ public class SDReversalPanel {
 	}
 	@Then("the remaining moves get reversed")
 	public void the_remaining_moves_get_reversed() {
-	    assertEquals(context.robot.getProgram().getCardList(), context.revpan.newProg.getCardList());
+	    assertEquals(context.robot.getProgram().getCardList(), context.revpan.getNewProgram().getCardList());
 	}
 }
