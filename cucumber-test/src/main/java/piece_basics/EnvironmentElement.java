@@ -1,6 +1,10 @@
 package piece_basics;
 import board.Position;
 
+/*  Environment elements are elements placed on the board
+ *  The class EnvironmentElement inherits from piece
+ *  All of the obstacles inherit from EnvironmentElement
+ */
 public abstract class EnvironmentElement extends Piece {
 	public Position calculatePosition() {
 		return board.calculatePosition(this);
