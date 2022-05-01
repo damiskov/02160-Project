@@ -29,18 +29,22 @@ public class SpriteRobotLaserAnimation extends Animation {
 	
 	@Override
 	public void initializeAnimation() {
+		
+		//set up starting and final colors of the lines drawing the laser
 		color2final = new Triplet(195,59,59);
 		color1final = new Triplet(152,32,32);
 		
 		color2start = new Triplet(255,140,120);
 		color1start = new Triplet(255,140,120);
 		
+		//this is the steps of how much the color changes each frame of the animation
 		color1shift = color1final.subtract(color1start);
 		color1shift.divide(getNumFrames());
 		
 		color2shift = color2final.subtract(color2start);
 		color2shift.divide(getNumFrames());
 		
+		//this is the actual used color, which gets changed during animation
 		color1 = new Color(color1start.getRed(),color1start.getBlue(),color1start.getGreen());
 		color2 = new Color(color2start.getRed(),color2start.getBlue(),color2start.getGreen());
 		
@@ -57,6 +61,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 		color1 = new Color(color1start.getRed(),color1start.getBlue(),color1start.getGreen());
 		color2 = new Color(color2start.getRed(),color2start.getBlue(),color2start.getGreen());
 		
+		//find our laser sprites and change only them
 		for(ColoredLinePair spritePair : laserSpriteList) {
 			if(spritePair.getSprite1().equals(robot1) || spritePair.getSprite2().equals(robot1) ||
 			   spritePair.getSprite1().equals(robot2) || spritePair.getSprite2().equals(robot2)) {
@@ -70,6 +75,7 @@ public class SpriteRobotLaserAnimation extends Animation {
 	@Override
 	public void finalizeAnimation() {
 		
+		//delete our laser sprite after the animation is done
 		for(ColoredLinePair spritePair : laserSpriteList) {
 			if(spritePair.getSprite1().equals(robot1) || spritePair.getSprite2().equals(robot1) ||
 			   spritePair.getSprite1().equals(robot2) || spritePair.getSprite2().equals(robot2)) {
@@ -77,15 +83,6 @@ public class SpriteRobotLaserAnimation extends Animation {
 				System.out.println("match found! removing from laser list");
 				break;
 			} 
-		}
-		
-		for(ColoredLinePair spritePair2 : laserSpriteList) {
-			if(laserSpriteList!=null) {
-				System.out.println(spritePair2.getSprite1());
-				System.out.println(spritePair2.getSprite2());
-			} else {
-				System.out.println("laser list was empty");
-			}
 		}
 	}
 }

@@ -1,7 +1,5 @@
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import board.Board;
 import environment_elements.Fire;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

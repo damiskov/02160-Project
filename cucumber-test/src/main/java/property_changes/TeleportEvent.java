@@ -1,18 +1,16 @@
 package property_changes;
 
 import board.Position;
-import piece_basics.Orientation;
+
 
 public class TeleportEvent implements IPropertyChangeEvent {
 
 	private int robotNumber;
 	private Position posNew;
-	private Orientation orientation;
 	
-	public TeleportEvent(int robotNumber, Position posNew, Orientation orientation) {
+	public TeleportEvent(int robotNumber, Position posNew) {
 		this.robotNumber = robotNumber;
 		this.posNew = posNew;
-		this.orientation = orientation;
 	}
 	
 	public int getRobotNum() {
@@ -23,9 +21,7 @@ public class TeleportEvent implements IPropertyChangeEvent {
 		return posNew;
 	}
 
-	public Orientation getOrientation() {
-		return orientation;
-	}
+
 	
 	
 	

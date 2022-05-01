@@ -4,7 +4,6 @@ import environment_elements.Checkpoint;
 import environment_elements.FinalCheckpoint;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 public class SDCheckpoint {
 

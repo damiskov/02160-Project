@@ -15,18 +15,11 @@ public class SDCard {
 	private Context context;
 	private Card card;
 	
-	
-	
-	
 	public SDCard(Context context) {
 		this.context = context;
 		
 	}
 
-	// scenario - accept the programming cards
-	// @Given("a player")
-	
-	
 	@Given("a Deck")
 	public void a_Deck() {
 	    this.context.deck = new Deck();
@@ -35,17 +28,13 @@ public class SDCard {
 	@When("a Hand is created")
 	public void a_Hand_is_created() {
 		Hand hand = context.deck.genHand();
-		context.hand = hand;
-	    
+		context.hand = hand;    
 	}
 	
 	@Then("the player accepts nine cards")
 	public void the_player_accepts_nine_cards() {
 	    context.player.setHand(context.hand);
 	}
-	
-	
-	// scenario - Programming the cards
 	
 	@Given("a player with a robot")
 	public void a_player_with_a_robot()
@@ -76,9 +65,6 @@ public class SDCard {
 	    context.card.executeAction(context.player.getRobot());
 	}
 	
-	
-	//scenario - Move the robot one step in the direction it is facing
-	
 	@Given("a Move1 card")
 	public void a_Move1_card() {
 		context.card = new Move1();
@@ -87,9 +73,7 @@ public class SDCard {
 
 	@When("the card is executed")
 	public void the_card_is_executed() {
-		context.card.executeAction(context.robot);
-		
-	
+		context.card.executeAction(context.robot);			
 	}
 
 	@Then("the robot moves one step in its direction")
@@ -97,12 +81,10 @@ public class SDCard {
 	    assertEquals(context.board.calculatePosition(context.robot), new Position(5,6));
 	}
 
-	//scenario - Move the robot two steps in the direction it is facing
 	
 	@Given("a Move2 card")
 	public void a_Move2_card() {
 		context.card = new Move2();
-    
 	}
 
 	@Then("the robot moves two steps in its direction")
@@ -110,44 +92,29 @@ public class SDCard {
 	    assertEquals(context.board.calculatePosition(context.robot), new Position(5,7));
 	}
 
-	
-	//scenario - Move the robot three steps in the direction it is facing
-	
 	@Given("a Move3 card")
 	public void a_Move3_card() {
 		context.card = new Move3();
-    
 	}
 
 	@Then("the robot moves three steps in its direction")
 	public void the_robot_moves_three_steps_in_its_direction() {
 	    assertEquals(context.board.calculatePosition(context.robot), new Position(5,8));
 	}
-	
 
-	//scenario - turn robot to the right
-	
 	@Given("Right Direction card")
-	public void right_direction_card() {
-		
-		context.card = new TurnRight();
-	    
+	public void right_direction_card() {		
+		context.card = new TurnRight();    
 	}
-	
 	
 	@Then("the robot moves ninety degrees to the right")
 	public void the_robot_moves_ninety_degrees_to_the_right() {
 	    assertEquals(context.robot.getOrientation(), Orientation.RIGHT);
 	}
 	
-	
-	//scenario - turn robot to the left
-	
 	@Given("Left turn card")
-	public void left_turn_card() {
-		
-		context.card = new TurnLeft();
-	    
+	public void left_turn_card() {	
+		context.card = new TurnLeft();    
 	}
 	
 	
@@ -155,29 +122,17 @@ public class SDCard {
 	public void the_robot_moves_ninety_degrees_to_the_left() {
 	    assertEquals(context.robot.getOrientation(), Orientation.LEFT);
 	}
-		
-	
-	
-	
-//scenario - turn robot to the right
 
 	@Given("UTurn card")
-	public void UTurn_card() {
-		
-		context.card = new UTurn();
-	    
+	public void UTurn_card() {	
+		context.card = new UTurn();    
 	}
-	
-	
+		
 	@Then("the robot faces opposite orientation")
 	public void the_robot_faces_opposite_orientation() {
 	    assertEquals(context.robot.getOrientation(), Orientation.DOWN);
 	}
-	
 
-	// Backup card 
-	
-	
 	@Given("Backup card")
 	public void backup_card() {
 		context.card = new BackUp();
@@ -187,14 +142,7 @@ public class SDCard {
 	public void the_robot_moves_one_space_back_without_changing_its_direction() {
 	    assertEquals(context.board.calculatePosition(context.robot), new Position(5,4));
 	}
-	
 
-	
-	
-//	ROBOT MOVEMENT
-	
-	//RIGHT AND LEFT
-	
 	@When("a turn right command is executed")
 	public void a_turn_right_command_is_executed() {
 		Card r_card = new TurnRight();
@@ -224,9 +172,7 @@ public class SDCard {
 		}
 		
 	}
-	
-	//FORWARD AND BACKWARD
-	
+
 	@When("a move forward command is executed")
 	public void a_move_forward_command_is_executed() {
 		Card f_card = new Move1();
@@ -255,7 +201,6 @@ public class SDCard {
 		context.card.executeAction(context.robot);
 	}
 	
-
 	@When("a move forward {int} command is executed")
 	public void a_move_forward_command_is_executed(Integer int1) {
 		
@@ -287,7 +232,6 @@ public class SDCard {
 	    assertEquals(card, null);
 	}
 	
-
 	@When("the number of the card is set")
 	public void the_number_of_the_card_is_set() {
 	    context.card.setNum(43);

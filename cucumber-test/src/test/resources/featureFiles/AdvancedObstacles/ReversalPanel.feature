@@ -1,6 +1,6 @@
 Feature: Reversal Panel
 
-  @tag1 
+
     Scenario: Reversal panel
     Given a game with an empty board
     And reversal panel on the board at (5, 5)

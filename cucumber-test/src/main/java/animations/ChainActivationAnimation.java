@@ -29,26 +29,28 @@ public class ChainActivationAnimation extends Animation {
 		this.robot2 = robot2;
 
 	}	
-	
-	Triplet colour = new Triplet(1,1,1);
 
 	@Override
 	public void initializeAnimation() {
+		//set up starting and final colors of the lines drawing the chain
 		color1final = new Triplet(0,0,0);
 		color2final = new Triplet(155,155,155);
 		
 		color1start = new Triplet(255,255,255);
 		color2start = new Triplet(255,255,255);
 		
+		//this is the steps of how much the color changes each frame of the animation
 		color1shift = color1final.subtract(color1start);
 		color1shift.divide(getNumFrames());
 		
 		color2shift = color2final.subtract(color2start);
 		color2shift.divide(getNumFrames());
 		
+		//this is the actual used color, which gets changed during animation
 		color1 = new Color(color1start.getRed(),color1start.getBlue(),color1start.getGreen());
 		color2 = new Color(color2start.getRed(),color2start.getBlue(),color2start.getGreen());
 		
+		//if the robots are getting chained make and add a new chain
 		if(process) {
 			System.out.println("adding to chain list");
 			chainSpriteList.add(new ColoredLinePair(robot1,robot2,color1,color2));
@@ -64,6 +66,7 @@ public class ChainActivationAnimation extends Animation {
 		color1 = new Color(color1start.getRed(),color1start.getBlue(),color1start.getGreen());
 		color2 = new Color(color2start.getRed(),color2start.getBlue(),color2start.getGreen());
 		
+		//find our chain sprites and change only them
 		for(ColoredLinePair spritePair : chainSpriteList) {
 			if(spritePair.getSprite1().equals(robot1) || spritePair.getSprite2().equals(robot1) ||
 			   spritePair.getSprite1().equals(robot2) || spritePair.getSprite2().equals(robot2)) {
@@ -77,6 +80,7 @@ public class ChainActivationAnimation extends Animation {
 	@Override
 	public void finalizeAnimation() {
 		
+		//if the robots are getting un-chained remove their chain
 		if(!process) {
 			System.out.println("removing from list...");
 			for(ColoredLinePair spritePair : chainSpriteList) {

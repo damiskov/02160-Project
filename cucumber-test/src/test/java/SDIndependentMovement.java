@@ -1,11 +1,8 @@
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import piece_basics.Orientation;
-import piece_basics.Robot;
 
 import static org.junit.Assert.*;
-import board.Board;
 import cards.BackUp;
 import cards.Card;
 import cards.Move1;
@@ -18,19 +15,13 @@ public class SDIndependentMovement {
 	public SDIndependentMovement(Context context) {
 		this.context = context;
 	}
-	
-	
-//given a robot on the board
 
-//given a command
 	@Given("A turn right command")
 	public void a_turn_right_command() {
 		 Card r1_card = new TurnRight();
 		 context.card = r1_card;
 	}
 
-	
-//given a robot on the board
 	@Then("Robot turns right")
 	public void robot_turns_right() {
 		Orientation prev_o = context.robot.getOrientation();
@@ -62,7 +53,6 @@ public class SDIndependentMovement {
 		context.card = l1_card;
 	}
 
-//given a robot on the board
 	@Then("Robot turns left")
 	public void robot_turns_left() {
 	   
@@ -85,11 +75,9 @@ public class SDIndependentMovement {
 			case LEFT:
 				assertEquals(curr_o, Orientation.DOWN);
 				break;
-		}
-	   
+		}   
 			
 	}
-
 
 	@Given("A move forward command")
 	public void a_move_forward_command() {
@@ -97,7 +85,6 @@ public class SDIndependentMovement {
 		context.card = f1_card;
 	}
 
-//given a robot on the board
 	@Then("Robot moves forward")
 	public void robot_moves_forward() {
 		int n = 1;
@@ -125,14 +112,12 @@ public class SDIndependentMovement {
 		}
 	}
 
-
 	@Given("a move backwards command")
 	public void a_move_backwards_command() {
 		Card b1_card = new BackUp();
 		context.card = b1_card;
 	}
 
-//given a robot on the board
 	@Then("Robot moves backward")
 	public void backwards() {
 		int n = -1;
