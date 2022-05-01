@@ -51,16 +51,9 @@ public class BoardCreationController {
 	}
 	
 	public void setElementIsActive(String id ) {
-		if (id == getSelectedElement() ) {
-			//set element as nt active
-			element_is_selected = false;
-			setSelectedElement("NONE");
-		} else {
 			
 			element_is_selected = true;
 			setSelectedElement(id);
-			
-		}
 		
 		
 	}

@@ -20,8 +20,6 @@ import player.Player;
 import property_changes.ActivationPhaseEndEvent;
 import property_changes.PropertyChangeSupport;
 import view.CardPanel;
-import player.Player;
-import property_changes.PropertyChangeSupport;
 import view.MasterView;
 
 public class MasterController {
@@ -45,7 +43,6 @@ public class MasterController {
 		
 		pcs = new PropertyChangeSupport();
 		game = new Game(pcs, playerCount);
-		
 
 		Difficulty d = new Difficulty(setDifLevel(difficulty));
 		game.begin(playerCount, d, pcs);
@@ -73,6 +70,7 @@ public class MasterController {
 		Player p = game.getPlayers()[currentPlayer];
 		p.getRobot().setProgram(stack);
 	}	
+
 	
 	public Game getGame()
 	{
@@ -83,10 +81,7 @@ public class MasterController {
 		this.currentPlayer = this.currentPlayer+1;
 		
 	}
-
-
-
-
+	
 	public int setDifLevel(String s)
 	{
 		if (s.toLowerCase()=="easy") {
@@ -111,22 +106,6 @@ public class MasterController {
     	return currentPlayer;
     }
     
-	private void runGame() {
-		while(!(game.isOver())) {
-			
-			game.dealCards();
-			
-			while(currentPlayer < game.getNumPlayers()) {
-				
-				
-				
-			}
-		
-			game.activationPhase();
-				
-		}
-		
-	}
 	
 	public void setRobotNames() {
 		for(int i = 0; i<playerCount; i++) {
@@ -168,17 +147,11 @@ public class MasterController {
 		{
 			// Execute activation phase
 			view.removeCardPanel();
-			 
 			game.activationPhase();
-			
-			
 		}
 		else
 		{
-
 			incrementCurrentPlayer();
-			
-		
 			displayCardPanelControl();
 		}
 	}

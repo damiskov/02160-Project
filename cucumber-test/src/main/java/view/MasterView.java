@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -57,6 +58,7 @@ public class MasterView extends JFrame implements IPropertyChangeListener {
 		cardPanel = new CardPanel(this, controller);
 		statusPanel = new StatusPanel(game.getNumPlayers());
 		blackScreen = new BlackScreen(this);
+		
 		
 		addElements();
 		pack();
@@ -128,9 +130,6 @@ public class MasterView extends JFrame implements IPropertyChangeListener {
 	public void displayCardPanelView(CardPanel cp){
 		displayBlackScreen(controller.getCurrentPlayer()+1);
 		cardPanel = cp;
-//		add(cardPanel, GridBagLayoutUtils.constraint(0, 1, 10));
-//		revalidate();
-//		repaint();
 		
 		
 	}

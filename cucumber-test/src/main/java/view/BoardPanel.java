@@ -77,7 +77,7 @@ public class BoardPanel extends JPanel {
 		setMinimumSize(new Dimension(width, height));
 		setPreferredSize(new Dimension(width, height)); 
 		
-		backgroundTile = ImageUtils.scaledImage("images/tile.png", cellWidth, cellWidth);
+		backgroundTile = ImageUtils.scaledImage("/tile.png", cellWidth, cellWidth);
 		
 		addInitialSprites(board);
 	}

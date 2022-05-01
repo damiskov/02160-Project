@@ -25,7 +25,6 @@ public class Robot extends Piece {
 	private ChainingPanel ChainedFrom;
 	private boolean chainable = false;
 	private Robot chainedTo;
-	private String command;	
 	private Program program;
 	/*
 	 *  The number of the most recent checkpoint this robot validly stepped on. 
