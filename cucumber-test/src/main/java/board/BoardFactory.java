@@ -14,7 +14,6 @@ public class BoardFactory {
 	private String[] easyFiles = {"E1", "E2", "E3"};
 	private String[] mediumFiles = {"M1", "M2", "M3"};
 	private String[] hardFiles = {"H1", "H2", "H3"};
-	private String[] customFiles = {};
 	private Position[] startingPositions = {new Position(6,0),
 			new Position(7,0),
 			new Position(5, 0),
